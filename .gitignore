@@ -1,5 +1,8 @@
 # Prerequisites
 *.d
+tests
+.clang-tidy
+Makefile
 
 # Compiled Object files
 *.slo
