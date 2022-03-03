@@ -163,14 +163,15 @@ constexpr auto Pe<Container>::parseHeaders() -> void {
 
 template <class Container>
 constexpr auto Pe<Container>::readCoffHeader() -> void {
+  auto offset = mPeHeaderAddress + 4;
   if (std::is_constant_evaluated()){
-    PelfHelper::copyStruct(this->mData, mCoffHeader, mPeHeaderAddress + 4);
+    PelfHelper::copyStruct(this->mData, mCoffHeader, offset);
   } else {
     assert(std::is_trivially_copyable<decltype(mCoffHeader)>::value);
     
     if (mPeHeaderAddress + 4 + sizeof(mCoffHeader) < this->mData.size()) {
       std::memcpy(reinterpret_cast<char *>(&mCoffHeader),
-          this->mData.data() + mPeHeaderAddress + 4,
+          this->mData.data() + offset,
           sizeof(mCoffHeader));
     } else {
       throw PelfException{"Bad PE file, invalid Coff Header"};
