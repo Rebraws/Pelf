@@ -33,7 +33,7 @@ public:
    *
    *  @return Returns pointer to a null-terminated string with explanatory information about the threw exception
    * */
-  auto what() const -> const char * override;
+  auto what() const noexcept -> const char * override;
 private:
   const char* mMsg /**< Explanatory string */;
 }; 

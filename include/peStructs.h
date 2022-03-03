@@ -15,18 +15,29 @@
 #include <boost/hana.hpp>
 #include <cstdint>
 
-namespace hana = boost::hana;
 
 
 namespace pelf {
 
+namespace hana = boost::hana;
+
+/* Windows typedefs */
 using WORD = std::uint16_t;
 using DWORD = std::uint32_t;
 
 #pragma pack(push, 1)     // Disable padding 
+
+/** @brief Struct that represents the COFF header format. It's 32/64 bit independent header
+ *  
+ *
+ * */
 struct IMAGE_FILE_HEADER {
+  /** @brief Macro that defines members of the structure
+   *
+   *  
+   * */
 	BOOST_HANA_DEFINE_STRUCT(IMAGE_FILE_HEADER,
-  	(WORD,  Machine),
+  	(WORD,  Machine),          
   	(WORD,  NumberOfSections),
   	(DWORD, TimeDateStamp),
   	(DWORD, PointerToSymbolTable),
@@ -34,6 +45,7 @@ struct IMAGE_FILE_HEADER {
   	(WORD,  SizeOfOptionalHeader),
   	(WORD,  Characteristics)
 	);
+
 
 	[[nodiscard]] constexpr auto getMachine() const -> WORD { 
 		return hana::at_c<0>(hana::members(*this)); 

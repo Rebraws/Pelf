@@ -115,7 +115,7 @@ private:
 
 
 template <class Container, template<typename> class Derived>
-inline constexpr Pelf<Container, Derived>::Pelf(Container data) 
+constexpr Pelf<Container, Derived>::Pelf(Container data) 
   noexcept
   requires container_and_convertible_v<Container, unsigned char> :
   mData(std::move(data)) {}
@@ -123,14 +123,14 @@ inline constexpr Pelf<Container, Derived>::Pelf(Container data)
 
 
 template <class Container, template<typename> class Derived>
-inline constexpr auto Pelf<Container, Derived>::getRawData() const noexcept -> Container {
+constexpr auto Pelf<Container, Derived>::getRawData() const noexcept -> Container {
   return mData;
 }
 
 
 
 template <class Container, template<typename> class Derived>
-inline constexpr auto Pelf<Container, Derived>::parse() -> void {
+constexpr auto Pelf<Container, Derived>::parse() -> void {
   
   auto& pelf = static_cast<Derived<Container>& >(*this);
 

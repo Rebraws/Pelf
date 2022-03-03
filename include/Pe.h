@@ -40,15 +40,17 @@ public:
    * */
   constexpr explicit Pe(Container data);
 
-  [[nodiscard]] constexpr auto testGetPeHeaderAddress() const -> unsigned int {
-    return mPeHeaderAddress;
-  }
-
+  /** @brief Returns the Coff header 
+   *
+   *  @return returns a `IMAGE_FILE_HEADER` struct which is a 
+   *  hana struct that represents the coff header of the PE file
+   * */
   [[nodiscard]] constexpr auto getCoffHeader() const -> IMAGE_FILE_HEADER;
 
 
 private:
   friend class Pelf<Container, Pe>;
+
   static constexpr std::uint16_t  mMZDSignature{0x4d5a};    /**< MZ DOS Signature */
   static constexpr std::uint32_t  mPeSignature{0x50450000};  /**< PE Signature 'PE\0\0' */
   static constexpr std::uint8_t   mMinPeSize{97};           /**< Minimum possible PE file size */
@@ -163,7 +165,10 @@ constexpr auto Pe<Container>::parseHeaders() -> void {
 
 template <class Container>
 constexpr auto Pe<Container>::readCoffHeader() -> void {
+  
+  // coff header offset
   auto offset = mPeHeaderAddress + 4;
+  
   if (std::is_constant_evaluated()){
     PelfHelper::copyStruct(this->mData, mCoffHeader, offset);
   } else {
