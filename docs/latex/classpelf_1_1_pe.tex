@@ -1,0 +1,247 @@
+\hypertarget{classpelf_1_1_pe}{}\doxysection{pelf\+::Pe\texorpdfstring{$<$}{<} Container \texorpdfstring{$>$}{>} Class Template Reference}
+\label{classpelf_1_1_pe}\index{pelf::Pe$<$ Container $>$@{pelf::Pe$<$ Container $>$}}
+
+
+\mbox{\hyperlink{classpelf_1_1_pe}{Pe}} class.  
+
+
+
+
+{\ttfamily \#include $<$Pe.\+h$>$}
+
+Inheritance diagram for pelf\+::Pe\texorpdfstring{$<$}{<} Container \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classpelf_1_1_pe}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+constexpr \mbox{\hyperlink{classpelf_1_1_pe_abaa3884f6d3f756c45d99c97dc7ac0ec}{Pe}} (Container data)
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classpelf_1_1_pe}{Pe}} constructor. \end{DoxyCompactList}\item 
+constexpr auto \mbox{\hyperlink{classpelf_1_1_pe_a308684b6eada062859e4c1a887a0d5eb}{get\+Coff\+Header}} () const -\/$>$ \mbox{\hyperlink{structpelf_1_1_i_m_a_g_e___f_i_l_e___h_e_a_d_e_r}{IMAGE\+\_\+\+FILE\+\_\+\+HEADER}}
+\begin{DoxyCompactList}\small\item\em Returns the Coff header. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+constexpr auto \mbox{\hyperlink{classpelf_1_1_pe_af46883d6b316372ea21c40796111c609}{check\+Signatures}} () const -\/$>$ bool
+\begin{DoxyCompactList}\small\item\em Checks if MZ DOS signature and PE signature are valid. \end{DoxyCompactList}\item 
+constexpr auto \mbox{\hyperlink{classpelf_1_1_pe_a34573a5da8e98176d7ff2905662630c2}{check\+MZDSignature}} () const -\/$>$ bool
+\begin{DoxyCompactList}\small\item\em Checks if the MZ DOS Signature (0x5a4d) at offset 0 is valid. \end{DoxyCompactList}\item 
+constexpr auto \mbox{\hyperlink{classpelf_1_1_pe_a8f7823c9fd56839c51f7fa689fb56971}{check\+PESignature}} () const -\/$>$ bool
+\begin{DoxyCompactList}\small\item\em Checks if the PE Signature {\ttfamily PE\textbackslash{}0\textbackslash{}0} is valid. \end{DoxyCompactList}\item 
+constexpr auto \mbox{\hyperlink{classpelf_1_1_pe_a99706db76c940290b2e875d4ff8a768a}{check\+File\+Size}} () const -\/$>$ bool
+\begin{DoxyCompactList}\small\item\em Checks if the size is valid. \end{DoxyCompactList}\item 
+constexpr auto \mbox{\hyperlink{classpelf_1_1_pe_a2fde5bc41beaf4d7868b8ef03bd31d42}{parse\+Headers}} () -\/$>$ void
+\begin{DoxyCompactList}\small\item\em Parses the Coff Header, and the optional coff header. \end{DoxyCompactList}\item 
+constexpr auto \mbox{\hyperlink{classpelf_1_1_pe_af6897e2b886e12e4b19af0994cf026ed}{read\+Coff\+Header}} () -\/$>$ void
+\begin{DoxyCompactList}\small\item\em Reads the coff header from {\ttfamily m\+Data} and saves it into m\+Coff\+Header struct. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::uint32\+\_\+t \mbox{\hyperlink{classpelf_1_1_pe_a93c1187c324e4ae7e2254731bf266cbd}{m\+Pe\+Header\+Address}} \{\}
+\item 
+\mbox{\hyperlink{structpelf_1_1_i_m_a_g_e___f_i_l_e___h_e_a_d_e_r}{IMAGE\+\_\+\+FILE\+\_\+\+HEADER}} \mbox{\hyperlink{classpelf_1_1_pe_a7eafaff28816fab0213b7193d420d178}{m\+Coff\+Header}} \{\}
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static constexpr std\+::uint16\+\_\+t \mbox{\hyperlink{classpelf_1_1_pe_a76a7612bdd93c78bac1e3a4bd54526dc}{m\+MZDSignature}} \{0x4d5a\}
+\item 
+static constexpr std\+::uint32\+\_\+t \mbox{\hyperlink{classpelf_1_1_pe_afd3cf9aa26d42801f4efa7ed377c05d2}{m\+Pe\+Signature}} \{0x50450000\}
+\item 
+static constexpr std\+::uint8\+\_\+t \mbox{\hyperlink{classpelf_1_1_pe_a90dfed482f8683a9adc33f3fde479311}{m\+Min\+Pe\+Size}} \{97\}
+\end{DoxyCompactItemize}
+\doxysubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classpelf_1_1_pe_a31ad3ffb5e374b1f1bfe272deadec778}{Pelf$<$ Container, Pe $>$}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class Container$>$\newline
+class pelf\+::\+Pe$<$ Container $>$}
+\mbox{\hyperlink{classpelf_1_1_pe}{Pe}} class. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Container} & The type of the container used to store the file content that needs to be parsed ~\newline
+ \\
+\hline
+\end{DoxyTemplParams}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classpelf_1_1_pe_abaa3884f6d3f756c45d99c97dc7ac0ec}\label{classpelf_1_1_pe_abaa3884f6d3f756c45d99c97dc7ac0ec}} 
+\index{pelf::Pe$<$ Container $>$@{pelf::Pe$<$ Container $>$}!Pe@{Pe}}
+\index{Pe@{Pe}!pelf::Pe$<$ Container $>$@{pelf::Pe$<$ Container $>$}}
+\doxysubsubsection{\texorpdfstring{Pe()}{Pe()}}
+{\footnotesize\ttfamily template$<$class Container $>$ \\
+constexpr \mbox{\hyperlink{classpelf_1_1_pe}{pelf\+::\+Pe}}$<$ Container $>$\+::\+Pe (\begin{DoxyParamCaption}\item[{Container}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}, {\ttfamily [constexpr]}}
+
+
+
+\mbox{\hyperlink{classpelf_1_1_pe}{Pe}} constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & data to be parsed \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classpelf_1_1_pe_a99706db76c940290b2e875d4ff8a768a}\label{classpelf_1_1_pe_a99706db76c940290b2e875d4ff8a768a}} 
+\index{pelf::Pe$<$ Container $>$@{pelf::Pe$<$ Container $>$}!checkFileSize@{checkFileSize}}
+\index{checkFileSize@{checkFileSize}!pelf::Pe$<$ Container $>$@{pelf::Pe$<$ Container $>$}}
+\doxysubsubsection{\texorpdfstring{checkFileSize()}{checkFileSize()}}
+{\footnotesize\ttfamily template$<$class Container $>$ \\
+constexpr auto \mbox{\hyperlink{classpelf_1_1_pe}{pelf\+::\+Pe}}$<$ Container $>$\+::check\+File\+Size\hspace{0.3cm}{\ttfamily [constexpr]}, {\ttfamily [private]}}
+
+
+
+Checks if the size is valid. 
+
+\begin{DoxyReturn}{Returns}
+Returns {\ttfamily true} if the size is valid, and {\ttfamily false} otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classpelf_1_1_pe_a34573a5da8e98176d7ff2905662630c2}\label{classpelf_1_1_pe_a34573a5da8e98176d7ff2905662630c2}} 
+\index{pelf::Pe$<$ Container $>$@{pelf::Pe$<$ Container $>$}!checkMZDSignature@{checkMZDSignature}}
+\index{checkMZDSignature@{checkMZDSignature}!pelf::Pe$<$ Container $>$@{pelf::Pe$<$ Container $>$}}
+\doxysubsubsection{\texorpdfstring{checkMZDSignature()}{checkMZDSignature()}}
+{\footnotesize\ttfamily template$<$class Container $>$ \\
+constexpr auto \mbox{\hyperlink{classpelf_1_1_pe}{pelf\+::\+Pe}}$<$ Container $>$\+::check\+MZDSignature\hspace{0.3cm}{\ttfamily [constexpr]}, {\ttfamily [private]}}
+
+
+
+Checks if the MZ DOS Signature (0x5a4d) at offset 0 is valid. 
+
+\begin{DoxyReturn}{Returns}
+Returns {\ttfamily true} if the signature is valid, {\ttfamily false} otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classpelf_1_1_pe_a8f7823c9fd56839c51f7fa689fb56971}\label{classpelf_1_1_pe_a8f7823c9fd56839c51f7fa689fb56971}} 
+\index{pelf::Pe$<$ Container $>$@{pelf::Pe$<$ Container $>$}!checkPESignature@{checkPESignature}}
+\index{checkPESignature@{checkPESignature}!pelf::Pe$<$ Container $>$@{pelf::Pe$<$ Container $>$}}
+\doxysubsubsection{\texorpdfstring{checkPESignature()}{checkPESignature()}}
+{\footnotesize\ttfamily template$<$class Container $>$ \\
+constexpr auto \mbox{\hyperlink{classpelf_1_1_pe}{pelf\+::\+Pe}}$<$ Container $>$\+::check\+PESignature\hspace{0.3cm}{\ttfamily [constexpr]}, {\ttfamily [private]}}
+
+
+
+Checks if the PE Signature {\ttfamily PE\textbackslash{}0\textbackslash{}0} is valid. 
+
+\begin{DoxyReturn}{Returns}
+Returns {\ttfamily true} if the signature is valid, {\ttfamily false} otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classpelf_1_1_pe_af46883d6b316372ea21c40796111c609}\label{classpelf_1_1_pe_af46883d6b316372ea21c40796111c609}} 
+\index{pelf::Pe$<$ Container $>$@{pelf::Pe$<$ Container $>$}!checkSignatures@{checkSignatures}}
+\index{checkSignatures@{checkSignatures}!pelf::Pe$<$ Container $>$@{pelf::Pe$<$ Container $>$}}
+\doxysubsubsection{\texorpdfstring{checkSignatures()}{checkSignatures()}}
+{\footnotesize\ttfamily template$<$class Container $>$ \\
+constexpr auto \mbox{\hyperlink{classpelf_1_1_pe}{pelf\+::\+Pe}}$<$ Container $>$\+::check\+Signatures\hspace{0.3cm}{\ttfamily [constexpr]}, {\ttfamily [private]}}
+
+
+
+Checks if MZ DOS signature and PE signature are valid. 
+
+\begin{DoxyReturn}{Returns}
+Returns {\ttfamily true} if signatures are valid, and {\ttfamily false} otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classpelf_1_1_pe_a308684b6eada062859e4c1a887a0d5eb}\label{classpelf_1_1_pe_a308684b6eada062859e4c1a887a0d5eb}} 
+\index{pelf::Pe$<$ Container $>$@{pelf::Pe$<$ Container $>$}!getCoffHeader@{getCoffHeader}}
+\index{getCoffHeader@{getCoffHeader}!pelf::Pe$<$ Container $>$@{pelf::Pe$<$ Container $>$}}
+\doxysubsubsection{\texorpdfstring{getCoffHeader()}{getCoffHeader()}}
+{\footnotesize\ttfamily template$<$class Container $>$ \\
+constexpr auto \mbox{\hyperlink{classpelf_1_1_pe}{pelf\+::\+Pe}}$<$ Container $>$\+::get\+Coff\+Header\hspace{0.3cm}{\ttfamily [constexpr]}}
+
+
+
+Returns the Coff header. 
+
+\begin{DoxyReturn}{Returns}
+returns a {\ttfamily \mbox{\hyperlink{structpelf_1_1_i_m_a_g_e___f_i_l_e___h_e_a_d_e_r}{IMAGE\+\_\+\+FILE\+\_\+\+HEADER}}} struct which is a hana struct that represents the coff header of the PE file 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classpelf_1_1_pe_a2fde5bc41beaf4d7868b8ef03bd31d42}\label{classpelf_1_1_pe_a2fde5bc41beaf4d7868b8ef03bd31d42}} 
+\index{pelf::Pe$<$ Container $>$@{pelf::Pe$<$ Container $>$}!parseHeaders@{parseHeaders}}
+\index{parseHeaders@{parseHeaders}!pelf::Pe$<$ Container $>$@{pelf::Pe$<$ Container $>$}}
+\doxysubsubsection{\texorpdfstring{parseHeaders()}{parseHeaders()}}
+{\footnotesize\ttfamily template$<$class Container $>$ \\
+constexpr auto \mbox{\hyperlink{classpelf_1_1_pe}{pelf\+::\+Pe}}$<$ Container $>$\+::parse\+Headers\hspace{0.3cm}{\ttfamily [constexpr]}, {\ttfamily [private]}}
+
+
+
+Parses the Coff Header, and the optional coff header. 
+
+\begin{DoxyReturn}{Returns}
+Void 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classpelf_1_1_pe_af6897e2b886e12e4b19af0994cf026ed}\label{classpelf_1_1_pe_af6897e2b886e12e4b19af0994cf026ed}} 
+\index{pelf::Pe$<$ Container $>$@{pelf::Pe$<$ Container $>$}!readCoffHeader@{readCoffHeader}}
+\index{readCoffHeader@{readCoffHeader}!pelf::Pe$<$ Container $>$@{pelf::Pe$<$ Container $>$}}
+\doxysubsubsection{\texorpdfstring{readCoffHeader()}{readCoffHeader()}}
+{\footnotesize\ttfamily template$<$class Container $>$ \\
+constexpr auto \mbox{\hyperlink{classpelf_1_1_pe}{pelf\+::\+Pe}}$<$ Container $>$\+::read\+Coff\+Header\hspace{0.3cm}{\ttfamily [constexpr]}, {\ttfamily [private]}}
+
+
+
+Reads the coff header from {\ttfamily m\+Data} and saves it into m\+Coff\+Header struct. 
+
+\begin{DoxyReturn}{Returns}
+Void. 
+\end{DoxyReturn}
+
+
+\doxysubsection{Friends And Related Function Documentation}
+\mbox{\Hypertarget{classpelf_1_1_pe_a31ad3ffb5e374b1f1bfe272deadec778}\label{classpelf_1_1_pe_a31ad3ffb5e374b1f1bfe272deadec778}} 
+\index{pelf::Pe$<$ Container $>$@{pelf::Pe$<$ Container $>$}!Pelf$<$ Container, Pe $>$@{Pelf$<$ Container, Pe $>$}}
+\index{Pelf$<$ Container, Pe $>$@{Pelf$<$ Container, Pe $>$}!pelf::Pe$<$ Container $>$@{pelf::Pe$<$ Container $>$}}
+\doxysubsubsection{\texorpdfstring{Pelf$<$ Container, Pe $>$}{Pelf< Container, Pe >}}
+{\footnotesize\ttfamily template$<$class Container $>$ \\
+friend class \mbox{\hyperlink{classpelf_1_1_pelf}{Pelf}}$<$ Container, \mbox{\hyperlink{classpelf_1_1_pe}{Pe}} $>$\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classpelf_1_1_pe_a7eafaff28816fab0213b7193d420d178}\label{classpelf_1_1_pe_a7eafaff28816fab0213b7193d420d178}} 
+\index{pelf::Pe$<$ Container $>$@{pelf::Pe$<$ Container $>$}!mCoffHeader@{mCoffHeader}}
+\index{mCoffHeader@{mCoffHeader}!pelf::Pe$<$ Container $>$@{pelf::Pe$<$ Container $>$}}
+\doxysubsubsection{\texorpdfstring{mCoffHeader}{mCoffHeader}}
+{\footnotesize\ttfamily template$<$class Container $>$ \\
+\mbox{\hyperlink{structpelf_1_1_i_m_a_g_e___f_i_l_e___h_e_a_d_e_r}{IMAGE\+\_\+\+FILE\+\_\+\+HEADER}} \mbox{\hyperlink{classpelf_1_1_pe}{pelf\+::\+Pe}}$<$ Container $>$\+::m\+Coff\+Header \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+Struct that represents the coff header \mbox{\Hypertarget{classpelf_1_1_pe_a90dfed482f8683a9adc33f3fde479311}\label{classpelf_1_1_pe_a90dfed482f8683a9adc33f3fde479311}} 
+\index{pelf::Pe$<$ Container $>$@{pelf::Pe$<$ Container $>$}!mMinPeSize@{mMinPeSize}}
+\index{mMinPeSize@{mMinPeSize}!pelf::Pe$<$ Container $>$@{pelf::Pe$<$ Container $>$}}
+\doxysubsubsection{\texorpdfstring{mMinPeSize}{mMinPeSize}}
+{\footnotesize\ttfamily template$<$class Container $>$ \\
+constexpr std\+::uint8\+\_\+t \mbox{\hyperlink{classpelf_1_1_pe}{pelf\+::\+Pe}}$<$ Container $>$\+::m\+Min\+Pe\+Size \{97\}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}, {\ttfamily [private]}}
+
+Minimum possible PE file size \mbox{\Hypertarget{classpelf_1_1_pe_a76a7612bdd93c78bac1e3a4bd54526dc}\label{classpelf_1_1_pe_a76a7612bdd93c78bac1e3a4bd54526dc}} 
+\index{pelf::Pe$<$ Container $>$@{pelf::Pe$<$ Container $>$}!mMZDSignature@{mMZDSignature}}
+\index{mMZDSignature@{mMZDSignature}!pelf::Pe$<$ Container $>$@{pelf::Pe$<$ Container $>$}}
+\doxysubsubsection{\texorpdfstring{mMZDSignature}{mMZDSignature}}
+{\footnotesize\ttfamily template$<$class Container $>$ \\
+constexpr std\+::uint16\+\_\+t \mbox{\hyperlink{classpelf_1_1_pe}{pelf\+::\+Pe}}$<$ Container $>$\+::m\+MZDSignature \{0x4d5a\}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}, {\ttfamily [private]}}
+
+MZ DOS Signature \mbox{\Hypertarget{classpelf_1_1_pe_a93c1187c324e4ae7e2254731bf266cbd}\label{classpelf_1_1_pe_a93c1187c324e4ae7e2254731bf266cbd}} 
+\index{pelf::Pe$<$ Container $>$@{pelf::Pe$<$ Container $>$}!mPeHeaderAddress@{mPeHeaderAddress}}
+\index{mPeHeaderAddress@{mPeHeaderAddress}!pelf::Pe$<$ Container $>$@{pelf::Pe$<$ Container $>$}}
+\doxysubsubsection{\texorpdfstring{mPeHeaderAddress}{mPeHeaderAddress}}
+{\footnotesize\ttfamily template$<$class Container $>$ \\
+std\+::uint32\+\_\+t \mbox{\hyperlink{classpelf_1_1_pe}{pelf\+::\+Pe}}$<$ Container $>$\+::m\+Pe\+Header\+Address \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+32 bit value that represents the start address of the coff header \mbox{\Hypertarget{classpelf_1_1_pe_afd3cf9aa26d42801f4efa7ed377c05d2}\label{classpelf_1_1_pe_afd3cf9aa26d42801f4efa7ed377c05d2}} 
+\index{pelf::Pe$<$ Container $>$@{pelf::Pe$<$ Container $>$}!mPeSignature@{mPeSignature}}
+\index{mPeSignature@{mPeSignature}!pelf::Pe$<$ Container $>$@{pelf::Pe$<$ Container $>$}}
+\doxysubsubsection{\texorpdfstring{mPeSignature}{mPeSignature}}
+{\footnotesize\ttfamily template$<$class Container $>$ \\
+constexpr std\+::uint32\+\_\+t \mbox{\hyperlink{classpelf_1_1_pe}{pelf\+::\+Pe}}$<$ Container $>$\+::m\+Pe\+Signature \{0x50450000\}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}, {\ttfamily [private]}}
+
+PE Signature \textquotesingle{}PE\textbackslash{}0\textbackslash{}0\textquotesingle{} 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/nahue/source/\+Pelf/include/\mbox{\hyperlink{_pe_8h}{Pe.\+h}}\end{DoxyCompactItemize}

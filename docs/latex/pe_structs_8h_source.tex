@@ -1,0 +1,70 @@
+\hypertarget{pe_structs_8h_source}{}\doxysection{pe\+Structs.\+h}
+\label{pe_structs_8h_source}\index{C:/Users/nahue/source/Pelf/include/peStructs.h@{C:/Users/nahue/source/Pelf/include/peStructs.h}}
+\mbox{\hyperlink{pe_structs_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#ifndef PESTRUCTS\_H\_}}
+\DoxyCodeLine{13 \textcolor{preprocessor}{\#define PESTRUCTS\_H\_}}
+\DoxyCodeLine{14 }
+\DoxyCodeLine{15 \textcolor{preprocessor}{\#include <boost/hana.hpp>}}
+\DoxyCodeLine{16 \textcolor{preprocessor}{\#include <cstdint>}}
+\DoxyCodeLine{17 }
+\DoxyCodeLine{18 }
+\DoxyCodeLine{19 }
+\DoxyCodeLine{20 \textcolor{keyword}{namespace }\mbox{\hyperlink{namespacepelf}{pelf}} \{}
+\DoxyCodeLine{21 }
+\DoxyCodeLine{22 \textcolor{keyword}{namespace }hana = boost::hana;}
+\DoxyCodeLine{23 }
+\DoxyCodeLine{24 \textcolor{comment}{/* Windows typedefs */}}
+\DoxyCodeLine{25 \textcolor{keyword}{using} \mbox{\hyperlink{namespacepelf_a68b4632c0053ab2bb24b62ba1ccbf7c2}{WORD}} = std::uint16\_t;}
+\DoxyCodeLine{26 \textcolor{keyword}{using} \mbox{\hyperlink{namespacepelf_a7931c494810aaeb8ce5f61bb01151a2c}{DWORD}} = std::uint32\_t;}
+\DoxyCodeLine{27 }
+\DoxyCodeLine{28 \textcolor{preprocessor}{\#pragma pack(push, 1)     }\textcolor{comment}{// Disable padding }}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{34 \textcolor{keyword}{struct }\mbox{\hyperlink{structpelf_1_1_i_m_a_g_e___f_i_l_e___h_e_a_d_e_r}{IMAGE\_FILE\_HEADER}} \{}
+\DoxyCodeLine{39   \mbox{\hyperlink{structpelf_1_1_i_m_a_g_e___f_i_l_e___h_e_a_d_e_r_ac47a89aef68a50041d3761c60be3f1d9}{BOOST\_HANA\_DEFINE\_STRUCT}}(\mbox{\hyperlink{structpelf_1_1_i_m_a_g_e___f_i_l_e___h_e_a_d_e_r}{IMAGE\_FILE\_HEADER}},}
+\DoxyCodeLine{40     (\mbox{\hyperlink{namespacepelf_a68b4632c0053ab2bb24b62ba1ccbf7c2}{WORD}},  Machine),          }
+\DoxyCodeLine{41     (\mbox{\hyperlink{namespacepelf_a68b4632c0053ab2bb24b62ba1ccbf7c2}{WORD}},  NumberOfSections),}
+\DoxyCodeLine{42     (\mbox{\hyperlink{namespacepelf_a7931c494810aaeb8ce5f61bb01151a2c}{DWORD}}, TimeDateStamp),}
+\DoxyCodeLine{43     (\mbox{\hyperlink{namespacepelf_a7931c494810aaeb8ce5f61bb01151a2c}{DWORD}}, PointerToSymbolTable),}
+\DoxyCodeLine{44     (\mbox{\hyperlink{namespacepelf_a7931c494810aaeb8ce5f61bb01151a2c}{DWORD}}, NumberOfSymbols),}
+\DoxyCodeLine{45     (\mbox{\hyperlink{namespacepelf_a68b4632c0053ab2bb24b62ba1ccbf7c2}{WORD}},  SizeOfOptionalHeader),}
+\DoxyCodeLine{46     (\mbox{\hyperlink{namespacepelf_a68b4632c0053ab2bb24b62ba1ccbf7c2}{WORD}},  Characteristics)}
+\DoxyCodeLine{47   );}
+\DoxyCodeLine{48 }
+\DoxyCodeLine{49 }
+\DoxyCodeLine{50   [[nodiscard]] \textcolor{keyword}{constexpr} \textcolor{keyword}{auto} \mbox{\hyperlink{structpelf_1_1_i_m_a_g_e___f_i_l_e___h_e_a_d_e_r_a9079b5f58a92d1b759d54a9c4da57c4c}{getMachine}}() const -\/> \mbox{\hyperlink{namespacepelf_a68b4632c0053ab2bb24b62ba1ccbf7c2}{WORD}} \{ }
+\DoxyCodeLine{51     \textcolor{keywordflow}{return} hana::at\_c<0>(hana::members(*\textcolor{keyword}{this})); }
+\DoxyCodeLine{52   \}}
+\DoxyCodeLine{53 }
+\DoxyCodeLine{54   [[nodiscard]] \textcolor{keyword}{constexpr} \textcolor{keyword}{auto} \mbox{\hyperlink{structpelf_1_1_i_m_a_g_e___f_i_l_e___h_e_a_d_e_r_a7517c9e0bbf36a49fd701e24605876f0}{getNumberOfSections}}() const -\/> \mbox{\hyperlink{namespacepelf_a68b4632c0053ab2bb24b62ba1ccbf7c2}{WORD}} \{}
+\DoxyCodeLine{55     \textcolor{keywordflow}{return} hana::at\_c<1>(hana::members(*\textcolor{keyword}{this})); }
+\DoxyCodeLine{56   \}}
+\DoxyCodeLine{57 }
+\DoxyCodeLine{58   [[nodiscard]] \textcolor{keyword}{constexpr} \textcolor{keyword}{auto} \mbox{\hyperlink{structpelf_1_1_i_m_a_g_e___f_i_l_e___h_e_a_d_e_r_a2a465c74dafb04b679ff43abc4b56f52}{getTimeDateStamp}}() const -\/> \mbox{\hyperlink{namespacepelf_a7931c494810aaeb8ce5f61bb01151a2c}{DWORD}} \{}
+\DoxyCodeLine{59     \textcolor{keywordflow}{return} hana::at\_c<2>(hana::members(*\textcolor{keyword}{this})); }
+\DoxyCodeLine{60   \}}
+\DoxyCodeLine{61 }
+\DoxyCodeLine{62   [[nodiscard]] \textcolor{keyword}{constexpr} \textcolor{keyword}{auto} \mbox{\hyperlink{structpelf_1_1_i_m_a_g_e___f_i_l_e___h_e_a_d_e_r_a916391f8a632b27d85b64f74585546ba}{getPointerToSymbolTable}}() const -\/> \mbox{\hyperlink{namespacepelf_a7931c494810aaeb8ce5f61bb01151a2c}{DWORD}} \{}
+\DoxyCodeLine{63     \textcolor{keywordflow}{return} hana::at\_c<3>(hana::members(*\textcolor{keyword}{this}));}
+\DoxyCodeLine{64   \}}
+\DoxyCodeLine{65 }
+\DoxyCodeLine{66   [[nodiscard]] \textcolor{keyword}{constexpr} \textcolor{keyword}{auto} \mbox{\hyperlink{structpelf_1_1_i_m_a_g_e___f_i_l_e___h_e_a_d_e_r_a3545dcd9c6a7bbaa2b3734fb365c3164}{getNumberOfSymbols}}() const -\/> \mbox{\hyperlink{namespacepelf_a7931c494810aaeb8ce5f61bb01151a2c}{DWORD}} \{}
+\DoxyCodeLine{67     \textcolor{keywordflow}{return} hana::at\_c<4>(hana::members(*\textcolor{keyword}{this}));}
+\DoxyCodeLine{68   \}}
+\DoxyCodeLine{69 }
+\DoxyCodeLine{70   [[nodiscard]] \textcolor{keyword}{constexpr} \textcolor{keyword}{auto} \mbox{\hyperlink{structpelf_1_1_i_m_a_g_e___f_i_l_e___h_e_a_d_e_r_aa752f2d5473af483a02309e61008ef94}{getSizeOfOptionalHeader}}() const -\/> \mbox{\hyperlink{namespacepelf_a68b4632c0053ab2bb24b62ba1ccbf7c2}{WORD}} \{}
+\DoxyCodeLine{71     \textcolor{keywordflow}{return} hana::at\_c<5>(hana::members(*\textcolor{keyword}{this}));}
+\DoxyCodeLine{72   \}}
+\DoxyCodeLine{73 }
+\DoxyCodeLine{74   [[nodiscard]] \textcolor{keyword}{constexpr} \textcolor{keyword}{auto} \mbox{\hyperlink{structpelf_1_1_i_m_a_g_e___f_i_l_e___h_e_a_d_e_r_a390b4bc0c763b79681d843ab0f77ac50}{getCharacteristics}}() const -\/> \mbox{\hyperlink{namespacepelf_a68b4632c0053ab2bb24b62ba1ccbf7c2}{WORD}} \{}
+\DoxyCodeLine{75     \textcolor{keywordflow}{return} hana::at\_c<6>(hana::members(*\textcolor{keyword}{this}));}
+\DoxyCodeLine{76   \}}
+\DoxyCodeLine{77 \};}
+\DoxyCodeLine{78 \textcolor{preprocessor}{\#pragma pack(pop)}}
+\DoxyCodeLine{79 }
+\DoxyCodeLine{80 \} \textcolor{comment}{// namespace end }}
+\DoxyCodeLine{81 }
+\DoxyCodeLine{82 \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

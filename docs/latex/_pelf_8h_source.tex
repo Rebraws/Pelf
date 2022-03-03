@@ -1,0 +1,121 @@
+\hypertarget{_pelf_8h_source}{}\doxysection{Pelf.\+h}
+\label{_pelf_8h_source}\index{C:/Users/nahue/source/Pelf/include/Pelf.h@{C:/Users/nahue/source/Pelf/include/Pelf.h}}
+\mbox{\hyperlink{_pelf_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#ifndef PELF\_H\_}}
+\DoxyCodeLine{13 \textcolor{preprocessor}{\#define PELF\_H\_}}
+\DoxyCodeLine{14 }
+\DoxyCodeLine{15 \textcolor{preprocessor}{\#include <type\_traits>}}
+\DoxyCodeLine{16 \textcolor{preprocessor}{\#include <stdexcept>}}
+\DoxyCodeLine{17 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{pelf_except_8h}{pelfExcept.h}}"{}}}
+\DoxyCodeLine{18 }
+\DoxyCodeLine{19 }
+\DoxyCodeLine{20 \textcolor{preprocessor}{\#include <boost/hana.hpp>}}
+\DoxyCodeLine{21 }
+\DoxyCodeLine{22 }
+\DoxyCodeLine{23 }
+\DoxyCodeLine{24 \textcolor{keyword}{namespace }\mbox{\hyperlink{namespacepelf}{pelf}} \{}
+\DoxyCodeLine{25 }
+\DoxyCodeLine{26 \textcolor{keyword}{namespace }hana = boost::hana;}
+\DoxyCodeLine{27 }
+\DoxyCodeLine{32 \textcolor{keyword}{class }\mbox{\hyperlink{classpelf_1_1_pelf_helper}{PelfHelper}} \{}
+\DoxyCodeLine{33 \textcolor{keyword}{public}:}
+\DoxyCodeLine{34   }
+\DoxyCodeLine{35   \textcolor{comment}{/***/}}
+\DoxyCodeLine{36   \textcolor{keyword}{template} <\textcolor{keyword}{class} Container, \textcolor{keyword}{class} Struct>}
+\DoxyCodeLine{37   \textcolor{keyword}{static} \textcolor{keyword}{constexpr} \textcolor{keyword}{auto} \mbox{\hyperlink{classpelf_1_1_pelf_helper_a59b51d5417a9f15ae9dd1cc2b9b1b060}{copyStruct}}(\textcolor{keyword}{const} Container\& data,}
+\DoxyCodeLine{38       Struct\& s,}
+\DoxyCodeLine{39       std::uint64\_t offset) -\/> void;}
+\DoxyCodeLine{40 \};}
+\DoxyCodeLine{41 }
+\DoxyCodeLine{42 \textcolor{keyword}{template} <\textcolor{keyword}{class} Container, \textcolor{keyword}{class} Struct>}
+\DoxyCodeLine{43 \textcolor{keyword}{constexpr} \textcolor{keyword}{auto} \mbox{\hyperlink{classpelf_1_1_pelf_helper_a59b51d5417a9f15ae9dd1cc2b9b1b060}{PelfHelper::copyStruct}}(\textcolor{keyword}{const} Container\& data,}
+\DoxyCodeLine{44     Struct\& s,}
+\DoxyCodeLine{45     std::uint64\_t offset) -\/> \textcolor{keywordtype}{void} \{}
+\DoxyCodeLine{46     }
+\DoxyCodeLine{47   hana::for\_each(hana::keys(s), [\&](\textcolor{keyword}{auto} key) \{}
+\DoxyCodeLine{48 }
+\DoxyCodeLine{49     \textcolor{keyword}{auto}\& member = hana::at\_key(s, key);}
+\DoxyCodeLine{50       }
+\DoxyCodeLine{51     \textcolor{keywordflow}{for} (std::size\_t i\{\}; i < \textcolor{keyword}{sizeof}(member); ++i)\{}
+\DoxyCodeLine{52       member <<= 8;}
+\DoxyCodeLine{53       member |= data.at(\textcolor{keyword}{sizeof}(member) -\/ 1 + offset -\/ i);}
+\DoxyCodeLine{54     \}}
+\DoxyCodeLine{55       }
+\DoxyCodeLine{56     offset += \textcolor{keyword}{sizeof}(member);}
+\DoxyCodeLine{57   \});}
+\DoxyCodeLine{58 \}}
+\DoxyCodeLine{59 }
+\DoxyCodeLine{60 }
+\DoxyCodeLine{63 \textcolor{keyword}{template} <\textcolor{keyword}{class} Container, \textcolor{keyword}{class} Type>}
+\DoxyCodeLine{64 \textcolor{keyword}{concept }\mbox{\hyperlink{conceptpelf_1_1container__and__convertible__v}{container\_and\_convertible\_v}} = }
+\DoxyCodeLine{65   std::is\_nothrow\_convertible\_v<typename Container::value\_type, Type>;}
+\DoxyCodeLine{66 }
+\DoxyCodeLine{67 }
+\DoxyCodeLine{75 \textcolor{keyword}{template} <\textcolor{keyword}{class} Container, \textcolor{keyword}{template}<\textcolor{keyword}{typename}> \textcolor{keyword}{class }Derived>}
+\DoxyCodeLine{76 \textcolor{keyword}{class }\mbox{\hyperlink{classpelf_1_1_pelf}{Pelf}} \{}
+\DoxyCodeLine{77 \textcolor{keyword}{public}:}
+\DoxyCodeLine{78   }
+\DoxyCodeLine{86   \textcolor{keyword}{constexpr} \textcolor{keyword}{explicit} \mbox{\hyperlink{classpelf_1_1_pelf_abd27fd25af4af69f0ff70097ce77fdd3}{Pelf}}(Container data)}
+\DoxyCodeLine{87     \textcolor{keyword}{noexcept} }
+\DoxyCodeLine{88     \textcolor{keyword}{requires} \mbox{\hyperlink{conceptpelf_1_1container__and__convertible__v}{container\_and\_convertible\_v<Container, unsigned char>}};}
+\DoxyCodeLine{89 }
+\DoxyCodeLine{96   \textcolor{keyword}{constexpr} \textcolor{keyword}{auto} \mbox{\hyperlink{classpelf_1_1_pelf_a3c0fabea66165b5ca917f5a72f8daeaf}{parse}}() -\/> void;}
+\DoxyCodeLine{97 }
+\DoxyCodeLine{98 }
+\DoxyCodeLine{99 }
+\DoxyCodeLine{105   [[nodiscard]] \textcolor{keyword}{constexpr} \textcolor{keyword}{auto} \mbox{\hyperlink{classpelf_1_1_pelf_a2bb779d7e943ec739df4c51ce2dffb53}{getRawData}}() const noexcept -\/> Container;}
+\DoxyCodeLine{106 }
+\DoxyCodeLine{107 }
+\DoxyCodeLine{108 }
+\DoxyCodeLine{109 }
+\DoxyCodeLine{110 protected:}
+\DoxyCodeLine{111   Container \mbox{\hyperlink{classpelf_1_1_pelf_ac98647f291b3aa3809e49e2f3b57e261}{mData}}; }
+\DoxyCodeLine{112 private:  }
+\DoxyCodeLine{113   friend class \mbox{\hyperlink{classpelf_1_1_pelf_helper}{PelfHelper}};}
+\DoxyCodeLine{114 \};}
+\DoxyCodeLine{115 }
+\DoxyCodeLine{116 }
+\DoxyCodeLine{117 template <class Container, template<typename> class Derived>}
+\DoxyCodeLine{118 constexpr \mbox{\hyperlink{classpelf_1_1_pelf}{Pelf}}<Container, Derived>::\mbox{\hyperlink{classpelf_1_1_pelf}{Pelf}}(Container data) }
+\DoxyCodeLine{119   noexcept}
+\DoxyCodeLine{120   requires \mbox{\hyperlink{conceptpelf_1_1container__and__convertible__v}{container\_and\_convertible\_v}}<Container, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char}> :}
+\DoxyCodeLine{121   \mbox{\hyperlink{classpelf_1_1_pelf_ac98647f291b3aa3809e49e2f3b57e261}{mData}}(std::move(data)) \{\}}
+\DoxyCodeLine{122 }
+\DoxyCodeLine{123 }
+\DoxyCodeLine{124 }
+\DoxyCodeLine{125 \textcolor{keyword}{template} <\textcolor{keyword}{class} Container, \textcolor{keyword}{template}<\textcolor{keyword}{typename}> \textcolor{keyword}{class }Derived>}
+\DoxyCodeLine{126 \textcolor{keyword}{constexpr} \textcolor{keyword}{auto} \mbox{\hyperlink{classpelf_1_1_pelf_a2bb779d7e943ec739df4c51ce2dffb53}{Pelf<Container, Derived>::getRawData}}() const noexcept -\/> Container \{}
+\DoxyCodeLine{127   \textcolor{keywordflow}{return} \mbox{\hyperlink{classpelf_1_1_pelf_ac98647f291b3aa3809e49e2f3b57e261}{mData}};}
+\DoxyCodeLine{128 \}}
+\DoxyCodeLine{129 }
+\DoxyCodeLine{130 }
+\DoxyCodeLine{131 }
+\DoxyCodeLine{132 \textcolor{keyword}{template} <\textcolor{keyword}{class} Container, \textcolor{keyword}{template}<\textcolor{keyword}{typename}> \textcolor{keyword}{class }Derived>}
+\DoxyCodeLine{133 \textcolor{keyword}{constexpr} \textcolor{keyword}{auto} \mbox{\hyperlink{classpelf_1_1_pelf_a3c0fabea66165b5ca917f5a72f8daeaf}{Pelf<Container, Derived>::parse}}() -\/> \textcolor{keywordtype}{void} \{}
+\DoxyCodeLine{134   }
+\DoxyCodeLine{135   \textcolor{keyword}{auto}\& \mbox{\hyperlink{namespacepelf}{pelf}} = \textcolor{keyword}{static\_cast<}Derived<Container>\& \textcolor{keyword}{>}(*this);}
+\DoxyCodeLine{136 }
+\DoxyCodeLine{137   \textcolor{keywordflow}{if} (!\mbox{\hyperlink{namespacepelf}{pelf}}.checkFileSize()) \{}
+\DoxyCodeLine{138     \textcolor{keywordflow}{throw} \mbox{\hyperlink{classpelf_1_1_pelf_exception}{PelfException}}\{\textcolor{stringliteral}{"{}Invalid File Size"{}}\};}
+\DoxyCodeLine{139   \}}
+\DoxyCodeLine{140   }
+\DoxyCodeLine{141   \textcolor{keywordflow}{if} (!\mbox{\hyperlink{namespacepelf}{pelf}}.checkSignatures()) \{}
+\DoxyCodeLine{142     \textcolor{keywordflow}{throw} \mbox{\hyperlink{classpelf_1_1_pelf_exception}{PelfException}}\{\textcolor{stringliteral}{"{}Invalid signatures!"{}}\};}
+\DoxyCodeLine{143   \}}
+\DoxyCodeLine{144 }
+\DoxyCodeLine{145   \mbox{\hyperlink{namespacepelf}{pelf}}.parseHeaders();}
+\DoxyCodeLine{146   }
+\DoxyCodeLine{147   \textcolor{comment}{//pelf.parseSections();}}
+\DoxyCodeLine{148 }
+\DoxyCodeLine{149 }
+\DoxyCodeLine{150 \}}
+\DoxyCodeLine{151 }
+\DoxyCodeLine{152 }
+\DoxyCodeLine{153 }
+\DoxyCodeLine{154 \} \textcolor{comment}{// end of namespace pelf}}
+\DoxyCodeLine{155 }
+\DoxyCodeLine{156 \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

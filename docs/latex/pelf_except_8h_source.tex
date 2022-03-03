@@ -1,0 +1,30 @@
+\hypertarget{pelf_except_8h_source}{}\doxysection{pelf\+Except.\+h}
+\label{pelf_except_8h_source}\index{C:/Users/nahue/source/Pelf/include/pelfExcept.h@{C:/Users/nahue/source/Pelf/include/pelfExcept.h}}
+\mbox{\hyperlink{pelf_except_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#ifndef PELFEXCEPT\_H\_}}
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#define PELFEXCEPT\_H\_}}
+\DoxyCodeLine{13 }
+\DoxyCodeLine{14 \textcolor{preprocessor}{\#include <stdexcept>}}
+\DoxyCodeLine{15 \textcolor{preprocessor}{\#include <mutex>}    \textcolor{comment}{// for std::call\_once}}
+\DoxyCodeLine{16 }
+\DoxyCodeLine{17 }
+\DoxyCodeLine{18 \textcolor{keyword}{namespace }\mbox{\hyperlink{namespacepelf}{pelf}} \{}
+\DoxyCodeLine{19 }
+\DoxyCodeLine{20 }
+\DoxyCodeLine{22 \textcolor{keyword}{class }\mbox{\hyperlink{classpelf_1_1_pelf_exception}{PelfException}} : \textcolor{keyword}{public} std::exception \{}
+\DoxyCodeLine{23 \textcolor{keyword}{public}:}
+\DoxyCodeLine{24 }
+\DoxyCodeLine{30   \textcolor{keyword}{explicit} \mbox{\hyperlink{classpelf_1_1_pelf_exception_a5a4c18c636eb386c5a787550035d6250}{PelfException}}(\textcolor{keyword}{const} \textcolor{keywordtype}{char}* msg) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{31 }
+\DoxyCodeLine{36   \textcolor{keyword}{auto} \mbox{\hyperlink{classpelf_1_1_pelf_exception_a1c360c593210419fe63978e982b045c3}{what}}() \textcolor{keyword}{const} \textcolor{keyword}{noexcept} -\/> \textcolor{keyword}{const} \textcolor{keywordtype}{char} * \textcolor{keyword}{override};}
+\DoxyCodeLine{37 \textcolor{keyword}{private}:}
+\DoxyCodeLine{38   \textcolor{keyword}{const} \textcolor{keywordtype}{char}* \mbox{\hyperlink{classpelf_1_1_pelf_exception_a3c8c79aae5cd295415e17e1837d73778}{mMsg}} ;}
+\DoxyCodeLine{39 \}; }
+\DoxyCodeLine{40 }
+\DoxyCodeLine{41 \}}
+\DoxyCodeLine{42 }
+\DoxyCodeLine{43 \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

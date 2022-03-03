@@ -1,0 +1,18 @@
+\hypertarget{conceptpelf_1_1container__and__convertible__v}{}\doxysection{pelf\+::container\+\_\+and\+\_\+convertible\+\_\+v Concept Reference}
+\label{conceptpelf_1_1container__and__convertible__v}\index{pelf::container\_and\_convertible\_v@{pelf::container\_and\_convertible\_v}}
+
+
+{\ttfamily \#include $<$Pelf.\+h$>$}
+
+\doxysubsection{Concept definition}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{class} Container, \textcolor{keyword}{class} Type>}
+\DoxyCodeLine{\textcolor{keyword}{concept }\mbox{\hyperlink{conceptpelf_1_1container__and__convertible__v}{pelf::container\_and\_convertible\_v}} =  }
+\DoxyCodeLine{  std::is\_nothrow\_convertible\_v<typename Container::value\_type, Type>}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Detailed Description}
+Checks if the template parameter Container has an alias named value\+\_\+type and it also checks if that type is convertible to Type 
