@@ -79,10 +79,13 @@ private:
    *  @return Returns `true` if the size is valid, and `false` otherwise
    * */
   [[nodiscard]] constexpr auto checkFileSize() const -> bool;  
+
+  [[nodiscard]] constexpr auto parseHeaders() -> bool;
+
 };  
 
 template <class Container>
-inline constexpr Pe<Container>::Pe(Container data) :
+constexpr Pe<Container>::Pe(Container data) :
   Pelf<Container, Pe>(std::move(data)) {
 
   if (!checkFileSize()) {
@@ -98,14 +101,14 @@ inline constexpr Pe<Container>::Pe(Container data) :
 }
 
 template <class Container>
-inline constexpr auto Pe<Container>::checkMZDSignature() const -> bool {
+constexpr auto Pe<Container>::checkMZDSignature() const -> bool {
 
   return (this->mData[0] == (mMZDSignature >> 8) &&
          this->mData[1] == (mMZDSignature & 0xFF));
 }
 
 template <class Container>
-inline constexpr auto Pe<Container>::checkPESignature() const -> bool {
+constexpr auto Pe<Container>::checkPESignature() const -> bool {
   /* Read PE Signature from offset mPeHeaderAddress*/ 
   std::uint32_t pe_signature{};
   std::size_t offset = mPeHeaderAddress;
@@ -123,12 +126,12 @@ inline constexpr auto Pe<Container>::checkPESignature() const -> bool {
 
 
 template <class Container>
-inline constexpr auto Pe<Container>::checkSignatures() const -> bool {
+constexpr auto Pe<Container>::checkSignatures() const -> bool {
   return checkMZDSignature() && checkPESignature();
 }
 
 template <class Container>
-inline constexpr auto Pe<Container>::checkFileSize() const -> bool {
+constexpr auto Pe<Container>::checkFileSize() const -> bool {
   return this->mData.size() >= mMinPeSize;
 }
 
