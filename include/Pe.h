@@ -14,13 +14,11 @@
 #include "Pelf.h"
 #include <algorithm>
 #include <cstring>
-
+#include <cassert>
+#include "peStructs.h"
 #include <boost/hana.hpp>
 
-namespace hana = boost::hana;
-
 namespace pelf {
-
 
 
 
@@ -46,14 +44,18 @@ public:
     return mPeHeaderAddress;
   }
 
+  [[nodiscard]] constexpr auto getCoffHeader() const -> IMAGE_FILE_HEADER;
+
+
 private:
   friend class Pelf<Container, Pe>;
-
   static constexpr std::uint16_t  mMZDSignature{0x4d5a};    /**< MZ DOS Signature */
   static constexpr std::uint32_t  mPeSignature{0x50450000};  /**< PE Signature 'PE\0\0' */
   static constexpr std::uint8_t   mMinPeSize{97};           /**< Minimum possible PE file size */
   
-  std::uint32_t mPeHeaderAddress{};
+  std::uint32_t mPeHeaderAddress{}; /**< 32 bit value that represents the start address of the coff header */
+
+  IMAGE_FILE_HEADER mCoffHeader{}; /**< Struct that represents the coff header */
 
   /** @brief  Checks if MZ DOS signature and PE signature are valid
    *
@@ -80,7 +82,20 @@ private:
    * */
   [[nodiscard]] constexpr auto checkFileSize() const -> bool;  
 
-  [[nodiscard]] constexpr auto parseHeaders() -> bool;
+
+  /** @brief Parses the Coff Header, and the optional coff header
+   *
+   *
+   * @return Void
+   * */
+  constexpr auto parseHeaders() -> void;
+
+  /** @brief Reads the coff header from `mData` and saves it into mCoffHeader struct
+   *
+   *
+   *  @return Void.
+   * */
+  constexpr auto readCoffHeader() -> void;
 
 };  
 
@@ -95,7 +110,8 @@ constexpr Pe<Container>::Pe(Container data) :
   std::size_t offset{0x3c};
   for (std::size_t i{}; i < sizeof(mPeHeaderAddress); ++i) {
     mPeHeaderAddress <<= 8;
-    mPeHeaderAddress |= static_cast<std::uint32_t>(this->mData[sizeof(mPeHeaderAddress) - 1 + offset--]);  
+    mPeHeaderAddress |= static_cast<std::uint32_t>(
+        this->mData[sizeof(mPeHeaderAddress) - 1 + offset--]);  
   }
 
 }
@@ -135,5 +151,39 @@ constexpr auto Pe<Container>::checkFileSize() const -> bool {
   return this->mData.size() >= mMinPeSize;
 }
 
+
+template <class Container>
+constexpr auto Pe<Container>::parseHeaders() -> void {
+  
+  readCoffHeader();
+
+  
+
+}
+
+template <class Container>
+constexpr auto Pe<Container>::readCoffHeader() -> void {
+  if (std::is_constant_evaluated()){
+    PelfHelper::copyStruct(this->mData, mCoffHeader, mPeHeaderAddress + 4);
+  } else {
+    assert(std::is_trivially_copyable<decltype(mCoffHeader)>::value);
+    
+    if (mPeHeaderAddress + 4 + sizeof(mCoffHeader) < this->mData.size()) {
+      std::memcpy(reinterpret_cast<char *>(&mCoffHeader),
+          this->mData.data() + mPeHeaderAddress + 4,
+          sizeof(mCoffHeader));
+    } else {
+      throw PelfException{"Bad PE file, invalid Coff Header"};
+    }
+  }
+
+}
+
+template <class Container>
+constexpr auto Pe<Container>::getCoffHeader() const -> IMAGE_FILE_HEADER {
+  return mCoffHeader;
+}
+
 } // end of namespace
+
 #endif
