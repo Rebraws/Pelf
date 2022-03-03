@@ -12,6 +12,12 @@
 #define PE_H_
 
 #include "Pelf.h"
+#include <algorithm>
+#include <cstring>
+
+#include <boost/hana.hpp>
+
+namespace hana = boost::hana;
 
 namespace pelf {
 
@@ -36,13 +42,19 @@ public:
    * */
   constexpr explicit Pe(Container data);
 
+  [[nodiscard]] constexpr auto testGetPeHeaderAddress() const -> unsigned int {
+    return mPeHeaderAddress;
+  }
+
 private:
   friend class Pelf<Container, Pe>;
 
-  static constexpr std::uint16_t  mMZDSignature{0x4d5a};  /**< MZ DOS Signature */
-  static constexpr std::uint32_t  mPeSignture{0x50450000};          /**< PE Signature 'PE\0\0' */
-  static constexpr std::uint8_t   mMinPeSize{97};         /**< Minimum possible PE file size */
+  static constexpr std::uint16_t  mMZDSignature{0x4d5a};    /**< MZ DOS Signature */
+  static constexpr std::uint32_t  mPeSignature{0x50450000};  /**< PE Signature 'PE\0\0' */
+  static constexpr std::uint8_t   mMinPeSize{97};           /**< Minimum possible PE file size */
   
+  std::uint32_t mPeHeaderAddress{};
+
   /** @brief  Checks if MZ DOS signature and PE signature are valid
    *
    *  @return Returns `true` if signatures are valid, and `false` otherwise
@@ -55,6 +67,7 @@ private:
    *  @return Returns `true` if the signature is valid, `false` otherwise.
    * */
   [[nodiscard]] constexpr auto checkMZDSignature() const -> bool;
+  
   /** @brief Checks if the PE Signature `PE\0\0` is valid
    *
    *  @return Returns `true` if the signature is valid, `false` otherwise.
@@ -70,7 +83,19 @@ private:
 
 template <class Container>
 inline constexpr Pe<Container>::Pe(Container data) :
-  Pelf<Container, Pe>(std::move(data)) {}
+  Pelf<Container, Pe>(std::move(data)) {
+
+  if (!checkFileSize()) {
+    throw PelfException{"Invalid PE file size!"};
+  }
+
+  std::size_t offset{0x3c};
+  for (std::size_t i{}; i < sizeof(mPeHeaderAddress); ++i) {
+    mPeHeaderAddress <<= 8;
+    mPeHeaderAddress |= static_cast<std::uint32_t>(this->mData[sizeof(mPeHeaderAddress) - 1 + offset--]);  
+  }
+
+}
 
 template <class Container>
 inline constexpr auto Pe<Container>::checkMZDSignature() const -> bool {
@@ -81,8 +106,19 @@ inline constexpr auto Pe<Container>::checkMZDSignature() const -> bool {
 
 template <class Container>
 inline constexpr auto Pe<Container>::checkPESignature() const -> bool {
-  return true; 
-  
+  /* Read PE Signature from offset mPeHeaderAddress*/ 
+  std::uint32_t pe_signature{};
+  std::size_t offset = mPeHeaderAddress;
+
+  /* mPeSignature is set as 0x5045000, so no need to read the value backwards */
+  for (std::size_t i{}; i < sizeof(pe_signature); ++i) {
+    pe_signature <<= 8;
+    pe_signature |= this->mData[offset++]; 
+  }
+
+
+  return pe_signature == mPeSignature; 
+    
 }
 
 
