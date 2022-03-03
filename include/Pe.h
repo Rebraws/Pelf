@@ -116,6 +116,8 @@ constexpr Pe<Container>::Pe(Container data) :
         this->mData[sizeof(mPeHeaderAddress) - 1 + offset--]);  
   }
 
+  this->parse();
+
 }
 
 template <class Container>

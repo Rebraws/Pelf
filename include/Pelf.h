@@ -65,6 +65,12 @@ concept container_and_convertible_v =
   std::is_nothrow_convertible_v<typename Container::value_type, Type>;
 
 
+template <class Container>
+concept has_data_method_v = requires (Container c){
+  c.data();
+};
+
+
 /** @brief Base class for Pe and Elf classes
  *
  *  @tparam Container The type of the container used to store the file content
@@ -85,16 +91,8 @@ public:
    *  * */ 
   constexpr explicit Pelf(Container data)
     noexcept 
-    requires container_and_convertible_v<Container, unsigned char>;
-
-  /** @brief Parses the PE/ELF headers and sections
-   * 
-   *
-   *  @return Void.
-   *
-   * */
-  constexpr auto parse() -> void;
-
+    requires container_and_convertible_v<Container, unsigned char> && 
+      has_data_method_v<Container>;
 
 
   /** @brief Returns the original data passed to the Pe/Elf constructor
@@ -109,15 +107,25 @@ public:
 
 protected:
   Container mData; /**< Raw data from the file to Îbe parsed */
+
+  /** @brief Parses the PE/ELF headers and sections
+   * 
+   *
+   *  @return Void.
+   *
+   * */
+  constexpr auto parse() -> void;
+
 private:  
-  friend class PelfHelper;
+ friend class PelfHelper;
 };
 
 
 template <class Container, template<typename> class Derived>
 constexpr Pelf<Container, Derived>::Pelf(Container data) 
   noexcept
-  requires container_and_convertible_v<Container, unsigned char> :
+  requires container_and_convertible_v<Container, unsigned char> && 
+    has_data_method_v<Container> :
   mData(std::move(data)) {}
 
 
