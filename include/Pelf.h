@@ -16,8 +16,46 @@
 #include <stdexcept>
 #include "pelfExcept.h"
 
+
+#include <boost/hana.hpp>
+
+
+
 namespace pelf {
 
+namespace hana = boost::hana;
+
+/** @brief Class helper that contains helper functions to abstract things from PE and ELF classes 
+ *
+ *  
+ * */
+class PelfHelper {
+public:
+  
+  /***/
+  template <class Container, class Struct>
+  static constexpr auto copyStruct(const Container& data,
+      Struct& s,
+      std::uint64_t offset) -> void;
+};
+
+template <class Container, class Struct>
+constexpr auto PelfHelper::copyStruct(const Container& data,
+    Struct& s,
+    std::uint64_t offset) -> void {
+    
+  hana::for_each(hana::keys(s), [&](auto key) {
+
+    auto& member = hana::at_key(s, key);
+      
+    for (std::size_t i{}; i < sizeof(member); ++i){
+      member <<= 8;
+      member |= data.at(sizeof(member) - 1 + offset - i);
+    }
+      
+    offset += sizeof(member);
+  });
+}
 
 
 /** Checks if the template parameter Container has an alias named value_type
@@ -49,18 +87,14 @@ public:
     noexcept 
     requires container_and_convertible_v<Container, unsigned char>;
 
-  /** @brief Parses the file contents stored in mData by calling internal member function _parse
+  /** @brief Parses the PE/ELF headers and sections
+   * 
    *
    *  @return Void.
    *
    * */
   constexpr auto parse() -> void;
 
-  /** @brief Parses the data from `mData`, this member function can only be execute once per class instance
-   *
-   *  @return Void.
-   * */
-  constexpr auto _parse() -> void;
 
 
   /** @brief Returns the original data passed to the Pe/Elf constructor
@@ -74,8 +108,9 @@ public:
 
 
 protected:
-  Container mData; /**< Raw data from the file to be parsed */
-  std::once_flag flag /**< Flag to ensure that parsing happens only once */;
+  Container mData; /**< Raw data from the file to Îbe parsed */
+private:  
+  friend class PelfHelper;
 };
 
 
@@ -93,16 +128,9 @@ inline constexpr auto Pelf<Container, Derived>::getRawData() const noexcept -> C
 }
 
 
+
 template <class Container, template<typename> class Derived>
 inline constexpr auto Pelf<Container, Derived>::parse() -> void {
-
-  std::call_once(flag, [&](){ 
-      this->_parse();
-      });
-  }
-
-template <class Container, template<typename> class Derived>
-inline constexpr auto Pelf<Container, Derived>::_parse() -> void {
   
   auto& pelf = static_cast<Derived<Container>& >(*this);
 
@@ -114,11 +142,14 @@ inline constexpr auto Pelf<Container, Derived>::_parse() -> void {
     throw PelfException{"Invalid signatures!"};
   }
 
-  //pelf.parseHeaders();
+  pelf.parseHeaders();
+  
   //pelf.parseSections();
 
 
 }
+
+
 
 } // end of namespace pelf
 
