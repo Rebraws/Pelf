@@ -66,7 +66,7 @@ public:
 
 
 protected:
-  Container mData; /**< Raw data from the file to Îbe parsed */
+  Container mData; /**< Raw data from the file to be parsed */
 
   /** @brief Parses the PE/ELF headers and sections
    *
