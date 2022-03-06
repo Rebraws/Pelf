@@ -40,12 +40,22 @@ public:
    * */
   constexpr explicit Pe(Container data);
 
+
+  [[nodiscard]] constexpr auto getOptionalHeader() const -> OptionalHeader;
+
   /** @brief Returns the Coff header 
    *
    *  @return returns a `IMAGE_FILE_HEADER` struct which is a 
    *  hana struct that represents the coff header of the PE file
    * */
   [[nodiscard]] constexpr auto getCoffHeader() const -> IMAGE_FILE_HEADER;
+
+
+  [[nodiscard]] constexpr auto getStandardCoffFields() const -> StandardCoffFields;
+  
+  [[nodiscard]] constexpr auto getWindowsSpecificFields() const -> WindowsSpecificFields;
+
+
 
 
 private:
@@ -58,6 +68,8 @@ private:
   std::uint32_t mPeHeaderAddress{}; /**< 32 bit value that represents the start address of the coff header */
 
   IMAGE_FILE_HEADER mCoffHeader{}; /**< Struct that represents the coff header */
+  OptionalHeader    mOptionalHeader; /**< Struct that represents the optional header, */ 
+
 
   /** @brief  Checks if MZ DOS signature and PE signature are valid
    *
@@ -92,12 +104,10 @@ private:
    * */
   constexpr auto parseHeaders() -> void;
 
-  /** @brief Reads the coff header from `mData` and saves it into mCoffHeader struct
-   *
-   *
-   *  @return Void.
-   * */
-  constexpr auto readCoffHeader() -> void;
+  template <class Header>
+  constexpr auto readHeader(Header& header,const std::size_t offset) -> void;
+
+  
 
 };  
 
@@ -159,37 +169,67 @@ constexpr auto Pe<Container>::checkFileSize() const -> bool {
 template <class Container>
 constexpr auto Pe<Container>::parseHeaders() -> void {
   
-  readCoffHeader();
+  std::size_t offset = mPeHeaderAddress + 4;
+  readHeader(mCoffHeader, offset);
+
+  offset += sizeof(mCoffHeader);
+  readHeader(mOptionalHeader.mScf, offset);
+
+  offset += sizeof(mOptionalHeader.mScf);
+
+  readHeader(mOptionalHeader.mWsf, offset);
+
+  /* Maybe a for loop for the IMAGE DATA DIRECTORY ARRAY */
 
   
 
 }
 
-template <class Container>
-constexpr auto Pe<Container>::readCoffHeader() -> void {
-  
-  // coff header offset
-  const auto offset = mPeHeaderAddress + 4;
-  
-  if (std::is_constant_evaluated()){
-    mCoffHeader = this->template getStruct<decltype(mCoffHeader)>(offset);
-  } else {
-    assert(std::is_trivially_copyable<decltype(mCoffHeader)>::value);
-    
-    if (offset + sizeof(mCoffHeader) < this->mData.size()) {
-      std::memcpy(reinterpret_cast<char *>(&mCoffHeader),
-          this->mData.data() + offset,
-          sizeof(mCoffHeader));
-    } else {
-      throw PelfException{"Bad PE file, invalid Coff Header"};
-    }
-  }
-
-}
 
 template <class Container>
 constexpr auto Pe<Container>::getCoffHeader() const -> IMAGE_FILE_HEADER {
   return mCoffHeader;
+}
+
+template <class Container>
+constexpr auto Pe<Container>::getStandardCoffFields() const -> StandardCoffFields {
+  return mOptionalHeader.mScf;
+}
+
+template <class Container>
+constexpr auto Pe<Container>::getWindowsSpecificFields() const -> WindowsSpecificFields {
+  return mOptionalHeader.mWsf;
+}
+
+template <class Container>
+constexpr auto Pe<Container>::getOptionalHeader() const -> OptionalHeader {
+  return mOptionalHeader;
+}
+
+
+
+
+
+/* PROBABLY NEED TO MOVE THIS INTO PELF SINCE ELF CLASS IS GOING TO USE
+ * THIS FUNCTION TOO */
+template <class Container>
+template<class Header>
+constexpr auto Pe<Container>::readHeader(Header& header,const std::size_t offset) -> void {
+
+  if (std::is_constant_evaluated()) {
+    header = this->template getStruct<Header>(offset);
+  } else {
+
+    assert(std::is_trivially_copyable<Header>::value);
+    
+    if (offset + sizeof(header) < this->mData.size()) {
+      std::memcpy(reinterpret_cast<char *>(&header), 
+          this->mData.data() + offset, sizeof(header));
+    }else {
+      throw PelfException{"Invalid Header"};
+    }
+
+  }
 }
 
 } // end of namespace
