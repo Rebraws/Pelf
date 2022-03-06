@@ -89,7 +89,7 @@ protected:
 
 	 
  	template <class Struct>
-  constexpr auto getStruct(std::uint64_t offset) -> Struct; 
+  constexpr auto getStruct(std::size_t offset) -> Struct; 
 
 };
 
@@ -142,7 +142,9 @@ constexpr auto Pelf<Container, Derived>::getStruct(std::size_t offset)
     auto& member = hana::at_key(s, key);
     #pragma unroll
     for (std::size_t i{}; i < sizeof(member); ++i){
-      member <<= 8;
+      if (sizeof(member) > 1) {
+        member <<= 8;
+      }
       member |= mData.at(sizeof(member) - 1 + offset - i);
     }
 
