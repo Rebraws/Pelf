@@ -25,46 +25,16 @@ namespace pelf {
 
 namespace hana = boost::hana;
 
-/** @brief Class helper that contains helper functions to abstract things from PE and ELF classes 
+
+/**  
  *
- *  
- * */
-class PelfHelper {
-public:
-  
-  /***/
-  template <class Container, class Struct>
-  static constexpr auto copyStruct(const Container& data,
-      Struct& s,
-      std::uint64_t offset) -> void;
-};
-
-template <class Container, class Struct>
-constexpr auto PelfHelper::copyStruct(const Container& data,
-    Struct& s,
-    std::uint64_t offset) -> void {
-    
-  hana::for_each(hana::keys(s), [&](auto key) {
-
-    auto& member = hana::at_key(s, key);
-      
-    for (std::size_t i{}; i < sizeof(member); ++i){
-      member <<= 8;
-      member |= data.at(sizeof(member) - 1 + offset - i);
-    }
-      
-    offset += sizeof(member);
-  });
-}
-
-
-/** Checks if the template parameter Container has an alias named value_type
+ * Checks if the template parameter Container has an alias named value_type
  *  and it also checks if that type is convertible to Type */  
 template <class Container, class Type>
 concept container_and_convertible_v = 
   std::is_nothrow_convertible_v<typename Container::value_type, Type>;
 
-
+/** @brief Checks whether the template argument has a data method */
 template <class Container>
 concept has_data_method_v = requires (Container c){
   c.data();
@@ -86,6 +56,7 @@ public:
    *
    *  Takes as a parameter a container that satisfies the concept
    *  container_and_convertible_v<Container, unsigned char>
+   *  and has_data_method_v<Container>
    *
    *  @param data The data to be parsed
    *  * */ 
@@ -116,8 +87,10 @@ protected:
    * */
   constexpr auto parse() -> void;
 
-private:  
- friend class PelfHelper;
+	 
+ 	template <class Struct>
+  constexpr auto getStruct(std::uint64_t offset) -> Struct; 
+
 };
 
 
@@ -157,7 +130,27 @@ constexpr auto Pelf<Container, Derived>::parse() -> void {
 
 }
 
+template <class Container, template<typename> class Derived>
+template <class Struct>
+constexpr auto Pelf<Container, Derived>::getStruct(std::size_t offset) 
+  -> Struct {
 
+  Struct s{};
+
+  hana::for_each(hana::keys(s), [&](auto key) {
+
+    auto& member = hana::at_key(s, key);
+    #pragma unroll
+    for (std::size_t i{}; i < sizeof(member); ++i){
+      member <<= 8;
+      member |= mData.at(sizeof(member) - 1 + offset - i);
+    }
+
+    offset += sizeof(member);
+  });
+
+  return s;
+}  
 
 } // end of namespace pelf
 

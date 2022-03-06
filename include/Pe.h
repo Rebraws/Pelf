@@ -169,14 +169,14 @@ template <class Container>
 constexpr auto Pe<Container>::readCoffHeader() -> void {
   
   // coff header offset
-  auto offset = mPeHeaderAddress + 4;
+  const auto offset = mPeHeaderAddress + 4;
   
   if (std::is_constant_evaluated()){
-    PelfHelper::copyStruct(this->mData, mCoffHeader, offset);
+    mCoffHeader = this->template getStruct<decltype(mCoffHeader)>(offset);
   } else {
     assert(std::is_trivially_copyable<decltype(mCoffHeader)>::value);
     
-    if (mPeHeaderAddress + 4 + sizeof(mCoffHeader) < this->mData.size()) {
+    if (offset + sizeof(mCoffHeader) < this->mData.size()) {
       std::memcpy(reinterpret_cast<char *>(&mCoffHeader),
           this->mData.data() + offset,
           sizeof(mCoffHeader));
