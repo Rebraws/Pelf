@@ -22,11 +22,12 @@ namespace pelf {
 namespace hana = boost::hana;
 
 /* Windows typedefs */
-using WORD = std::uint16_t;
-using DWORD = std::uint32_t;
-using BYTE = std::uint8_t;
+using WORD 			= std::uint16_t;
+using DWORD 		= std::uint32_t;
+using BYTE 			= std::uint8_t;
+using ULONGLONG = std::uint64_t;
 
-constexpr std::uint8_t IMAGE_NUMBER_OF_DIRECTORY_ENTRIES{16};
+inline constexpr std::uint8_t IMAGE_NUMBER_OF_DIRECTORY_ENTRIES{16};
 
 
 #pragma pack(push, 1)     // Disable padding 
@@ -50,34 +51,6 @@ struct IMAGE_FILE_HEADER {
   	(WORD,  Characteristics)
 	);
 
-
-	[[nodiscard]] constexpr auto getMachine() const -> WORD { 
-		return Machine; 
-	}
-
-	[[nodiscard]] constexpr auto getNumberOfSections() const -> WORD {
-		return NumberOfSections; 
-	}
-
-	[[nodiscard]] constexpr auto getTimeDateStamp() const -> DWORD {
-		return TimeDateStamp; 
-	}
-
-	[[nodiscard]] constexpr auto getPointerToSymbolTable() const -> DWORD {
-		return PointerToSymbolTable;
-	}
-
-	[[nodiscard]] constexpr auto getNumberOfSymbols() const -> DWORD {
-		return NumberOfSymbols;
-	}
-
-	[[nodiscard]] constexpr auto getSizeOfOptionalHeader() const -> WORD {
-		return SizeOfOptionalHeader;
-	}
-
-	[[nodiscard]] constexpr auto getCharacteristics() const -> WORD {
-		return Characteristics;
-	}
 };
 #pragma pack(pop)
 
@@ -103,51 +76,42 @@ struct StandardCoffFields {
     (DWORD,                AddressOfEntryPoint),
     (DWORD,                BaseOfCode)
 	);
-
-	[[nodiscard]] constexpr auto getMagic() const -> WORD {
-    return Magic; 
-  }
-	
-	[[nodiscard]] constexpr auto getMajorLinkerVersion() const -> BYTE {
- 		return MajorLinkerVersion; 
-	}
-
-  [[nodiscard]] constexpr auto getMinorLinkerVersion() const -> BYTE {
-    return MinorLinkerVersion; 
-  }
-
-  [[nodiscard]] constexpr auto getSizeOfCode() const -> DWORD {
-    return SizeOfCode; 
-  }
-
-  [[nodiscard]] constexpr auto getSizeOfInitializedData() const -> DWORD { 
-    return SizeOfInitializedData;
-  }
-
-  [[nodiscard]] constexpr auto getSizeOfUninitializedData() const -> DWORD { 
-    return SizeOfUninitializedData; 
-  }
-
-  [[nodiscard]] constexpr auto getAddressOfEntryPoint() const -> DWORD {
-    return AddressOfEntryPoint;
-  }
-
-  [[nodiscard]] constexpr auto getBaseOfCode() const -> DWORD {
-    return BaseOfCode; 
-  }
-   
-
 };
 #pragma pack(pop)
 
-struct WindowsSpecificFields {};
+struct WindowsSpecificFields {
+  BOOST_HANA_DEFINE_STRUCT(WindowsSpecificFields,
+		
+    (ULONGLONG,   ImageBase),
+		(DWORD,       SectionAlignment),
+		(DWORD,       FileAlignment),
+		(WORD,        MajorOperatingSystemVersion),
+		(WORD,        MinorOperatingSystemVersion),
+		(WORD,        MajorImageVersion),
+		(WORD,        MinorImageVersion),
+		(WORD,        MajorSubsystemVersion),
+		(WORD,        MinorSubsystemVersion),
+		(DWORD,       Win32VersionValue),
+		(DWORD,       SizeOfImage),
+		(DWORD,       SizeOfHeaders),
+		(DWORD,       CheckSum),
+		(WORD,        Subsystem),
+		(WORD,        DllCharacteristics),
+		(ULONGLONG,   SizeOfStackReserve),
+		(ULONGLONG,   SizeOfStackCommit),
+		(ULONGLONG,   SizeOfHeapReserve),
+		(ULONGLONG,   SizeOfHeapCommit),
+		(DWORD,       LoaderFlags),
+		(DWORD,       NumberOfRvaAndSizes)
+ );
+};
 
 
 #pragma pack(push, 1)  // This can be removed for this structure
 struct OptionalHeader {
-  StandardCoffFields      mScf;
-  WindowsSpecificFields   mWfs;
-  IMAGE_DATA_DIRECTORY  mDataDirectories[IMAGE_NUMBER_OF_DIRECTORY_ENTRIES];
+  StandardCoffFields      mScf{};
+  WindowsSpecificFields   mWfs{};
+//  IMAGE_DATA_DIRECTORY  mDataDirectories[IMAGE_NUMBER_OF_DIRECTORY_ENTRIES];
 };
 #pragma pack(pop)
 
