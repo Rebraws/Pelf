@@ -92,7 +92,7 @@ protected:
    *  @return `Struct`
    *  */
   template<class Struct>
-  constexpr auto getStruct(std::size_t offset) -> Struct;
+  [[nodiscard]] constexpr auto getStruct(std::size_t offset) -> Struct;
 };
 
 
