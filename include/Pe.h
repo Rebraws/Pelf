@@ -39,20 +39,11 @@ public:
    * */
   constexpr explicit Pe(Container data);
 
-
-  [[nodiscard]] constexpr auto getOptionalHeader() const -> OptionalHeader;
-
-  /** @brief Returns the Coff header
+  /** @brief Returns a struct that contains all Pe headers
    *
-   *  @return returns a `IMAGE_FILE_HEADER` struct which is a
-   *  hana struct that represents the coff header of the PE file
+   *  @return `PeHeaders`
    * */
-  [[nodiscard]] constexpr auto getCoffHeader() const -> IMAGE_FILE_HEADER;
-
-
-  [[nodiscard]] constexpr auto getStandardCoffFields() const -> StandardCoffFields;
-
-  [[nodiscard]] constexpr auto getWindowsSpecificFields() const -> WindowsSpecificFields;
+  [[nodiscard]] constexpr auto getHeaders() const -> PeHeaders;
 
 
 private:
@@ -64,9 +55,7 @@ private:
 
   std::uint32_t mPeHeaderAddress{}; /**< 32 bit value that represents the start address of the coff header */
 
-  IMAGE_FILE_HEADER mCoffHeader{}; /**< Struct that represents the coff header */
-  OptionalHeader mOptionalHeader; /**< Struct that represents the optional header, */
-
+  PeHeaders mHeaders;
 
   /** @brief  Checks if MZ DOS signature and PE signature are valid
    *
@@ -164,41 +153,30 @@ constexpr auto Pe<Container>::parseHeaders() -> void
 {
 
   std::ptrdiff_t offset = mPeHeaderAddress + 4;
-  this->readHeader(mCoffHeader, offset);
+  
+  this->readHeader(mHeaders.mCoffHeader, offset);
 
-  offset += sizeof(mCoffHeader);
-  this->readHeader(mOptionalHeader.mScf, offset);
+  offset += sizeof(mHeaders.mCoffHeader);
+  
+  this->readHeader(mHeaders.mOptionalHeader.mScf, offset);
 
-  offset += sizeof(mOptionalHeader.mScf);
+  offset += sizeof(mHeaders.mOptionalHeader.mScf);
 
-  this->readHeader(mOptionalHeader.mWsf, offset);
+  this->readHeader(mHeaders.mOptionalHeader.mWsf, offset);
 
-  /* Maybe a for loop for the IMAGE DATA DIRECTORY ARRAY */
+  offset += sizeof(mHeaders.mOptionalHeader.mWsf);
+
+  for (auto& data_dir : mHeaders.mOptionalHeader.mDataDirectories) {
+    this->readHeader(data_dir, offset);
+    offset += sizeof(data_dir);
+  }
+
 }
 
 
-template<class Container>
-constexpr auto Pe<Container>::getCoffHeader() const -> IMAGE_FILE_HEADER
-{
-  return mCoffHeader;
-}
-
-template<class Container>
-constexpr auto Pe<Container>::getStandardCoffFields() const -> StandardCoffFields
-{
-  return mOptionalHeader.mScf;
-}
-
-template<class Container>
-constexpr auto Pe<Container>::getWindowsSpecificFields() const -> WindowsSpecificFields
-{
-  return mOptionalHeader.mWsf;
-}
-
-template<class Container>
-constexpr auto Pe<Container>::getOptionalHeader() const -> OptionalHeader
-{
-  return mOptionalHeader;
+template <class Container>
+constexpr auto Pe<Container>::getHeaders() const -> PeHeaders {
+  return mHeaders;
 }
 
 
