@@ -64,6 +64,14 @@ public:
    * */
   [[nodiscard]] constexpr auto getRawData() const noexcept -> Container;
 
+  /** @brief Returns a struct with the headers from the PE or ELF file as member variables
+   *
+   *  @return 
+   * */
+  template <template <typename> class T = Derived>
+  [[nodiscard]] constexpr auto getHeaders() const noexcept -> 
+    decltype(static_cast<T<Container>&>(*this).getHeaders());
+
 
 protected:
   Container mData; /**< Raw data from the file to be parsed */
@@ -106,6 +114,13 @@ template<class Container, template<typename> class Derived>
 constexpr auto Pelf<Container, Derived>::getRawData() const noexcept -> Container
 {
   return mData;
+}
+
+template <class Container, template<typename> class Derived>
+template <template<typename> class T>
+constexpr auto Pelf<Container, Derived>::getHeaders() const noexcept -> 
+  decltype(static_cast<T<Container>&>(*this).getHeaders()) {
+  return static_cast<const Derived<Container> &>(*this).getHeaders();
 }
 
 
