@@ -110,13 +110,41 @@ struct WindowsSpecificFields {
 #pragma pack(push, 1)  // This can be removed for this structure
 struct OptionalHeader {
   StandardCoffFields      mScf{};
-  WindowsSpecificFields   mWfs{};
-//  IMAGE_DATA_DIRECTORY  mDataDirectories[IMAGE_NUMBER_OF_DIRECTORY_ENTRIES];
+  WindowsSpecificFields   mWsf{};
+  IMAGE_DATA_DIRECTORY  mDataDirectories[IMAGE_NUMBER_OF_DIRECTORY_ENTRIES] = {};
 };
 #pragma pack(pop)
 
 
+struct PeHeaders {
+  IMAGE_FILE_HEADER mCoffHeader{}; /**< Struct that represents the coff header */
+  OptionalHeader mOptionalHeader;  /**< Struct that represents the optional header */
 
+  /* Methods to make access to headers more readable for the user */
+  [[nodiscard]] constexpr auto getCoffHeader() const noexcept 
+    -> IMAGE_FILE_HEADER {
+    return mCoffHeader;
+  }
+  
+  [[nodiscard]] constexpr auto getOptionalHeader() const noexcept -> OptionalHeader {
+    return mOptionalHeader;
+  }
+
+  [[nodiscard]] constexpr auto getStandardCoffFields() const noexcept
+    -> StandardCoffFields {
+    return mOptionalHeader.mScf;
+  } 
+
+  [[nodiscard]] constexpr auto getWindowsSpecificFields() const noexcept
+    -> WindowsSpecificFields {
+    return mOptionalHeader.mWsf;
+  }
+
+  [[nodiscard]] constexpr auto getDataDirectories() const noexcept {
+      return mOptionalHeader.mDataDirectories;
+    }
+
+};
 
 
 
