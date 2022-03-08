@@ -30,12 +30,12 @@ using ULONGLONG = std::uint64_t;
 inline constexpr std::uint8_t IMAGE_NUMBER_OF_DIRECTORY_ENTRIES{16};
 
 
-#pragma pack(push, 1)     // Disable padding 
 
 /** @brief Struct that represents the COFF header format. It's 32/64 bit independent header
  *  
  *
  * */
+#pragma pack(push, 1)     // Disable padding 
 struct IMAGE_FILE_HEADER {
   /** @brief Macro that defines members of the structure
    *
@@ -79,6 +79,7 @@ struct StandardCoffFields {
 };
 #pragma pack(pop)
 
+#pragma pack(push, 1)
 struct WindowsSpecificFields {
   BOOST_HANA_DEFINE_STRUCT(WindowsSpecificFields,
 		
@@ -105,15 +106,13 @@ struct WindowsSpecificFields {
 		(DWORD,       NumberOfRvaAndSizes)
  );
 };
+#pragma pack(pop)
 
-
-#pragma pack(push, 1)  // This can be removed for this structure
 struct OptionalHeader {
   StandardCoffFields      mScf{};
   WindowsSpecificFields   mWsf{};
   std::array<IMAGE_DATA_DIRECTORY, IMAGE_NUMBER_OF_DIRECTORY_ENTRIES> mDataDirectories{};
 };
-#pragma pack(pop)
 
 
 struct PeHeaders {
