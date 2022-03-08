@@ -29,8 +29,8 @@ namespace pelf {
  *
  * */
 
-template<class Container>
-class Pe : public Pelf<Container, Pe>
+template<class Container, std::size_t Sections>
+class Pe : public Pelf<Container, Pe, Sections>
 {
 public:
   /** @brief Pe constructor
@@ -45,9 +45,10 @@ public:
    * */
   [[nodiscard]] constexpr auto getHeaders() const -> PeHeaders;
 
+  [[nodiscard]] constexpr auto getSections() const;
 
 private:
-  friend class Pelf<Container, Pe>;
+  friend class Pelf<Container, Pe, Sections>;
 
   static constexpr std::uint16_t mMZDSignature{ 0x4d5a }; /**< MZ DOS Signature */
   static constexpr std::uint32_t mPeSignature{ 0x50450000 }; /**< PE Signature 'PE\0\0' */
@@ -56,6 +57,7 @@ private:
   std::uint32_t mPeHeaderAddress{}; /**< 32 bit value that represents the start address of the coff header */
 
   PeHeaders mHeaders;
+  std::array<IMAGE_SECTION_HEADER, Sections> mSections = {};
 
   /** @brief  Checks if MZ DOS signature and PE signature are valid
    *
@@ -90,10 +92,15 @@ private:
    * */
   constexpr auto parseHeaders() -> void;
 
+
+  constexpr auto parseSections() -> void;
 };
 
-template<class Container>
-constexpr Pe<Container>::Pe(Container data) : Pelf<Container, Pe>(std::move(data))
+
+
+template<class Container, std::size_t Sections>
+constexpr Pe<Container, Sections>::Pe(Container data) : 
+  Pelf<Container, Pe, Sections>(std::move(data))
 {
 
   if (!checkFileSize()) {
@@ -110,15 +117,15 @@ constexpr Pe<Container>::Pe(Container data) : Pelf<Container, Pe>(std::move(data
   this->parse();
 }
 
-template<class Container>
-constexpr auto Pe<Container>::checkMZDSignature() const -> bool
+template<class Container, std::size_t Sections>
+constexpr auto Pe<Container, Sections>::checkMZDSignature() const -> bool
 {
 
   return (this->mData[0] == (mMZDSignature >> 8) && this->mData[1] == (mMZDSignature & 0xFF));
 }
 
-template<class Container>
-constexpr auto Pe<Container>::checkPESignature() const -> bool
+template<class Container, std::size_t Sections>
+constexpr auto Pe<Container, Sections>::checkPESignature() const -> bool
 {
   /* Read PE Signature from offset mPeHeaderAddress*/
   std::uint32_t pe_signature{};
@@ -135,21 +142,21 @@ constexpr auto Pe<Container>::checkPESignature() const -> bool
 }
 
 
-template<class Container>
-constexpr auto Pe<Container>::checkSignatures() const -> bool
+template<class Container, std::size_t Sections>
+constexpr auto Pe<Container, Sections>::checkSignatures() const -> bool
 {
   return checkMZDSignature() && checkPESignature();
 }
 
-template<class Container>
-constexpr auto Pe<Container>::checkFileSize() const -> bool
+template<class Container, std::size_t Sections>
+constexpr auto Pe<Container, Sections>::checkFileSize() const -> bool
 {
   return this->mData.size() >= mMinPeSize;
 }
 
 
-template<class Container>
-constexpr auto Pe<Container>::parseHeaders() -> void
+template<class Container, std::size_t Sections>
+constexpr auto Pe<Container, Sections>::parseHeaders() -> void
 {
 
   std::ptrdiff_t offset = mPeHeaderAddress + 4;
@@ -174,11 +181,33 @@ constexpr auto Pe<Container>::parseHeaders() -> void
 }
 
 
-template <class Container>
-constexpr auto Pe<Container>::getHeaders() const -> PeHeaders {
+template <class Container, std::size_t Sections>
+constexpr auto Pe<Container, Sections>::getHeaders() const -> PeHeaders {
   return mHeaders;
 }
 
+
+template <class Container, std::size_t Sections>
+constexpr auto Pe<Container, Sections>::parseSections() -> void {
+
+  [[maybe_unused]] std::ptrdiff_t offset = mPeHeaderAddress + sizeof(mHeaders.mCoffHeader) + 
+    sizeof(mHeaders.mOptionalHeader.mDataDirectories) * 16 + 
+    sizeof(mHeaders.mOptionalHeader.mWsf) + sizeof(mHeaders.mOptionalHeader.mScf);
+
+
+  for (auto& section : mSections) {
+    this->readHeader(section, offset);
+    offset += sizeof(section);
+  }
+  
+}
+
+
+template <class Container, std::size_t Sections>
+constexpr auto Pe<Container, Sections>::getSections() const {
+  return mSections;
+  
+}
 
 }// namespace pelf
 
