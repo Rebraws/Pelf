@@ -14,7 +14,7 @@
 
 #include <boost/hana.hpp>
 #include <cstdint>
-
+#include <array>
 
 
 namespace pelf {
@@ -111,7 +111,7 @@ struct WindowsSpecificFields {
 struct OptionalHeader {
   StandardCoffFields      mScf{};
   WindowsSpecificFields   mWsf{};
-  IMAGE_DATA_DIRECTORY  mDataDirectories[IMAGE_NUMBER_OF_DIRECTORY_ENTRIES] = {};
+  std::array<IMAGE_DATA_DIRECTORY, IMAGE_NUMBER_OF_DIRECTORY_ENTRIES> mDataDirectories{};
 };
 #pragma pack(pop)
 
@@ -146,9 +146,22 @@ struct PeHeaders {
 
 };
 
-
-
-
+#pragma pack(push, 1)
+struct IMAGE_SECTION_HEADER {
+  BOOST_HANA_DEFINE_STRUCT(IMAGE_SECTION_HEADER,
+    (ULONGLONG,  Name),
+    (ULONGLONG,  PhysAddressAndVirtSize),
+    (DWORD, VirtualAddress),
+    (DWORD, SizeOfRawData),
+    (DWORD, PointerToRawData),
+    (DWORD, PointerToRelocations),
+    (DWORD, PointerToLinenumbers),
+    (WORD,  NumberOfRelocations),
+    (WORD,  NumberOfLinenumbers),
+    (DWORD, Characteristics)
+  );
+}; 
+#pragma pack(pop)
 
 
 } // namespace end 
