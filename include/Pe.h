@@ -11,26 +11,64 @@
 #ifndef PE_H_
 #define PE_H_
 
-#include "Pelf.h"
-#include <algorithm>
-#include <cstring>
-#include <cassert>
 #include "peStructs.h"
+#include "Pelf.h"
+
+#include <algorithm>
+#include <cassert>
+#include <vector>
+#include <array>
+#include <type_traits>
+
 #include <boost/hana.hpp>
 
 namespace pelf {
+
+
+
+/** @brief Function template that returns the number of sections that a Pe file has
+ *
+ *  @tparam Container Container used to pass the data from the Pe file
+ *  @param data Container with the bytes from the Pe file as elements
+ *
+ *  @return Returns a `std::uint16_t` that represents the number of sections
+ *
+ * */
+template<class Container>
+constexpr auto getPeNumberOfSections(const Container &data) requires
+  container_and_convertible_v<Container, unsigned char>
+{
+
+  std::uint32_t pe_header_address{};
+  std::size_t offset{ 0x3c };
+  for (std::size_t i{}; i < sizeof(pe_header_address); ++i) {
+    pe_header_address <<= 8;
+    pe_header_address |= static_cast<std::uint32_t>(
+      data.at(sizeof(pe_header_address) - 1 + offset--));
+  }
+
+  offset = pe_header_address + sizeof(DWORD) + sizeof(WORD);
+
+  WORD number_of_sections{};
+
+  for (std::size_t i{}; i < sizeof(number_of_sections); ++i) {
+    number_of_sections <<= 8;
+    number_of_sections |= data.at(sizeof(number_of_sections) - 1 + offset - i);
+  }
+
+  return number_of_sections;
+}
 
 
 /** @brief Pe class
  *
  *  @tparam Container The type of the container used to store the file content
  *  that needs to be parsed
- *
+ *  @tparam NumOfSections Number of Sections of the Pe File, by default is set to Zero
  *
  * */
-
-template<class Container, std::size_t Sections>
-class Pe : public Pelf<Container, Pe, Sections>
+template<class Container, std::size_t NumOfSections = 0>
+class Pe : public Pelf<Container, Pe, NumOfSections>
 {
 public:
   /** @brief Pe constructor
@@ -41,23 +79,46 @@ public:
 
   /** @brief Returns a struct that contains all Pe headers
    *
-   *  @return `PeHeaders`
+   *  @return Returns a struct `PeHeaders` that contains the coff header and 
+   *    the optional header, which are represented by the following hana 
+   *    struct `IMAGE_FILE_HEADER` and the `OptionalHeader` struct
+   *
    * */
   [[nodiscard]] constexpr auto getHeaders() const -> PeHeaders;
 
+  /** @brief  Returns either an array or a vector with all sections from the Pe
+   *
+   *  If the parsing is done at compile time it returns an array with all the
+   *  sections from the Pe file, each section is represented by the hana struct
+   *  `IMAGE_SECTION_HEADER`, on the other side, if parsing happens at runtime
+   *  it returns a std::vector with all the sections.
+   *
+   * */
   [[nodiscard]] constexpr auto getSections() const;
 
 private:
-  friend class Pelf<Container, Pe, Sections>;
+  friend class Pelf<Container, Pe, NumOfSections>;
 
-  static constexpr std::uint16_t mMZDSignature{ 0x4d5a }; /**< MZ DOS Signature */
-  static constexpr std::uint32_t mPeSignature{ 0x50450000 }; /**< PE Signature 'PE\0\0' */
-  static constexpr std::uint8_t mMinPeSize{ 97 }; /**< Minimum possible PE file size */
 
-  std::uint32_t mPeHeaderAddress{}; /**< 32 bit value that represents the start address of the coff header */
+  /* Variables */
 
-  PeHeaders mHeaders;
-  std::array<IMAGE_SECTION_HEADER, Sections> mSections = {};
+  static constexpr std::uint16_t mMZDSignature{0x4d5a}; /**< MZ DOS Signature*/
+  static constexpr std::uint32_t mPeSignature{0x50450000}; /**< PE Signature
+                                                             'PE\0\0' */
+  static constexpr std::uint8_t mMinPeSize{97}; /**< Minimum possible PE file
+                                                  size */
+
+  std::uint32_t mPeHeaderAddress{}; /**< 32 bit value that represents the start
+                                       address of the coff header */
+
+  PeHeaders mHeaders; /**< Struct which contains all Pe headers, more precisely
+                           it contains the coff header (`IMAGE_FILE_HEADER`)
+                           and the optional header (`OptionalHeader`)*/
+
+  Sections<IMAGE_SECTION_HEADER, NumOfSections> mSections = {}; 
+
+  /* Private member functions */
+
 
   /** @brief  Checks if MZ DOS signature and PE signature are valid
    *
@@ -92,40 +153,41 @@ private:
    * */
   constexpr auto parseHeaders() -> void;
 
-
+  /** @brief Parses the sections from the Pe
+   *
+   *  @return Void.
+   * */
   constexpr auto parseSections() -> void;
 };
 
 
-
-template<class Container, std::size_t Sections>
-constexpr Pe<Container, Sections>::Pe(Container data) : 
-  Pelf<Container, Pe, Sections>(std::move(data))
+template<class Container, std::size_t NumOfSections>
+constexpr Pe<Container, NumOfSections>::Pe(Container data)
+  : Pelf<Container, Pe, NumOfSections>(std::move(data))
 {
 
-  if (!checkFileSize()) {
-    throw PelfException{ "Invalid PE file size!" };
-  }
+  if (!checkFileSize()) { throw PelfException{ "Invalid PE file size!" }; }
 
   std::size_t offset{ 0x3c };
   for (std::size_t i{}; i < sizeof(mPeHeaderAddress); ++i) {
     mPeHeaderAddress <<= 8;
     mPeHeaderAddress |= static_cast<std::uint32_t>(
-      this->mData[sizeof(mPeHeaderAddress) - 1 + offset--]);
+      this->mData.at(sizeof(mPeHeaderAddress) - 1 + offset--));
   }
 
   this->parse();
 }
 
-template<class Container, std::size_t Sections>
-constexpr auto Pe<Container, Sections>::checkMZDSignature() const -> bool
+template<class Container, std::size_t NumOfSections>
+constexpr auto Pe<Container, NumOfSections>::checkMZDSignature() const -> bool
 {
 
-  return (this->mData[0] == (mMZDSignature >> 8) && this->mData[1] == (mMZDSignature & 0xFF));
+  return (this->mData[0] == (mMZDSignature >> 8)
+          && this->mData[1] == (mMZDSignature & 0xFF));
 }
 
-template<class Container, std::size_t Sections>
-constexpr auto Pe<Container, Sections>::checkPESignature() const -> bool
+template<class Container, std::size_t NumOfSections>
+constexpr auto Pe<Container, NumOfSections>::checkPESignature() const -> bool
 {
   /* Read PE Signature from offset mPeHeaderAddress*/
   std::uint32_t pe_signature{};
@@ -134,7 +196,7 @@ constexpr auto Pe<Container, Sections>::checkPESignature() const -> bool
   /* mPeSignature is set as 0x5045000, so no need to read the value backwards */
   for (std::size_t i{}; i < sizeof(pe_signature); ++i) {
     pe_signature <<= 8;
-    pe_signature |= this->mData[offset++];
+    pe_signature |= this->mData.at(offset++);
   }
 
 
@@ -142,29 +204,29 @@ constexpr auto Pe<Container, Sections>::checkPESignature() const -> bool
 }
 
 
-template<class Container, std::size_t Sections>
-constexpr auto Pe<Container, Sections>::checkSignatures() const -> bool
+template<class Container, std::size_t NumOfSections>
+constexpr auto Pe<Container, NumOfSections>::checkSignatures() const -> bool
 {
   return checkMZDSignature() && checkPESignature();
 }
 
-template<class Container, std::size_t Sections>
-constexpr auto Pe<Container, Sections>::checkFileSize() const -> bool
+template<class Container, std::size_t NumOfSections>
+constexpr auto Pe<Container, NumOfSections>::checkFileSize() const -> bool
 {
   return this->mData.size() >= mMinPeSize;
 }
 
 
-template<class Container, std::size_t Sections>
-constexpr auto Pe<Container, Sections>::parseHeaders() -> void
+template<class Container, std::size_t NumOfSections>
+constexpr auto Pe<Container, NumOfSections>::parseHeaders() -> void
 {
 
   std::ptrdiff_t offset = mPeHeaderAddress + 4;
-  
+
   this->readHeader(mHeaders.mCoffHeader, offset);
 
   offset += sizeof(mHeaders.mCoffHeader);
-  
+
   this->readHeader(mHeaders.mOptionalHeader.mScf, offset);
 
   offset += sizeof(mHeaders.mOptionalHeader.mScf);
@@ -173,40 +235,52 @@ constexpr auto Pe<Container, Sections>::parseHeaders() -> void
 
   offset += sizeof(mHeaders.mOptionalHeader.mWsf);
 
-  for (auto& data_dir : mHeaders.mOptionalHeader.mDataDirectories) {
+  for (auto &data_dir : mHeaders.mOptionalHeader.mDataDirectories) {
     this->readHeader(data_dir, offset);
     offset += sizeof(data_dir);
   }
-
 }
 
 
-template <class Container, std::size_t Sections>
-constexpr auto Pe<Container, Sections>::getHeaders() const -> PeHeaders {
+template<class Container, std::size_t NumOfSections>
+constexpr auto Pe<Container, NumOfSections>::getHeaders() const -> PeHeaders
+{
   return mHeaders;
 }
 
 
-template <class Container, std::size_t Sections>
-constexpr auto Pe<Container, Sections>::parseSections() -> void {
+template<class Container, std::size_t NumOfSections>
+constexpr auto Pe<Container, NumOfSections>::parseSections() -> void
+{
 
-  [[maybe_unused]] std::ptrdiff_t offset = mPeHeaderAddress + sizeof(mHeaders.mCoffHeader) + 
-    sizeof(mHeaders.mOptionalHeader.mDataDirectories) * 16 + 
-    sizeof(mHeaders.mOptionalHeader.mWsf) + sizeof(mHeaders.mOptionalHeader.mScf);
+  std::ptrdiff_t offset =
+    mPeHeaderAddress + sizeof(mHeaders.mCoffHeader)
+    + sizeof(mHeaders.mOptionalHeader.mDataDirectories) * 16
+    + sizeof(mHeaders.mOptionalHeader.mWsf)
+    + sizeof(mHeaders.mOptionalHeader.mScf);
 
+  if constexpr (!std::is_same_v<decltype(mSections),
+                  std::vector<IMAGE_SECTION_HEADER>>) {
 
-  for (auto& section : mSections) {
-    this->readHeader(section, offset);
-    offset += sizeof(section);
+    for (auto &section : mSections) {
+      this->readHeader(section, offset);
+      offset += sizeof(section);
+    }
+  } else {
+    for (int i{}; i < mHeaders.mCoffHeader.NumberOfSections; ++i) {
+      IMAGE_SECTION_HEADER tmp_section{};
+      this->readHeader(tmp_section, offset);
+      offset += sizeof(tmp_section);
+      mSections.push_back(tmp_section);
+    }
   }
-  
 }
 
 
-template <class Container, std::size_t Sections>
-constexpr auto Pe<Container, Sections>::getSections() const {
+template<class Container, std::size_t NumOfSections>
+constexpr auto Pe<Container, NumOfSections>::getSections() const
+{
   return mSections;
-  
 }
 
 }// namespace pelf
