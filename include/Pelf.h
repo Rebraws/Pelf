@@ -15,8 +15,8 @@
 #include <type_traits>
 #include <stdexcept>
 #include "pelfExcept.h"
-
-
+#include <peStructs.h>
+#include <cassert>
 #include <boost/hana.hpp>
 
 
@@ -24,6 +24,17 @@ namespace pelf {
 
 namespace hana = boost::hana;
 
+/** @brief Metafunction that returns an array if `NumberOfSections` is
+ *  zero, and a vector otherwise 
+ *
+ *  @tparam NumOfSections Number of sections that a Pe or Elf file contains
+ *  @tparam Struct Type of the elements the the array or vector contains
+ *
+ *  */
+template<class Struct, std::size_t NumOfSections>
+using Sections = std::conditional_t<NumOfSections == 0,
+  std::vector<Struct>,
+  std::array<Struct, NumOfSections>>;
 
 
 /**
@@ -34,38 +45,19 @@ template<class Container, class Type>
 concept container_and_convertible_v =
   std::is_nothrow_convertible_v<typename Container::value_type, Type>;
 
-template <class Container>
-constexpr auto getPeNumberOfSections(const Container& data) requires container_and_convertible_v<Container, unsigned char> {
-	
-	std::uint32_t pe_header_address{};
-	std::size_t offset{ 0x3c };
-  for (std::size_t i{}; i < sizeof(pe_header_address); ++i) {
-    pe_header_address <<= 8;
-    pe_header_address |= static_cast<std::uint32_t>(
-      data[sizeof(pe_header_address) - 1 + offset--]);
-  }  
 
-	offset = pe_header_address + sizeof(DWORD) + sizeof(WORD);
-	
-	WORD number_of_sections{};
-
-	for (std::size_t i{}; i < sizeof(number_of_sections); ++i) {
-    number_of_sections <<= 8;
-		number_of_sections |= data.at(sizeof(number_of_sections) - 1 + offset - i);
-  }	
-
-	return number_of_sections;
-	
-}
-
-  /** @brief Base class for Pe and Elf classes
+/** @brief Base class for Pe and Elf classes
  *
  *  @tparam Container The type of the container used to store the file content
  *  that needs to be parsed
  *
  *  @tparam Derived The type of the inherited class
+ *  @tparam NumOfSections Number of Sections that the Pe or Elf file has
  *  */
-template<class Container, template<typename, std::size_t> class Derived, std::size_t Sections>
+template<class Container,
+  template<typename, std::size_t>
+  class Derived,
+  std::size_t NumOfSections>
 class Pelf
 {
 public:
@@ -77,8 +69,8 @@ public:
    *
    *  @param data The data to be parsed
    *  * */
-  constexpr explicit Pelf(Container data) noexcept
-    requires container_and_convertible_v<Container, unsigned char>;
+  constexpr explicit Pelf(Container data) requires
+    container_and_convertible_v<Container, unsigned char>;
 
 
   /** @brief Returns the original data passed to the Pe/Elf constructor
@@ -88,12 +80,16 @@ public:
    * */
   [[nodiscard]] constexpr auto getRawData() const noexcept -> Container;
 
-  /** @brief Returns a struct with the headers from the PE or ELF file as member variables
+  /** @brief Returns a struct with the headers from the PE or ELF file as member
+   * variables
+   *
+   *  @tparam T 
    *
    *  @return
    * */
   template<template<typename, std::size_t> class T = Derived>
-  [[nodiscard]] constexpr auto getHeaders() const noexcept -> decltype(static_cast<T<Container, Sections> &>(*this).getHeaders());
+  [[nodiscard]] constexpr auto getHeaders() const noexcept
+    -> decltype(static_cast<T<Container, NumOfSections> &>(*this).getHeaders());
 
 protected:
   Container mData; /**< Raw data from the file to be parsed */
@@ -107,7 +103,8 @@ protected:
   constexpr auto parse() -> void;
 
 
-  /** @brief Reads the contents from `mData` at the index `offset` into the struct passed by reference
+  /** @brief Reads the contents from `mData` at the index `offset` into the
+   * struct passed by reference
    *
    *  @tparam Header struct that represents either a Pe header or an Elf header
    *
@@ -115,11 +112,14 @@ protected:
    *  @return Void
    * */
   template<class Header>
-  constexpr auto readHeader(Header &header, const std::ptrdiff_t offset) -> void;
+  constexpr auto readHeader(Header &header, const std::ptrdiff_t offset)
+    -> void;
 
-  /** @brief Returns an Struct filled with the data from `mData` from index `offset`
+  /** @brief Returns an Struct filled with the data from `mData` from index
+   * `offset`
    *
-   *  This function is only used if parsing is done at compile time, otherwise std::copy() is used
+   *  This function is only used if parsing is done at compile time, otherwise
+   * std::copy() is used
    *
    *  @tparam Struct hana struct
    *  @param offset offset
@@ -131,40 +131,53 @@ protected:
 };
 
 
-template<class Container, template<typename, std::size_t> class Derived, std::size_t Sections>
-constexpr Pelf<Container, Derived, Sections>::Pelf(Container data) noexcept
-  requires container_and_convertible_v<Container, unsigned char>
-  : mData(std::move(data)) {}
+template<class Container,
+  template<typename, std::size_t>
+  class Derived,
+  std::size_t NumOfSections>
+constexpr Pelf<Container, Derived, NumOfSections>::Pelf(
+  Container data) requires container_and_convertible_v<Container, unsigned char>
+  : mData(std::move(data))
+{}
 
 
-template<class Container, template<typename, std::size_t> class Derived, std::size_t Sections>
-constexpr auto Pelf<Container, Derived, Sections>::getRawData() const noexcept -> Container
+template<class Container,
+  template<typename, std::size_t>
+  class Derived,
+  std::size_t NumOfSections>
+constexpr auto
+  Pelf<Container, Derived, NumOfSections>::getRawData() const noexcept
+  -> Container
 {
   return mData;
 }
 
-template<class Container, template<typename, std::size_t> class Derived, std::size_t Sections>
+template<class Container,
+  template<typename, std::size_t>
+  class Derived,
+  std::size_t NumOfSections>
 template<template<typename, std::size_t> class T>
-constexpr auto Pelf<Container, Derived, Sections>::getHeaders() const noexcept
-  -> decltype(static_cast<T<Container, Sections> &>(*this).getHeaders())
+constexpr auto
+  Pelf<Container, Derived, NumOfSections>::getHeaders() const noexcept
+  -> decltype(static_cast<T<Container, NumOfSections> &>(*this).getHeaders())
 {
-  return static_cast<const Derived<Container, Sections> &>(*this).getHeaders();
+  return static_cast<const Derived<Container, NumOfSections> &>(*this)
+    .getHeaders();
 }
 
 
-template<class Container, template<typename, std::size_t> class Derived, std::size_t Sections>
-constexpr auto Pelf<Container, Derived, Sections>::parse() -> void
+template<class Container,
+  template<typename, std::size_t>
+  class Derived,
+  std::size_t NumOfSections>
+constexpr auto Pelf<Container, Derived, NumOfSections>::parse() -> void
 {
 
-  auto &pelf = static_cast<Derived<Container, Sections> &>(*this);
+  auto &pelf = static_cast<Derived<Container, NumOfSections> &>(*this);
 
-  if (!pelf.checkFileSize()) {
-    throw PelfException{ "Invalid File Size" };
-  }
+  if (!pelf.checkFileSize()) { throw PelfException{ "Invalid File Size" }; }
 
-  if (!pelf.checkSignatures()) {
-    throw PelfException{ "Invalid signatures!" };
-  }
+  if (!pelf.checkSignatures()) { throw PelfException{ "Invalid signatures!" }; }
 
   pelf.parseHeaders();
 
@@ -172,9 +185,13 @@ constexpr auto Pelf<Container, Derived, Sections>::parse() -> void
 }
 
 
-template<class Container, template<typename, std::size_t> class Derived, std::size_t Sections>
+template<class Container,
+  template<typename, std::size_t>
+  class Derived,
+  std::size_t NumOfSections>
 template<class Header>
-constexpr auto Pelf<Container, Derived, Sections>::readHeader(Header &header,
+constexpr auto Pelf<Container, Derived, NumOfSections>::readHeader(
+  Header &header,
   const std::ptrdiff_t offset) -> void
 {
 
@@ -188,9 +205,10 @@ constexpr auto Pelf<Container, Derived, Sections>::readHeader(Header &header,
 
     assert(std::is_trivially_copyable<Header>::value);
 
-    if (static_cast<std::size_t>(offset) + sizeof(header) < this->mData.size()) {
+    if (static_cast<std::size_t>(offset) + sizeof(header)
+        < this->mData.size()) {
       std::copy(this->mData.begin() + offset,
-        this->mData.begin() + sizeof(header),
+        this->mData.begin() + offset + sizeof(header),
         reinterpret_cast<char *>(&header));
     } else {
       throw PelfException{ "Invalid Header" };
@@ -199,10 +217,13 @@ constexpr auto Pelf<Container, Derived, Sections>::readHeader(Header &header,
 }
 
 
-template<class Container, template<typename, std::size_t> class Derived, std::size_t Sections>
+template<class Container,
+  template<typename, std::size_t>
+  class Derived,
+  std::size_t NumOfSections>
 template<class Struct>
-constexpr auto Pelf<Container, Derived, Sections>::getStruct(std::size_t offset)
-  -> Struct
+constexpr auto Pelf<Container, Derived, NumOfSections>::getStruct(
+  std::size_t offset) -> Struct
 {
 
   Struct s{};
@@ -212,9 +233,7 @@ constexpr auto Pelf<Container, Derived, Sections>::getStruct(std::size_t offset)
 
 #pragma unroll
     for (std::size_t i{}; i < sizeof(member); ++i) {
-      if (sizeof(member) > 1) {
-        member <<= 8;
-      }
+      if (sizeof(member) > 1) { member <<= 8; }
       member |= mData.at(sizeof(member) - 1 + offset - i);
     }
 
