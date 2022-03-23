@@ -25,7 +25,7 @@ namespace pelf {
 namespace hana = boost::hana;
 
 /** @brief Metafunction that returns an array if `NumberOfSections` is
- *  zero, and a vector otherwise 
+ *  zero, and a vector otherwise
  *
  *  @tparam NumOfSections Number of sections that a Pe or Elf file contains
  *  @tparam Struct Type of the elements the the array or vector contains
@@ -55,9 +55,9 @@ concept container_and_convertible_v =
  *  @tparam NumOfSections Number of Sections that the Pe or Elf file has
  *  */
 template<class Container,
-  template<typename, std::size_t>
+  template<typename, std::size_t...>
   class Derived,
-  std::size_t NumOfSections>
+  std::size_t... N>
 class Pelf
 {
 public:
@@ -83,13 +83,14 @@ public:
   /** @brief Returns a struct with the headers from the PE or ELF file as member
    * variables
    *
-   *  @tparam T 
+   *  @tparam T
    *
    *  @return
    * */
-  template<template<typename, std::size_t> class T = Derived>
-  [[nodiscard]] constexpr auto getHeaders() const noexcept
-    -> decltype(static_cast<T<Container, NumOfSections> &>(*this).getHeaders());
+  template<template<typename, std::size_t...> class T = Derived>
+  constexpr auto getHeaders() const noexcept -> void;
+ 
+
 
 protected:
   Container mData; /**< Raw data from the file to be parsed */
@@ -132,48 +133,44 @@ protected:
 
 
 template<class Container,
-  template<typename, std::size_t>
+  template<typename, std::size_t...>
   class Derived,
-  std::size_t NumOfSections>
-constexpr Pelf<Container, Derived, NumOfSections>::Pelf(
+  std::size_t... N>
+constexpr Pelf<Container, Derived, N...>::Pelf(
   Container data) requires container_and_convertible_v<Container, unsigned char>
   : mData(std::move(data))
 {}
 
 
 template<class Container,
-  template<typename, std::size_t>
+  template<typename, std::size_t...>
   class Derived,
-  std::size_t NumOfSections>
-constexpr auto
-  Pelf<Container, Derived, NumOfSections>::getRawData() const noexcept
+  std::size_t... N>
+constexpr auto Pelf<Container, Derived, N...>::getRawData() const noexcept
   -> Container
 {
   return mData;
 }
 
 template<class Container,
-  template<typename, std::size_t>
+  template<typename, std::size_t...>
   class Derived,
-  std::size_t NumOfSections>
-template<template<typename, std::size_t> class T>
-constexpr auto
-  Pelf<Container, Derived, NumOfSections>::getHeaders() const noexcept
-  -> decltype(static_cast<T<Container, NumOfSections> &>(*this).getHeaders())
+  std::size_t... N>
+template<template<typename, std::size_t...> class T>
+constexpr auto Pelf<Container, Derived, N...>::getHeaders() const noexcept -> void
 {
-  return static_cast<const Derived<Container, NumOfSections> &>(*this)
-    .getHeaders();
+  static_cast<const Derived<Container, N...> &>(*this).getHeaders();
 }
 
 
 template<class Container,
-  template<typename, std::size_t>
+  template<typename, std::size_t...>
   class Derived,
-  std::size_t NumOfSections>
-constexpr auto Pelf<Container, Derived, NumOfSections>::parse() -> void
+  std::size_t... N>
+constexpr auto Pelf<Container, Derived, N...>::parse() -> void
 {
 
-  auto &pelf = static_cast<Derived<Container, NumOfSections> &>(*this);
+  auto &pelf = static_cast<Derived<Container, N...> &>(*this);
 
   if (!pelf.checkFileSize()) { throw PelfException{ "Invalid File Size" }; }
 
@@ -186,11 +183,11 @@ constexpr auto Pelf<Container, Derived, NumOfSections>::parse() -> void
 
 
 template<class Container,
-  template<typename, std::size_t>
+  template<typename, std::size_t ...>
   class Derived,
-  std::size_t NumOfSections>
+  std::size_t ... N>
 template<class Header>
-constexpr auto Pelf<Container, Derived, NumOfSections>::readHeader(
+constexpr auto Pelf<Container, Derived, N ...>::readHeader(
   Header &header,
   const std::ptrdiff_t offset) -> void
 {
@@ -218,11 +215,11 @@ constexpr auto Pelf<Container, Derived, NumOfSections>::readHeader(
 
 
 template<class Container,
-  template<typename, std::size_t>
+  template<typename, std::size_t ...>
   class Derived,
-  std::size_t NumOfSections>
+  std::size_t ... N>
 template<class Struct>
-constexpr auto Pelf<Container, Derived, NumOfSections>::getStruct(
+constexpr auto Pelf<Container, Derived, N ...>::getStruct(
   std::size_t offset) -> Struct
 {
 
