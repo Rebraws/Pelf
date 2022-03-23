@@ -69,7 +69,7 @@ public:
    *
    *  @param data The data to be parsed
    *  * */
-  constexpr explicit Pelf(Container data) requires
+  constexpr explicit Pelf(const Container& data) requires
     container_and_convertible_v<Container, unsigned char>;
 
 
@@ -80,14 +80,13 @@ public:
    * */
   [[nodiscard]] constexpr auto getRawData() const noexcept -> Container;
 
-  /** @brief Returns a struct with the headers from the PE or ELF file 
+  /** @brief Returns a struct with the headers from the PE or ELF file
    *
-   * 
+   *
    *
    *  @return
    * */
   constexpr auto getHeaders() const noexcept -> void;
- 
 
 
 protected:
@@ -111,7 +110,7 @@ protected:
    *  @return Void
    * */
   template<class Header>
-  constexpr auto readHeader(Header &header, const std::ptrdiff_t offset)
+  constexpr auto readHeader(Header& header, const std::ptrdiff_t offset)
     -> void;
 
   /** @brief Returns an Struct filled with the data from `mData` from index
@@ -134,9 +133,8 @@ template<class Container,
   template<typename, std::size_t...>
   class Derived,
   std::size_t... N>
-constexpr Pelf<Container, Derived, N...>::Pelf(
-  Container data) requires container_and_convertible_v<Container, unsigned char>
-  : mData(std::move(data))
+constexpr Pelf<Container, Derived, N...>::Pelf(const Container& data) requires
+  container_and_convertible_v<Container, unsigned char> : mData(data)
 {}
 
 
@@ -154,9 +152,10 @@ template<class Container,
   template<typename, std::size_t...>
   class Derived,
   std::size_t... N>
-constexpr auto Pelf<Container, Derived, N...>::getHeaders() const noexcept -> void
+constexpr auto Pelf<Container, Derived, N...>::getHeaders() const noexcept
+  -> void
 {
-  static_cast<const Derived<Container, N...> &>(*this).getHeaders();
+  static_cast<const Derived<Container, N...>&>(*this).getHeaders();
 }
 
 
@@ -167,7 +166,7 @@ template<class Container,
 constexpr auto Pelf<Container, Derived, N...>::parse() -> void
 {
 
-  auto &pelf = static_cast<Derived<Container, N...> &>(*this);
+  auto& pelf = static_cast<Derived<Container, N...>&>(*this);
 
   if (!pelf.checkFileSize()) { throw PelfException{ "Invalid File Size" }; }
 
@@ -180,12 +179,11 @@ constexpr auto Pelf<Container, Derived, N...>::parse() -> void
 
 
 template<class Container,
-  template<typename, std::size_t ...>
+  template<typename, std::size_t...>
   class Derived,
-  std::size_t ... N>
+  std::size_t... N>
 template<class Header>
-constexpr auto Pelf<Container, Derived, N ...>::readHeader(
-  Header &header,
+constexpr auto Pelf<Container, Derived, N...>::readHeader(Header& header,
   const std::ptrdiff_t offset) -> void
 {
 
@@ -203,7 +201,7 @@ constexpr auto Pelf<Container, Derived, N ...>::readHeader(
         < this->mData.size()) {
       std::copy(this->mData.begin() + offset,
         this->mData.begin() + offset + sizeof(header),
-        reinterpret_cast<char *>(&header));
+        reinterpret_cast<char*>(&header));
     } else {
       throw PelfException{ "Invalid Header" };
     }
@@ -212,18 +210,18 @@ constexpr auto Pelf<Container, Derived, N ...>::readHeader(
 
 
 template<class Container,
-  template<typename, std::size_t ...>
+  template<typename, std::size_t...>
   class Derived,
-  std::size_t ... N>
+  std::size_t... N>
 template<class Struct>
-constexpr auto Pelf<Container, Derived, N ...>::getStruct(
-  std::size_t offset) -> Struct
+constexpr auto Pelf<Container, Derived, N...>::getStruct(std::size_t offset)
+  -> Struct
 {
 
   Struct s{};
 
   hana::for_each(hana::keys(s), [&](auto key) {
-    auto &member = hana::at_key(s, key);
+    auto& member = hana::at_key(s, key);
 
 #pragma unroll
     for (std::size_t i{}; i < sizeof(member); ++i) {

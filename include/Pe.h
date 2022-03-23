@@ -75,7 +75,7 @@ public:
    *
    *  @param data data to be parsed
    * */
-  constexpr explicit Pe(Container data);
+  constexpr explicit Pe(const Container& data);
 
   /** @brief Returns a struct that contains all Pe headers
    *
@@ -97,6 +97,7 @@ public:
   [[nodiscard]] constexpr auto getSections() const;
 
 private:
+
   friend class Pelf<Container, Pe, NumOfSections>;
 
 
@@ -162,8 +163,8 @@ private:
 
 
 template<class Container, std::size_t NumOfSections>
-constexpr Pe<Container, NumOfSections>::Pe(Container data)
-  : Pelf<Container, Pe, NumOfSections>(std::move(data))
+constexpr Pe<Container, NumOfSections>::Pe(const Container& data)
+  : Pelf<Container, Pe, NumOfSections>(data)
 {
 
   if (!checkFileSize()) { throw PelfException{ "Invalid PE file size!" }; }
