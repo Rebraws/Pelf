@@ -80,14 +80,12 @@ public:
    * */
   [[nodiscard]] constexpr auto getRawData() const noexcept -> Container;
 
-  /** @brief Returns a struct with the headers from the PE or ELF file as member
-   * variables
+  /** @brief Returns a struct with the headers from the PE or ELF file 
    *
-   *  @tparam T
+   * 
    *
    *  @return
    * */
-  template<template<typename, std::size_t...> class T = Derived>
   constexpr auto getHeaders() const noexcept -> void;
  
 
@@ -156,7 +154,6 @@ template<class Container,
   template<typename, std::size_t...>
   class Derived,
   std::size_t... N>
-template<template<typename, std::size_t...> class T>
 constexpr auto Pelf<Container, Derived, N...>::getHeaders() const noexcept -> void
 {
   static_cast<const Derived<Container, N...> &>(*this).getHeaders();
