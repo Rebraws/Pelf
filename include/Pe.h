@@ -25,8 +25,8 @@
 namespace pelf {
 
 
-
-/** @brief Function template that returns the number of sections that a Pe file has
+/** @brief Function template that returns the number of sections that a Pe file
+ * has
  *
  *  @tparam Container Container used to pass the data from the Pe file
  *  @param data Container with the bytes from the Pe file as elements
@@ -35,7 +35,7 @@ namespace pelf {
  *
  * */
 template<class Container>
-constexpr auto getPeNumberOfSections(const Container &data) requires
+constexpr auto getPeNumberOfSections(const Container& data) requires
   container_and_convertible_v<Container, unsigned char>
 {
 
@@ -64,7 +64,8 @@ constexpr auto getPeNumberOfSections(const Container &data) requires
  *
  *  @tparam Container The type of the container used to store the file content
  *  that needs to be parsed
- *  @tparam NumOfSections Number of Sections of the Pe File, by default is set to Zero
+ *  @tparam NumOfSections Number of Sections of the Pe File, by default is set
+ * to Zero
  *
  * */
 template<class Container, std::size_t NumOfSections = 0>
@@ -79,12 +80,12 @@ public:
 
   /** @brief Returns a struct that contains all Pe headers
    *
-   *  @return Returns a struct `PeHeaders` that contains the coff header and 
-   *    the optional header, which are represented by the following hana 
+   *  @return Returns a struct `PeHeaders` that contains the coff header and
+   *    the optional header, which are represented by the following hana
    *    struct `IMAGE_FILE_HEADER` and the `OptionalHeader` struct
    *
    * */
-  [[nodiscard]] constexpr auto getHeaders() const -> PeHeaders;
+  [[nodiscard]] constexpr auto getHeaders() const noexcept -> PeHeaders;
 
   /** @brief  Returns either an array or a vector with all sections from the Pe
    *
@@ -94,7 +95,8 @@ public:
    *  it returns a std::vector with all the sections.
    *
    * */
-  [[nodiscard]] constexpr auto getSections() const;
+  [[nodiscard]] constexpr auto getSections() const noexcept
+    -> Sections<IMAGE_SECTION_HEADER, NumOfSections>;
 
 private:
 
@@ -103,11 +105,13 @@ private:
 
   /* Variables */
 
-  static constexpr std::uint16_t mMZDSignature{0x4d5a}; /**< MZ DOS Signature*/
-  static constexpr std::uint32_t mPeSignature{0x50450000}; /**< PE Signature
-                                                             'PE\0\0' */
-  static constexpr std::uint8_t mMinPeSize{97}; /**< Minimum possible PE file
-                                                  size */
+  static constexpr std::uint16_t mMZDSignature{
+    0x4d5a
+  }; /**< MZ DOS Signature*/
+  static constexpr std::uint32_t mPeSignature{ 0x50450000 }; /**< PE Signature
+                                                               'PE\0\0' */
+  static constexpr std::uint8_t mMinPeSize{ 97 }; /**< Minimum possible PE file
+                                                    size */
 
   std::uint32_t mPeHeaderAddress{}; /**< 32 bit value that represents the start
                                        address of the coff header */
@@ -116,7 +120,7 @@ private:
                            it contains the coff header (`IMAGE_FILE_HEADER`)
                            and the optional header (`OptionalHeader`)*/
 
-  Sections<IMAGE_SECTION_HEADER, NumOfSections> mSections = {}; 
+  Sections<IMAGE_SECTION_HEADER, NumOfSections> mSections = {};
 
   /* Private member functions */
 
@@ -236,7 +240,7 @@ constexpr auto Pe<Container, NumOfSections>::parseHeaders() -> void
 
   offset += sizeof(mHeaders.mOptionalHeader.mWsf);
 
-  for (auto &data_dir : mHeaders.mOptionalHeader.mDataDirectories) {
+  for (auto& data_dir : mHeaders.mOptionalHeader.mDataDirectories) {
     this->readHeader(data_dir, offset);
     offset += sizeof(data_dir);
   }
@@ -244,7 +248,8 @@ constexpr auto Pe<Container, NumOfSections>::parseHeaders() -> void
 
 
 template<class Container, std::size_t NumOfSections>
-constexpr auto Pe<Container, NumOfSections>::getHeaders() const -> PeHeaders
+constexpr auto Pe<Container, NumOfSections>::getHeaders() const noexcept
+  -> PeHeaders
 {
   return mHeaders;
 }
@@ -263,7 +268,7 @@ constexpr auto Pe<Container, NumOfSections>::parseSections() -> void
   if constexpr (!std::is_same_v<decltype(mSections),
                   std::vector<IMAGE_SECTION_HEADER>>) {
 
-    for (auto &section : mSections) {
+    for (auto& section : mSections) {
       this->readHeader(section, offset);
       offset += sizeof(section);
     }
@@ -279,7 +284,8 @@ constexpr auto Pe<Container, NumOfSections>::parseSections() -> void
 
 
 template<class Container, std::size_t NumOfSections>
-constexpr auto Pe<Container, NumOfSections>::getSections() const
+constexpr auto Pe<Container, NumOfSections>::getSections() const noexcept
+  -> Sections<IMAGE_SECTION_HEADER, NumOfSections>
 {
   return mSections;
 }
