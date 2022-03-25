@@ -96,7 +96,7 @@ public:
    *
    * */
   [[nodiscard]] constexpr auto getSections() const noexcept
-    -> Sections<IMAGE_SECTION_HEADER, NumOfSections>;
+    -> Table<IMAGE_SECTION_HEADER, NumOfSections>;
 
 private:
 
@@ -120,7 +120,7 @@ private:
                            it contains the coff header (`IMAGE_FILE_HEADER`)
                            and the optional header (`OptionalHeader`)*/
 
-  Sections<IMAGE_SECTION_HEADER, NumOfSections> mSections = {};
+  Table<IMAGE_SECTION_HEADER, NumOfSections> mSections = {};
 
   /* Private member functions */
 
@@ -285,7 +285,7 @@ constexpr auto Pe<Container, NumOfSections>::parseSections() -> void
 
 template<class Container, std::size_t NumOfSections>
 constexpr auto Pe<Container, NumOfSections>::getSections() const noexcept
-  -> Sections<IMAGE_SECTION_HEADER, NumOfSections>
+  -> Table<IMAGE_SECTION_HEADER, NumOfSections>
 {
   return mSections;
 }

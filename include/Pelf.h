@@ -24,17 +24,17 @@ namespace pelf {
 
 namespace hana = boost::hana;
 
-/** @brief Metafunction that returns an array if `NumberOfSections` is
+/** @brief Metafunction that returns an array if `Num` is
  *  zero, and a vector otherwise
  *
- *  @tparam NumOfSections Number of sections that a Pe or Elf file contains
+ *  @tparam Num Number of sections that table contains
  *  @tparam Struct Type of the elements the the array or vector contains
  *
  *  */
-template<class Struct, std::size_t NumOfSections>
-using Sections = std::conditional_t<NumOfSections == 0,
+template<class Struct, std::size_t Num>
+using Table = std::conditional_t<Num == 0,
   std::vector<Struct>,
-  std::array<Struct, NumOfSections>>;
+  std::array<Struct, Num>>;
 
 
 /**
