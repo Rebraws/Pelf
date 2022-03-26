@@ -53,7 +53,13 @@ struct IMAGE_FILE_HEADER
 };
 #pragma pack(pop)
 
-
+/**
+ * @brief Struct that represents the data directory
+ *
+ *  Each data directory gives the address and size of a table or string that
+ * Windows uses
+ *
+ */
 #pragma pack(push, 1)// disable padding
 struct IMAGE_DATA_DIRECTORY
 {
@@ -62,6 +68,14 @@ struct IMAGE_DATA_DIRECTORY
     (DWORD, Size));
 };
 #pragma pack(pop)
+
+/**
+ * @brief Struct that represents the first eight fields of the optional header
+ *
+ * These fields contain general information that is useful for loading and
+ * running an executable file
+ *
+ */
 
 #pragma pack(push, 1)
 struct StandardCoffFields
@@ -78,6 +92,15 @@ struct StandardCoffFields
 };
 #pragma pack(pop)
 
+
+/**
+ * @brief Struct that represents the next 21 fields after the
+ * `StandardCoffFields`
+ *
+ * They contain additional information that is required by the linker and loader
+ * in Windows.
+ *
+ */
 #pragma pack(push, 1)
 struct WindowsSpecificFields
 {
@@ -107,6 +130,11 @@ struct WindowsSpecificFields
 };
 #pragma pack(pop)
 
+
+/**
+ * @brief Struct that wraps the Optional header
+ *
+ */
 struct OptionalHeader
 {
   StandardCoffFields mScf{};
@@ -116,38 +144,68 @@ struct OptionalHeader
 };
 
 
+/**
+ * @brief Struct that wraps all Headers of a Pe file (both Coff Header and
+ * Optional Header)
+ *
+ */
 struct PeHeaders
 {
   IMAGE_FILE_HEADER
-    mCoffHeader{}; /**< Struct that represents the coff header */
+  mCoffHeader{}; /**< Struct that represents the coff header */
   OptionalHeader mOptionalHeader; /**< Struct that represents the
                                     optional header */
 
   /* Methods to make access to headers more readable for the user */
+
+  /**
+   * @brief Get the Coff Header object
+   *
+   * @return Returns the struct `IMAGE_FILE_HEADER`
+   */
   [[nodiscard]] constexpr auto getCoffHeader() const noexcept
     -> IMAGE_FILE_HEADER
   {
     return mCoffHeader;
   }
 
+  /**
+   * @brief Get the Optional Header object
+   *
+   * @return Returns the struct `OptionalHeader`
+   */
   [[nodiscard]] constexpr auto getOptionalHeader() const noexcept
     -> OptionalHeader
   {
     return mOptionalHeader;
   }
 
+  /**
+   * @brief Get the Standard Coff Fields object
+   *
+   * @return Returns the struct `StandardCoffFields`
+   */
   [[nodiscard]] constexpr auto getStandardCoffFields() const noexcept
     -> StandardCoffFields
   {
     return mOptionalHeader.mScf;
   }
 
+  /**
+   * @brief Get the Windows Specific Fields object
+   *
+   * @return Returns the struct `WindowsSpecificFields`
+   */
   [[nodiscard]] constexpr auto getWindowsSpecificFields() const noexcept
     -> WindowsSpecificFields
   {
     return mOptionalHeader.mWsf;
   }
-
+  /**
+   * @brief Get the Data Directories object
+   *
+   * @return Returns an array with all data directories as elements
+   */
   [[nodiscard]] constexpr auto getDataDirectories() const noexcept
   {
     return mOptionalHeader.mDataDirectories;
