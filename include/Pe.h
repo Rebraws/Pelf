@@ -25,11 +25,12 @@
 namespace pelf {
 
 
-/** @brief Function template that returns the number of sections that a Pe file
- * has
+/** @brief Function template that returns the number of sections (size of the
+ * section table)
+ *
  *
  *  @tparam Container Container used to pass the data from the Pe file
- *  @param data Container with the bytes from the Pe file as elements
+ *  @param data Bytes from the Pe file
  *
  *  @return Returns a `std::uint16_t` that represents the number of sections
  *
@@ -39,14 +40,20 @@ constexpr auto getPeNumberOfSections(const Container& data) requires
   container_and_convertible_v<Container, unsigned char>
 {
 
+  /* The number of sections it's at offset 6 from the Coff header , so first we
+   * need to read pe header address (at offset 0x3c) */
   std::uint32_t pe_header_address{};
+
   std::size_t offset{ 0x3c };
+
+
   for (std::size_t i{}; i < sizeof(pe_header_address); ++i) {
     pe_header_address <<= 8;
     pe_header_address |= static_cast<std::uint32_t>(
       data.at(sizeof(pe_header_address) - 1 + offset--));
   }
 
+  /* Offset of the Number of Sections */
   offset = pe_header_address + sizeof(DWORD) + sizeof(WORD);
 
   WORD number_of_sections{};
@@ -64,8 +71,8 @@ constexpr auto getPeNumberOfSections(const Container& data) requires
  *
  *  @tparam Container The type of the container used to store the file content
  *  that needs to be parsed
- *  @tparam NumOfSections Number of Sections of the Pe File, by default is set
- * to Zero
+ *  @tparam NumOfSections Number of Sections of the Pe File (Size of the section
+ * table)
  *
  * */
 template<class Container, std::size_t NumOfSections = 0>
@@ -81,25 +88,27 @@ public:
   /** @brief Returns a struct that contains all Pe headers
    *
    *  @return Returns a struct `PeHeaders` that contains the coff header and
-   *    the optional header, which are represented by the following hana
+   *    the optional header, which are represented by the hana
    *    struct `IMAGE_FILE_HEADER` and the `OptionalHeader` struct
    *
    * */
   [[nodiscard]] constexpr auto getHeaders() const noexcept -> PeHeaders;
 
-  /** @brief  Returns either an array or a vector with all sections from the Pe
+  /** @brief  Returns the section table from the Pe file
    *
    *  If the parsing is done at compile time it returns an array with all the
    *  sections from the Pe file, each section is represented by the hana struct
    *  `IMAGE_SECTION_HEADER`, on the other side, if parsing happens at runtime
    *  it returns a std::vector with all the sections.
    *
+   *  @return Returns either an array or a vector that represents the section
+   * table
+   *
    * */
   [[nodiscard]] constexpr auto getSections() const noexcept
     -> Table<IMAGE_SECTION_HEADER, NumOfSections>;
 
 private:
-
   friend class Pelf<Container, Pe, NumOfSections>;
 
 
@@ -116,11 +125,12 @@ private:
   std::uint32_t mPeHeaderAddress{}; /**< 32 bit value that represents the start
                                        address of the coff header */
 
-  PeHeaders mHeaders; /**< Struct which contains all Pe headers, more precisely
+  PeHeaders mHeaders; /**< Struct that contains all Pe headers, more precisely
                            it contains the coff header (`IMAGE_FILE_HEADER`)
                            and the optional header (`OptionalHeader`)*/
 
-  Table<IMAGE_SECTION_HEADER, NumOfSections> mSections = {};
+  Table<IMAGE_SECTION_HEADER, NumOfSections>
+    mSections = {}; /**< Container that represents the section table */
 
   /* Private member functions */
 
@@ -132,7 +142,8 @@ private:
   [[nodiscard]] constexpr auto checkSignatures() const -> bool;
 
 
-  /** @brief Checks if the MZ DOS Signature (0x5a4d) at offset 0 is valid
+  /** @brief Checks if the MZ DOS Signature (0x5a4d) at offset 0 is valid of the
+   * Pe file
    *
    *  @return Returns `true` if the signature is valid, `false` otherwise.
    * */
@@ -154,11 +165,18 @@ private:
   /** @brief Parses the Coff Header, and the optional coff header
    *
    *
+   *  Initializes the mHeaders struct by reading the coff header and the
+   * optional header from `mData`
+   *
+   *
    * @return Void
    * */
   constexpr auto parseHeaders() -> void;
 
   /** @brief Parses the sections from the Pe
+   *
+   *
+   *  Reads the section table from `mData` and saves it into `mSections`
    *
    *  @return Void.
    * */
