@@ -51,9 +51,9 @@ struct Elf64_Ehdr
     (std::uint32_t, e_flags),
     (std::uint16_t, e_ehsize),
     (std::uint16_t, e_phentsize),
-    (std::uint16_t, e_phnum),
+    (std::uint16_t, e_phnum),// Number of entries in the program header table
     (std::uint16_t, e_shentsize),
-    (std::uint16_t, e_shnum),
+    (std::uint16_t, e_shnum),//
     (std::uint16_t, e_shstrndx));
 };
 #pragma pack(pop)
@@ -97,13 +97,33 @@ struct Elf64_Shdr
     (std::uint64_t, sh_flags),
     (std::uint64_t, sh_addr),
     (std::uint64_t, sh_offset),
-    (std::uint64_t, sh_size),
+    (std::uint64_t, sh_size),//
     (std::uint32_t, sh_link),
     (std::uint32_t, sh_info),
     (std::uint64_t, sh_addralign),
     (std::uint64_t, sh_entsize));
 };
 #pragma pack(pop)
+
+/**
+ * @brief Structure that contains the Elf header and the program header table
+ * from an ELF file
+ *
+ * @tparam NumOfProgramHeader Number of headers in the program header table
+ */
+template<std::size_t NumOfProgramHeader = 0> struct ElfHeaders
+{
+  template<std::size_t N>
+  using ProgramHeaders = std::conditional_t<NumOfProgramHeader == 0,
+    std::vector<Elf64_Phdr>,
+    std::array<Elf64_Phdr, NumOfProgramHeader>>;
+
+
+  Elf64_Ehdr mElfHeader; /**< Elf header */
+  ProgramHeaders<NumOfProgramHeader>
+    mProgramHeaders; /**< Array or vector containing all program headers from
+                        the program header table*/
+};
 
 
 }// namespace pelf

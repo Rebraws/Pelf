@@ -119,8 +119,9 @@ private:
   }; /**< MZ DOS Signature*/
   static constexpr std::uint32_t mPeSignature{ 0x50450000 }; /**< PE Signature
                                                                'PE\0\0' */
-  static constexpr std::uint8_t mMinPeSize{ 97 }; /**< Minimum possible PE file
-                                                    size */
+  static constexpr std::uint8_t mMinPeSize{
+    97
+  }; /**< Minimum possible PE file size */
 
   std::uint32_t mPeHeaderAddress{}; /**< 32 bit value that represents the start
                                        address of the coff header */
