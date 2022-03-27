@@ -36,7 +36,7 @@ namespace pelf {
  *
  * */
 template<class Container>
-constexpr auto getPeNumberOfSections(const Container& data) requires
+consteval auto getPeNumberOfSections(const Container& data) requires
   container_and_convertible_v<Container, unsigned char>
 {
 
