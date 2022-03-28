@@ -6,7 +6,7 @@ Pelf is a C++20 library for extracting information from PE and ELF file formats 
 ## Getting Started
 ### Prerequisites
 
-To compile the code, it requires at least a C++20 compiler with the following C++20 supported features
+To compile the code, it requires at least a C++20 compiler with the following C++20 features
 
 - constexpr std::copy()
 - concepts
