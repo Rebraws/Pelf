@@ -65,13 +65,11 @@ public:
 
   /* Really bad design :( need to find a way to re-write this to avoid
     double parsing when the elf class is instantiated while also easy to use */
-  static consteval auto getElfTablesSize(const Container& data)
+  [[nodiscard]] static constexpr auto getElfTablesSize(const Container& data)
     -> TableSizes requires
     container_and_convertible_v<Container, unsigned char>;
 
-private
-  :
-
+private : friend class Pelf<Container, Elf, NumOfSections, NumOfProgHeaders>;
   /* Member Variables */
 
   static constexpr std::uint8_t mMinElfSize{
@@ -80,7 +78,6 @@ private
   static constexpr std::size_t mElfHeaderOffset{
     0
   }; /**< Represents the elf header offset (it always starts at zero)*/
-  friend class Pelf<Container, Pe, NumOfSections, NumOfProgHeaders>;
 
   ElfHeaders<NumOfProgHeaders> mHeaders; /**< Struct that contains the elf
                           header and the program header table */
@@ -128,7 +125,23 @@ private
    * @return Returns `true` if signatures are valir, otherwise it returns
    * `false`
    */
-  constexpr auto checkFileSignatures() const -> bool;
+  constexpr auto checkSignatures() const -> bool;
+
+  /**
+   * @brief Reads the Elf header and the program header table from `mData` into
+   * `mHeaders.elfHeader` and `mHeaders.programHeader` structs respectively
+   *
+   *  @return Void.
+   *
+   */
+  constexpr auto parseHeaders() -> void;
+
+  /**
+   * @brief Reads the section table from `mData` and saves into mSections
+   *
+   *  @return Void.
+   */
+  constexpr auto parseSections() -> void;
 };
 
 
@@ -141,8 +154,9 @@ constexpr Elf<Container, NumOfSections, NumOfProgHeaders>::Elf(
 {
   if (!checkFileSize()) { throw PelfException{ "Invalid PE file size!" }; }
 
-  
+
   this->parse();
+
 }
 
 template<class Container,
@@ -203,7 +217,7 @@ constexpr auto
     /* Read the initial entry in section header table*/
     Elf64_Shdr section_header = {};
     read_struct(section_header, elfHeader.e_shoff);
-    return section_header.sh_size;
+    return section_header.sh_info;
   }
 
   return elfHeader.e_phnum;
@@ -213,7 +227,7 @@ constexpr auto
 template<class Container,
   std::size_t NumOfSections,
   std::size_t NumOfProgHeaders>
-consteval auto
+constexpr auto
   Elf<Container, NumOfSections, NumOfProgHeaders>::getElfTablesSize(
     const Container& data)
     -> TableSizes requires container_and_convertible_v<Container, unsigned char>
@@ -269,7 +283,7 @@ template<class Container,
   std::size_t NumOfSections,
   std::size_t NumOfProgHeaders>
 constexpr auto
-  Elf<Container, NumOfSections, NumOfProgHeaders>::checkFileSignatures() const
+  Elf<Container, NumOfSections, NumOfProgHeaders>::checkSignatures() const
   -> bool
 {
 
@@ -283,6 +297,91 @@ constexpr auto
          && magic_numbers[2] == EI_MAG2 && magic_numbers[3] == EI_MAG3
          && magic_numbers[4] == EI_CLASS && magic_numbers[5] == EI_DATA;
 }
+
+
+template<class Container,
+  std::size_t NumOfSections,
+  std::size_t NumOfProgHeaders>
+constexpr auto Elf<Container, NumOfSections, NumOfProgHeaders>::parseHeaders()
+  -> void
+{
+
+  /* Read the elf header into mElfHeaders.elfHeader, the elf header is always at
+   * offset 0 */
+  this->readHeader(mHeaders.elfHeader, 0);
+
+
+  // e_phoff can't be negative, unless it's an invalid file and an exception
+  // will be thrown later
+  std::ptrdiff_t offset =
+   static_cast<std::ptrdiff_t>(mHeaders.elfHeader.e_phoff); // program header table offset
+
+  /* Read the program header table */
+
+  if constexpr (!std::is_same_v<decltype(mHeaders.programHeaders),
+                  std::vector<Elf64_Phdr>>) {
+    /* If offset is zero the programHeader container will be empty */
+    for (auto& header : mHeaders.programHeaders) {
+      this->readHeader(header, offset);
+      offset += sizeof(header);
+    }
+  } else { /* Runtime case! */
+    /* Get number of entries in the program header table */
+    std::size_t program_header_table_size{};
+    if (mHeaders.elfHeader.e_phnum >= PN_XNUM) {
+      program_header_table_size = getElfTablesSize(this->mData).programHeader;
+    } else {
+      program_header_table_size = mHeaders.elfHeader.e_phnum;
+    }
+    
+    for (std::size_t i{}; i < program_header_table_size; ++i) {
+      Elf64_Phdr tmp = {};
+      this->readHeader(tmp, offset);
+      mHeaders.programHeaders.push_back(tmp);
+      offset += sizeof(tmp);
+    }
+  }
+}
+
+
+template<class Container,
+  std::size_t NumOfSections,
+  std::size_t NumOfProgHeaders>
+constexpr auto Elf<Container, NumOfSections, NumOfProgHeaders>::parseSections()
+  -> void
+{
+
+
+  // e_shoff can't be negative, unless it's an invalid file and an exception
+  // will be thrown later
+  std::ptrdiff_t offset = static_cast<std::ptrdiff_t>(
+    mHeaders.elfHeader.e_shoff); // section table offset
+
+
+  if constexpr (!std::is_same_v<decltype(mSections), std::vector<Elf64_Shdr>>) {
+    for (auto& header : mSections) {
+      this->readHeader(header, offset);
+      offset += sizeof(header);
+    }
+  } else { /* Runtime case! */
+    /* Get number of entries in the section table */
+    std::size_t section_table_size{};
+    if (mHeaders.elfHeader.e_shnum >= SHN_LORESERVE) {
+      section_table_size = getElfTablesSize(this->mData).sectionTable;
+    } else {
+      section_table_size = mHeaders.elfHeader.e_shnum;
+    }
+
+    for (std::size_t i{}; i < section_table_size; ++i) {
+      Elf64_Shdr tmp = {};
+      this->readHeader(tmp, offset);
+      offset += sizeof(Elf64_Shdr);
+
+      mSections.push_back(tmp);
+    }
+  }
+}
+
 
 }// namespace pelf
 
