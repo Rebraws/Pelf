@@ -198,7 +198,7 @@ constexpr auto Pelf<Container, Derived, N...>::readHeader(Header& header,
     assert(std::is_trivially_copyable<Header>::value);
 
     if (static_cast<std::size_t>(offset) + sizeof(header)
-        < this->mData.size()) {
+        <= this->mData.size()) {
       std::copy(this->mData.begin() + offset,
         this->mData.begin() + offset + sizeof(header),
         reinterpret_cast<char*>(&header));
