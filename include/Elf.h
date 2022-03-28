@@ -41,7 +41,7 @@ public:
   constexpr explicit Elf(const Container& data);
 
   /**
-   * @brief Get the Headers object
+   * @brief Returns a `ElfHeaders` struct that contains the Elf header and the program header table
    *
    * @return ElfHeaders<NumOfProgHeaders>
    */
@@ -49,7 +49,7 @@ public:
     -> ElfHeaders<NumOfProgHeaders>;
 
   /**
-   * @brief Get the Sections object
+   * @brief Returns the Section table
    *
    * @return Table<Elf64_Shdr, NumOfSections>
    */
@@ -57,10 +57,10 @@ public:
     -> Table<Elf64_Shdr, NumOfSections>;
 
   /**
-   * @brief Get the Elf Section Table Size object
+   * @brief Get the Elf Section Table Size 
    *
    * @param data
-   * @return consteval
+   * @return Returns a `TableSizes` struct 
    */
 
   /* Really bad design :( need to find a way to re-write this to avoid
@@ -99,7 +99,7 @@ private : friend class Pelf<Container, Elf, NumOfSections, NumOfProgHeaders>;
     Function read_struct) -> std::size_t;
 
   /**
-   * @brief Get the Program Table Size object
+   * @brief Get the Program Table Size 
    *
    * @tparam Callable object
    * @param elfHeader Elf header of the file (already initialized)
