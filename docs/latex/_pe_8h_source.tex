@@ -6,141 +6,225 @@
 \DoxyCodeLine{11 \textcolor{preprocessor}{\#ifndef PE\_H\_}}
 \DoxyCodeLine{12 \textcolor{preprocessor}{\#define PE\_H\_}}
 \DoxyCodeLine{13 }
-\DoxyCodeLine{14 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{_pelf_8h}{Pelf.h}}"{}}}
-\DoxyCodeLine{15 \textcolor{preprocessor}{\#include <algorithm>}}
-\DoxyCodeLine{16 \textcolor{preprocessor}{\#include <cstring>}}
-\DoxyCodeLine{17 \textcolor{preprocessor}{\#include <cassert>}}
-\DoxyCodeLine{18 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{pe_structs_8h}{peStructs.h}}"{}}}
-\DoxyCodeLine{19 \textcolor{preprocessor}{\#include <boost/hana.hpp>}}
-\DoxyCodeLine{20 }
-\DoxyCodeLine{21 \textcolor{keyword}{namespace }\mbox{\hyperlink{namespacepelf}{pelf}} \{}
+\DoxyCodeLine{14 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{pe_structs_8h}{peStructs.h}}"{}}}
+\DoxyCodeLine{15 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{_pelf_8h}{Pelf.h}}"{}}}
+\DoxyCodeLine{16 }
+\DoxyCodeLine{17 \textcolor{preprocessor}{\#include <algorithm>}}
+\DoxyCodeLine{18 \textcolor{preprocessor}{\#include <cassert>}}
+\DoxyCodeLine{19 \textcolor{preprocessor}{\#include <vector>}}
+\DoxyCodeLine{20 \textcolor{preprocessor}{\#include <array>}}
+\DoxyCodeLine{21 \textcolor{preprocessor}{\#include <type\_traits>}}
 \DoxyCodeLine{22 }
-\DoxyCodeLine{23 }
+\DoxyCodeLine{23 \textcolor{preprocessor}{\#include <boost/hana.hpp>}}
 \DoxyCodeLine{24 }
-\DoxyCodeLine{33 \textcolor{keyword}{template} <\textcolor{keyword}{class} Container>}
-\DoxyCodeLine{34 \textcolor{keyword}{class }\mbox{\hyperlink{classpelf_1_1_pe}{Pe}} : \textcolor{keyword}{public} \mbox{\hyperlink{classpelf_1_1_pelf}{Pelf}}<Container, Pe> \{}
-\DoxyCodeLine{35 \textcolor{keyword}{public}:}
-\DoxyCodeLine{36 }
-\DoxyCodeLine{41   \textcolor{keyword}{constexpr} \textcolor{keyword}{explicit} \mbox{\hyperlink{classpelf_1_1_pe_abaa3884f6d3f756c45d99c97dc7ac0ec}{Pe}}(Container data);}
+\DoxyCodeLine{25 \textcolor{keyword}{namespace }\mbox{\hyperlink{namespacepelf}{pelf}} \{}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27 }
+\DoxyCodeLine{38 \textcolor{keyword}{template}<\textcolor{keyword}{class} Container>}
+\DoxyCodeLine{39 \textcolor{keyword}{consteval} \textcolor{keyword}{auto} \mbox{\hyperlink{namespacepelf_a45ded953c0ff554de8b2c8fd0f07b6d6}{getPeNumberOfSections}}(\textcolor{keyword}{const} Container\& data) \textcolor{keyword}{requires}}
+\DoxyCodeLine{40   \mbox{\hyperlink{conceptpelf_1_1container__and__convertible__v}{container\_and\_convertible\_v<Container, unsigned char>}}}
+\DoxyCodeLine{41 \{}
 \DoxyCodeLine{42 }
-\DoxyCodeLine{48   [[nodiscard]] \textcolor{keyword}{constexpr} \textcolor{keyword}{auto} \mbox{\hyperlink{classpelf_1_1_pe_a308684b6eada062859e4c1a887a0d5eb}{getCoffHeader}}() const -\/> \mbox{\hyperlink{structpelf_1_1_i_m_a_g_e___f_i_l_e___h_e_a_d_e_r}{IMAGE\_FILE\_HEADER}};}
+\DoxyCodeLine{43   \textcolor{comment}{/* The number of sections it's at offset 6 from the Coff header , so first we}}
+\DoxyCodeLine{44 \textcolor{comment}{   * need to read pe header address (at offset 0x3c) */}}
+\DoxyCodeLine{45   std::uint32\_t pe\_header\_address\{\};}
+\DoxyCodeLine{46 }
+\DoxyCodeLine{47   std::size\_t offset\{ 0x3c \};}
+\DoxyCodeLine{48 }
 \DoxyCodeLine{49 }
-\DoxyCodeLine{50 }
-\DoxyCodeLine{51 private:}
-\DoxyCodeLine{52   friend class \mbox{\hyperlink{classpelf_1_1_pelf}{Pelf}}<Container, \mbox{\hyperlink{classpelf_1_1_pe}{Pe}}>;}
-\DoxyCodeLine{53 }
-\DoxyCodeLine{54   static constexpr std::uint16\_t  \mbox{\hyperlink{classpelf_1_1_pe_a76a7612bdd93c78bac1e3a4bd54526dc}{mMZDSignature}}\{0x4d5a\};    }
-\DoxyCodeLine{55   \textcolor{keyword}{static} \textcolor{keyword}{constexpr} std::uint32\_t  \mbox{\hyperlink{classpelf_1_1_pe_afd3cf9aa26d42801f4efa7ed377c05d2}{mPeSignature}}\{0x50450000\};  }
-\DoxyCodeLine{56   \textcolor{keyword}{static} \textcolor{keyword}{constexpr} std::uint8\_t   \mbox{\hyperlink{classpelf_1_1_pe_a90dfed482f8683a9adc33f3fde479311}{mMinPeSize}}\{97\};           }
-\DoxyCodeLine{58   std::uint32\_t \mbox{\hyperlink{classpelf_1_1_pe_a93c1187c324e4ae7e2254731bf266cbd}{mPeHeaderAddress}}\{\}; }
-\DoxyCodeLine{60   \mbox{\hyperlink{structpelf_1_1_i_m_a_g_e___f_i_l_e___h_e_a_d_e_r}{IMAGE\_FILE\_HEADER}} \mbox{\hyperlink{classpelf_1_1_pe_a7eafaff28816fab0213b7193d420d178}{mCoffHeader}}\{\}; }
-\DoxyCodeLine{66   [[nodiscard]] \textcolor{keyword}{constexpr} \textcolor{keyword}{auto} \mbox{\hyperlink{classpelf_1_1_pe_af46883d6b316372ea21c40796111c609}{checkSignatures}}() const -\/> \textcolor{keywordtype}{bool};}
-\DoxyCodeLine{67 }
+\DoxyCodeLine{50   \textcolor{keywordflow}{for} (std::size\_t i\{\}; i < \textcolor{keyword}{sizeof}(pe\_header\_address); ++i) \{}
+\DoxyCodeLine{51     pe\_header\_address <<= 8;}
+\DoxyCodeLine{52     pe\_header\_address |= \textcolor{keyword}{static\_cast<}std::uint32\_t\textcolor{keyword}{>}(}
+\DoxyCodeLine{53       data.at(\textcolor{keyword}{sizeof}(pe\_header\_address) -\/ 1 + offset-\/-\/));}
+\DoxyCodeLine{54   \}}
+\DoxyCodeLine{55 }
+\DoxyCodeLine{56   \textcolor{comment}{/* Offset of the Number of Sections */}}
+\DoxyCodeLine{57   offset = pe\_header\_address + \textcolor{keyword}{sizeof}(\mbox{\hyperlink{namespacepelf_a7931c494810aaeb8ce5f61bb01151a2c}{DWORD}}) + \textcolor{keyword}{sizeof}(\mbox{\hyperlink{namespacepelf_a68b4632c0053ab2bb24b62ba1ccbf7c2}{WORD}});}
+\DoxyCodeLine{58 }
+\DoxyCodeLine{59   \mbox{\hyperlink{namespacepelf_a68b4632c0053ab2bb24b62ba1ccbf7c2}{WORD}} number\_of\_sections\{\};}
+\DoxyCodeLine{60 }
+\DoxyCodeLine{61   \textcolor{keywordflow}{for} (std::size\_t i\{\}; i < \textcolor{keyword}{sizeof}(number\_of\_sections); ++i) \{}
+\DoxyCodeLine{62     number\_of\_sections <<= 8;}
+\DoxyCodeLine{63     number\_of\_sections |= data.at(\textcolor{keyword}{sizeof}(number\_of\_sections) -\/ 1 + offset -\/ i);}
+\DoxyCodeLine{64   \}}
+\DoxyCodeLine{65 }
+\DoxyCodeLine{66   \textcolor{keywordflow}{return} number\_of\_sections;}
+\DoxyCodeLine{67 \}}
 \DoxyCodeLine{68 }
-\DoxyCodeLine{73   [[nodiscard]] constexpr auto \mbox{\hyperlink{classpelf_1_1_pe_a34573a5da8e98176d7ff2905662630c2}{checkMZDSignature}}() const -\/> \textcolor{keywordtype}{bool};}
-\DoxyCodeLine{74   }
-\DoxyCodeLine{79   [[nodiscard]] constexpr auto \mbox{\hyperlink{classpelf_1_1_pe_a8f7823c9fd56839c51f7fa689fb56971}{checkPESignature}}() const -\/> \textcolor{keywordtype}{bool};}
-\DoxyCodeLine{80 }
-\DoxyCodeLine{85   [[nodiscard]] constexpr auto \mbox{\hyperlink{classpelf_1_1_pe_a99706db76c940290b2e875d4ff8a768a}{checkFileSize}}() const -\/> \textcolor{keywordtype}{bool};  }
-\DoxyCodeLine{86 }
+\DoxyCodeLine{69 }
+\DoxyCodeLine{78 \textcolor{keyword}{template}<\textcolor{keyword}{class} Container, std::\textcolor{keywordtype}{size\_t} NumOfSections = 0>}
+\DoxyCodeLine{79 \textcolor{keyword}{class }\mbox{\hyperlink{classpelf_1_1_pe}{Pe}} : \textcolor{keyword}{public} \mbox{\hyperlink{classpelf_1_1_pelf}{Pelf}}<Container, Pe, NumOfSections>}
+\DoxyCodeLine{80 \{}
+\DoxyCodeLine{81 \textcolor{keyword}{public}:}
+\DoxyCodeLine{86   \textcolor{keyword}{constexpr} \textcolor{keyword}{explicit} \mbox{\hyperlink{classpelf_1_1_pe_a27c023655ad92e6e3f372f7215e38b7a}{Pe}}(\textcolor{keyword}{const} Container\& data);}
 \DoxyCodeLine{87 }
-\DoxyCodeLine{93   constexpr auto \mbox{\hyperlink{classpelf_1_1_pe_a2fde5bc41beaf4d7868b8ef03bd31d42}{parseHeaders}}() -\/> \textcolor{keywordtype}{void};}
-\DoxyCodeLine{94 }
-\DoxyCodeLine{100   constexpr auto \mbox{\hyperlink{classpelf_1_1_pe_af6897e2b886e12e4b19af0994cf026ed}{readCoffHeader}}() -\/> \textcolor{keywordtype}{void};}
-\DoxyCodeLine{101 }
-\DoxyCodeLine{102 \};  }
-\DoxyCodeLine{103 }
-\DoxyCodeLine{104 template <class Container>}
-\DoxyCodeLine{105 constexpr \mbox{\hyperlink{classpelf_1_1_pe}{Pe}}<Container>::\mbox{\hyperlink{classpelf_1_1_pe}{Pe}}(Container data) :}
-\DoxyCodeLine{106   \mbox{\hyperlink{classpelf_1_1_pelf}{Pelf}}<Container, \mbox{\hyperlink{classpelf_1_1_pe}{Pe}}>(std::move(data)) \{}
-\DoxyCodeLine{107 }
-\DoxyCodeLine{108   \textcolor{keywordflow}{if} (!\mbox{\hyperlink{classpelf_1_1_pe_a99706db76c940290b2e875d4ff8a768a}{checkFileSize}}()) \{}
-\DoxyCodeLine{109     \textcolor{keywordflow}{throw} \mbox{\hyperlink{classpelf_1_1_pelf_exception}{PelfException}}\{\textcolor{stringliteral}{"{}Invalid PE file size!"{}}\};}
-\DoxyCodeLine{110   \}}
-\DoxyCodeLine{111 }
-\DoxyCodeLine{112   std::size\_t offset\{0x3c\};}
-\DoxyCodeLine{113   \textcolor{keywordflow}{for} (std::size\_t i\{\}; i < \textcolor{keyword}{sizeof}(\mbox{\hyperlink{classpelf_1_1_pe_a93c1187c324e4ae7e2254731bf266cbd}{mPeHeaderAddress}}); ++i) \{}
-\DoxyCodeLine{114     \mbox{\hyperlink{classpelf_1_1_pe_a93c1187c324e4ae7e2254731bf266cbd}{mPeHeaderAddress}} <<= 8;}
-\DoxyCodeLine{115     \mbox{\hyperlink{classpelf_1_1_pe_a93c1187c324e4ae7e2254731bf266cbd}{mPeHeaderAddress}} |= \textcolor{keyword}{static\_cast<}std::uint32\_t\textcolor{keyword}{>}(}
-\DoxyCodeLine{116         this-\/>\mbox{\hyperlink{classpelf_1_1_pelf_ac98647f291b3aa3809e49e2f3b57e261}{mData}}[\textcolor{keyword}{sizeof}(\mbox{\hyperlink{classpelf_1_1_pe_a93c1187c324e4ae7e2254731bf266cbd}{mPeHeaderAddress}}) -\/ 1 + offset-\/-\/]);  }
-\DoxyCodeLine{117   \}}
-\DoxyCodeLine{118 }
-\DoxyCodeLine{119 \}}
-\DoxyCodeLine{120 }
-\DoxyCodeLine{121 \textcolor{keyword}{template} <\textcolor{keyword}{class} Container>}
-\DoxyCodeLine{122 \textcolor{keyword}{constexpr} \textcolor{keyword}{auto} \mbox{\hyperlink{classpelf_1_1_pe_a34573a5da8e98176d7ff2905662630c2}{Pe<Container>::checkMZDSignature}}() const -\/> \textcolor{keywordtype}{bool} \{}
-\DoxyCodeLine{123 }
-\DoxyCodeLine{124   \textcolor{keywordflow}{return} (this-\/>\mbox{\hyperlink{classpelf_1_1_pelf_ac98647f291b3aa3809e49e2f3b57e261}{mData}}[0] == (\mbox{\hyperlink{classpelf_1_1_pe_a76a7612bdd93c78bac1e3a4bd54526dc}{mMZDSignature}} >> 8) \&\&}
-\DoxyCodeLine{125          this-\/>\mbox{\hyperlink{classpelf_1_1_pelf_ac98647f291b3aa3809e49e2f3b57e261}{mData}}[1] == (\mbox{\hyperlink{classpelf_1_1_pe_a76a7612bdd93c78bac1e3a4bd54526dc}{mMZDSignature}} \& 0xFF));}
-\DoxyCodeLine{126 \}}
-\DoxyCodeLine{127 }
-\DoxyCodeLine{128 \textcolor{keyword}{template} <\textcolor{keyword}{class} Container>}
-\DoxyCodeLine{129 \textcolor{keyword}{constexpr} \textcolor{keyword}{auto} \mbox{\hyperlink{classpelf_1_1_pe_a8f7823c9fd56839c51f7fa689fb56971}{Pe<Container>::checkPESignature}}() const -\/> \textcolor{keywordtype}{bool} \{}
-\DoxyCodeLine{130   \textcolor{comment}{/* Read PE Signature from offset mPeHeaderAddress*/} }
-\DoxyCodeLine{131   std::uint32\_t pe\_signature\{\};}
-\DoxyCodeLine{132   std::size\_t offset = \mbox{\hyperlink{classpelf_1_1_pe_a93c1187c324e4ae7e2254731bf266cbd}{mPeHeaderAddress}};}
-\DoxyCodeLine{133 }
-\DoxyCodeLine{134   \textcolor{comment}{/* mPeSignature is set as 0x5045000, so no need to read the value backwards */}}
-\DoxyCodeLine{135   \textcolor{keywordflow}{for} (std::size\_t i\{\}; i < \textcolor{keyword}{sizeof}(pe\_signature); ++i) \{}
-\DoxyCodeLine{136     pe\_signature <<= 8;}
-\DoxyCodeLine{137     pe\_signature |= this-\/>\mbox{\hyperlink{classpelf_1_1_pelf_ac98647f291b3aa3809e49e2f3b57e261}{mData}}[offset++]; }
-\DoxyCodeLine{138   \}}
-\DoxyCodeLine{139 }
-\DoxyCodeLine{140 }
-\DoxyCodeLine{141   \textcolor{keywordflow}{return} pe\_signature == \mbox{\hyperlink{classpelf_1_1_pe_afd3cf9aa26d42801f4efa7ed377c05d2}{mPeSignature}}; }
-\DoxyCodeLine{142     }
-\DoxyCodeLine{143 \}}
+\DoxyCodeLine{95   [[nodiscard]] \textcolor{keyword}{constexpr} \textcolor{keyword}{auto} \mbox{\hyperlink{classpelf_1_1_pe_ac78bd8cd71c3441234baa00d890c5e66}{getHeaders}}() \textcolor{keyword}{const} \textcolor{keyword}{noexcept} -\/> \mbox{\hyperlink{structpelf_1_1_pe_headers}{PeHeaders}};}
+\DoxyCodeLine{96 }
+\DoxyCodeLine{108   [[nodiscard]] \textcolor{keyword}{constexpr} \textcolor{keyword}{auto} \mbox{\hyperlink{classpelf_1_1_pe_a5495d1ce12d80d52f2e097a161fb4976}{getSections}}() const noexcept}
+\DoxyCodeLine{109     -\/> \mbox{\hyperlink{namespacepelf_aaa0c7d556c13e87c42a7ab82d5111709}{Table}}<\mbox{\hyperlink{structpelf_1_1_i_m_a_g_e___s_e_c_t_i_o_n___h_e_a_d_e_r}{IMAGE\_SECTION\_HEADER}}, NumOfSections>;}
+\DoxyCodeLine{110 }
+\DoxyCodeLine{111 private:}
+\DoxyCodeLine{112   friend class \mbox{\hyperlink{classpelf_1_1_pelf}{Pelf}}<Container, \mbox{\hyperlink{classpelf_1_1_pe}{Pe}}, NumOfSections>;}
+\DoxyCodeLine{113 }
+\DoxyCodeLine{114 }
+\DoxyCodeLine{115   \textcolor{comment}{/* Variables */}}
+\DoxyCodeLine{116 }
+\DoxyCodeLine{117   static constexpr std::uint16\_t \mbox{\hyperlink{classpelf_1_1_pe_a595368141107227f74bfa7c35472e23d}{mMZDSignature}}\{}
+\DoxyCodeLine{118     0x4d5a}
+\DoxyCodeLine{119   \}; }
+\DoxyCodeLine{120   \textcolor{keyword}{static} \textcolor{keyword}{constexpr} std::uint32\_t \mbox{\hyperlink{classpelf_1_1_pe_a60d52ace465e6867051627c3d8f9dee9}{mPeSignature}}\{ 0x50450000 \}; }
+\DoxyCodeLine{122   \textcolor{keyword}{static} \textcolor{keyword}{constexpr} std::uint8\_t \mbox{\hyperlink{classpelf_1_1_pe_a5240d16889d719e24d80505e3be0053e}{mMinPeSize}}\{}
+\DoxyCodeLine{123     97}
+\DoxyCodeLine{124   \}; }
+\DoxyCodeLine{126   std::uint32\_t \mbox{\hyperlink{classpelf_1_1_pe_a86c309782cb097393ef0dd0597f68fed}{mPeHeaderAddress}}\{\}; }
+\DoxyCodeLine{129   \mbox{\hyperlink{structpelf_1_1_pe_headers}{PeHeaders}} \mbox{\hyperlink{classpelf_1_1_pe_ab5f8843ef672df7bc70702bfab2734d2}{mHeaders}}; }
+\DoxyCodeLine{133   \mbox{\hyperlink{namespacepelf_aaa0c7d556c13e87c42a7ab82d5111709}{Table<IMAGE\_SECTION\_HEADER, NumOfSections>}}}
+\DoxyCodeLine{134     \mbox{\hyperlink{classpelf_1_1_pe_a41e2cbdb538d3a028feb011ec30ecd5a}{mSections}} = \{\}; }
+\DoxyCodeLine{136   \textcolor{comment}{/* Private member functions */}}
+\DoxyCodeLine{137 }
+\DoxyCodeLine{138 }
+\DoxyCodeLine{143   [[nodiscard]] \textcolor{keyword}{constexpr} \textcolor{keyword}{auto} \mbox{\hyperlink{classpelf_1_1_pe_a9dca41bf0156d7c10835646fe23b6616}{checkSignatures}}() const -\/> \textcolor{keywordtype}{bool};}
 \DoxyCodeLine{144 }
 \DoxyCodeLine{145 }
-\DoxyCodeLine{146 \textcolor{keyword}{template} <\textcolor{keyword}{class} Container>}
-\DoxyCodeLine{147 \textcolor{keyword}{constexpr} \textcolor{keyword}{auto} \mbox{\hyperlink{classpelf_1_1_pe_af46883d6b316372ea21c40796111c609}{Pe<Container>::checkSignatures}}() const -\/> \textcolor{keywordtype}{bool} \{}
-\DoxyCodeLine{148   \textcolor{keywordflow}{return} \mbox{\hyperlink{classpelf_1_1_pe_a34573a5da8e98176d7ff2905662630c2}{checkMZDSignature}}() \&\& \mbox{\hyperlink{classpelf_1_1_pe_a8f7823c9fd56839c51f7fa689fb56971}{checkPESignature}}();}
-\DoxyCodeLine{149 \}}
-\DoxyCodeLine{150 }
-\DoxyCodeLine{151 \textcolor{keyword}{template} <\textcolor{keyword}{class} Container>}
-\DoxyCodeLine{152 \textcolor{keyword}{constexpr} \textcolor{keyword}{auto} \mbox{\hyperlink{classpelf_1_1_pe_a99706db76c940290b2e875d4ff8a768a}{Pe<Container>::checkFileSize}}() const -\/> \textcolor{keywordtype}{bool} \{}
-\DoxyCodeLine{153   \textcolor{keywordflow}{return} this-\/>\mbox{\hyperlink{classpelf_1_1_pelf_ac98647f291b3aa3809e49e2f3b57e261}{mData}}.size() >= \mbox{\hyperlink{classpelf_1_1_pe_a90dfed482f8683a9adc33f3fde479311}{mMinPeSize}};}
-\DoxyCodeLine{154 \}}
-\DoxyCodeLine{155 }
-\DoxyCodeLine{156 }
-\DoxyCodeLine{157 \textcolor{keyword}{template} <\textcolor{keyword}{class} Container>}
-\DoxyCodeLine{158 \textcolor{keyword}{constexpr} \textcolor{keyword}{auto} \mbox{\hyperlink{classpelf_1_1_pe_a2fde5bc41beaf4d7868b8ef03bd31d42}{Pe<Container>::parseHeaders}}() -\/> \textcolor{keywordtype}{void} \{}
-\DoxyCodeLine{159   }
-\DoxyCodeLine{160   \mbox{\hyperlink{classpelf_1_1_pe_af6897e2b886e12e4b19af0994cf026ed}{readCoffHeader}}();}
-\DoxyCodeLine{161 }
-\DoxyCodeLine{162   }
-\DoxyCodeLine{163 }
-\DoxyCodeLine{164 \}}
+\DoxyCodeLine{151   [[nodiscard]] constexpr auto \mbox{\hyperlink{classpelf_1_1_pe_af76e7838ee5f706281a94457eafd4f11}{checkMZDSignature}}() const -\/> \textcolor{keywordtype}{bool};}
+\DoxyCodeLine{152 }
+\DoxyCodeLine{157   [[nodiscard]] constexpr auto \mbox{\hyperlink{classpelf_1_1_pe_a4a887ff030639ded9222e37fba10032d}{checkPESignature}}() const -\/> \textcolor{keywordtype}{bool};}
+\DoxyCodeLine{158 }
+\DoxyCodeLine{163   [[nodiscard]] constexpr auto \mbox{\hyperlink{classpelf_1_1_pe_a3a438104d2bf4c2d5995ab523c4c9b11}{checkFileSize}}() const -\/> \textcolor{keywordtype}{bool};}
+\DoxyCodeLine{164 }
 \DoxyCodeLine{165 }
-\DoxyCodeLine{166 \textcolor{keyword}{template} <\textcolor{keyword}{class} Container>}
-\DoxyCodeLine{167 \textcolor{keyword}{constexpr} \textcolor{keyword}{auto} \mbox{\hyperlink{classpelf_1_1_pe_af6897e2b886e12e4b19af0994cf026ed}{Pe<Container>::readCoffHeader}}() -\/> \textcolor{keywordtype}{void} \{}
-\DoxyCodeLine{168   }
-\DoxyCodeLine{169   \textcolor{comment}{// coff header offset}}
-\DoxyCodeLine{170   \textcolor{keyword}{auto} offset = \mbox{\hyperlink{classpelf_1_1_pe_a93c1187c324e4ae7e2254731bf266cbd}{mPeHeaderAddress}} + 4;}
-\DoxyCodeLine{171   }
-\DoxyCodeLine{172   \textcolor{keywordflow}{if} (std::is\_constant\_evaluated())\{}
-\DoxyCodeLine{173     \mbox{\hyperlink{classpelf_1_1_pelf_helper_a59b51d5417a9f15ae9dd1cc2b9b1b060}{PelfHelper::copyStruct}}(this-\/>\mbox{\hyperlink{classpelf_1_1_pelf_ac98647f291b3aa3809e49e2f3b57e261}{mData}}, \mbox{\hyperlink{classpelf_1_1_pe_a7eafaff28816fab0213b7193d420d178}{mCoffHeader}}, offset);}
-\DoxyCodeLine{174   \} \textcolor{keywordflow}{else} \{}
-\DoxyCodeLine{175     assert(std::is\_trivially\_copyable<\textcolor{keyword}{decltype}(\mbox{\hyperlink{classpelf_1_1_pe_a7eafaff28816fab0213b7193d420d178}{mCoffHeader}})>::value);}
-\DoxyCodeLine{176     }
-\DoxyCodeLine{177     \textcolor{keywordflow}{if} (\mbox{\hyperlink{classpelf_1_1_pe_a93c1187c324e4ae7e2254731bf266cbd}{mPeHeaderAddress}} + 4 + \textcolor{keyword}{sizeof}(\mbox{\hyperlink{classpelf_1_1_pe_a7eafaff28816fab0213b7193d420d178}{mCoffHeader}}) < this-\/>\mbox{\hyperlink{classpelf_1_1_pelf_ac98647f291b3aa3809e49e2f3b57e261}{mData}}.size()) \{}
-\DoxyCodeLine{178       std::memcpy(\textcolor{keyword}{reinterpret\_cast<}\textcolor{keywordtype}{char} *\textcolor{keyword}{>}(\&\mbox{\hyperlink{classpelf_1_1_pe_a7eafaff28816fab0213b7193d420d178}{mCoffHeader}}),}
-\DoxyCodeLine{179           this-\/>\mbox{\hyperlink{classpelf_1_1_pelf_ac98647f291b3aa3809e49e2f3b57e261}{mData}}.data() + offset,}
-\DoxyCodeLine{180           \textcolor{keyword}{sizeof}(\mbox{\hyperlink{classpelf_1_1_pe_a7eafaff28816fab0213b7193d420d178}{mCoffHeader}}));}
-\DoxyCodeLine{181     \} \textcolor{keywordflow}{else} \{}
-\DoxyCodeLine{182       \textcolor{keywordflow}{throw} \mbox{\hyperlink{classpelf_1_1_pelf_exception}{PelfException}}\{\textcolor{stringliteral}{"{}Bad PE file, invalid Coff Header"{}}\};}
-\DoxyCodeLine{183     \}}
-\DoxyCodeLine{184   \}}
-\DoxyCodeLine{185 }
-\DoxyCodeLine{186 \}}
+\DoxyCodeLine{175   constexpr auto \mbox{\hyperlink{classpelf_1_1_pe_a8d4d2fd67bf0ac12a51ec4f59ce768e0}{parseHeaders}}() -\/> \textcolor{keywordtype}{void};}
+\DoxyCodeLine{176 }
+\DoxyCodeLine{184   constexpr auto \mbox{\hyperlink{classpelf_1_1_pe_ad134561c00561f410a29c803785418ca}{parseSections}}() -\/> \textcolor{keywordtype}{void};}
+\DoxyCodeLine{185 \};}
+\DoxyCodeLine{186 }
 \DoxyCodeLine{187 }
-\DoxyCodeLine{188 \textcolor{keyword}{template} <\textcolor{keyword}{class} Container>}
-\DoxyCodeLine{189 \textcolor{keyword}{constexpr} \textcolor{keyword}{auto} \mbox{\hyperlink{classpelf_1_1_pe_a308684b6eada062859e4c1a887a0d5eb}{Pe<Container>::getCoffHeader}}() const -\/> \mbox{\hyperlink{structpelf_1_1_i_m_a_g_e___f_i_l_e___h_e_a_d_e_r}{IMAGE\_FILE\_HEADER}} \{}
-\DoxyCodeLine{190   \textcolor{keywordflow}{return} \mbox{\hyperlink{classpelf_1_1_pe_a7eafaff28816fab0213b7193d420d178}{mCoffHeader}};}
-\DoxyCodeLine{191 \}}
+\DoxyCodeLine{188 template<class Container, std::\textcolor{keywordtype}{size\_t} NumOfSections>}
+\DoxyCodeLine{189 constexpr \mbox{\hyperlink{classpelf_1_1_pe}{Pe}}<Container, NumOfSections>::\mbox{\hyperlink{classpelf_1_1_pe}{Pe}}(const Container\& data)}
+\DoxyCodeLine{190   : \mbox{\hyperlink{classpelf_1_1_pelf}{Pelf}}<Container, \mbox{\hyperlink{classpelf_1_1_pe}{Pe}}, NumOfSections>(data)}
+\DoxyCodeLine{191 \{}
 \DoxyCodeLine{192 }
-\DoxyCodeLine{193 \} \textcolor{comment}{// end of namespace}}
+\DoxyCodeLine{193   \textcolor{keywordflow}{if} (!\mbox{\hyperlink{classpelf_1_1_pe_a3a438104d2bf4c2d5995ab523c4c9b11}{checkFileSize}}()) \{ \textcolor{keywordflow}{throw} \mbox{\hyperlink{classpelf_1_1_pelf_exception}{PelfException}}\{ \textcolor{stringliteral}{"{}Invalid PE file size!"{}} \}; \}}
 \DoxyCodeLine{194 }
-\DoxyCodeLine{195 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{195   std::size\_t offset\{ 0x3c \};}
+\DoxyCodeLine{196   \textcolor{keywordflow}{for} (std::size\_t i\{\}; i < \textcolor{keyword}{sizeof}(\mbox{\hyperlink{classpelf_1_1_pe_a86c309782cb097393ef0dd0597f68fed}{mPeHeaderAddress}}); ++i) \{}
+\DoxyCodeLine{197     \mbox{\hyperlink{classpelf_1_1_pe_a86c309782cb097393ef0dd0597f68fed}{mPeHeaderAddress}} <<= 8;}
+\DoxyCodeLine{198     \mbox{\hyperlink{classpelf_1_1_pe_a86c309782cb097393ef0dd0597f68fed}{mPeHeaderAddress}} |= \textcolor{keyword}{static\_cast<}std::uint32\_t\textcolor{keyword}{>}(}
+\DoxyCodeLine{199       this-\/>\mbox{\hyperlink{classpelf_1_1_pelf_a5306bc94bda869eafe757fd422b0d8cd}{mData}}.at(\textcolor{keyword}{sizeof}(\mbox{\hyperlink{classpelf_1_1_pe_a86c309782cb097393ef0dd0597f68fed}{mPeHeaderAddress}}) -\/ 1 + offset-\/-\/));}
+\DoxyCodeLine{200   \}}
+\DoxyCodeLine{201 }
+\DoxyCodeLine{202   this-\/>\mbox{\hyperlink{classpelf_1_1_pelf_a89266cb498c8c99b2912ed3cc0edccc9}{parse}}();}
+\DoxyCodeLine{203 \}}
+\DoxyCodeLine{204 }
+\DoxyCodeLine{205 \textcolor{keyword}{template}<\textcolor{keyword}{class} Container, std::\textcolor{keywordtype}{size\_t} NumOfSections>}
+\DoxyCodeLine{206 \textcolor{keyword}{constexpr} \textcolor{keyword}{auto} \mbox{\hyperlink{classpelf_1_1_pe_af76e7838ee5f706281a94457eafd4f11}{Pe<Container, NumOfSections>::checkMZDSignature}}() const -\/> \textcolor{keywordtype}{bool}}
+\DoxyCodeLine{207 \{}
+\DoxyCodeLine{208 }
+\DoxyCodeLine{209   \textcolor{keywordflow}{return} (this-\/>\mbox{\hyperlink{classpelf_1_1_pelf_a5306bc94bda869eafe757fd422b0d8cd}{mData}}[0] == (\mbox{\hyperlink{classpelf_1_1_pe_a595368141107227f74bfa7c35472e23d}{mMZDSignature}} >> 8)}
+\DoxyCodeLine{210           \&\& this-\/>\mbox{\hyperlink{classpelf_1_1_pelf_a5306bc94bda869eafe757fd422b0d8cd}{mData}}[1] == (\mbox{\hyperlink{classpelf_1_1_pe_a595368141107227f74bfa7c35472e23d}{mMZDSignature}} \& 0xFF));}
+\DoxyCodeLine{211 \}}
+\DoxyCodeLine{212 }
+\DoxyCodeLine{213 \textcolor{keyword}{template}<\textcolor{keyword}{class} Container, std::\textcolor{keywordtype}{size\_t} NumOfSections>}
+\DoxyCodeLine{214 \textcolor{keyword}{constexpr} \textcolor{keyword}{auto} \mbox{\hyperlink{classpelf_1_1_pe_a4a887ff030639ded9222e37fba10032d}{Pe<Container, NumOfSections>::checkPESignature}}() const -\/> \textcolor{keywordtype}{bool}}
+\DoxyCodeLine{215 \{}
+\DoxyCodeLine{216   \textcolor{comment}{/* Read PE Signature from offset mPeHeaderAddress*/}}
+\DoxyCodeLine{217   std::uint32\_t pe\_signature\{\};}
+\DoxyCodeLine{218   std::size\_t offset = \mbox{\hyperlink{classpelf_1_1_pe_a86c309782cb097393ef0dd0597f68fed}{mPeHeaderAddress}};}
+\DoxyCodeLine{219 }
+\DoxyCodeLine{220   \textcolor{comment}{/* mPeSignature is set as 0x5045000, so no need to read the value backwards */}}
+\DoxyCodeLine{221   \textcolor{keywordflow}{for} (std::size\_t i\{\}; i < \textcolor{keyword}{sizeof}(pe\_signature); ++i) \{}
+\DoxyCodeLine{222     pe\_signature <<= 8;}
+\DoxyCodeLine{223     pe\_signature |= this-\/>\mbox{\hyperlink{classpelf_1_1_pelf_a5306bc94bda869eafe757fd422b0d8cd}{mData}}.at(offset++);}
+\DoxyCodeLine{224   \}}
+\DoxyCodeLine{225 }
+\DoxyCodeLine{226 }
+\DoxyCodeLine{227   \textcolor{keywordflow}{return} pe\_signature == \mbox{\hyperlink{classpelf_1_1_pe_a60d52ace465e6867051627c3d8f9dee9}{mPeSignature}};}
+\DoxyCodeLine{228 \}}
+\DoxyCodeLine{229 }
+\DoxyCodeLine{230 }
+\DoxyCodeLine{231 \textcolor{keyword}{template}<\textcolor{keyword}{class} Container, std::\textcolor{keywordtype}{size\_t} NumOfSections>}
+\DoxyCodeLine{232 \textcolor{keyword}{constexpr} \textcolor{keyword}{auto} \mbox{\hyperlink{classpelf_1_1_pe_a9dca41bf0156d7c10835646fe23b6616}{Pe<Container, NumOfSections>::checkSignatures}}() const -\/> \textcolor{keywordtype}{bool}}
+\DoxyCodeLine{233 \{}
+\DoxyCodeLine{234   \textcolor{keywordflow}{return} \mbox{\hyperlink{classpelf_1_1_pe_af76e7838ee5f706281a94457eafd4f11}{checkMZDSignature}}() \&\& \mbox{\hyperlink{classpelf_1_1_pe_a4a887ff030639ded9222e37fba10032d}{checkPESignature}}();}
+\DoxyCodeLine{235 \}}
+\DoxyCodeLine{236 }
+\DoxyCodeLine{237 \textcolor{keyword}{template}<\textcolor{keyword}{class} Container, std::\textcolor{keywordtype}{size\_t} NumOfSections>}
+\DoxyCodeLine{238 \textcolor{keyword}{constexpr} \textcolor{keyword}{auto} \mbox{\hyperlink{classpelf_1_1_pe_a3a438104d2bf4c2d5995ab523c4c9b11}{Pe<Container, NumOfSections>::checkFileSize}}() const -\/> \textcolor{keywordtype}{bool}}
+\DoxyCodeLine{239 \{}
+\DoxyCodeLine{240   \textcolor{keywordflow}{return} this-\/>\mbox{\hyperlink{classpelf_1_1_pelf_a5306bc94bda869eafe757fd422b0d8cd}{mData}}.size() >= \mbox{\hyperlink{classpelf_1_1_pe_a5240d16889d719e24d80505e3be0053e}{mMinPeSize}};}
+\DoxyCodeLine{241 \}}
+\DoxyCodeLine{242 }
+\DoxyCodeLine{243 }
+\DoxyCodeLine{244 \textcolor{keyword}{template}<\textcolor{keyword}{class} Container, std::\textcolor{keywordtype}{size\_t} NumOfSections>}
+\DoxyCodeLine{245 \textcolor{keyword}{constexpr} \textcolor{keyword}{auto} \mbox{\hyperlink{classpelf_1_1_pe_a8d4d2fd67bf0ac12a51ec4f59ce768e0}{Pe<Container, NumOfSections>::parseHeaders}}() -\/> \textcolor{keywordtype}{void}}
+\DoxyCodeLine{246 \{}
+\DoxyCodeLine{247 }
+\DoxyCodeLine{248   std::ptrdiff\_t offset = \mbox{\hyperlink{classpelf_1_1_pe_a86c309782cb097393ef0dd0597f68fed}{mPeHeaderAddress}} + 4;}
+\DoxyCodeLine{249 }
+\DoxyCodeLine{250   this-\/>\mbox{\hyperlink{classpelf_1_1_pelf_a5bd0037e6d0e3eec7a3107592dd9a6b0}{readHeader}}(mHeaders.\mbox{\hyperlink{structpelf_1_1_pe_headers_a74303421cc117ea467dce67a787de85c}{mCoffHeader}}, offset);}
+\DoxyCodeLine{251 }
+\DoxyCodeLine{252   offset += \textcolor{keyword}{sizeof}(\mbox{\hyperlink{classpelf_1_1_pe_ab5f8843ef672df7bc70702bfab2734d2}{mHeaders}}.\mbox{\hyperlink{structpelf_1_1_pe_headers_a74303421cc117ea467dce67a787de85c}{mCoffHeader}});}
+\DoxyCodeLine{253 }
+\DoxyCodeLine{254   this-\/>\mbox{\hyperlink{classpelf_1_1_pelf_a5bd0037e6d0e3eec7a3107592dd9a6b0}{readHeader}}(mHeaders.\mbox{\hyperlink{structpelf_1_1_pe_headers_a2e1cc83a3d005b178371fa7ec1180e72}{mOptionalHeader}}.\mbox{\hyperlink{structpelf_1_1_optional_header_adde9a675c4612a9ab231d428e25a489b}{mScf}}, offset);}
+\DoxyCodeLine{255 }
+\DoxyCodeLine{256   offset += \textcolor{keyword}{sizeof}(\mbox{\hyperlink{classpelf_1_1_pe_ab5f8843ef672df7bc70702bfab2734d2}{mHeaders}}.\mbox{\hyperlink{structpelf_1_1_pe_headers_a2e1cc83a3d005b178371fa7ec1180e72}{mOptionalHeader}}.\mbox{\hyperlink{structpelf_1_1_optional_header_adde9a675c4612a9ab231d428e25a489b}{mScf}});}
+\DoxyCodeLine{257 }
+\DoxyCodeLine{258   this-\/>\mbox{\hyperlink{classpelf_1_1_pelf_a5bd0037e6d0e3eec7a3107592dd9a6b0}{readHeader}}(mHeaders.\mbox{\hyperlink{structpelf_1_1_pe_headers_a2e1cc83a3d005b178371fa7ec1180e72}{mOptionalHeader}}.\mbox{\hyperlink{structpelf_1_1_optional_header_abc5cb58f1cd05db22a5b3ed897af6542}{mWsf}}, offset);}
+\DoxyCodeLine{259 }
+\DoxyCodeLine{260   offset += \textcolor{keyword}{sizeof}(\mbox{\hyperlink{classpelf_1_1_pe_ab5f8843ef672df7bc70702bfab2734d2}{mHeaders}}.\mbox{\hyperlink{structpelf_1_1_pe_headers_a2e1cc83a3d005b178371fa7ec1180e72}{mOptionalHeader}}.\mbox{\hyperlink{structpelf_1_1_optional_header_abc5cb58f1cd05db22a5b3ed897af6542}{mWsf}});}
+\DoxyCodeLine{261 }
+\DoxyCodeLine{262   \textcolor{keywordflow}{for} (\textcolor{keyword}{auto}\& data\_dir : \mbox{\hyperlink{classpelf_1_1_pe_ab5f8843ef672df7bc70702bfab2734d2}{mHeaders}}.\mbox{\hyperlink{structpelf_1_1_pe_headers_a2e1cc83a3d005b178371fa7ec1180e72}{mOptionalHeader}}.\mbox{\hyperlink{structpelf_1_1_optional_header_a4cfcdbdc6a87bb9e54b88215d0c592a1}{mDataDirectories}}) \{}
+\DoxyCodeLine{263     this-\/>\mbox{\hyperlink{classpelf_1_1_pelf_a5bd0037e6d0e3eec7a3107592dd9a6b0}{readHeader}}(data\_dir, offset);}
+\DoxyCodeLine{264     offset += \textcolor{keyword}{sizeof}(data\_dir);}
+\DoxyCodeLine{265   \}}
+\DoxyCodeLine{266 \}}
+\DoxyCodeLine{267 }
+\DoxyCodeLine{268 }
+\DoxyCodeLine{269 \textcolor{keyword}{template}<\textcolor{keyword}{class} Container, std::\textcolor{keywordtype}{size\_t} NumOfSections>}
+\DoxyCodeLine{270 \textcolor{keyword}{constexpr} \textcolor{keyword}{auto} \mbox{\hyperlink{classpelf_1_1_pe_ac78bd8cd71c3441234baa00d890c5e66}{Pe<Container, NumOfSections>::getHeaders}}() const noexcept}
+\DoxyCodeLine{271   -\/> \mbox{\hyperlink{structpelf_1_1_pe_headers}{PeHeaders}}}
+\DoxyCodeLine{272 \{}
+\DoxyCodeLine{273   \textcolor{keywordflow}{return} \mbox{\hyperlink{classpelf_1_1_pe_ab5f8843ef672df7bc70702bfab2734d2}{mHeaders}};}
+\DoxyCodeLine{274 \}}
+\DoxyCodeLine{275 }
+\DoxyCodeLine{276 }
+\DoxyCodeLine{277 \textcolor{keyword}{template}<\textcolor{keyword}{class} Container, std::\textcolor{keywordtype}{size\_t} NumOfSections>}
+\DoxyCodeLine{278 \textcolor{keyword}{constexpr} \textcolor{keyword}{auto} \mbox{\hyperlink{classpelf_1_1_pe_ad134561c00561f410a29c803785418ca}{Pe<Container, NumOfSections>::parseSections}}() -\/> \textcolor{keywordtype}{void}}
+\DoxyCodeLine{279 \{}
+\DoxyCodeLine{280 }
+\DoxyCodeLine{281   std::ptrdiff\_t offset =}
+\DoxyCodeLine{282     \mbox{\hyperlink{classpelf_1_1_pe_a86c309782cb097393ef0dd0597f68fed}{mPeHeaderAddress}} + \textcolor{keyword}{sizeof}(\mbox{\hyperlink{classpelf_1_1_pe_ab5f8843ef672df7bc70702bfab2734d2}{mHeaders}}.\mbox{\hyperlink{structpelf_1_1_pe_headers_a74303421cc117ea467dce67a787de85c}{mCoffHeader}})}
+\DoxyCodeLine{283     + \textcolor{keyword}{sizeof}(\mbox{\hyperlink{classpelf_1_1_pe_ab5f8843ef672df7bc70702bfab2734d2}{mHeaders}}.\mbox{\hyperlink{structpelf_1_1_pe_headers_a2e1cc83a3d005b178371fa7ec1180e72}{mOptionalHeader}}.\mbox{\hyperlink{structpelf_1_1_optional_header_a4cfcdbdc6a87bb9e54b88215d0c592a1}{mDataDirectories}}) * 16}
+\DoxyCodeLine{284     + \textcolor{keyword}{sizeof}(\mbox{\hyperlink{classpelf_1_1_pe_ab5f8843ef672df7bc70702bfab2734d2}{mHeaders}}.\mbox{\hyperlink{structpelf_1_1_pe_headers_a2e1cc83a3d005b178371fa7ec1180e72}{mOptionalHeader}}.\mbox{\hyperlink{structpelf_1_1_optional_header_abc5cb58f1cd05db22a5b3ed897af6542}{mWsf}})}
+\DoxyCodeLine{285     + \textcolor{keyword}{sizeof}(\mbox{\hyperlink{classpelf_1_1_pe_ab5f8843ef672df7bc70702bfab2734d2}{mHeaders}}.\mbox{\hyperlink{structpelf_1_1_pe_headers_a2e1cc83a3d005b178371fa7ec1180e72}{mOptionalHeader}}.\mbox{\hyperlink{structpelf_1_1_optional_header_adde9a675c4612a9ab231d428e25a489b}{mScf}});}
+\DoxyCodeLine{286 }
+\DoxyCodeLine{287   \textcolor{keywordflow}{if} \textcolor{keyword}{constexpr} (!std::is\_same\_v<\textcolor{keyword}{decltype}(\mbox{\hyperlink{classpelf_1_1_pe_a41e2cbdb538d3a028feb011ec30ecd5a}{mSections}}),}
+\DoxyCodeLine{288                   std::vector<IMAGE\_SECTION\_HEADER>>) \{}
+\DoxyCodeLine{289 }
+\DoxyCodeLine{290     \textcolor{keywordflow}{for} (\textcolor{keyword}{auto}\& section : \mbox{\hyperlink{classpelf_1_1_pe_a41e2cbdb538d3a028feb011ec30ecd5a}{mSections}}) \{}
+\DoxyCodeLine{291       this-\/>\mbox{\hyperlink{classpelf_1_1_pelf_a5bd0037e6d0e3eec7a3107592dd9a6b0}{readHeader}}(section, offset);}
+\DoxyCodeLine{292       offset += \textcolor{keyword}{sizeof}(section);}
+\DoxyCodeLine{293     \}}
+\DoxyCodeLine{294   \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{295     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i\{\}; i < \mbox{\hyperlink{classpelf_1_1_pe_ab5f8843ef672df7bc70702bfab2734d2}{mHeaders}}.\mbox{\hyperlink{structpelf_1_1_pe_headers_a74303421cc117ea467dce67a787de85c}{mCoffHeader}}.NumberOfSections; ++i) \{}
+\DoxyCodeLine{296       \mbox{\hyperlink{structpelf_1_1_i_m_a_g_e___s_e_c_t_i_o_n___h_e_a_d_e_r}{IMAGE\_SECTION\_HEADER}} tmp\_section\{\};}
+\DoxyCodeLine{297       this-\/>\mbox{\hyperlink{classpelf_1_1_pelf_a5bd0037e6d0e3eec7a3107592dd9a6b0}{readHeader}}(tmp\_section, offset);}
+\DoxyCodeLine{298       offset += \textcolor{keyword}{sizeof}(tmp\_section);}
+\DoxyCodeLine{299       \mbox{\hyperlink{classpelf_1_1_pe_a41e2cbdb538d3a028feb011ec30ecd5a}{mSections}}.push\_back(tmp\_section);}
+\DoxyCodeLine{300     \}}
+\DoxyCodeLine{301   \}}
+\DoxyCodeLine{302 \}}
+\DoxyCodeLine{303 }
+\DoxyCodeLine{304 }
+\DoxyCodeLine{305 \textcolor{keyword}{template}<\textcolor{keyword}{class} Container, std::\textcolor{keywordtype}{size\_t} NumOfSections>}
+\DoxyCodeLine{306 \textcolor{keyword}{constexpr} \textcolor{keyword}{auto} \mbox{\hyperlink{classpelf_1_1_pe_a5495d1ce12d80d52f2e097a161fb4976}{Pe<Container, NumOfSections>::getSections}}() const noexcept}
+\DoxyCodeLine{307   -\/> \mbox{\hyperlink{namespacepelf_aaa0c7d556c13e87c42a7ab82d5111709}{Table}}<\mbox{\hyperlink{structpelf_1_1_i_m_a_g_e___s_e_c_t_i_o_n___h_e_a_d_e_r}{IMAGE\_SECTION\_HEADER}}, NumOfSections>}
+\DoxyCodeLine{308 \{}
+\DoxyCodeLine{309   \textcolor{keywordflow}{return} \mbox{\hyperlink{classpelf_1_1_pe_a41e2cbdb538d3a028feb011ec30ecd5a}{mSections}};}
+\DoxyCodeLine{310 \}}
+\DoxyCodeLine{311 }
+\DoxyCodeLine{312 \}\textcolor{comment}{// namespace pelf}}
+\DoxyCodeLine{313 }
+\DoxyCodeLine{314 \textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCode}

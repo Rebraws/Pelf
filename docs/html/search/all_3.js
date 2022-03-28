@@ -1,12 +1,19 @@
 var searchData=
 [
-  ['getcharacteristics_0',['getCharacteristics',['../structpelf_1_1_i_m_a_g_e___f_i_l_e___h_e_a_d_e_r.html#a390b4bc0c763b79681d843ab0f77ac50',1,'pelf::IMAGE_FILE_HEADER']]],
-  ['getcoffheader_1',['getCoffHeader',['../classpelf_1_1_pe.html#a308684b6eada062859e4c1a887a0d5eb',1,'pelf::Pe']]],
-  ['getmachine_2',['getMachine',['../structpelf_1_1_i_m_a_g_e___f_i_l_e___h_e_a_d_e_r.html#a9079b5f58a92d1b759d54a9c4da57c4c',1,'pelf::IMAGE_FILE_HEADER']]],
-  ['getnumberofsections_3',['getNumberOfSections',['../structpelf_1_1_i_m_a_g_e___f_i_l_e___h_e_a_d_e_r.html#a7517c9e0bbf36a49fd701e24605876f0',1,'pelf::IMAGE_FILE_HEADER']]],
-  ['getnumberofsymbols_4',['getNumberOfSymbols',['../structpelf_1_1_i_m_a_g_e___f_i_l_e___h_e_a_d_e_r.html#a3545dcd9c6a7bbaa2b3734fb365c3164',1,'pelf::IMAGE_FILE_HEADER']]],
-  ['getpointertosymboltable_5',['getPointerToSymbolTable',['../structpelf_1_1_i_m_a_g_e___f_i_l_e___h_e_a_d_e_r.html#a916391f8a632b27d85b64f74585546ba',1,'pelf::IMAGE_FILE_HEADER']]],
-  ['getrawdata_6',['getRawData',['../classpelf_1_1_pelf.html#a2bb779d7e943ec739df4c51ce2dffb53',1,'pelf::Pelf']]],
-  ['getsizeofoptionalheader_7',['getSizeOfOptionalHeader',['../structpelf_1_1_i_m_a_g_e___f_i_l_e___h_e_a_d_e_r.html#aa752f2d5473af483a02309e61008ef94',1,'pelf::IMAGE_FILE_HEADER']]],
-  ['gettimedatestamp_8',['getTimeDateStamp',['../structpelf_1_1_i_m_a_g_e___f_i_l_e___h_e_a_d_e_r.html#a2a465c74dafb04b679ff43abc4b56f52',1,'pelf::IMAGE_FILE_HEADER']]]
+  ['ei_5fclass_0',['EI_CLASS',['../namespacepelf.html#a93a643cc6ba430789ac6565ce1cc8e63',1,'pelf']]],
+  ['ei_5fdata_1',['EI_DATA',['../namespacepelf.html#acf5b4f71bdc0ae8d35d39b40222c01b3',1,'pelf']]],
+  ['ei_5fmag0_2',['EI_MAG0',['../namespacepelf.html#ae8b26e065d67c82a3e3c07b10bc94045',1,'pelf']]],
+  ['ei_5fmag1_3',['EI_MAG1',['../namespacepelf.html#a4bdac3cd6e3b890d427e2273a5db2513',1,'pelf']]],
+  ['ei_5fmag2_4',['EI_MAG2',['../namespacepelf.html#abc2c8ca470598236eea266c7b8d30090',1,'pelf']]],
+  ['ei_5fmag3_5',['EI_MAG3',['../namespacepelf.html#a7657a8ef3238ba5e3e6eb9a91f89cf87',1,'pelf']]],
+  ['elf_6',['Elf',['../classpelf_1_1_elf.html#aa85df319ece20802ade89e361eb1312f',1,'pelf::Elf::Elf()'],['../classpelf_1_1_elf.html',1,'pelf::Elf&lt; Container, NumOfSections, NumOfProgHeaders &gt;']]],
+  ['elf_2eh_7',['Elf.h',['../_elf_8h.html',1,'']]],
+  ['elf64_5fehdr_8',['Elf64_Ehdr',['../structpelf_1_1_elf64___ehdr.html',1,'pelf']]],
+  ['elf64_5fphdr_9',['Elf64_Phdr',['../structpelf_1_1_elf64___phdr.html',1,'pelf']]],
+  ['elf64_5fshdr_10',['Elf64_Shdr',['../structpelf_1_1_elf64___shdr.html',1,'pelf']]],
+  ['elfclass64_11',['ELFCLASS64',['../namespacepelf.html#acee3872fd4945b0f5938b9cac3dc239f',1,'pelf']]],
+  ['elfheader_12',['elfHeader',['../structpelf_1_1_elf_headers.html#ac83a681bcd2fe191a8e18cdba3445966',1,'pelf::ElfHeaders']]],
+  ['elfheaders_13',['ElfHeaders',['../structpelf_1_1_elf_headers.html',1,'pelf']]],
+  ['elfheaders_3c_200_20_3e_14',['ElfHeaders&lt; 0 &gt;',['../structpelf_1_1_elf_headers.html',1,'pelf']]],
+  ['elfstructs_2eh_15',['elfStructs.h',['../elf_structs_8h.html',1,'']]]
 ];

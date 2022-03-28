@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['dword_0',['DWORD',['../namespacepelf.html#a7931c494810aaeb8ce5f61bb01151a2c',1,'pelf']]]
+  ['byte_0',['BYTE',['../namespacepelf.html#a6e96db286837d72766c86aca048c6dfd',1,'pelf']]]
 ];

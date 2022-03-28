@@ -1,8 +1,8 @@
-\hypertarget{classpelf_1_1_pelf}{}\doxysection{pelf\+::Pelf\texorpdfstring{$<$}{<} Container, Derived \texorpdfstring{$>$}{>} Class Template Reference}
-\label{classpelf_1_1_pelf}\index{pelf::Pelf$<$ Container, Derived $>$@{pelf::Pelf$<$ Container, Derived $>$}}
+\hypertarget{classpelf_1_1_pelf}{}\doxysection{pelf\+::Pelf\texorpdfstring{$<$}{<} Container, Derived, N \texorpdfstring{$>$}{>} Class Template Reference}
+\label{classpelf_1_1_pelf}\index{pelf::Pelf$<$ Container, Derived, N $>$@{pelf::Pelf$<$ Container, Derived, N $>$}}
 
 
-Base class for \mbox{\hyperlink{classpelf_1_1_pe}{Pe}} and Elf classes.  
+Base class for \mbox{\hyperlink{classpelf_1_1_pe}{Pe}} and \mbox{\hyperlink{classpelf_1_1_elf}{Elf}} classes.  
 
 
 
@@ -12,28 +12,34 @@ Base class for \mbox{\hyperlink{classpelf_1_1_pe}{Pe}} and Elf classes.
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-constexpr \mbox{\hyperlink{classpelf_1_1_pelf_abd27fd25af4af69f0ff70097ce77fdd3}{Pelf}} (Container data) noexcept
+constexpr \mbox{\hyperlink{classpelf_1_1_pelf_a78f0df8ec18368d227a5e2c4027687a2}{Pelf}} (const Container \&data)
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classpelf_1_1_pelf}{Pelf}} constructor. \end{DoxyCompactList}\item 
-constexpr auto \mbox{\hyperlink{classpelf_1_1_pelf_a3c0fabea66165b5ca917f5a72f8daeaf}{parse}} () -\/$>$ void
+constexpr auto \mbox{\hyperlink{classpelf_1_1_pelf_ad20b8665e2640ce5dc28508acceea6d7}{get\+Raw\+Data}} () const noexcept -\/$>$ Container
+\begin{DoxyCompactList}\small\item\em Returns the original data passed to the Pe/\+Elf constructor. \end{DoxyCompactList}\item 
+constexpr auto \mbox{\hyperlink{classpelf_1_1_pelf_a9fe71d4afd2ef54095257f10473a5dcc}{get\+Headers}} () const noexcept -\/$>$ void
+\begin{DoxyCompactList}\small\item\em Returns a struct with the headers from the PE or ELF file. \end{DoxyCompactList}\item 
+constexpr auto \mbox{\hyperlink{classpelf_1_1_pelf_a0241f13c5f834e536e53d05e3cfcb974}{get\+Sections}} () const noexcept -\/$>$ void
+\begin{DoxyCompactList}\small\item\em Returns the section table of the \mbox{\hyperlink{classpelf_1_1_pe}{Pe}} or ELF file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+constexpr auto \mbox{\hyperlink{classpelf_1_1_pelf_a89266cb498c8c99b2912ed3cc0edccc9}{parse}} () -\/$>$ void
 \begin{DoxyCompactList}\small\item\em Parses the PE/\+ELF headers and sections. \end{DoxyCompactList}\item 
-constexpr auto \mbox{\hyperlink{classpelf_1_1_pelf_a2bb779d7e943ec739df4c51ce2dffb53}{get\+Raw\+Data}} () const noexcept -\/$>$ Container
-\begin{DoxyCompactList}\small\item\em Returns the original data passed to the Pe/\+Elf constructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+{\footnotesize template$<$class Header $>$ }\\constexpr auto \mbox{\hyperlink{classpelf_1_1_pelf_a5bd0037e6d0e3eec7a3107592dd9a6b0}{read\+Header}} (Header \&header, const std\+::ptrdiff\+\_\+t offset) -\/$>$ void
+\begin{DoxyCompactList}\small\item\em Reads the contents from {\ttfamily m\+Data} at the index {\ttfamily offset} into the struct passed by reference. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Struct $>$ }\\constexpr auto \mbox{\hyperlink{classpelf_1_1_pelf_a0d157a0ec643322c0a212cd24dec917a}{get\+Struct}} (std\+::size\+\_\+t offset) -\/$>$ Struct
+\begin{DoxyCompactList}\small\item\em Returns an Struct filled with the data from {\ttfamily m\+Data} from index {\ttfamily offset} \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
-Container \mbox{\hyperlink{classpelf_1_1_pelf_ac98647f291b3aa3809e49e2f3b57e261}{m\+Data}}
-\end{DoxyCompactItemize}
-\doxysubsection*{Friends}
-\begin{DoxyCompactItemize}
-\item 
-class \mbox{\hyperlink{classpelf_1_1_pelf_ac75a05191073b22dd8ccecfb96f0aa8b}{Pelf\+Helper}}
+Container \mbox{\hyperlink{classpelf_1_1_pelf_a5306bc94bda869eafe757fd422b0d8cd}{m\+Data}}
 \end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
-\subsubsection*{template$<$class Container, template$<$ typename $>$ class Derived$>$\newline
-class pelf\+::\+Pelf$<$ Container, Derived $>$}
-Base class for \mbox{\hyperlink{classpelf_1_1_pe}{Pe}} and Elf classes. 
+\subsubsection*{template$<$class Container, template$<$ typename, std\+::size\+\_\+t... $>$ class Derived, std\+::size\+\_\+t... N$>$\newline
+class pelf\+::\+Pelf$<$ Container, Derived, N $>$}
+Base class for \mbox{\hyperlink{classpelf_1_1_pe}{Pe}} and \mbox{\hyperlink{classpelf_1_1_elf}{Elf}} classes. 
 
 
 \begin{DoxyTemplParams}{Template Parameters}
@@ -41,23 +47,25 @@ Base class for \mbox{\hyperlink{classpelf_1_1_pe}{Pe}} and Elf classes.
 \hline
 {\em Derived} & The type of the inherited class \\
 \hline
+{\em Num\+Of\+Sections} & Number of Sections that the \mbox{\hyperlink{classpelf_1_1_pe}{Pe}} or \mbox{\hyperlink{classpelf_1_1_elf}{Elf}} file has \\
+\hline
 \end{DoxyTemplParams}
 
 
 \doxysubsection{Constructor \& Destructor Documentation}
-\mbox{\Hypertarget{classpelf_1_1_pelf_abd27fd25af4af69f0ff70097ce77fdd3}\label{classpelf_1_1_pelf_abd27fd25af4af69f0ff70097ce77fdd3}} 
-\index{pelf::Pelf$<$ Container, Derived $>$@{pelf::Pelf$<$ Container, Derived $>$}!Pelf@{Pelf}}
-\index{Pelf@{Pelf}!pelf::Pelf$<$ Container, Derived $>$@{pelf::Pelf$<$ Container, Derived $>$}}
+\mbox{\Hypertarget{classpelf_1_1_pelf_a78f0df8ec18368d227a5e2c4027687a2}\label{classpelf_1_1_pelf_a78f0df8ec18368d227a5e2c4027687a2}} 
+\index{pelf::Pelf$<$ Container, Derived, N $>$@{pelf::Pelf$<$ Container, Derived, N $>$}!Pelf@{Pelf}}
+\index{Pelf@{Pelf}!pelf::Pelf$<$ Container, Derived, N $>$@{pelf::Pelf$<$ Container, Derived, N $>$}}
 \doxysubsubsection{\texorpdfstring{Pelf()}{Pelf()}}
-{\footnotesize\ttfamily template$<$class Container , template$<$ typename $>$ class Derived$>$ \newline
+{\footnotesize\ttfamily template$<$class Container , template$<$ typename, std\+::size\+\_\+t... $>$ class Derived, std\+::size\+\_\+t... N$>$ \newline
 requires container\+\_\+and\+\_\+convertible\+\_\+v$<$Container, unsigned char$>$\\
-constexpr \mbox{\hyperlink{classpelf_1_1_pelf}{pelf\+::\+Pelf}}$<$ Container, Derived $>$\+::\+Pelf (\begin{DoxyParamCaption}\item[{Container}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}, {\ttfamily [constexpr]}, {\ttfamily [noexcept]}}
+constexpr \mbox{\hyperlink{classpelf_1_1_pelf}{pelf\+::\+Pelf}}$<$ Container, Derived, N $>$\+::\+Pelf (\begin{DoxyParamCaption}\item[{const Container \&}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}, {\ttfamily [constexpr]}}
 
 
 
 \mbox{\hyperlink{classpelf_1_1_pelf}{Pelf}} constructor. 
 
-Takes as a parameter a container that satisfies the concept container\+\_\+and\+\_\+convertible\+\_\+v$<$\+Container, unsigned char$>$
+Takes as a parameter a container that satisfies the concept container\+\_\+and\+\_\+convertible\+\_\+v$<$\+Container, unsigned char$>$ and has\+\_\+data\+\_\+method\+\_\+v$<$\+Container$>$
 
 
 \begin{DoxyParams}{Parameters}
@@ -70,12 +78,26 @@ Takes as a parameter a container that satisfies the concept container\+\_\+and\+
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classpelf_1_1_pelf_a2bb779d7e943ec739df4c51ce2dffb53}\label{classpelf_1_1_pelf_a2bb779d7e943ec739df4c51ce2dffb53}} 
-\index{pelf::Pelf$<$ Container, Derived $>$@{pelf::Pelf$<$ Container, Derived $>$}!getRawData@{getRawData}}
-\index{getRawData@{getRawData}!pelf::Pelf$<$ Container, Derived $>$@{pelf::Pelf$<$ Container, Derived $>$}}
+\mbox{\Hypertarget{classpelf_1_1_pelf_a9fe71d4afd2ef54095257f10473a5dcc}\label{classpelf_1_1_pelf_a9fe71d4afd2ef54095257f10473a5dcc}} 
+\index{pelf::Pelf$<$ Container, Derived, N $>$@{pelf::Pelf$<$ Container, Derived, N $>$}!getHeaders@{getHeaders}}
+\index{getHeaders@{getHeaders}!pelf::Pelf$<$ Container, Derived, N $>$@{pelf::Pelf$<$ Container, Derived, N $>$}}
+\doxysubsubsection{\texorpdfstring{getHeaders()}{getHeaders()}}
+{\footnotesize\ttfamily template$<$class Container , template$<$ typename, std\+::size\+\_\+t... $>$ class Derived, std\+::size\+\_\+t... N$>$ \\
+constexpr auto \mbox{\hyperlink{classpelf_1_1_pelf}{pelf\+::\+Pelf}}$<$ Container, Derived, N $>$\+::get\+Headers\hspace{0.3cm}{\ttfamily [constexpr]}, {\ttfamily [noexcept]}}
+
+
+
+Returns a struct with the headers from the PE or ELF file. 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{classpelf_1_1_pelf_ad20b8665e2640ce5dc28508acceea6d7}\label{classpelf_1_1_pelf_ad20b8665e2640ce5dc28508acceea6d7}} 
+\index{pelf::Pelf$<$ Container, Derived, N $>$@{pelf::Pelf$<$ Container, Derived, N $>$}!getRawData@{getRawData}}
+\index{getRawData@{getRawData}!pelf::Pelf$<$ Container, Derived, N $>$@{pelf::Pelf$<$ Container, Derived, N $>$}}
 \doxysubsubsection{\texorpdfstring{getRawData()}{getRawData()}}
-{\footnotesize\ttfamily template$<$class Container , template$<$ typename $>$ class Derived$>$ \\
-constexpr auto \mbox{\hyperlink{classpelf_1_1_pelf}{pelf\+::\+Pelf}}$<$ Container, Derived $>$\+::get\+Raw\+Data\hspace{0.3cm}{\ttfamily [constexpr]}, {\ttfamily [noexcept]}}
+{\footnotesize\ttfamily template$<$class Container , template$<$ typename, std\+::size\+\_\+t... $>$ class Derived, std\+::size\+\_\+t... N$>$ \\
+constexpr auto \mbox{\hyperlink{classpelf_1_1_pelf}{pelf\+::\+Pelf}}$<$ Container, Derived, N $>$\+::get\+Raw\+Data\hspace{0.3cm}{\ttfamily [constexpr]}, {\ttfamily [noexcept]}}
 
 
 
@@ -84,12 +106,50 @@ Returns the original data passed to the Pe/\+Elf constructor.
 \begin{DoxyReturn}{Returns}
 The original data stored in {\ttfamily m\+Data} 
 \end{DoxyReturn}
-\mbox{\Hypertarget{classpelf_1_1_pelf_a3c0fabea66165b5ca917f5a72f8daeaf}\label{classpelf_1_1_pelf_a3c0fabea66165b5ca917f5a72f8daeaf}} 
-\index{pelf::Pelf$<$ Container, Derived $>$@{pelf::Pelf$<$ Container, Derived $>$}!parse@{parse}}
-\index{parse@{parse}!pelf::Pelf$<$ Container, Derived $>$@{pelf::Pelf$<$ Container, Derived $>$}}
+\mbox{\Hypertarget{classpelf_1_1_pelf_a0241f13c5f834e536e53d05e3cfcb974}\label{classpelf_1_1_pelf_a0241f13c5f834e536e53d05e3cfcb974}} 
+\index{pelf::Pelf$<$ Container, Derived, N $>$@{pelf::Pelf$<$ Container, Derived, N $>$}!getSections@{getSections}}
+\index{getSections@{getSections}!pelf::Pelf$<$ Container, Derived, N $>$@{pelf::Pelf$<$ Container, Derived, N $>$}}
+\doxysubsubsection{\texorpdfstring{getSections()}{getSections()}}
+{\footnotesize\ttfamily template$<$class Container , template$<$ typename, std\+::size\+\_\+t... $>$ class Derived, std\+::size\+\_\+t... N$>$ \\
+constexpr auto \mbox{\hyperlink{classpelf_1_1_pelf}{pelf\+::\+Pelf}}$<$ Container, Derived, N $>$\+::get\+Sections\hspace{0.3cm}{\ttfamily [constexpr]}, {\ttfamily [noexcept]}}
+
+
+
+Returns the section table of the \mbox{\hyperlink{classpelf_1_1_pe}{Pe}} or ELF file. 
+
+\mbox{\Hypertarget{classpelf_1_1_pelf_a0d157a0ec643322c0a212cd24dec917a}\label{classpelf_1_1_pelf_a0d157a0ec643322c0a212cd24dec917a}} 
+\index{pelf::Pelf$<$ Container, Derived, N $>$@{pelf::Pelf$<$ Container, Derived, N $>$}!getStruct@{getStruct}}
+\index{getStruct@{getStruct}!pelf::Pelf$<$ Container, Derived, N $>$@{pelf::Pelf$<$ Container, Derived, N $>$}}
+\doxysubsubsection{\texorpdfstring{getStruct()}{getStruct()}}
+{\footnotesize\ttfamily template$<$class Container , template$<$ typename, std\+::size\+\_\+t... $>$ class Derived, std\+::size\+\_\+t... N$>$ \\
+template$<$class Struct $>$ \\
+constexpr auto \mbox{\hyperlink{classpelf_1_1_pelf}{pelf\+::\+Pelf}}$<$ Container, Derived, N $>$\+::get\+Struct (\begin{DoxyParamCaption}\item[{std\+::size\+\_\+t}]{offset }\end{DoxyParamCaption}) -\/$>$ Struct\hspace{0.3cm}{\ttfamily [constexpr]}, {\ttfamily [protected]}}
+
+
+
+Returns an Struct filled with the data from {\ttfamily m\+Data} from index {\ttfamily offset} 
+
+This function is only used if parsing is done at compile time, otherwise std\+::copy() is used
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Struct} & hana struct that represents a pe or elf header \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em offset} & offset of the header\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns a struct of the corresponding header 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classpelf_1_1_pelf_a89266cb498c8c99b2912ed3cc0edccc9}\label{classpelf_1_1_pelf_a89266cb498c8c99b2912ed3cc0edccc9}} 
+\index{pelf::Pelf$<$ Container, Derived, N $>$@{pelf::Pelf$<$ Container, Derived, N $>$}!parse@{parse}}
+\index{parse@{parse}!pelf::Pelf$<$ Container, Derived, N $>$@{pelf::Pelf$<$ Container, Derived, N $>$}}
 \doxysubsubsection{\texorpdfstring{parse()}{parse()}}
-{\footnotesize\ttfamily template$<$class Container , template$<$ typename $>$ class Derived$>$ \\
-constexpr auto \mbox{\hyperlink{classpelf_1_1_pelf}{pelf\+::\+Pelf}}$<$ Container, Derived $>$\+::parse\hspace{0.3cm}{\ttfamily [constexpr]}}
+{\footnotesize\ttfamily template$<$class Container , template$<$ typename, std\+::size\+\_\+t... $>$ class Derived, std\+::size\+\_\+t... N$>$ \\
+constexpr auto \mbox{\hyperlink{classpelf_1_1_pelf}{pelf\+::\+Pelf}}$<$ Container, Derived, N $>$\+::parse\hspace{0.3cm}{\ttfamily [constexpr]}, {\ttfamily [protected]}}
 
 
 
@@ -98,27 +158,37 @@ Parses the PE/\+ELF headers and sections.
 \begin{DoxyReturn}{Returns}
 Void. 
 \end{DoxyReturn}
+\mbox{\Hypertarget{classpelf_1_1_pelf_a5bd0037e6d0e3eec7a3107592dd9a6b0}\label{classpelf_1_1_pelf_a5bd0037e6d0e3eec7a3107592dd9a6b0}} 
+\index{pelf::Pelf$<$ Container, Derived, N $>$@{pelf::Pelf$<$ Container, Derived, N $>$}!readHeader@{readHeader}}
+\index{readHeader@{readHeader}!pelf::Pelf$<$ Container, Derived, N $>$@{pelf::Pelf$<$ Container, Derived, N $>$}}
+\doxysubsubsection{\texorpdfstring{readHeader()}{readHeader()}}
+{\footnotesize\ttfamily template$<$class Container , template$<$ typename, std\+::size\+\_\+t... $>$ class Derived, std\+::size\+\_\+t... N$>$ \\
+template$<$class Header $>$ \\
+constexpr auto \mbox{\hyperlink{classpelf_1_1_pelf}{pelf\+::\+Pelf}}$<$ Container, Derived, N $>$\+::read\+Header (\begin{DoxyParamCaption}\item[{Header \&}]{header,  }\item[{const std\+::ptrdiff\+\_\+t}]{offset }\end{DoxyParamCaption}) -\/$>$ void\hspace{0.3cm}{\ttfamily [constexpr]}, {\ttfamily [protected]}}
 
 
-\doxysubsection{Friends And Related Function Documentation}
-\mbox{\Hypertarget{classpelf_1_1_pelf_ac75a05191073b22dd8ccecfb96f0aa8b}\label{classpelf_1_1_pelf_ac75a05191073b22dd8ccecfb96f0aa8b}} 
-\index{pelf::Pelf$<$ Container, Derived $>$@{pelf::Pelf$<$ Container, Derived $>$}!PelfHelper@{PelfHelper}}
-\index{PelfHelper@{PelfHelper}!pelf::Pelf$<$ Container, Derived $>$@{pelf::Pelf$<$ Container, Derived $>$}}
-\doxysubsubsection{\texorpdfstring{PelfHelper}{PelfHelper}}
-{\footnotesize\ttfamily template$<$class Container , template$<$ typename $>$ class Derived$>$ \\
-friend class \mbox{\hyperlink{classpelf_1_1_pelf_helper}{Pelf\+Helper}}\hspace{0.3cm}{\ttfamily [friend]}}
 
+Reads the contents from {\ttfamily m\+Data} at the index {\ttfamily offset} into the struct passed by reference. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Header} & struct that represents either a \mbox{\hyperlink{classpelf_1_1_pe}{Pe}} header or an \mbox{\hyperlink{classpelf_1_1_elf}{Elf}} header\\
+\hline
+\end{DoxyTemplParams}
+\begin{DoxyReturn}{Returns}
+Void 
+\end{DoxyReturn}
 
 
 \doxysubsection{Member Data Documentation}
-\mbox{\Hypertarget{classpelf_1_1_pelf_ac98647f291b3aa3809e49e2f3b57e261}\label{classpelf_1_1_pelf_ac98647f291b3aa3809e49e2f3b57e261}} 
-\index{pelf::Pelf$<$ Container, Derived $>$@{pelf::Pelf$<$ Container, Derived $>$}!mData@{mData}}
-\index{mData@{mData}!pelf::Pelf$<$ Container, Derived $>$@{pelf::Pelf$<$ Container, Derived $>$}}
+\mbox{\Hypertarget{classpelf_1_1_pelf_a5306bc94bda869eafe757fd422b0d8cd}\label{classpelf_1_1_pelf_a5306bc94bda869eafe757fd422b0d8cd}} 
+\index{pelf::Pelf$<$ Container, Derived, N $>$@{pelf::Pelf$<$ Container, Derived, N $>$}!mData@{mData}}
+\index{mData@{mData}!pelf::Pelf$<$ Container, Derived, N $>$@{pelf::Pelf$<$ Container, Derived, N $>$}}
 \doxysubsubsection{\texorpdfstring{mData}{mData}}
-{\footnotesize\ttfamily template$<$class Container , template$<$ typename $>$ class Derived$>$ \\
-Container \mbox{\hyperlink{classpelf_1_1_pelf}{pelf\+::\+Pelf}}$<$ Container, Derived $>$\+::m\+Data\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily template$<$class Container , template$<$ typename, std\+::size\+\_\+t... $>$ class Derived, std\+::size\+\_\+t... N$>$ \\
+Container \mbox{\hyperlink{classpelf_1_1_pelf}{pelf\+::\+Pelf}}$<$ Container, Derived, N $>$\+::m\+Data\hspace{0.3cm}{\ttfamily [protected]}}
 
-Raw data from the file to Îbe parsed 
+Raw data from the file to be parsed 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 

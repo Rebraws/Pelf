@@ -1,8 +1,6 @@
 var searchData=
 [
-  ['pe_0',['Pe',['../classpelf_1_1_pe.html',1,'pelf']]],
-  ['pelf_1',['Pelf',['../classpelf_1_1_pelf.html',1,'pelf']]],
-  ['pelf_3c_20container_2c_20pe_20_3e_2',['Pelf&lt; Container, Pe &gt;',['../classpelf_1_1_pelf.html',1,'pelf']]],
-  ['pelfexception_3',['PelfException',['../classpelf_1_1_pelf_exception.html',1,'pelf']]],
-  ['pelfhelper_4',['PelfHelper',['../classpelf_1_1_pelf_helper.html',1,'pelf']]]
+  ['image_5fdata_5fdirectory_0',['IMAGE_DATA_DIRECTORY',['../structpelf_1_1_i_m_a_g_e___d_a_t_a___d_i_r_e_c_t_o_r_y.html',1,'pelf']]],
+  ['image_5ffile_5fheader_1',['IMAGE_FILE_HEADER',['../structpelf_1_1_i_m_a_g_e___f_i_l_e___h_e_a_d_e_r.html',1,'pelf']]],
+  ['image_5fsection_5fheader_2',['IMAGE_SECTION_HEADER',['../structpelf_1_1_i_m_a_g_e___s_e_c_t_i_o_n___h_e_a_d_e_r.html',1,'pelf']]]
 ];

@@ -8,14 +8,14 @@ Pelf class declaration.
 {\ttfamily \#include $<$type\+\_\+traits$>$}\newline
 {\ttfamily \#include $<$stdexcept$>$}\newline
 {\ttfamily \#include \char`\"{}pelf\+Except.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$pe\+Structs.\+h$>$}\newline
+{\ttfamily \#include $<$cassert$>$}\newline
 {\ttfamily \#include $<$boost/hana.\+hpp$>$}\newline
 \doxysubsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
-class \mbox{\hyperlink{classpelf_1_1_pelf_helper}{pelf\+::\+Pelf\+Helper}}
-\begin{DoxyCompactList}\small\item\em Class helper that contains helper functions to abstract things from PE and ELF classes. \end{DoxyCompactList}\item 
-class \mbox{\hyperlink{classpelf_1_1_pelf}{pelf\+::\+Pelf$<$ Container, Derived $>$}}
-\begin{DoxyCompactList}\small\item\em Base class for \mbox{\hyperlink{classpelf_1_1_pe}{Pe}} and Elf classes. \end{DoxyCompactList}\end{DoxyCompactItemize}
+class \mbox{\hyperlink{classpelf_1_1_pelf}{pelf\+::\+Pelf$<$ Container, Derived, N $>$}}
+\begin{DoxyCompactList}\small\item\em Base class for \mbox{\hyperlink{classpelf_1_1_pe}{Pe}} and \mbox{\hyperlink{classpelf_1_1_elf}{Elf}} classes. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Namespaces}
 \begin{DoxyCompactItemize}
 \item 
@@ -26,13 +26,17 @@ namespace \mbox{\hyperlink{namespacepelf}{pelf}}
 \item 
 concept \mbox{\hyperlink{conceptpelf_1_1container__and__convertible__v}{pelf\+::container\+\_\+and\+\_\+convertible\+\_\+v}}
 \end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$class Struct , std\+::size\+\_\+t Num$>$ }\\using \mbox{\hyperlink{namespacepelf_aaa0c7d556c13e87c42a7ab82d5111709}{pelf\+::\+Table}} = std\+::conditional\+\_\+t$<$ Num==0, std\+::vector$<$ Struct $>$, std\+::array$<$ Struct, Num $>$ $>$
+\begin{DoxyCompactList}\small\item\em Metafunction that returns an array if {\ttfamily Num} is zero, and a vector otherwise. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
 Pelf class declaration. 
 
-This file contains the Pelf class declaration, which is the base class of the Pe and Elf classes ~\newline
-
+This file contains the Pelf class declaration, which is the base class of the Pe and Elf classes
 
 \begin{DoxyAuthor}{Author}
 Rebraws 

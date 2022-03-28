@@ -5,7 +5,7 @@
 %%For: 
 %Magnification: 1.00
 %%Orientation: Portrait
-%%BoundingBox: 0 0 500 232.558136
+%%BoundingBox: 0 0 500 168.776367
 %%Pages: 0
 %%BeginSetup
 %%EndSetup
@@ -19,7 +19,7 @@
 /marginwidth 10 def
 /distx 20 def
 /disty 40 def
-/boundaspect 2.150000 def  % aspect ratio of the BoundingBox (width/height)
+/boundaspect 2.962500 def  % aspect ratio of the BoundingBox (width/height)
 /boundx 500 def
 /boundy boundx boundaspect div def
 /xspacing 0 def
@@ -173,8 +173,8 @@
 
 boxfont setfont
 1 boundaspect scale
-(pelf::Pe< Container >) cw
-(pelf::Pelf< Container, Pe >) cw
+(pelf::Pe< Container, NumOfSections >) cw
+(pelf::Pelf< Container, Pe, 0 >) cw
 /boxwidth boxwidth marginwidth 2 mul add def
 /xspacing boxwidth distx add def
 /yspacing boxheight disty add def
@@ -186,8 +186,8 @@ boundx scalefactor div boundy scalefactor div scale
 
 % ----- classes -----
 
- (pelf::Pe< Container >) 0.000000 0.000000 box
- (pelf::Pelf< Container, Pe >) 0.000000 1.000000 box
+ (pelf::Pe< Container, NumOfSections >) 0.000000 0.000000 box
+ (pelf::Pelf< Container, Pe, 0 >) 0.000000 1.000000 box
 
 % ----- relations -----
 

@@ -1,0 +1,58 @@
+\hypertarget{elf_structs_8h}{}\doxysection{C\+:/\+Users/nahue/source/\+Pelf/include/elf\+Structs.h File Reference}
+\label{elf_structs_8h}\index{C:/Users/nahue/source/Pelf/include/elfStructs.h@{C:/Users/nahue/source/Pelf/include/elfStructs.h}}
+
+
+ELF headers and sections structs.  
+
+
+{\ttfamily \#include $<$cstdint$>$}\newline
+{\ttfamily \#include $<$boost/hana.\+hpp$>$}\newline
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structpelf_1_1_table_sizes}{pelf\+::\+Table\+Sizes}}
+\item 
+struct \mbox{\hyperlink{structpelf_1_1_elf64___ehdr}{pelf\+::\+Elf64\+\_\+\+Ehdr}}
+\begin{DoxyCompactList}\small\item\em Hana struct that represents the 64 bit elf header. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structpelf_1_1_elf64___phdr}{pelf\+::\+Elf64\+\_\+\+Phdr}}
+\begin{DoxyCompactList}\small\item\em Hana struct that represents the program header table. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structpelf_1_1_elf64___shdr}{pelf\+::\+Elf64\+\_\+\+Shdr}}
+\begin{DoxyCompactList}\small\item\em Hana struct that represents the section header table. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structpelf_1_1_elf_headers}{pelf\+::\+Elf\+Headers$<$ Num\+Of\+Program\+Header $>$}}
+\begin{DoxyCompactList}\small\item\em Structure that contains the \mbox{\hyperlink{classpelf_1_1_elf}{Elf}} header and the program header table from an ELF file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespacepelf}{pelf}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+constexpr int \mbox{\hyperlink{namespacepelf_acee3872fd4945b0f5938b9cac3dc239f}{pelf\+::\+ELFCLASS64}} = 2
+\item 
+constexpr int \mbox{\hyperlink{namespacepelf_a305ed76c541cf02df786241cddaafa4f}{pelf\+::\+PN\+\_\+\+XNUM}} = 0xffff
+\item 
+constexpr int \mbox{\hyperlink{namespacepelf_adb52eb849e9a4a54621da0156800eedf}{pelf\+::\+SHN\+\_\+\+LORESERVE}} = 0xff00
+\item 
+constexpr unsigned char \mbox{\hyperlink{namespacepelf_ae8b26e065d67c82a3e3c07b10bc94045}{pelf\+::\+EI\+\_\+\+MAG0}}
+\item 
+constexpr unsigned char \mbox{\hyperlink{namespacepelf_a4bdac3cd6e3b890d427e2273a5db2513}{pelf\+::\+EI\+\_\+\+MAG1}}
+\item 
+constexpr unsigned char \mbox{\hyperlink{namespacepelf_abc2c8ca470598236eea266c7b8d30090}{pelf\+::\+EI\+\_\+\+MAG2}}
+\item 
+constexpr unsigned char \mbox{\hyperlink{namespacepelf_a7657a8ef3238ba5e3e6eb9a91f89cf87}{pelf\+::\+EI\+\_\+\+MAG3}}
+\item 
+constexpr unsigned char \mbox{\hyperlink{namespacepelf_a93a643cc6ba430789ac6565ce1cc8e63}{pelf\+::\+EI\+\_\+\+CLASS}}
+\item 
+constexpr unsigned char \mbox{\hyperlink{namespacepelf_acf5b4f71bdc0ae8d35d39b40222c01b3}{pelf\+::\+EI\+\_\+\+DATA}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+ELF headers and sections structs. 
+
+This file contains definition of structs that represent the internals of the ELF file format
+
+\begin{DoxyAuthor}{Author}
+Rebraws 
+\end{DoxyAuthor}

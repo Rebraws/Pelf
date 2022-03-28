@@ -3,16 +3,38 @@
 \doxysubsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
+class \mbox{\hyperlink{classpelf_1_1_elf}{Elf}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classpelf_1_1_elf}{Elf}} class. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structpelf_1_1_elf64___ehdr}{Elf64\+\_\+\+Ehdr}}
+\begin{DoxyCompactList}\small\item\em Hana struct that represents the 64 bit elf header. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structpelf_1_1_elf64___phdr}{Elf64\+\_\+\+Phdr}}
+\begin{DoxyCompactList}\small\item\em Hana struct that represents the program header table. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structpelf_1_1_elf64___shdr}{Elf64\+\_\+\+Shdr}}
+\begin{DoxyCompactList}\small\item\em Hana struct that represents the section header table. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structpelf_1_1_elf_headers}{Elf\+Headers}}
+\begin{DoxyCompactList}\small\item\em Structure that contains the \mbox{\hyperlink{classpelf_1_1_elf}{Elf}} header and the program header table from an ELF file. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structpelf_1_1_i_m_a_g_e___d_a_t_a___d_i_r_e_c_t_o_r_y}{IMAGE\+\_\+\+DATA\+\_\+\+DIRECTORY}}
+\begin{DoxyCompactList}\small\item\em Struct that represents the data directory. \end{DoxyCompactList}\item 
 struct \mbox{\hyperlink{structpelf_1_1_i_m_a_g_e___f_i_l_e___h_e_a_d_e_r}{IMAGE\+\_\+\+FILE\+\_\+\+HEADER}}
 \begin{DoxyCompactList}\small\item\em Struct that represents the COFF header format. It\textquotesingle{}s 32/64 bit independent header. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structpelf_1_1_i_m_a_g_e___s_e_c_t_i_o_n___h_e_a_d_e_r}{IMAGE\+\_\+\+SECTION\+\_\+\+HEADER}}
+\item 
+struct \mbox{\hyperlink{structpelf_1_1_optional_header}{Optional\+Header}}
+\begin{DoxyCompactList}\small\item\em Struct that wraps the Optional header. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classpelf_1_1_pe}{Pe}}
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classpelf_1_1_pe}{Pe}} class. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structpelf_1_1_pe_headers}{Pe\+Headers}}
+\begin{DoxyCompactList}\small\item\em Struct that wraps all Headers of a \mbox{\hyperlink{classpelf_1_1_pe}{Pe}} file (both Coff Header and Optional Header) \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classpelf_1_1_pelf}{Pelf}}
-\begin{DoxyCompactList}\small\item\em Base class for \mbox{\hyperlink{classpelf_1_1_pe}{Pe}} and Elf classes. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Base class for \mbox{\hyperlink{classpelf_1_1_pe}{Pe}} and \mbox{\hyperlink{classpelf_1_1_elf}{Elf}} classes. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classpelf_1_1_pelf_exception}{Pelf\+Exception}}
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classpelf_1_1_pelf_exception}{Pelf\+Exception}} class. \end{DoxyCompactList}\item 
-class \mbox{\hyperlink{classpelf_1_1_pelf_helper}{Pelf\+Helper}}
-\begin{DoxyCompactList}\small\item\em Class helper that contains helper functions to abstract things from PE and ELF classes. \end{DoxyCompactList}\end{DoxyCompactItemize}
+struct \mbox{\hyperlink{structpelf_1_1_standard_coff_fields}{Standard\+Coff\+Fields}}
+\begin{DoxyCompactList}\small\item\em Struct that represents the first eight fields of the optional header. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structpelf_1_1_table_sizes}{Table\+Sizes}}
+\item 
+struct \mbox{\hyperlink{structpelf_1_1_windows_specific_fields}{Windows\+Specific\+Fields}}
+\begin{DoxyCompactList}\small\item\em Struct that represents the next 21 fields after the {\ttfamily \mbox{\hyperlink{structpelf_1_1_standard_coff_fields}{Standard\+Coff\+Fields}}} \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Concepts}
 \begin{DoxyCompactItemize}
 \item 
@@ -21,22 +43,220 @@ concept \mbox{\hyperlink{conceptpelf_1_1container__and__convertible__v}{containe
 \doxysubsection*{Typedefs}
 \begin{DoxyCompactItemize}
 \item 
+{\footnotesize template$<$class Struct , std\+::size\+\_\+t Num$>$ }\\using \mbox{\hyperlink{namespacepelf_aaa0c7d556c13e87c42a7ab82d5111709}{Table}} = std\+::conditional\+\_\+t$<$ Num==0, std\+::vector$<$ Struct $>$, std\+::array$<$ Struct, Num $>$ $>$
+\begin{DoxyCompactList}\small\item\em Metafunction that returns an array if {\ttfamily Num} is zero, and a vector otherwise. \end{DoxyCompactList}\item 
 using \mbox{\hyperlink{namespacepelf_a68b4632c0053ab2bb24b62ba1ccbf7c2}{WORD}} = std\+::uint16\+\_\+t
 \item 
 using \mbox{\hyperlink{namespacepelf_a7931c494810aaeb8ce5f61bb01151a2c}{DWORD}} = std\+::uint32\+\_\+t
+\item 
+using \mbox{\hyperlink{namespacepelf_a6e96db286837d72766c86aca048c6dfd}{BYTE}} = std\+::uint8\+\_\+t
+\item 
+using \mbox{\hyperlink{namespacepelf_af027a97fcc726a33b2fe786943890dff}{ULONGLONG}} = std\+::uint64\+\_\+t
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$class Container $>$ \newline
+requires container\+\_\+and\+\_\+convertible\+\_\+v$<$Container, unsigned char$>$}\\consteval auto \mbox{\hyperlink{namespacepelf_a45ded953c0ff554de8b2c8fd0f07b6d6}{get\+Pe\+Number\+Of\+Sections}} (const Container \&data)
+\begin{DoxyCompactList}\small\item\em Function template that returns the number of sections (size of the section table) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+constexpr int \mbox{\hyperlink{namespacepelf_acee3872fd4945b0f5938b9cac3dc239f}{ELFCLASS64}} = 2
+\item 
+constexpr int \mbox{\hyperlink{namespacepelf_a305ed76c541cf02df786241cddaafa4f}{PN\+\_\+\+XNUM}} = 0xffff
+\item 
+constexpr int \mbox{\hyperlink{namespacepelf_adb52eb849e9a4a54621da0156800eedf}{SHN\+\_\+\+LORESERVE}} = 0xff00
+\item 
+constexpr unsigned char \mbox{\hyperlink{namespacepelf_ae8b26e065d67c82a3e3c07b10bc94045}{EI\+\_\+\+MAG0}}
+\item 
+constexpr unsigned char \mbox{\hyperlink{namespacepelf_a4bdac3cd6e3b890d427e2273a5db2513}{EI\+\_\+\+MAG1}}
+\item 
+constexpr unsigned char \mbox{\hyperlink{namespacepelf_abc2c8ca470598236eea266c7b8d30090}{EI\+\_\+\+MAG2}}
+\item 
+constexpr unsigned char \mbox{\hyperlink{namespacepelf_a7657a8ef3238ba5e3e6eb9a91f89cf87}{EI\+\_\+\+MAG3}}
+\item 
+constexpr unsigned char \mbox{\hyperlink{namespacepelf_a93a643cc6ba430789ac6565ce1cc8e63}{EI\+\_\+\+CLASS}}
+\item 
+constexpr unsigned char \mbox{\hyperlink{namespacepelf_acf5b4f71bdc0ae8d35d39b40222c01b3}{EI\+\_\+\+DATA}}
+\item 
+constexpr std\+::uint8\+\_\+t \mbox{\hyperlink{namespacepelf_a716c30fc438e7314073e86fcb72b293b}{IMAGE\+\_\+\+NUMBER\+\_\+\+OF\+\_\+\+DIRECTORY\+\_\+\+ENTRIES}} \{ 16 \}
 \end{DoxyCompactItemize}
 
 
 \doxysubsection{Typedef Documentation}
+\mbox{\Hypertarget{namespacepelf_a6e96db286837d72766c86aca048c6dfd}\label{namespacepelf_a6e96db286837d72766c86aca048c6dfd}} 
+\index{pelf@{pelf}!BYTE@{BYTE}}
+\index{BYTE@{BYTE}!pelf@{pelf}}
+\doxysubsubsection{\texorpdfstring{BYTE}{BYTE}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{namespacepelf_a6e96db286837d72766c86aca048c6dfd}{pelf\+::\+BYTE}} = typedef std\+::uint8\+\_\+t}
+
 \mbox{\Hypertarget{namespacepelf_a7931c494810aaeb8ce5f61bb01151a2c}\label{namespacepelf_a7931c494810aaeb8ce5f61bb01151a2c}} 
 \index{pelf@{pelf}!DWORD@{DWORD}}
 \index{DWORD@{DWORD}!pelf@{pelf}}
 \doxysubsubsection{\texorpdfstring{DWORD}{DWORD}}
 {\footnotesize\ttfamily using \mbox{\hyperlink{namespacepelf_a7931c494810aaeb8ce5f61bb01151a2c}{pelf\+::\+DWORD}} = typedef std\+::uint32\+\_\+t}
 
+\mbox{\Hypertarget{namespacepelf_aaa0c7d556c13e87c42a7ab82d5111709}\label{namespacepelf_aaa0c7d556c13e87c42a7ab82d5111709}} 
+\index{pelf@{pelf}!Table@{Table}}
+\index{Table@{Table}!pelf@{pelf}}
+\doxysubsubsection{\texorpdfstring{Table}{Table}}
+{\footnotesize\ttfamily template$<$class Struct , std\+::size\+\_\+t Num$>$ \\
+using \mbox{\hyperlink{namespacepelf_aaa0c7d556c13e87c42a7ab82d5111709}{pelf\+::\+Table}} = typedef std\+::conditional\+\_\+t$<$Num == 0, std\+::vector$<$Struct$>$, std\+::array$<$Struct, Num$>$ $>$}
+
+
+
+Metafunction that returns an array if {\ttfamily Num} is zero, and a vector otherwise. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Num} & Number of sections that table contains \\
+\hline
+{\em Struct} & Type of the elements the the array or vector contains \\
+\hline
+\end{DoxyTemplParams}
+\mbox{\Hypertarget{namespacepelf_af027a97fcc726a33b2fe786943890dff}\label{namespacepelf_af027a97fcc726a33b2fe786943890dff}} 
+\index{pelf@{pelf}!ULONGLONG@{ULONGLONG}}
+\index{ULONGLONG@{ULONGLONG}!pelf@{pelf}}
+\doxysubsubsection{\texorpdfstring{ULONGLONG}{ULONGLONG}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{namespacepelf_af027a97fcc726a33b2fe786943890dff}{pelf\+::\+ULONGLONG}} = typedef std\+::uint64\+\_\+t}
+
 \mbox{\Hypertarget{namespacepelf_a68b4632c0053ab2bb24b62ba1ccbf7c2}\label{namespacepelf_a68b4632c0053ab2bb24b62ba1ccbf7c2}} 
 \index{pelf@{pelf}!WORD@{WORD}}
 \index{WORD@{WORD}!pelf@{pelf}}
 \doxysubsubsection{\texorpdfstring{WORD}{WORD}}
 {\footnotesize\ttfamily using \mbox{\hyperlink{namespacepelf_a68b4632c0053ab2bb24b62ba1ccbf7c2}{pelf\+::\+WORD}} = typedef std\+::uint16\+\_\+t}
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{namespacepelf_a45ded953c0ff554de8b2c8fd0f07b6d6}\label{namespacepelf_a45ded953c0ff554de8b2c8fd0f07b6d6}} 
+\index{pelf@{pelf}!getPeNumberOfSections@{getPeNumberOfSections}}
+\index{getPeNumberOfSections@{getPeNumberOfSections}!pelf@{pelf}}
+\doxysubsubsection{\texorpdfstring{getPeNumberOfSections()}{getPeNumberOfSections()}}
+{\footnotesize\ttfamily template$<$class Container $>$ \newline
+requires container\+\_\+and\+\_\+convertible\+\_\+v$<$Container, unsigned char$>$\\
+consteval auto pelf\+::get\+Pe\+Number\+Of\+Sections (\begin{DoxyParamCaption}\item[{const Container \&}]{data }\end{DoxyParamCaption})}
+
+
+
+Function template that returns the number of sections (size of the section table) 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Container} & Container used to pass the data from the \mbox{\hyperlink{classpelf_1_1_pe}{Pe}} file \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em data} & Bytes from the \mbox{\hyperlink{classpelf_1_1_pe}{Pe}} file\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns a {\ttfamily std\+::uint16\+\_\+t} that represents the number of sections 
+\end{DoxyReturn}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{namespacepelf_a93a643cc6ba430789ac6565ce1cc8e63}\label{namespacepelf_a93a643cc6ba430789ac6565ce1cc8e63}} 
+\index{pelf@{pelf}!EI\_CLASS@{EI\_CLASS}}
+\index{EI\_CLASS@{EI\_CLASS}!pelf@{pelf}}
+\doxysubsubsection{\texorpdfstring{EI\_CLASS}{EI\_CLASS}}
+{\footnotesize\ttfamily constexpr unsigned char pelf\+::\+EI\+\_\+\+CLASS\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{  0x2}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+Magic number identifying the architecture (in this case 64-\/bit) \mbox{\Hypertarget{namespacepelf_acf5b4f71bdc0ae8d35d39b40222c01b3}\label{namespacepelf_acf5b4f71bdc0ae8d35d39b40222c01b3}} 
+\index{pelf@{pelf}!EI\_DATA@{EI\_DATA}}
+\index{EI\_DATA@{EI\_DATA}!pelf@{pelf}}
+\doxysubsubsection{\texorpdfstring{EI\_DATA}{EI\_DATA}}
+{\footnotesize\ttfamily constexpr unsigned char pelf\+::\+EI\+\_\+\+DATA\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{  0x1}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+Magic number identifying the data encoding of the processor-\/specific data in the file (in this case is Two\textquotesingle{}s complement, little-\/endian.) \mbox{\Hypertarget{namespacepelf_ae8b26e065d67c82a3e3c07b10bc94045}\label{namespacepelf_ae8b26e065d67c82a3e3c07b10bc94045}} 
+\index{pelf@{pelf}!EI\_MAG0@{EI\_MAG0}}
+\index{EI\_MAG0@{EI\_MAG0}!pelf@{pelf}}
+\doxysubsubsection{\texorpdfstring{EI\_MAG0}{EI\_MAG0}}
+{\footnotesize\ttfamily constexpr unsigned char pelf\+::\+EI\+\_\+\+MAG0\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{  0x7f}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+Magic number identifying the File as an ELF object file \mbox{\Hypertarget{namespacepelf_a4bdac3cd6e3b890d427e2273a5db2513}\label{namespacepelf_a4bdac3cd6e3b890d427e2273a5db2513}} 
+\index{pelf@{pelf}!EI\_MAG1@{EI\_MAG1}}
+\index{EI\_MAG1@{EI\_MAG1}!pelf@{pelf}}
+\doxysubsubsection{\texorpdfstring{EI\_MAG1}{EI\_MAG1}}
+{\footnotesize\ttfamily constexpr unsigned char pelf\+::\+EI\+\_\+\+MAG1\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{  \textcolor{charliteral}{'E'}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+Magic number identifying the File as an ELF object file \mbox{\Hypertarget{namespacepelf_abc2c8ca470598236eea266c7b8d30090}\label{namespacepelf_abc2c8ca470598236eea266c7b8d30090}} 
+\index{pelf@{pelf}!EI\_MAG2@{EI\_MAG2}}
+\index{EI\_MAG2@{EI\_MAG2}!pelf@{pelf}}
+\doxysubsubsection{\texorpdfstring{EI\_MAG2}{EI\_MAG2}}
+{\footnotesize\ttfamily constexpr unsigned char pelf\+::\+EI\+\_\+\+MAG2\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{  \textcolor{charliteral}{'L'}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+Magic number identifying the File as an ELF object file \mbox{\Hypertarget{namespacepelf_a7657a8ef3238ba5e3e6eb9a91f89cf87}\label{namespacepelf_a7657a8ef3238ba5e3e6eb9a91f89cf87}} 
+\index{pelf@{pelf}!EI\_MAG3@{EI\_MAG3}}
+\index{EI\_MAG3@{EI\_MAG3}!pelf@{pelf}}
+\doxysubsubsection{\texorpdfstring{EI\_MAG3}{EI\_MAG3}}
+{\footnotesize\ttfamily constexpr unsigned char pelf\+::\+EI\+\_\+\+MAG3\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{  \textcolor{charliteral}{'F'}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+Magic number identifying the File as an ELF object file \mbox{\Hypertarget{namespacepelf_acee3872fd4945b0f5938b9cac3dc239f}\label{namespacepelf_acee3872fd4945b0f5938b9cac3dc239f}} 
+\index{pelf@{pelf}!ELFCLASS64@{ELFCLASS64}}
+\index{ELFCLASS64@{ELFCLASS64}!pelf@{pelf}}
+\doxysubsubsection{\texorpdfstring{ELFCLASS64}{ELFCLASS64}}
+{\footnotesize\ttfamily constexpr int pelf\+::\+ELFCLASS64 = 2\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+\mbox{\Hypertarget{namespacepelf_a716c30fc438e7314073e86fcb72b293b}\label{namespacepelf_a716c30fc438e7314073e86fcb72b293b}} 
+\index{pelf@{pelf}!IMAGE\_NUMBER\_OF\_DIRECTORY\_ENTRIES@{IMAGE\_NUMBER\_OF\_DIRECTORY\_ENTRIES}}
+\index{IMAGE\_NUMBER\_OF\_DIRECTORY\_ENTRIES@{IMAGE\_NUMBER\_OF\_DIRECTORY\_ENTRIES}!pelf@{pelf}}
+\doxysubsubsection{\texorpdfstring{IMAGE\_NUMBER\_OF\_DIRECTORY\_ENTRIES}{IMAGE\_NUMBER\_OF\_DIRECTORY\_ENTRIES}}
+{\footnotesize\ttfamily constexpr std\+::uint8\+\_\+t pelf\+::\+IMAGE\+\_\+\+NUMBER\+\_\+\+OF\+\_\+\+DIRECTORY\+\_\+\+ENTRIES \{ 16 \}\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+\mbox{\Hypertarget{namespacepelf_a305ed76c541cf02df786241cddaafa4f}\label{namespacepelf_a305ed76c541cf02df786241cddaafa4f}} 
+\index{pelf@{pelf}!PN\_XNUM@{PN\_XNUM}}
+\index{PN\_XNUM@{PN\_XNUM}!pelf@{pelf}}
+\doxysubsubsection{\texorpdfstring{PN\_XNUM}{PN\_XNUM}}
+{\footnotesize\ttfamily constexpr int pelf\+::\+PN\+\_\+\+XNUM = 0xffff\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+\mbox{\Hypertarget{namespacepelf_adb52eb849e9a4a54621da0156800eedf}\label{namespacepelf_adb52eb849e9a4a54621da0156800eedf}} 
+\index{pelf@{pelf}!SHN\_LORESERVE@{SHN\_LORESERVE}}
+\index{SHN\_LORESERVE@{SHN\_LORESERVE}!pelf@{pelf}}
+\doxysubsubsection{\texorpdfstring{SHN\_LORESERVE}{SHN\_LORESERVE}}
+{\footnotesize\ttfamily constexpr int pelf\+::\+SHN\+\_\+\+LORESERVE = 0xff00\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
 

@@ -1,5 +1,26 @@
 var searchData=
 [
-  ['what_0',['what',['../classpelf_1_1_pelf_exception.html#a1c360c593210419fe63978e982b045c3',1,'pelf::PelfException']]],
-  ['word_1',['WORD',['../namespacepelf.html#a68b4632c0053ab2bb24b62ba1ccbf7c2',1,'pelf']]]
+  ['container_5fand_5fconvertible_5fv_0',['container_and_convertible_v',['../conceptpelf_1_1container__and__convertible__v.html',1,'pelf']]],
+  ['parse_1',['parse',['../classpelf_1_1_pelf.html#a89266cb498c8c99b2912ed3cc0edccc9',1,'pelf::Pelf']]],
+  ['parseheaders_2',['parseHeaders',['../classpelf_1_1_elf.html#ac79192c97a6abaa18d69f22bf488656f',1,'pelf::Elf::parseHeaders()'],['../classpelf_1_1_pe.html#a8d4d2fd67bf0ac12a51ec4f59ce768e0',1,'pelf::Pe::parseHeaders()']]],
+  ['parsesections_3',['parseSections',['../classpelf_1_1_elf.html#a55062cdb28d75fbae260b039d4009b73',1,'pelf::Elf::parseSections()'],['../classpelf_1_1_pe.html#ad134561c00561f410a29c803785418ca',1,'pelf::Pe::parseSections() -&gt; void']]],
+  ['pe_4',['Pe',['../classpelf_1_1_pe.html#a27c023655ad92e6e3f372f7215e38b7a',1,'pelf::Pe::Pe()'],['../classpelf_1_1_pe.html',1,'pelf::Pe&lt; Container, NumOfSections &gt;']]],
+  ['pe_2ecpp_5',['Pe.cpp',['../_pe_8cpp.html',1,'']]],
+  ['pe_2eh_6',['Pe.h',['../_pe_8h.html',1,'']]],
+  ['peheaders_7',['PeHeaders',['../structpelf_1_1_pe_headers.html',1,'pelf']]],
+  ['pelf_8',['pelf',['../namespacepelf.html',1,'']]],
+  ['pelf_9',['Pelf',['../classpelf_1_1_pelf.html#a78f0df8ec18368d227a5e2c4027687a2',1,'pelf::Pelf::Pelf()'],['../classpelf_1_1_pelf.html',1,'pelf::Pelf&lt; Container, Derived, N &gt;']]],
+  ['pelf_2eh_10',['Pelf.h',['../_pelf_8h.html',1,'']]],
+  ['pelf_3c_20container_2c_20elf_2c_200_2c_200_20_3e_11',['Pelf&lt; Container, Elf, 0, 0 &gt;',['../classpelf_1_1_pelf.html',1,'pelf']]],
+  ['pelf_3c_20container_2c_20elf_2c_20numofsections_2c_20numofprogheaders_20_3e_12',['Pelf&lt; Container, Elf, NumOfSections, NumOfProgHeaders &gt;',['../classpelf_1_1_elf.html#ab15a6ef588012e2eb578b50511e88164',1,'pelf::Elf']]],
+  ['pelf_3c_20container_2c_20pe_2c_200_20_3e_13',['Pelf&lt; Container, Pe, 0 &gt;',['../classpelf_1_1_pelf.html',1,'pelf']]],
+  ['pelf_3c_20container_2c_20pe_2c_20numofsections_20_3e_14',['Pelf&lt; Container, Pe, NumOfSections &gt;',['../classpelf_1_1_pe.html#ad51aa13d68276658458f3d82793dc7de',1,'pelf::Pe']]],
+  ['pelfexcept_2ecpp_15',['pelfExcept.cpp',['../pelf_except_8cpp.html',1,'']]],
+  ['pelfexcept_2eh_16',['pelfExcept.h',['../pelf_except_8h.html',1,'']]],
+  ['pelfexception_17',['PelfException',['../classpelf_1_1_pelf_exception.html',1,'pelf::PelfException'],['../classpelf_1_1_pelf_exception.html#a5a4c18c636eb386c5a787550035d6250',1,'pelf::PelfException::PelfException()']]],
+  ['pestructs_2eh_18',['peStructs.h',['../pe_structs_8h.html',1,'']]],
+  ['pn_5fxnum_19',['PN_XNUM',['../namespacepelf.html#a305ed76c541cf02df786241cddaafa4f',1,'pelf']]],
+  ['programheader_20',['programHeader',['../structpelf_1_1_table_sizes.html#af5e0a0b980047cb1eebcc2b62bc74e7f',1,'pelf::TableSizes']]],
+  ['programheaders_21',['programHeaders',['../structpelf_1_1_elf_headers.html#a93823ccbea8521e0ff643d198ddce04b',1,'pelf::ElfHeaders']]],
+  ['programheaders_22',['ProgramHeaders',['../structpelf_1_1_elf_headers.html#a9e41084a296b1568db8b7639dbaf6f95',1,'pelf::ElfHeaders']]]
 ];

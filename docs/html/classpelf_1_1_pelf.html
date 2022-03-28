@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.3"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Pelf: pelf::Pelf&lt; Container, Derived &gt; Class Template Reference</title>
+<title>Pelf: pelf::Pelf&lt; Container, Derived, N &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -69,80 +69,93 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
-<a href="#friends">Friends</a> &#124;
 <a href="classpelf_1_1_pelf-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">pelf::Pelf&lt; Container, Derived &gt; Class Template Reference</div></div>
+  <div class="headertitle"><div class="title">pelf::Pelf&lt; Container, Derived, N &gt; Class Template Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Base class for <a class="el" href="classpelf_1_1_pe.html" title="Pe class.">Pe</a> and Elf classes.  
+<p>Base class for <a class="el" href="classpelf_1_1_pe.html" title="Pe class.">Pe</a> and <a class="el" href="classpelf_1_1_elf.html" title="Elf class.">Elf</a> classes.  
  <a href="classpelf_1_1_pelf.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_pelf_8h_source.html">Pelf.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:abd27fd25af4af69f0ff70097ce77fdd3"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpelf_1_1_pelf.html#abd27fd25af4af69f0ff70097ce77fdd3">Pelf</a> (Container data) noexcept</td></tr>
-<tr class="memdesc:abd27fd25af4af69f0ff70097ce77fdd3"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classpelf_1_1_pelf.html" title="Base class for Pe and Elf classes.">Pelf</a> constructor.  <a href="classpelf_1_1_pelf.html#abd27fd25af4af69f0ff70097ce77fdd3">More...</a><br /></td></tr>
-<tr class="separator:abd27fd25af4af69f0ff70097ce77fdd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3c0fabea66165b5ca917f5a72f8daeaf"><td class="memItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpelf_1_1_pelf.html#a3c0fabea66165b5ca917f5a72f8daeaf">parse</a> () -&gt; void</td></tr>
-<tr class="memdesc:a3c0fabea66165b5ca917f5a72f8daeaf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parses the PE/ELF headers and sections.  <a href="classpelf_1_1_pelf.html#a3c0fabea66165b5ca917f5a72f8daeaf">More...</a><br /></td></tr>
-<tr class="separator:a3c0fabea66165b5ca917f5a72f8daeaf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2bb779d7e943ec739df4c51ce2dffb53"><td class="memItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpelf_1_1_pelf.html#a2bb779d7e943ec739df4c51ce2dffb53">getRawData</a> () const noexcept -&gt; Container</td></tr>
-<tr class="memdesc:a2bb779d7e943ec739df4c51ce2dffb53"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the original data passed to the Pe/Elf constructor.  <a href="classpelf_1_1_pelf.html#a2bb779d7e943ec739df4c51ce2dffb53">More...</a><br /></td></tr>
-<tr class="separator:a2bb779d7e943ec739df4c51ce2dffb53"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a78f0df8ec18368d227a5e2c4027687a2"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpelf_1_1_pelf.html#a78f0df8ec18368d227a5e2c4027687a2">Pelf</a> (const Container &amp;data)</td></tr>
+<tr class="memdesc:a78f0df8ec18368d227a5e2c4027687a2"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classpelf_1_1_pelf.html" title="Base class for Pe and Elf classes.">Pelf</a> constructor.  <a href="classpelf_1_1_pelf.html#a78f0df8ec18368d227a5e2c4027687a2">More...</a><br /></td></tr>
+<tr class="separator:a78f0df8ec18368d227a5e2c4027687a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad20b8665e2640ce5dc28508acceea6d7"><td class="memItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpelf_1_1_pelf.html#ad20b8665e2640ce5dc28508acceea6d7">getRawData</a> () const noexcept -&gt; Container</td></tr>
+<tr class="memdesc:ad20b8665e2640ce5dc28508acceea6d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the original data passed to the Pe/Elf constructor.  <a href="classpelf_1_1_pelf.html#ad20b8665e2640ce5dc28508acceea6d7">More...</a><br /></td></tr>
+<tr class="separator:ad20b8665e2640ce5dc28508acceea6d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9fe71d4afd2ef54095257f10473a5dcc"><td class="memItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpelf_1_1_pelf.html#a9fe71d4afd2ef54095257f10473a5dcc">getHeaders</a> () const noexcept -&gt; void</td></tr>
+<tr class="memdesc:a9fe71d4afd2ef54095257f10473a5dcc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a struct with the headers from the PE or ELF file.  <a href="classpelf_1_1_pelf.html#a9fe71d4afd2ef54095257f10473a5dcc">More...</a><br /></td></tr>
+<tr class="separator:a9fe71d4afd2ef54095257f10473a5dcc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0241f13c5f834e536e53d05e3cfcb974"><td class="memItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpelf_1_1_pelf.html#a0241f13c5f834e536e53d05e3cfcb974">getSections</a> () const noexcept -&gt; void</td></tr>
+<tr class="memdesc:a0241f13c5f834e536e53d05e3cfcb974"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the section table of the <a class="el" href="classpelf_1_1_pe.html" title="Pe class.">Pe</a> or ELF file.  <a href="classpelf_1_1_pelf.html#a0241f13c5f834e536e53d05e3cfcb974">More...</a><br /></td></tr>
+<tr class="separator:a0241f13c5f834e536e53d05e3cfcb974"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:a89266cb498c8c99b2912ed3cc0edccc9"><td class="memItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpelf_1_1_pelf.html#a89266cb498c8c99b2912ed3cc0edccc9">parse</a> () -&gt; void</td></tr>
+<tr class="memdesc:a89266cb498c8c99b2912ed3cc0edccc9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parses the PE/ELF headers and sections.  <a href="classpelf_1_1_pelf.html#a89266cb498c8c99b2912ed3cc0edccc9">More...</a><br /></td></tr>
+<tr class="separator:a89266cb498c8c99b2912ed3cc0edccc9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5bd0037e6d0e3eec7a3107592dd9a6b0"><td class="memTemplParams" colspan="2">template&lt;class Header &gt; </td></tr>
+<tr class="memitem:a5bd0037e6d0e3eec7a3107592dd9a6b0"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classpelf_1_1_pelf.html#a5bd0037e6d0e3eec7a3107592dd9a6b0">readHeader</a> (Header &amp;header, const std::ptrdiff_t offset) -&gt; void</td></tr>
+<tr class="memdesc:a5bd0037e6d0e3eec7a3107592dd9a6b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads the contents from <code>mData</code> at the index <code>offset</code> into the struct passed by reference.  <a href="classpelf_1_1_pelf.html#a5bd0037e6d0e3eec7a3107592dd9a6b0">More...</a><br /></td></tr>
+<tr class="separator:a5bd0037e6d0e3eec7a3107592dd9a6b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d157a0ec643322c0a212cd24dec917a"><td class="memTemplParams" colspan="2">template&lt;class Struct &gt; </td></tr>
+<tr class="memitem:a0d157a0ec643322c0a212cd24dec917a"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classpelf_1_1_pelf.html#a0d157a0ec643322c0a212cd24dec917a">getStruct</a> (std::size_t offset) -&gt; Struct</td></tr>
+<tr class="memdesc:a0d157a0ec643322c0a212cd24dec917a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns an Struct filled with the data from <code>mData</code> from index <code>offset</code>  <a href="classpelf_1_1_pelf.html#a0d157a0ec643322c0a212cd24dec917a">More...</a><br /></td></tr>
+<tr class="separator:a0d157a0ec643322c0a212cd24dec917a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:ac98647f291b3aa3809e49e2f3b57e261"><td class="memItemLeft" align="right" valign="top">Container&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpelf_1_1_pelf.html#ac98647f291b3aa3809e49e2f3b57e261">mData</a></td></tr>
-<tr class="separator:ac98647f291b3aa3809e49e2f3b57e261"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friends" name="friends"></a>
-Friends</h2></td></tr>
-<tr class="memitem:ac75a05191073b22dd8ccecfb96f0aa8b"><td class="memItemLeft" align="right" valign="top">class&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpelf_1_1_pelf.html#ac75a05191073b22dd8ccecfb96f0aa8b">PelfHelper</a></td></tr>
-<tr class="separator:ac75a05191073b22dd8ccecfb96f0aa8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5306bc94bda869eafe757fd422b0d8cd"><td class="memItemLeft" align="right" valign="top">Container&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpelf_1_1_pelf.html#a5306bc94bda869eafe757fd422b0d8cd">mData</a></td></tr>
+<tr class="separator:a5306bc94bda869eafe757fd422b0d8cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><div class="compoundTemplParams">template&lt;class Container, template&lt; typename &gt; class Derived&gt;<br />
-class pelf::Pelf&lt; Container, Derived &gt;</div><p >Base class for <a class="el" href="classpelf_1_1_pe.html" title="Pe class.">Pe</a> and Elf classes. </p>
+<div class="textblock"><div class="compoundTemplParams">template&lt;class Container, template&lt; typename, std::size_t... &gt; class Derived, std::size_t... N&gt;<br />
+class pelf::Pelf&lt; Container, Derived, N &gt;</div><p >Base class for <a class="el" href="classpelf_1_1_pe.html" title="Pe class.">Pe</a> and <a class="el" href="classpelf_1_1_elf.html" title="Elf class.">Elf</a> classes. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">Container</td><td>The type of the container used to store the file content that needs to be parsed</td></tr>
     <tr><td class="paramname">Derived</td><td>The type of the inherited class </td></tr>
+    <tr><td class="paramname">NumOfSections</td><td>Number of Sections that the <a class="el" href="classpelf_1_1_pe.html" title="Pe class.">Pe</a> or <a class="el" href="classpelf_1_1_elf.html" title="Elf class.">Elf</a> file has </td></tr>
   </table>
   </dd>
 </dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="abd27fd25af4af69f0ff70097ce77fdd3" name="abd27fd25af4af69f0ff70097ce77fdd3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abd27fd25af4af69f0ff70097ce77fdd3">&#9670;&nbsp;</a></span>Pelf()</h2>
+<a id="a78f0df8ec18368d227a5e2c4027687a2" name="a78f0df8ec18368d227a5e2c4027687a2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a78f0df8ec18368d227a5e2c4027687a2">&#9670;&nbsp;</a></span>Pelf()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class Container , template&lt; typename &gt; class Derived&gt; <br />
+template&lt;class Container , template&lt; typename, std::size_t... &gt; class Derived, std::size_t... N&gt; <br />
 requires container_and_convertible_v&lt;Container, unsigned char&gt;</div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr <a class="el" href="classpelf_1_1_pelf.html">pelf::Pelf</a>&lt; Container, Derived &gt;::Pelf </td>
+          <td class="memname">constexpr <a class="el" href="classpelf_1_1_pelf.html">pelf::Pelf</a>&lt; Container, Derived, N &gt;::Pelf </td>
           <td>(</td>
-          <td class="paramtype">Container&#160;</td>
+          <td class="paramtype">const Container &amp;&#160;</td>
           <td class="paramname"><em>data</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">explicit</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">explicit</span><span class="mlabel">constexpr</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p><a class="el" href="classpelf_1_1_pelf.html" title="Base class for Pe and Elf classes.">Pelf</a> constructor. </p>
-<p >Takes as a parameter a container that satisfies the concept container_and_convertible_v&lt;Container, unsigned char&gt;</p>
+<p >Takes as a parameter a container that satisfies the concept container_and_convertible_v&lt;Container, unsigned char&gt; and has_data_method_v&lt;Container&gt;</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">data</td><td>The data to be parsed<ul>
@@ -156,19 +169,46 @@ requires container_and_convertible_v&lt;Container, unsigned char&gt;</div>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a2bb779d7e943ec739df4c51ce2dffb53" name="a2bb779d7e943ec739df4c51ce2dffb53"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2bb779d7e943ec739df4c51ce2dffb53">&#9670;&nbsp;</a></span>getRawData()</h2>
+<a id="a9fe71d4afd2ef54095257f10473a5dcc" name="a9fe71d4afd2ef54095257f10473a5dcc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9fe71d4afd2ef54095257f10473a5dcc">&#9670;&nbsp;</a></span>getHeaders()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class Container , template&lt; typename &gt; class Derived&gt; </div>
+template&lt;class Container , template&lt; typename, std::size_t... &gt; class Derived, std::size_t... N&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr auto <a class="el" href="classpelf_1_1_pelf.html">pelf::Pelf</a>&lt; Container, Derived &gt;::getRawData</td>
+          <td class="memname">constexpr auto <a class="el" href="classpelf_1_1_pelf.html">pelf::Pelf</a>&lt; Container, Derived, N &gt;::getHeaders</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns a struct with the headers from the PE or ELF file. </p>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+</div>
+</div>
+<a id="ad20b8665e2640ce5dc28508acceea6d7" name="ad20b8665e2640ce5dc28508acceea6d7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad20b8665e2640ce5dc28508acceea6d7">&#9670;&nbsp;</a></span>getRawData()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Container , template&lt; typename, std::size_t... &gt; class Derived, std::size_t... N&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr auto <a class="el" href="classpelf_1_1_pelf.html">pelf::Pelf</a>&lt; Container, Derived, N &gt;::getRawData</td>
         </tr>
       </table>
   </td>
@@ -183,24 +223,96 @@ template&lt;class Container , template&lt; typename &gt; class Derived&gt; </div
 
 </div>
 </div>
-<a id="a3c0fabea66165b5ca917f5a72f8daeaf" name="a3c0fabea66165b5ca917f5a72f8daeaf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3c0fabea66165b5ca917f5a72f8daeaf">&#9670;&nbsp;</a></span>parse()</h2>
+<a id="a0241f13c5f834e536e53d05e3cfcb974" name="a0241f13c5f834e536e53d05e3cfcb974"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0241f13c5f834e536e53d05e3cfcb974">&#9670;&nbsp;</a></span>getSections()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class Container , template&lt; typename &gt; class Derived&gt; </div>
+template&lt;class Container , template&lt; typename, std::size_t... &gt; class Derived, std::size_t... N&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr auto <a class="el" href="classpelf_1_1_pelf.html">pelf::Pelf</a>&lt; Container, Derived &gt;::parse</td>
+          <td class="memname">constexpr auto <a class="el" href="classpelf_1_1_pelf.html">pelf::Pelf</a>&lt; Container, Derived, N &gt;::getSections</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the section table of the <a class="el" href="classpelf_1_1_pe.html" title="Pe class.">Pe</a> or ELF file. </p>
+
+</div>
+</div>
+<a id="a0d157a0ec643322c0a212cd24dec917a" name="a0d157a0ec643322c0a212cd24dec917a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0d157a0ec643322c0a212cd24dec917a">&#9670;&nbsp;</a></span>getStruct()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Container , template&lt; typename, std::size_t... &gt; class Derived, std::size_t... N&gt; </div>
+<div class="memtemplate">
+template&lt;class Struct &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr auto <a class="el" href="classpelf_1_1_pelf.html">pelf::Pelf</a>&lt; Container, Derived, N &gt;::getStruct </td>
+          <td>(</td>
+          <td class="paramtype">std::size_t&#160;</td>
+          <td class="paramname"><em>offset</em></td><td>)</td>
+          <td> -&gt; Struct</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns an Struct filled with the data from <code>mData</code> from index <code>offset</code> </p>
+<p >This function is only used if parsing is done at compile time, otherwise std::copy() is used</p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Struct</td><td>hana struct that represents a pe or elf header </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">offset</td><td>offset of the header</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns a struct of the corresponding header </dd></dl>
+
+</div>
+</div>
+<a id="a89266cb498c8c99b2912ed3cc0edccc9" name="a89266cb498c8c99b2912ed3cc0edccc9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a89266cb498c8c99b2912ed3cc0edccc9">&#9670;&nbsp;</a></span>parse()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Container , template&lt; typename, std::size_t... &gt; class Derived, std::size_t... N&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr auto <a class="el" href="classpelf_1_1_pelf.html">pelf::Pelf</a>&lt; Container, Derived, N &gt;::parse</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -210,45 +322,69 @@ template&lt;class Container , template&lt; typename &gt; class Derived&gt; </div
 
 </div>
 </div>
-<h2 class="groupheader">Friends And Related Function Documentation</h2>
-<a id="ac75a05191073b22dd8ccecfb96f0aa8b" name="ac75a05191073b22dd8ccecfb96f0aa8b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac75a05191073b22dd8ccecfb96f0aa8b">&#9670;&nbsp;</a></span>PelfHelper</h2>
+<a id="a5bd0037e6d0e3eec7a3107592dd9a6b0" name="a5bd0037e6d0e3eec7a3107592dd9a6b0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5bd0037e6d0e3eec7a3107592dd9a6b0">&#9670;&nbsp;</a></span>readHeader()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class Container , template&lt; typename &gt; class Derived&gt; </div>
+template&lt;class Container , template&lt; typename, std::size_t... &gt; class Derived, std::size_t... N&gt; </div>
+<div class="memtemplate">
+template&lt;class Header &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">friend class <a class="el" href="classpelf_1_1_pelf_helper.html">PelfHelper</a></td>
+          <td class="memname">constexpr auto <a class="el" href="classpelf_1_1_pelf.html">pelf::Pelf</a>&lt; Container, Derived, N &gt;::readHeader </td>
+          <td>(</td>
+          <td class="paramtype">Header &amp;&#160;</td>
+          <td class="paramname"><em>header</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::ptrdiff_t&#160;</td>
+          <td class="paramname"><em>offset</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> -&gt; void</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
+<p>Reads the contents from <code>mData</code> at the index <code>offset</code> into the struct passed by reference. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Header</td><td>struct that represents either a <a class="el" href="classpelf_1_1_pe.html" title="Pe class.">Pe</a> header or an <a class="el" href="classpelf_1_1_elf.html" title="Elf class.">Elf</a> header</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Void </dd></dl>
+
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="ac98647f291b3aa3809e49e2f3b57e261" name="ac98647f291b3aa3809e49e2f3b57e261"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac98647f291b3aa3809e49e2f3b57e261">&#9670;&nbsp;</a></span>mData</h2>
+<a id="a5306bc94bda869eafe757fd422b0d8cd" name="a5306bc94bda869eafe757fd422b0d8cd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5306bc94bda869eafe757fd422b0d8cd">&#9670;&nbsp;</a></span>mData</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class Container , template&lt; typename &gt; class Derived&gt; </div>
+template&lt;class Container , template&lt; typename, std::size_t... &gt; class Derived, std::size_t... N&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">Container <a class="el" href="classpelf_1_1_pelf.html">pelf::Pelf</a>&lt; Container, Derived &gt;::mData</td>
+          <td class="memname">Container <a class="el" href="classpelf_1_1_pelf.html">pelf::Pelf</a>&lt; Container, Derived, N &gt;::mData</td>
         </tr>
       </table>
   </td>
@@ -257,7 +393,7 @@ template&lt;class Container , template&lt; typename &gt; class Derived&gt; </div
   </tr>
 </table>
 </div><div class="memdoc">
-<p >Raw data from the file to Îbe parsed </p>
+<p >Raw data from the file to be parsed </p>
 
 </div>
 </div>

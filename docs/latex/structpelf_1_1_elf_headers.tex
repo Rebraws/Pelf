@@ -1,0 +1,68 @@
+\hypertarget{structpelf_1_1_elf_headers}{}\doxysection{pelf\+::Elf\+Headers\texorpdfstring{$<$}{<} Num\+Of\+Program\+Header \texorpdfstring{$>$}{>} Struct Template Reference}
+\label{structpelf_1_1_elf_headers}\index{pelf::ElfHeaders$<$ NumOfProgramHeader $>$@{pelf::ElfHeaders$<$ NumOfProgramHeader $>$}}
+
+
+Structure that contains the \mbox{\hyperlink{classpelf_1_1_elf}{Elf}} header and the program header table from an ELF file.  
+
+
+
+
+{\ttfamily \#include $<$elf\+Structs.\+h$>$}
+
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$std\+::size\+\_\+t N$>$ }\\using \mbox{\hyperlink{structpelf_1_1_elf_headers_a9e41084a296b1568db8b7639dbaf6f95}{Program\+Headers}} = std\+::conditional\+\_\+t$<$ Num\+Of\+Program\+Header==0, std\+::vector$<$ \mbox{\hyperlink{structpelf_1_1_elf64___phdr}{Elf64\+\_\+\+Phdr}} $>$, std\+::array$<$ \mbox{\hyperlink{structpelf_1_1_elf64___phdr}{Elf64\+\_\+\+Phdr}}, Num\+Of\+Program\+Header $>$ $>$
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structpelf_1_1_elf64___ehdr}{Elf64\+\_\+\+Ehdr}} \mbox{\hyperlink{structpelf_1_1_elf_headers_ac83a681bcd2fe191a8e18cdba3445966}{elf\+Header}} = \{\}
+\item 
+\mbox{\hyperlink{structpelf_1_1_elf_headers_a9e41084a296b1568db8b7639dbaf6f95}{Program\+Headers}}$<$ Num\+Of\+Program\+Header $>$ \mbox{\hyperlink{structpelf_1_1_elf_headers_a93823ccbea8521e0ff643d198ddce04b}{program\+Headers}} = \{\}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$std\+::size\+\_\+t Num\+Of\+Program\+Header = 0$>$\newline
+struct pelf\+::\+Elf\+Headers$<$ Num\+Of\+Program\+Header $>$}
+Structure that contains the \mbox{\hyperlink{classpelf_1_1_elf}{Elf}} header and the program header table from an ELF file. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Num\+Of\+Program\+Header} & Number of headers in the program header table \\
+\hline
+\end{DoxyTemplParams}
+
+
+\doxysubsection{Member Typedef Documentation}
+\mbox{\Hypertarget{structpelf_1_1_elf_headers_a9e41084a296b1568db8b7639dbaf6f95}\label{structpelf_1_1_elf_headers_a9e41084a296b1568db8b7639dbaf6f95}} 
+\index{pelf::ElfHeaders$<$ NumOfProgramHeader $>$@{pelf::ElfHeaders$<$ NumOfProgramHeader $>$}!ProgramHeaders@{ProgramHeaders}}
+\index{ProgramHeaders@{ProgramHeaders}!pelf::ElfHeaders$<$ NumOfProgramHeader $>$@{pelf::ElfHeaders$<$ NumOfProgramHeader $>$}}
+\doxysubsubsection{\texorpdfstring{ProgramHeaders}{ProgramHeaders}}
+{\footnotesize\ttfamily template$<$std\+::size\+\_\+t Num\+Of\+Program\+Header = 0$>$ \\
+template$<$std\+::size\+\_\+t N$>$ \\
+using \mbox{\hyperlink{structpelf_1_1_elf_headers}{pelf\+::\+Elf\+Headers}}$<$ Num\+Of\+Program\+Header $>$\+::\+Program\+Headers =  std\+::conditional\+\_\+t$<$Num\+Of\+Program\+Header == 0, std\+::vector$<$\mbox{\hyperlink{structpelf_1_1_elf64___phdr}{Elf64\+\_\+\+Phdr}}$>$, std\+::array$<$\mbox{\hyperlink{structpelf_1_1_elf64___phdr}{Elf64\+\_\+\+Phdr}}, Num\+Of\+Program\+Header$>$ $>$}
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{structpelf_1_1_elf_headers_ac83a681bcd2fe191a8e18cdba3445966}\label{structpelf_1_1_elf_headers_ac83a681bcd2fe191a8e18cdba3445966}} 
+\index{pelf::ElfHeaders$<$ NumOfProgramHeader $>$@{pelf::ElfHeaders$<$ NumOfProgramHeader $>$}!elfHeader@{elfHeader}}
+\index{elfHeader@{elfHeader}!pelf::ElfHeaders$<$ NumOfProgramHeader $>$@{pelf::ElfHeaders$<$ NumOfProgramHeader $>$}}
+\doxysubsubsection{\texorpdfstring{elfHeader}{elfHeader}}
+{\footnotesize\ttfamily template$<$std\+::size\+\_\+t Num\+Of\+Program\+Header = 0$>$ \\
+\mbox{\hyperlink{structpelf_1_1_elf64___ehdr}{Elf64\+\_\+\+Ehdr}} \mbox{\hyperlink{structpelf_1_1_elf_headers}{pelf\+::\+Elf\+Headers}}$<$ Num\+Of\+Program\+Header $>$\+::elf\+Header = \{\}}
+
+\mbox{\hyperlink{classpelf_1_1_elf}{Elf}} header \mbox{\Hypertarget{structpelf_1_1_elf_headers_a93823ccbea8521e0ff643d198ddce04b}\label{structpelf_1_1_elf_headers_a93823ccbea8521e0ff643d198ddce04b}} 
+\index{pelf::ElfHeaders$<$ NumOfProgramHeader $>$@{pelf::ElfHeaders$<$ NumOfProgramHeader $>$}!programHeaders@{programHeaders}}
+\index{programHeaders@{programHeaders}!pelf::ElfHeaders$<$ NumOfProgramHeader $>$@{pelf::ElfHeaders$<$ NumOfProgramHeader $>$}}
+\doxysubsubsection{\texorpdfstring{programHeaders}{programHeaders}}
+{\footnotesize\ttfamily template$<$std\+::size\+\_\+t Num\+Of\+Program\+Header = 0$>$ \\
+\mbox{\hyperlink{structpelf_1_1_elf_headers_a9e41084a296b1568db8b7639dbaf6f95}{Program\+Headers}}$<$Num\+Of\+Program\+Header$>$ \mbox{\hyperlink{structpelf_1_1_elf_headers}{pelf\+::\+Elf\+Headers}}$<$ Num\+Of\+Program\+Header $>$\+::program\+Headers = \{\}}
+
+Array or vector containing all program headers from the program header table 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/nahue/source/\+Pelf/include/\mbox{\hyperlink{elf_structs_8h}{elf\+Structs.\+h}}\end{DoxyCompactItemize}

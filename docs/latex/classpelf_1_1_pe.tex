@@ -1,5 +1,5 @@
-\hypertarget{classpelf_1_1_pe}{}\doxysection{pelf\+::Pe\texorpdfstring{$<$}{<} Container \texorpdfstring{$>$}{>} Class Template Reference}
-\label{classpelf_1_1_pe}\index{pelf::Pe$<$ Container $>$@{pelf::Pe$<$ Container $>$}}
+\hypertarget{classpelf_1_1_pe}{}\doxysection{pelf\+::Pe\texorpdfstring{$<$}{<} Container, Num\+Of\+Sections \texorpdfstring{$>$}{>} Class Template Reference}
+\label{classpelf_1_1_pe}\index{pelf::Pe$<$ Container, NumOfSections $>$@{pelf::Pe$<$ Container, NumOfSections $>$}}
 
 
 \mbox{\hyperlink{classpelf_1_1_pe}{Pe}} class.  
@@ -9,7 +9,7 @@
 
 {\ttfamily \#include $<$Pe.\+h$>$}
 
-Inheritance diagram for pelf\+::Pe\texorpdfstring{$<$}{<} Container \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+Inheritance diagram for pelf\+::Pe\texorpdfstring{$<$}{<} Container, Num\+Of\+Sections \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=2.000000cm]{classpelf_1_1_pe}
@@ -18,69 +18,74 @@ Inheritance diagram for pelf\+::Pe\texorpdfstring{$<$}{<} Container \texorpdfstr
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-constexpr \mbox{\hyperlink{classpelf_1_1_pe_abaa3884f6d3f756c45d99c97dc7ac0ec}{Pe}} (Container data)
+constexpr \mbox{\hyperlink{classpelf_1_1_pe_a27c023655ad92e6e3f372f7215e38b7a}{Pe}} (const Container \&data)
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classpelf_1_1_pe}{Pe}} constructor. \end{DoxyCompactList}\item 
-constexpr auto \mbox{\hyperlink{classpelf_1_1_pe_a308684b6eada062859e4c1a887a0d5eb}{get\+Coff\+Header}} () const -\/$>$ \mbox{\hyperlink{structpelf_1_1_i_m_a_g_e___f_i_l_e___h_e_a_d_e_r}{IMAGE\+\_\+\+FILE\+\_\+\+HEADER}}
-\begin{DoxyCompactList}\small\item\em Returns the Coff header. \end{DoxyCompactList}\end{DoxyCompactItemize}
+constexpr auto \mbox{\hyperlink{classpelf_1_1_pe_ac78bd8cd71c3441234baa00d890c5e66}{get\+Headers}} () const noexcept -\/$>$ \mbox{\hyperlink{structpelf_1_1_pe_headers}{Pe\+Headers}}
+\begin{DoxyCompactList}\small\item\em Returns a struct that contains all \mbox{\hyperlink{classpelf_1_1_pe}{Pe}} headers. \end{DoxyCompactList}\item 
+constexpr auto \mbox{\hyperlink{classpelf_1_1_pe_a5495d1ce12d80d52f2e097a161fb4976}{get\+Sections}} () const noexcept -\/$>$ \mbox{\hyperlink{namespacepelf_aaa0c7d556c13e87c42a7ab82d5111709}{Table}}$<$ \mbox{\hyperlink{structpelf_1_1_i_m_a_g_e___s_e_c_t_i_o_n___h_e_a_d_e_r}{IMAGE\+\_\+\+SECTION\+\_\+\+HEADER}}, Num\+Of\+Sections $>$
+\begin{DoxyCompactList}\small\item\em Returns the section table from the \mbox{\hyperlink{classpelf_1_1_pe}{Pe}} file. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-constexpr auto \mbox{\hyperlink{classpelf_1_1_pe_af46883d6b316372ea21c40796111c609}{check\+Signatures}} () const -\/$>$ bool
+constexpr auto \mbox{\hyperlink{classpelf_1_1_pe_a9dca41bf0156d7c10835646fe23b6616}{check\+Signatures}} () const -\/$>$ bool
 \begin{DoxyCompactList}\small\item\em Checks if MZ DOS signature and PE signature are valid. \end{DoxyCompactList}\item 
-constexpr auto \mbox{\hyperlink{classpelf_1_1_pe_a34573a5da8e98176d7ff2905662630c2}{check\+MZDSignature}} () const -\/$>$ bool
-\begin{DoxyCompactList}\small\item\em Checks if the MZ DOS Signature (0x5a4d) at offset 0 is valid. \end{DoxyCompactList}\item 
-constexpr auto \mbox{\hyperlink{classpelf_1_1_pe_a8f7823c9fd56839c51f7fa689fb56971}{check\+PESignature}} () const -\/$>$ bool
+constexpr auto \mbox{\hyperlink{classpelf_1_1_pe_af76e7838ee5f706281a94457eafd4f11}{check\+MZDSignature}} () const -\/$>$ bool
+\begin{DoxyCompactList}\small\item\em Checks if the MZ DOS Signature (0x5a4d) at offset 0 is valid of the \mbox{\hyperlink{classpelf_1_1_pe}{Pe}} file. \end{DoxyCompactList}\item 
+constexpr auto \mbox{\hyperlink{classpelf_1_1_pe_a4a887ff030639ded9222e37fba10032d}{check\+PESignature}} () const -\/$>$ bool
 \begin{DoxyCompactList}\small\item\em Checks if the PE Signature {\ttfamily PE\textbackslash{}0\textbackslash{}0} is valid. \end{DoxyCompactList}\item 
-constexpr auto \mbox{\hyperlink{classpelf_1_1_pe_a99706db76c940290b2e875d4ff8a768a}{check\+File\+Size}} () const -\/$>$ bool
+constexpr auto \mbox{\hyperlink{classpelf_1_1_pe_a3a438104d2bf4c2d5995ab523c4c9b11}{check\+File\+Size}} () const -\/$>$ bool
 \begin{DoxyCompactList}\small\item\em Checks if the size is valid. \end{DoxyCompactList}\item 
-constexpr auto \mbox{\hyperlink{classpelf_1_1_pe_a2fde5bc41beaf4d7868b8ef03bd31d42}{parse\+Headers}} () -\/$>$ void
+constexpr auto \mbox{\hyperlink{classpelf_1_1_pe_a8d4d2fd67bf0ac12a51ec4f59ce768e0}{parse\+Headers}} () -\/$>$ void
 \begin{DoxyCompactList}\small\item\em Parses the Coff Header, and the optional coff header. \end{DoxyCompactList}\item 
-constexpr auto \mbox{\hyperlink{classpelf_1_1_pe_af6897e2b886e12e4b19af0994cf026ed}{read\+Coff\+Header}} () -\/$>$ void
-\begin{DoxyCompactList}\small\item\em Reads the coff header from {\ttfamily m\+Data} and saves it into m\+Coff\+Header struct. \end{DoxyCompactList}\end{DoxyCompactItemize}
+constexpr auto \mbox{\hyperlink{classpelf_1_1_pe_ad134561c00561f410a29c803785418ca}{parse\+Sections}} () -\/$>$ void
+\begin{DoxyCompactList}\small\item\em Parses the sections from the \mbox{\hyperlink{classpelf_1_1_pe}{Pe}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-std\+::uint32\+\_\+t \mbox{\hyperlink{classpelf_1_1_pe_a93c1187c324e4ae7e2254731bf266cbd}{m\+Pe\+Header\+Address}} \{\}
+std\+::uint32\+\_\+t \mbox{\hyperlink{classpelf_1_1_pe_a86c309782cb097393ef0dd0597f68fed}{m\+Pe\+Header\+Address}} \{\}
 \item 
-\mbox{\hyperlink{structpelf_1_1_i_m_a_g_e___f_i_l_e___h_e_a_d_e_r}{IMAGE\+\_\+\+FILE\+\_\+\+HEADER}} \mbox{\hyperlink{classpelf_1_1_pe_a7eafaff28816fab0213b7193d420d178}{m\+Coff\+Header}} \{\}
+\mbox{\hyperlink{structpelf_1_1_pe_headers}{Pe\+Headers}} \mbox{\hyperlink{classpelf_1_1_pe_ab5f8843ef672df7bc70702bfab2734d2}{m\+Headers}}
+\item 
+\mbox{\hyperlink{namespacepelf_aaa0c7d556c13e87c42a7ab82d5111709}{Table}}$<$ \mbox{\hyperlink{structpelf_1_1_i_m_a_g_e___s_e_c_t_i_o_n___h_e_a_d_e_r}{IMAGE\+\_\+\+SECTION\+\_\+\+HEADER}}, Num\+Of\+Sections $>$ \mbox{\hyperlink{classpelf_1_1_pe_a41e2cbdb538d3a028feb011ec30ecd5a}{m\+Sections}} = \{\}
 \end{DoxyCompactItemize}
 \doxysubsection*{Static Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-static constexpr std\+::uint16\+\_\+t \mbox{\hyperlink{classpelf_1_1_pe_a76a7612bdd93c78bac1e3a4bd54526dc}{m\+MZDSignature}} \{0x4d5a\}
+static constexpr std\+::uint16\+\_\+t \mbox{\hyperlink{classpelf_1_1_pe_a595368141107227f74bfa7c35472e23d}{m\+MZDSignature}}
 \item 
-static constexpr std\+::uint32\+\_\+t \mbox{\hyperlink{classpelf_1_1_pe_afd3cf9aa26d42801f4efa7ed377c05d2}{m\+Pe\+Signature}} \{0x50450000\}
+static constexpr std\+::uint32\+\_\+t \mbox{\hyperlink{classpelf_1_1_pe_a60d52ace465e6867051627c3d8f9dee9}{m\+Pe\+Signature}} \{ 0x50450000 \}
 \item 
-static constexpr std\+::uint8\+\_\+t \mbox{\hyperlink{classpelf_1_1_pe_a90dfed482f8683a9adc33f3fde479311}{m\+Min\+Pe\+Size}} \{97\}
+static constexpr std\+::uint8\+\_\+t \mbox{\hyperlink{classpelf_1_1_pe_a5240d16889d719e24d80505e3be0053e}{m\+Min\+Pe\+Size}}
 \end{DoxyCompactItemize}
 \doxysubsection*{Friends}
 \begin{DoxyCompactItemize}
 \item 
-class \mbox{\hyperlink{classpelf_1_1_pe_a31ad3ffb5e374b1f1bfe272deadec778}{Pelf$<$ Container, Pe $>$}}
+class \mbox{\hyperlink{classpelf_1_1_pe_ad51aa13d68276658458f3d82793dc7de}{Pelf$<$ Container, Pe, Num\+Of\+Sections $>$}}
 \end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
 
 \doxysubsection{Detailed Description}
-\subsubsection*{template$<$class Container$>$\newline
-class pelf\+::\+Pe$<$ Container $>$}
+\subsubsection*{template$<$class Container, std\+::size\+\_\+t Num\+Of\+Sections = 0$>$\newline
+class pelf\+::\+Pe$<$ Container, Num\+Of\+Sections $>$}
 \mbox{\hyperlink{classpelf_1_1_pe}{Pe}} class. 
 
 
 \begin{DoxyTemplParams}{Template Parameters}
-{\em Container} & The type of the container used to store the file content that needs to be parsed ~\newline
- \\
+{\em Container} & The type of the container used to store the file content that needs to be parsed \\
+\hline
+{\em Num\+Of\+Sections} & Number of Sections of the \mbox{\hyperlink{classpelf_1_1_pe}{Pe}} File (Size of the section table) \\
 \hline
 \end{DoxyTemplParams}
 
 
 \doxysubsection{Constructor \& Destructor Documentation}
-\mbox{\Hypertarget{classpelf_1_1_pe_abaa3884f6d3f756c45d99c97dc7ac0ec}\label{classpelf_1_1_pe_abaa3884f6d3f756c45d99c97dc7ac0ec}} 
-\index{pelf::Pe$<$ Container $>$@{pelf::Pe$<$ Container $>$}!Pe@{Pe}}
-\index{Pe@{Pe}!pelf::Pe$<$ Container $>$@{pelf::Pe$<$ Container $>$}}
+\mbox{\Hypertarget{classpelf_1_1_pe_a27c023655ad92e6e3f372f7215e38b7a}\label{classpelf_1_1_pe_a27c023655ad92e6e3f372f7215e38b7a}} 
+\index{pelf::Pe$<$ Container, NumOfSections $>$@{pelf::Pe$<$ Container, NumOfSections $>$}!Pe@{Pe}}
+\index{Pe@{Pe}!pelf::Pe$<$ Container, NumOfSections $>$@{pelf::Pe$<$ Container, NumOfSections $>$}}
 \doxysubsubsection{\texorpdfstring{Pe()}{Pe()}}
-{\footnotesize\ttfamily template$<$class Container $>$ \\
-constexpr \mbox{\hyperlink{classpelf_1_1_pe}{pelf\+::\+Pe}}$<$ Container $>$\+::\+Pe (\begin{DoxyParamCaption}\item[{Container}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}, {\ttfamily [constexpr]}}
+{\footnotesize\ttfamily template$<$class Container , std\+::size\+\_\+t Num\+Of\+Sections$>$ \\
+constexpr \mbox{\hyperlink{classpelf_1_1_pe}{pelf\+::\+Pe}}$<$ Container, Num\+Of\+Sections $>$\+::\+Pe (\begin{DoxyParamCaption}\item[{const Container \&}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}, {\ttfamily [constexpr]}}
 
 
 
@@ -94,12 +99,12 @@ constexpr \mbox{\hyperlink{classpelf_1_1_pe}{pelf\+::\+Pe}}$<$ Container $>$\+::
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classpelf_1_1_pe_a99706db76c940290b2e875d4ff8a768a}\label{classpelf_1_1_pe_a99706db76c940290b2e875d4ff8a768a}} 
-\index{pelf::Pe$<$ Container $>$@{pelf::Pe$<$ Container $>$}!checkFileSize@{checkFileSize}}
-\index{checkFileSize@{checkFileSize}!pelf::Pe$<$ Container $>$@{pelf::Pe$<$ Container $>$}}
+\mbox{\Hypertarget{classpelf_1_1_pe_a3a438104d2bf4c2d5995ab523c4c9b11}\label{classpelf_1_1_pe_a3a438104d2bf4c2d5995ab523c4c9b11}} 
+\index{pelf::Pe$<$ Container, NumOfSections $>$@{pelf::Pe$<$ Container, NumOfSections $>$}!checkFileSize@{checkFileSize}}
+\index{checkFileSize@{checkFileSize}!pelf::Pe$<$ Container, NumOfSections $>$@{pelf::Pe$<$ Container, NumOfSections $>$}}
 \doxysubsubsection{\texorpdfstring{checkFileSize()}{checkFileSize()}}
-{\footnotesize\ttfamily template$<$class Container $>$ \\
-constexpr auto \mbox{\hyperlink{classpelf_1_1_pe}{pelf\+::\+Pe}}$<$ Container $>$\+::check\+File\+Size\hspace{0.3cm}{\ttfamily [constexpr]}, {\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$class Container , std\+::size\+\_\+t Num\+Of\+Sections$>$ \\
+constexpr auto \mbox{\hyperlink{classpelf_1_1_pe}{pelf\+::\+Pe}}$<$ Container, Num\+Of\+Sections $>$\+::check\+File\+Size\hspace{0.3cm}{\ttfamily [constexpr]}, {\ttfamily [private]}}
 
 
 
@@ -108,26 +113,26 @@ Checks if the size is valid.
 \begin{DoxyReturn}{Returns}
 Returns {\ttfamily true} if the size is valid, and {\ttfamily false} otherwise 
 \end{DoxyReturn}
-\mbox{\Hypertarget{classpelf_1_1_pe_a34573a5da8e98176d7ff2905662630c2}\label{classpelf_1_1_pe_a34573a5da8e98176d7ff2905662630c2}} 
-\index{pelf::Pe$<$ Container $>$@{pelf::Pe$<$ Container $>$}!checkMZDSignature@{checkMZDSignature}}
-\index{checkMZDSignature@{checkMZDSignature}!pelf::Pe$<$ Container $>$@{pelf::Pe$<$ Container $>$}}
+\mbox{\Hypertarget{classpelf_1_1_pe_af76e7838ee5f706281a94457eafd4f11}\label{classpelf_1_1_pe_af76e7838ee5f706281a94457eafd4f11}} 
+\index{pelf::Pe$<$ Container, NumOfSections $>$@{pelf::Pe$<$ Container, NumOfSections $>$}!checkMZDSignature@{checkMZDSignature}}
+\index{checkMZDSignature@{checkMZDSignature}!pelf::Pe$<$ Container, NumOfSections $>$@{pelf::Pe$<$ Container, NumOfSections $>$}}
 \doxysubsubsection{\texorpdfstring{checkMZDSignature()}{checkMZDSignature()}}
-{\footnotesize\ttfamily template$<$class Container $>$ \\
-constexpr auto \mbox{\hyperlink{classpelf_1_1_pe}{pelf\+::\+Pe}}$<$ Container $>$\+::check\+MZDSignature\hspace{0.3cm}{\ttfamily [constexpr]}, {\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$class Container , std\+::size\+\_\+t Num\+Of\+Sections$>$ \\
+constexpr auto \mbox{\hyperlink{classpelf_1_1_pe}{pelf\+::\+Pe}}$<$ Container, Num\+Of\+Sections $>$\+::check\+MZDSignature\hspace{0.3cm}{\ttfamily [constexpr]}, {\ttfamily [private]}}
 
 
 
-Checks if the MZ DOS Signature (0x5a4d) at offset 0 is valid. 
+Checks if the MZ DOS Signature (0x5a4d) at offset 0 is valid of the \mbox{\hyperlink{classpelf_1_1_pe}{Pe}} file. 
 
 \begin{DoxyReturn}{Returns}
 Returns {\ttfamily true} if the signature is valid, {\ttfamily false} otherwise. 
 \end{DoxyReturn}
-\mbox{\Hypertarget{classpelf_1_1_pe_a8f7823c9fd56839c51f7fa689fb56971}\label{classpelf_1_1_pe_a8f7823c9fd56839c51f7fa689fb56971}} 
-\index{pelf::Pe$<$ Container $>$@{pelf::Pe$<$ Container $>$}!checkPESignature@{checkPESignature}}
-\index{checkPESignature@{checkPESignature}!pelf::Pe$<$ Container $>$@{pelf::Pe$<$ Container $>$}}
+\mbox{\Hypertarget{classpelf_1_1_pe_a4a887ff030639ded9222e37fba10032d}\label{classpelf_1_1_pe_a4a887ff030639ded9222e37fba10032d}} 
+\index{pelf::Pe$<$ Container, NumOfSections $>$@{pelf::Pe$<$ Container, NumOfSections $>$}!checkPESignature@{checkPESignature}}
+\index{checkPESignature@{checkPESignature}!pelf::Pe$<$ Container, NumOfSections $>$@{pelf::Pe$<$ Container, NumOfSections $>$}}
 \doxysubsubsection{\texorpdfstring{checkPESignature()}{checkPESignature()}}
-{\footnotesize\ttfamily template$<$class Container $>$ \\
-constexpr auto \mbox{\hyperlink{classpelf_1_1_pe}{pelf\+::\+Pe}}$<$ Container $>$\+::check\+PESignature\hspace{0.3cm}{\ttfamily [constexpr]}, {\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$class Container , std\+::size\+\_\+t Num\+Of\+Sections$>$ \\
+constexpr auto \mbox{\hyperlink{classpelf_1_1_pe}{pelf\+::\+Pe}}$<$ Container, Num\+Of\+Sections $>$\+::check\+PESignature\hspace{0.3cm}{\ttfamily [constexpr]}, {\ttfamily [private]}}
 
 
 
@@ -136,12 +141,12 @@ Checks if the PE Signature {\ttfamily PE\textbackslash{}0\textbackslash{}0} is v
 \begin{DoxyReturn}{Returns}
 Returns {\ttfamily true} if the signature is valid, {\ttfamily false} otherwise. 
 \end{DoxyReturn}
-\mbox{\Hypertarget{classpelf_1_1_pe_af46883d6b316372ea21c40796111c609}\label{classpelf_1_1_pe_af46883d6b316372ea21c40796111c609}} 
-\index{pelf::Pe$<$ Container $>$@{pelf::Pe$<$ Container $>$}!checkSignatures@{checkSignatures}}
-\index{checkSignatures@{checkSignatures}!pelf::Pe$<$ Container $>$@{pelf::Pe$<$ Container $>$}}
+\mbox{\Hypertarget{classpelf_1_1_pe_a9dca41bf0156d7c10835646fe23b6616}\label{classpelf_1_1_pe_a9dca41bf0156d7c10835646fe23b6616}} 
+\index{pelf::Pe$<$ Container, NumOfSections $>$@{pelf::Pe$<$ Container, NumOfSections $>$}!checkSignatures@{checkSignatures}}
+\index{checkSignatures@{checkSignatures}!pelf::Pe$<$ Container, NumOfSections $>$@{pelf::Pe$<$ Container, NumOfSections $>$}}
 \doxysubsubsection{\texorpdfstring{checkSignatures()}{checkSignatures()}}
-{\footnotesize\ttfamily template$<$class Container $>$ \\
-constexpr auto \mbox{\hyperlink{classpelf_1_1_pe}{pelf\+::\+Pe}}$<$ Container $>$\+::check\+Signatures\hspace{0.3cm}{\ttfamily [constexpr]}, {\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$class Container , std\+::size\+\_\+t Num\+Of\+Sections$>$ \\
+constexpr auto \mbox{\hyperlink{classpelf_1_1_pe}{pelf\+::\+Pe}}$<$ Container, Num\+Of\+Sections $>$\+::check\+Signatures\hspace{0.3cm}{\ttfamily [constexpr]}, {\ttfamily [private]}}
 
 
 
@@ -150,44 +155,64 @@ Checks if MZ DOS signature and PE signature are valid.
 \begin{DoxyReturn}{Returns}
 Returns {\ttfamily true} if signatures are valid, and {\ttfamily false} otherwise 
 \end{DoxyReturn}
-\mbox{\Hypertarget{classpelf_1_1_pe_a308684b6eada062859e4c1a887a0d5eb}\label{classpelf_1_1_pe_a308684b6eada062859e4c1a887a0d5eb}} 
-\index{pelf::Pe$<$ Container $>$@{pelf::Pe$<$ Container $>$}!getCoffHeader@{getCoffHeader}}
-\index{getCoffHeader@{getCoffHeader}!pelf::Pe$<$ Container $>$@{pelf::Pe$<$ Container $>$}}
-\doxysubsubsection{\texorpdfstring{getCoffHeader()}{getCoffHeader()}}
-{\footnotesize\ttfamily template$<$class Container $>$ \\
-constexpr auto \mbox{\hyperlink{classpelf_1_1_pe}{pelf\+::\+Pe}}$<$ Container $>$\+::get\+Coff\+Header\hspace{0.3cm}{\ttfamily [constexpr]}}
+\mbox{\Hypertarget{classpelf_1_1_pe_ac78bd8cd71c3441234baa00d890c5e66}\label{classpelf_1_1_pe_ac78bd8cd71c3441234baa00d890c5e66}} 
+\index{pelf::Pe$<$ Container, NumOfSections $>$@{pelf::Pe$<$ Container, NumOfSections $>$}!getHeaders@{getHeaders}}
+\index{getHeaders@{getHeaders}!pelf::Pe$<$ Container, NumOfSections $>$@{pelf::Pe$<$ Container, NumOfSections $>$}}
+\doxysubsubsection{\texorpdfstring{getHeaders()}{getHeaders()}}
+{\footnotesize\ttfamily template$<$class Container , std\+::size\+\_\+t Num\+Of\+Sections$>$ \\
+constexpr auto \mbox{\hyperlink{classpelf_1_1_pe}{pelf\+::\+Pe}}$<$ Container, Num\+Of\+Sections $>$\+::get\+Headers\hspace{0.3cm}{\ttfamily [constexpr]}, {\ttfamily [noexcept]}}
 
 
 
-Returns the Coff header. 
+Returns a struct that contains all \mbox{\hyperlink{classpelf_1_1_pe}{Pe}} headers. 
 
 \begin{DoxyReturn}{Returns}
-returns a {\ttfamily \mbox{\hyperlink{structpelf_1_1_i_m_a_g_e___f_i_l_e___h_e_a_d_e_r}{IMAGE\+\_\+\+FILE\+\_\+\+HEADER}}} struct which is a hana struct that represents the coff header of the PE file 
+Returns a struct {\ttfamily \mbox{\hyperlink{structpelf_1_1_pe_headers}{Pe\+Headers}}} that contains the coff header and the optional header, which are represented by the hana struct {\ttfamily \mbox{\hyperlink{structpelf_1_1_i_m_a_g_e___f_i_l_e___h_e_a_d_e_r}{IMAGE\+\_\+\+FILE\+\_\+\+HEADER}}} and the {\ttfamily \mbox{\hyperlink{structpelf_1_1_optional_header}{Optional\+Header}}} struct 
 \end{DoxyReturn}
-\mbox{\Hypertarget{classpelf_1_1_pe_a2fde5bc41beaf4d7868b8ef03bd31d42}\label{classpelf_1_1_pe_a2fde5bc41beaf4d7868b8ef03bd31d42}} 
-\index{pelf::Pe$<$ Container $>$@{pelf::Pe$<$ Container $>$}!parseHeaders@{parseHeaders}}
-\index{parseHeaders@{parseHeaders}!pelf::Pe$<$ Container $>$@{pelf::Pe$<$ Container $>$}}
+\mbox{\Hypertarget{classpelf_1_1_pe_a5495d1ce12d80d52f2e097a161fb4976}\label{classpelf_1_1_pe_a5495d1ce12d80d52f2e097a161fb4976}} 
+\index{pelf::Pe$<$ Container, NumOfSections $>$@{pelf::Pe$<$ Container, NumOfSections $>$}!getSections@{getSections}}
+\index{getSections@{getSections}!pelf::Pe$<$ Container, NumOfSections $>$@{pelf::Pe$<$ Container, NumOfSections $>$}}
+\doxysubsubsection{\texorpdfstring{getSections()}{getSections()}}
+{\footnotesize\ttfamily template$<$class Container , std\+::size\+\_\+t Num\+Of\+Sections$>$ \\
+constexpr auto \mbox{\hyperlink{classpelf_1_1_pe}{pelf\+::\+Pe}}$<$ Container, Num\+Of\+Sections $>$\+::get\+Sections\hspace{0.3cm}{\ttfamily [constexpr]}, {\ttfamily [noexcept]}}
+
+
+
+Returns the section table from the \mbox{\hyperlink{classpelf_1_1_pe}{Pe}} file. 
+
+If the parsing is done at compile time it returns an array with all the sections from the \mbox{\hyperlink{classpelf_1_1_pe}{Pe}} file, each section is represented by the hana struct {\ttfamily \mbox{\hyperlink{structpelf_1_1_i_m_a_g_e___s_e_c_t_i_o_n___h_e_a_d_e_r}{IMAGE\+\_\+\+SECTION\+\_\+\+HEADER}}}, on the other side, if parsing happens at runtime it returns a std\+::vector with all the sections.
+
+\begin{DoxyReturn}{Returns}
+Returns either an array or a vector that represents the section table 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classpelf_1_1_pe_a8d4d2fd67bf0ac12a51ec4f59ce768e0}\label{classpelf_1_1_pe_a8d4d2fd67bf0ac12a51ec4f59ce768e0}} 
+\index{pelf::Pe$<$ Container, NumOfSections $>$@{pelf::Pe$<$ Container, NumOfSections $>$}!parseHeaders@{parseHeaders}}
+\index{parseHeaders@{parseHeaders}!pelf::Pe$<$ Container, NumOfSections $>$@{pelf::Pe$<$ Container, NumOfSections $>$}}
 \doxysubsubsection{\texorpdfstring{parseHeaders()}{parseHeaders()}}
-{\footnotesize\ttfamily template$<$class Container $>$ \\
-constexpr auto \mbox{\hyperlink{classpelf_1_1_pe}{pelf\+::\+Pe}}$<$ Container $>$\+::parse\+Headers\hspace{0.3cm}{\ttfamily [constexpr]}, {\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$class Container , std\+::size\+\_\+t Num\+Of\+Sections$>$ \\
+constexpr auto \mbox{\hyperlink{classpelf_1_1_pe}{pelf\+::\+Pe}}$<$ Container, Num\+Of\+Sections $>$\+::parse\+Headers\hspace{0.3cm}{\ttfamily [constexpr]}, {\ttfamily [private]}}
 
 
 
 Parses the Coff Header, and the optional coff header. 
 
+Initializes the m\+Headers struct by reading the coff header and the optional header from {\ttfamily m\+Data}
+
 \begin{DoxyReturn}{Returns}
 Void 
 \end{DoxyReturn}
-\mbox{\Hypertarget{classpelf_1_1_pe_af6897e2b886e12e4b19af0994cf026ed}\label{classpelf_1_1_pe_af6897e2b886e12e4b19af0994cf026ed}} 
-\index{pelf::Pe$<$ Container $>$@{pelf::Pe$<$ Container $>$}!readCoffHeader@{readCoffHeader}}
-\index{readCoffHeader@{readCoffHeader}!pelf::Pe$<$ Container $>$@{pelf::Pe$<$ Container $>$}}
-\doxysubsubsection{\texorpdfstring{readCoffHeader()}{readCoffHeader()}}
-{\footnotesize\ttfamily template$<$class Container $>$ \\
-constexpr auto \mbox{\hyperlink{classpelf_1_1_pe}{pelf\+::\+Pe}}$<$ Container $>$\+::read\+Coff\+Header\hspace{0.3cm}{\ttfamily [constexpr]}, {\ttfamily [private]}}
+\mbox{\Hypertarget{classpelf_1_1_pe_ad134561c00561f410a29c803785418ca}\label{classpelf_1_1_pe_ad134561c00561f410a29c803785418ca}} 
+\index{pelf::Pe$<$ Container, NumOfSections $>$@{pelf::Pe$<$ Container, NumOfSections $>$}!parseSections@{parseSections}}
+\index{parseSections@{parseSections}!pelf::Pe$<$ Container, NumOfSections $>$@{pelf::Pe$<$ Container, NumOfSections $>$}}
+\doxysubsubsection{\texorpdfstring{parseSections()}{parseSections()}}
+{\footnotesize\ttfamily template$<$class Container , std\+::size\+\_\+t Num\+Of\+Sections$>$ \\
+constexpr auto \mbox{\hyperlink{classpelf_1_1_pe}{pelf\+::\+Pe}}$<$ Container, Num\+Of\+Sections $>$\+::parse\+Sections\hspace{0.3cm}{\ttfamily [constexpr]}, {\ttfamily [private]}}
 
 
 
-Reads the coff header from {\ttfamily m\+Data} and saves it into m\+Coff\+Header struct. 
+Parses the sections from the \mbox{\hyperlink{classpelf_1_1_pe}{Pe}}. 
+
+Reads the section table from {\ttfamily m\+Data} and saves it into {\ttfamily m\+Sections}
 
 \begin{DoxyReturn}{Returns}
 Void. 
@@ -195,52 +220,73 @@ Void.
 
 
 \doxysubsection{Friends And Related Function Documentation}
-\mbox{\Hypertarget{classpelf_1_1_pe_a31ad3ffb5e374b1f1bfe272deadec778}\label{classpelf_1_1_pe_a31ad3ffb5e374b1f1bfe272deadec778}} 
-\index{pelf::Pe$<$ Container $>$@{pelf::Pe$<$ Container $>$}!Pelf$<$ Container, Pe $>$@{Pelf$<$ Container, Pe $>$}}
-\index{Pelf$<$ Container, Pe $>$@{Pelf$<$ Container, Pe $>$}!pelf::Pe$<$ Container $>$@{pelf::Pe$<$ Container $>$}}
-\doxysubsubsection{\texorpdfstring{Pelf$<$ Container, Pe $>$}{Pelf< Container, Pe >}}
-{\footnotesize\ttfamily template$<$class Container $>$ \\
-friend class \mbox{\hyperlink{classpelf_1_1_pelf}{Pelf}}$<$ Container, \mbox{\hyperlink{classpelf_1_1_pe}{Pe}} $>$\hspace{0.3cm}{\ttfamily [friend]}}
+\mbox{\Hypertarget{classpelf_1_1_pe_ad51aa13d68276658458f3d82793dc7de}\label{classpelf_1_1_pe_ad51aa13d68276658458f3d82793dc7de}} 
+\index{pelf::Pe$<$ Container, NumOfSections $>$@{pelf::Pe$<$ Container, NumOfSections $>$}!Pelf$<$ Container, Pe, NumOfSections $>$@{Pelf$<$ Container, Pe, NumOfSections $>$}}
+\index{Pelf$<$ Container, Pe, NumOfSections $>$@{Pelf$<$ Container, Pe, NumOfSections $>$}!pelf::Pe$<$ Container, NumOfSections $>$@{pelf::Pe$<$ Container, NumOfSections $>$}}
+\doxysubsubsection{\texorpdfstring{Pelf$<$ Container, Pe, NumOfSections $>$}{Pelf< Container, Pe, NumOfSections >}}
+{\footnotesize\ttfamily template$<$class Container , std\+::size\+\_\+t Num\+Of\+Sections = 0$>$ \\
+friend class \mbox{\hyperlink{classpelf_1_1_pelf}{Pelf}}$<$ Container, \mbox{\hyperlink{classpelf_1_1_pe}{Pe}}, Num\+Of\+Sections $>$\hspace{0.3cm}{\ttfamily [friend]}}
 
 
 
 \doxysubsection{Member Data Documentation}
-\mbox{\Hypertarget{classpelf_1_1_pe_a7eafaff28816fab0213b7193d420d178}\label{classpelf_1_1_pe_a7eafaff28816fab0213b7193d420d178}} 
-\index{pelf::Pe$<$ Container $>$@{pelf::Pe$<$ Container $>$}!mCoffHeader@{mCoffHeader}}
-\index{mCoffHeader@{mCoffHeader}!pelf::Pe$<$ Container $>$@{pelf::Pe$<$ Container $>$}}
-\doxysubsubsection{\texorpdfstring{mCoffHeader}{mCoffHeader}}
-{\footnotesize\ttfamily template$<$class Container $>$ \\
-\mbox{\hyperlink{structpelf_1_1_i_m_a_g_e___f_i_l_e___h_e_a_d_e_r}{IMAGE\+\_\+\+FILE\+\_\+\+HEADER}} \mbox{\hyperlink{classpelf_1_1_pe}{pelf\+::\+Pe}}$<$ Container $>$\+::m\+Coff\+Header \{\}\hspace{0.3cm}{\ttfamily [private]}}
+\mbox{\Hypertarget{classpelf_1_1_pe_ab5f8843ef672df7bc70702bfab2734d2}\label{classpelf_1_1_pe_ab5f8843ef672df7bc70702bfab2734d2}} 
+\index{pelf::Pe$<$ Container, NumOfSections $>$@{pelf::Pe$<$ Container, NumOfSections $>$}!mHeaders@{mHeaders}}
+\index{mHeaders@{mHeaders}!pelf::Pe$<$ Container, NumOfSections $>$@{pelf::Pe$<$ Container, NumOfSections $>$}}
+\doxysubsubsection{\texorpdfstring{mHeaders}{mHeaders}}
+{\footnotesize\ttfamily template$<$class Container , std\+::size\+\_\+t Num\+Of\+Sections = 0$>$ \\
+\mbox{\hyperlink{structpelf_1_1_pe_headers}{Pe\+Headers}} \mbox{\hyperlink{classpelf_1_1_pe}{pelf\+::\+Pe}}$<$ Container, Num\+Of\+Sections $>$\+::m\+Headers\hspace{0.3cm}{\ttfamily [private]}}
 
-Struct that represents the coff header \mbox{\Hypertarget{classpelf_1_1_pe_a90dfed482f8683a9adc33f3fde479311}\label{classpelf_1_1_pe_a90dfed482f8683a9adc33f3fde479311}} 
-\index{pelf::Pe$<$ Container $>$@{pelf::Pe$<$ Container $>$}!mMinPeSize@{mMinPeSize}}
-\index{mMinPeSize@{mMinPeSize}!pelf::Pe$<$ Container $>$@{pelf::Pe$<$ Container $>$}}
+Struct that contains all \mbox{\hyperlink{classpelf_1_1_pe}{Pe}} headers, more precisely it contains the coff header ({\ttfamily \mbox{\hyperlink{structpelf_1_1_i_m_a_g_e___f_i_l_e___h_e_a_d_e_r}{IMAGE\+\_\+\+FILE\+\_\+\+HEADER}}}) and the optional header ({\ttfamily \mbox{\hyperlink{structpelf_1_1_optional_header}{Optional\+Header}}}) \mbox{\Hypertarget{classpelf_1_1_pe_a5240d16889d719e24d80505e3be0053e}\label{classpelf_1_1_pe_a5240d16889d719e24d80505e3be0053e}} 
+\index{pelf::Pe$<$ Container, NumOfSections $>$@{pelf::Pe$<$ Container, NumOfSections $>$}!mMinPeSize@{mMinPeSize}}
+\index{mMinPeSize@{mMinPeSize}!pelf::Pe$<$ Container, NumOfSections $>$@{pelf::Pe$<$ Container, NumOfSections $>$}}
 \doxysubsubsection{\texorpdfstring{mMinPeSize}{mMinPeSize}}
-{\footnotesize\ttfamily template$<$class Container $>$ \\
-constexpr std\+::uint8\+\_\+t \mbox{\hyperlink{classpelf_1_1_pe}{pelf\+::\+Pe}}$<$ Container $>$\+::m\+Min\+Pe\+Size \{97\}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}, {\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$class Container , std\+::size\+\_\+t Num\+Of\+Sections = 0$>$ \\
+constexpr std\+::uint8\+\_\+t \mbox{\hyperlink{classpelf_1_1_pe}{pelf\+::\+Pe}}$<$ Container, Num\+Of\+Sections $>$\+::m\+Min\+Pe\+Size\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}, {\ttfamily [private]}}
 
-Minimum possible PE file size \mbox{\Hypertarget{classpelf_1_1_pe_a76a7612bdd93c78bac1e3a4bd54526dc}\label{classpelf_1_1_pe_a76a7612bdd93c78bac1e3a4bd54526dc}} 
-\index{pelf::Pe$<$ Container $>$@{pelf::Pe$<$ Container $>$}!mMZDSignature@{mMZDSignature}}
-\index{mMZDSignature@{mMZDSignature}!pelf::Pe$<$ Container $>$@{pelf::Pe$<$ Container $>$}}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    97}
+\DoxyCodeLine{  \}}
+
+\end{DoxyCode}
+Minimum possible PE file size \mbox{\Hypertarget{classpelf_1_1_pe_a595368141107227f74bfa7c35472e23d}\label{classpelf_1_1_pe_a595368141107227f74bfa7c35472e23d}} 
+\index{pelf::Pe$<$ Container, NumOfSections $>$@{pelf::Pe$<$ Container, NumOfSections $>$}!mMZDSignature@{mMZDSignature}}
+\index{mMZDSignature@{mMZDSignature}!pelf::Pe$<$ Container, NumOfSections $>$@{pelf::Pe$<$ Container, NumOfSections $>$}}
 \doxysubsubsection{\texorpdfstring{mMZDSignature}{mMZDSignature}}
-{\footnotesize\ttfamily template$<$class Container $>$ \\
-constexpr std\+::uint16\+\_\+t \mbox{\hyperlink{classpelf_1_1_pe}{pelf\+::\+Pe}}$<$ Container $>$\+::m\+MZDSignature \{0x4d5a\}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}, {\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$class Container , std\+::size\+\_\+t Num\+Of\+Sections = 0$>$ \\
+constexpr std\+::uint16\+\_\+t \mbox{\hyperlink{classpelf_1_1_pe}{pelf\+::\+Pe}}$<$ Container, Num\+Of\+Sections $>$\+::m\+MZDSignature\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}, {\ttfamily [private]}}
 
-MZ DOS Signature \mbox{\Hypertarget{classpelf_1_1_pe_a93c1187c324e4ae7e2254731bf266cbd}\label{classpelf_1_1_pe_a93c1187c324e4ae7e2254731bf266cbd}} 
-\index{pelf::Pe$<$ Container $>$@{pelf::Pe$<$ Container $>$}!mPeHeaderAddress@{mPeHeaderAddress}}
-\index{mPeHeaderAddress@{mPeHeaderAddress}!pelf::Pe$<$ Container $>$@{pelf::Pe$<$ Container $>$}}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    0x4d5a}
+\DoxyCodeLine{  \}}
+
+\end{DoxyCode}
+MZ DOS Signature \mbox{\Hypertarget{classpelf_1_1_pe_a86c309782cb097393ef0dd0597f68fed}\label{classpelf_1_1_pe_a86c309782cb097393ef0dd0597f68fed}} 
+\index{pelf::Pe$<$ Container, NumOfSections $>$@{pelf::Pe$<$ Container, NumOfSections $>$}!mPeHeaderAddress@{mPeHeaderAddress}}
+\index{mPeHeaderAddress@{mPeHeaderAddress}!pelf::Pe$<$ Container, NumOfSections $>$@{pelf::Pe$<$ Container, NumOfSections $>$}}
 \doxysubsubsection{\texorpdfstring{mPeHeaderAddress}{mPeHeaderAddress}}
-{\footnotesize\ttfamily template$<$class Container $>$ \\
-std\+::uint32\+\_\+t \mbox{\hyperlink{classpelf_1_1_pe}{pelf\+::\+Pe}}$<$ Container $>$\+::m\+Pe\+Header\+Address \{\}\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$class Container , std\+::size\+\_\+t Num\+Of\+Sections = 0$>$ \\
+std\+::uint32\+\_\+t \mbox{\hyperlink{classpelf_1_1_pe}{pelf\+::\+Pe}}$<$ Container, Num\+Of\+Sections $>$\+::m\+Pe\+Header\+Address \{\}\hspace{0.3cm}{\ttfamily [private]}}
 
-32 bit value that represents the start address of the coff header \mbox{\Hypertarget{classpelf_1_1_pe_afd3cf9aa26d42801f4efa7ed377c05d2}\label{classpelf_1_1_pe_afd3cf9aa26d42801f4efa7ed377c05d2}} 
-\index{pelf::Pe$<$ Container $>$@{pelf::Pe$<$ Container $>$}!mPeSignature@{mPeSignature}}
-\index{mPeSignature@{mPeSignature}!pelf::Pe$<$ Container $>$@{pelf::Pe$<$ Container $>$}}
+32 bit value that represents the start address of the coff header \mbox{\Hypertarget{classpelf_1_1_pe_a60d52ace465e6867051627c3d8f9dee9}\label{classpelf_1_1_pe_a60d52ace465e6867051627c3d8f9dee9}} 
+\index{pelf::Pe$<$ Container, NumOfSections $>$@{pelf::Pe$<$ Container, NumOfSections $>$}!mPeSignature@{mPeSignature}}
+\index{mPeSignature@{mPeSignature}!pelf::Pe$<$ Container, NumOfSections $>$@{pelf::Pe$<$ Container, NumOfSections $>$}}
 \doxysubsubsection{\texorpdfstring{mPeSignature}{mPeSignature}}
-{\footnotesize\ttfamily template$<$class Container $>$ \\
-constexpr std\+::uint32\+\_\+t \mbox{\hyperlink{classpelf_1_1_pe}{pelf\+::\+Pe}}$<$ Container $>$\+::m\+Pe\+Signature \{0x50450000\}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}, {\ttfamily [private]}}
+{\footnotesize\ttfamily template$<$class Container , std\+::size\+\_\+t Num\+Of\+Sections = 0$>$ \\
+constexpr std\+::uint32\+\_\+t \mbox{\hyperlink{classpelf_1_1_pe}{pelf\+::\+Pe}}$<$ Container, Num\+Of\+Sections $>$\+::m\+Pe\+Signature \{ 0x50450000 \}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}, {\ttfamily [private]}}
 
-PE Signature \textquotesingle{}PE\textbackslash{}0\textbackslash{}0\textquotesingle{} 
+PE Signature \textquotesingle{}PE\textbackslash{}0\textbackslash{}0\textquotesingle{} \mbox{\Hypertarget{classpelf_1_1_pe_a41e2cbdb538d3a028feb011ec30ecd5a}\label{classpelf_1_1_pe_a41e2cbdb538d3a028feb011ec30ecd5a}} 
+\index{pelf::Pe$<$ Container, NumOfSections $>$@{pelf::Pe$<$ Container, NumOfSections $>$}!mSections@{mSections}}
+\index{mSections@{mSections}!pelf::Pe$<$ Container, NumOfSections $>$@{pelf::Pe$<$ Container, NumOfSections $>$}}
+\doxysubsubsection{\texorpdfstring{mSections}{mSections}}
+{\footnotesize\ttfamily template$<$class Container , std\+::size\+\_\+t Num\+Of\+Sections = 0$>$ \\
+\mbox{\hyperlink{namespacepelf_aaa0c7d556c13e87c42a7ab82d5111709}{Table}}$<$\mbox{\hyperlink{structpelf_1_1_i_m_a_g_e___s_e_c_t_i_o_n___h_e_a_d_e_r}{IMAGE\+\_\+\+SECTION\+\_\+\+HEADER}}, Num\+Of\+Sections$>$ \mbox{\hyperlink{classpelf_1_1_pe}{pelf\+::\+Pe}}$<$ Container, Num\+Of\+Sections $>$\+::m\+Sections = \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+Container that represents the section table 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 

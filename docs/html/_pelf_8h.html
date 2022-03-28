@@ -70,7 +70,8 @@ $(function() {
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#namespaces">Namespaces</a> &#124;
-<a href="#concepts">Concepts</a>  </div>
+<a href="#concepts">Concepts</a> &#124;
+<a href="#typedef-members">Typedefs</a>  </div>
   <div class="headertitle"><div class="title">Pelf.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
@@ -80,17 +81,16 @@ $(function() {
 <div class="textblock"><code>#include &lt;type_traits&gt;</code><br />
 <code>#include &lt;stdexcept&gt;</code><br />
 <code>#include &quot;<a class="el" href="pelf_except_8h_source.html">pelfExcept.h</a>&quot;</code><br />
+<code>#include &lt;<a class="el" href="pe_structs_8h_source.html">peStructs.h</a>&gt;</code><br />
+<code>#include &lt;cassert&gt;</code><br />
 <code>#include &lt;boost/hana.hpp&gt;</code><br />
 </div>
 <p><a href="_pelf_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpelf_1_1_pelf_helper.html">pelf::PelfHelper</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Class helper that contains helper functions to abstract things from PE and ELF classes.  <a href="classpelf_1_1_pelf_helper.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpelf_1_1_pelf.html">pelf::Pelf&lt; Container, Derived &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base class for <a class="el" href="classpelf_1_1_pe.html" title="Pe class.">Pe</a> and Elf classes.  <a href="classpelf_1_1_pelf.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpelf_1_1_pelf.html">pelf::Pelf&lt; Container, Derived, N &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base class for <a class="el" href="classpelf_1_1_pe.html" title="Pe class.">Pe</a> and <a class="el" href="classpelf_1_1_elf.html" title="Elf class.">Elf</a> classes.  <a href="classpelf_1_1_pelf.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
@@ -102,11 +102,17 @@ Namespaces</h2></td></tr>
 Concepts</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">concept &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="conceptpelf_1_1container__and__convertible__v.html">pelf::container_and_convertible_v</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:aaa0c7d556c13e87c42a7ab82d5111709"><td class="memTemplParams" colspan="2">template&lt;class Struct , std::size_t Num&gt; </td></tr>
+<tr class="memitem:aaa0c7d556c13e87c42a7ab82d5111709"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacepelf.html#aaa0c7d556c13e87c42a7ab82d5111709">pelf::Table</a> = std::conditional_t&lt; Num==0, std::vector&lt; Struct &gt;, std::array&lt; Struct, Num &gt; &gt;</td></tr>
+<tr class="memdesc:aaa0c7d556c13e87c42a7ab82d5111709"><td class="mdescLeft">&#160;</td><td class="mdescRight">Metafunction that returns an array if <code>Num</code> is zero, and a vector otherwise.  <a href="namespacepelf.html#aaa0c7d556c13e87c42a7ab82d5111709">More...</a><br /></td></tr>
+<tr class="separator:aaa0c7d556c13e87c42a7ab82d5111709"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >Pelf class declaration. </p>
-<p >This file contains the Pelf class declaration, which is the base class of the Pe and Elf classes <br  />
-</p>
+<p >This file contains the Pelf class declaration, which is the base class of the Pe and Elf classes</p>
 <dl class="section author"><dt>Author</dt><dd>Rebraws </dd></dl>
 </div></div><!-- contents -->
 <!-- start footer part -->

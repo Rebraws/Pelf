@@ -69,25 +69,28 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#namespaces">Namespaces</a>  </div>
+<a href="#namespaces">Namespaces</a> &#124;
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle"><div class="title">Pe.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
 <p>Pe class declaration.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;<a class="el" href="_pelf_8h_source.html">Pelf.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="pe_structs_8h_source.html">peStructs.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_pelf_8h_source.html">Pelf.h</a>&quot;</code><br />
 <code>#include &lt;algorithm&gt;</code><br />
-<code>#include &lt;cstring&gt;</code><br />
 <code>#include &lt;cassert&gt;</code><br />
-<code>#include &quot;<a class="el" href="pe_structs_8h_source.html">peStructs.h</a>&quot;</code><br />
+<code>#include &lt;vector&gt;</code><br />
+<code>#include &lt;array&gt;</code><br />
+<code>#include &lt;type_traits&gt;</code><br />
 <code>#include &lt;boost/hana.hpp&gt;</code><br />
 </div>
 <p><a href="_pe_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpelf_1_1_pe.html">pelf::Pe&lt; Container &gt;</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpelf_1_1_pe.html">pelf::Pe&lt; Container, NumOfSections &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classpelf_1_1_pe.html" title="Pe class.">Pe</a> class.  <a href="classpelf_1_1_pe.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -95,6 +98,14 @@ Classes</h2></td></tr>
 Namespaces</h2></td></tr>
 <tr class="memitem:namespacepelf"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepelf.html">pelf</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a45ded953c0ff554de8b2c8fd0f07b6d6"><td class="memTemplParams" colspan="2">template&lt;class Container &gt; <br />
+requires container_and_convertible_v&lt;Container, unsigned char&gt;</td></tr>
+<tr class="memitem:a45ded953c0ff554de8b2c8fd0f07b6d6"><td class="memTemplItemLeft" align="right" valign="top">consteval auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacepelf.html#a45ded953c0ff554de8b2c8fd0f07b6d6">pelf::getPeNumberOfSections</a> (const Container &amp;data)</td></tr>
+<tr class="memdesc:a45ded953c0ff554de8b2c8fd0f07b6d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function template that returns the number of sections (size of the section table)  <a href="namespacepelf.html#a45ded953c0ff554de8b2c8fd0f07b6d6">More...</a><br /></td></tr>
+<tr class="separator:a45ded953c0ff554de8b2c8fd0f07b6d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >Pe class declaration. </p>

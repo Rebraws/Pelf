@@ -1,0 +1,122 @@
+\hypertarget{structpelf_1_1_pe_headers}{}\doxysection{pelf\+::Pe\+Headers Struct Reference}
+\label{structpelf_1_1_pe_headers}\index{pelf::PeHeaders@{pelf::PeHeaders}}
+
+
+Struct that wraps all Headers of a \mbox{\hyperlink{classpelf_1_1_pe}{Pe}} file (both Coff Header and Optional Header)  
+
+
+
+
+{\ttfamily \#include $<$pe\+Structs.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+constexpr auto \mbox{\hyperlink{structpelf_1_1_pe_headers_afaa14298fc20ae442d3b44f60a9b0012}{get\+Coff\+Header}} () const noexcept -\/$>$ \mbox{\hyperlink{structpelf_1_1_i_m_a_g_e___f_i_l_e___h_e_a_d_e_r}{IMAGE\+\_\+\+FILE\+\_\+\+HEADER}}
+\begin{DoxyCompactList}\small\item\em Get the Coff Header object. \end{DoxyCompactList}\item 
+constexpr auto \mbox{\hyperlink{structpelf_1_1_pe_headers_abd7e4d5e7b1a38e93b33ed9539d28818}{get\+Optional\+Header}} () const noexcept -\/$>$ \mbox{\hyperlink{structpelf_1_1_optional_header}{Optional\+Header}}
+\begin{DoxyCompactList}\small\item\em Get the Optional Header object. \end{DoxyCompactList}\item 
+constexpr auto \mbox{\hyperlink{structpelf_1_1_pe_headers_acf2d19c7a2e1f91fee04dd7c76865772}{get\+Standard\+Coff\+Fields}} () const noexcept -\/$>$ \mbox{\hyperlink{structpelf_1_1_standard_coff_fields}{Standard\+Coff\+Fields}}
+\begin{DoxyCompactList}\small\item\em Get the Standard Coff Fields object. \end{DoxyCompactList}\item 
+constexpr auto \mbox{\hyperlink{structpelf_1_1_pe_headers_acdb82e633dad6c3dac26b41407867a72}{get\+Windows\+Specific\+Fields}} () const noexcept -\/$>$ \mbox{\hyperlink{structpelf_1_1_windows_specific_fields}{Windows\+Specific\+Fields}}
+\begin{DoxyCompactList}\small\item\em Get the Windows Specific Fields object. \end{DoxyCompactList}\item 
+constexpr auto \mbox{\hyperlink{structpelf_1_1_pe_headers_a84be803693a20335592e46504906b6f0}{get\+Data\+Directories}} () const noexcept
+\begin{DoxyCompactList}\small\item\em Get the Data Directories object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structpelf_1_1_i_m_a_g_e___f_i_l_e___h_e_a_d_e_r}{IMAGE\+\_\+\+FILE\+\_\+\+HEADER}} \mbox{\hyperlink{structpelf_1_1_pe_headers_a74303421cc117ea467dce67a787de85c}{m\+Coff\+Header}} \{\}
+\item 
+\mbox{\hyperlink{structpelf_1_1_optional_header}{Optional\+Header}} \mbox{\hyperlink{structpelf_1_1_pe_headers_a2e1cc83a3d005b178371fa7ec1180e72}{m\+Optional\+Header}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Struct that wraps all Headers of a \mbox{\hyperlink{classpelf_1_1_pe}{Pe}} file (both Coff Header and Optional Header) 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{structpelf_1_1_pe_headers_afaa14298fc20ae442d3b44f60a9b0012}\label{structpelf_1_1_pe_headers_afaa14298fc20ae442d3b44f60a9b0012}} 
+\index{pelf::PeHeaders@{pelf::PeHeaders}!getCoffHeader@{getCoffHeader}}
+\index{getCoffHeader@{getCoffHeader}!pelf::PeHeaders@{pelf::PeHeaders}}
+\doxysubsubsection{\texorpdfstring{getCoffHeader()}{getCoffHeader()}}
+{\footnotesize\ttfamily constexpr auto pelf\+::\+Pe\+Headers\+::get\+Coff\+Header (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const -\/$>$ \mbox{\hyperlink{structpelf_1_1_i_m_a_g_e___f_i_l_e___h_e_a_d_e_r}{IMAGE\+\_\+\+FILE\+\_\+\+HEADER}}   \hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}, {\ttfamily [noexcept]}}
+
+
+
+Get the Coff Header object. 
+
+\begin{DoxyReturn}{Returns}
+Returns the struct {\ttfamily \mbox{\hyperlink{structpelf_1_1_i_m_a_g_e___f_i_l_e___h_e_a_d_e_r}{IMAGE\+\_\+\+FILE\+\_\+\+HEADER}}} 
+\end{DoxyReturn}
+\mbox{\Hypertarget{structpelf_1_1_pe_headers_a84be803693a20335592e46504906b6f0}\label{structpelf_1_1_pe_headers_a84be803693a20335592e46504906b6f0}} 
+\index{pelf::PeHeaders@{pelf::PeHeaders}!getDataDirectories@{getDataDirectories}}
+\index{getDataDirectories@{getDataDirectories}!pelf::PeHeaders@{pelf::PeHeaders}}
+\doxysubsubsection{\texorpdfstring{getDataDirectories()}{getDataDirectories()}}
+{\footnotesize\ttfamily constexpr auto pelf\+::\+Pe\+Headers\+::get\+Data\+Directories (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}, {\ttfamily [noexcept]}}
+
+
+
+Get the Data Directories object. 
+
+\begin{DoxyReturn}{Returns}
+Returns an array with all data directories as elements 
+\end{DoxyReturn}
+\mbox{\Hypertarget{structpelf_1_1_pe_headers_abd7e4d5e7b1a38e93b33ed9539d28818}\label{structpelf_1_1_pe_headers_abd7e4d5e7b1a38e93b33ed9539d28818}} 
+\index{pelf::PeHeaders@{pelf::PeHeaders}!getOptionalHeader@{getOptionalHeader}}
+\index{getOptionalHeader@{getOptionalHeader}!pelf::PeHeaders@{pelf::PeHeaders}}
+\doxysubsubsection{\texorpdfstring{getOptionalHeader()}{getOptionalHeader()}}
+{\footnotesize\ttfamily constexpr auto pelf\+::\+Pe\+Headers\+::get\+Optional\+Header (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const -\/$>$ \mbox{\hyperlink{structpelf_1_1_optional_header}{Optional\+Header}}   \hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}, {\ttfamily [noexcept]}}
+
+
+
+Get the Optional Header object. 
+
+\begin{DoxyReturn}{Returns}
+Returns the struct {\ttfamily \mbox{\hyperlink{structpelf_1_1_optional_header}{Optional\+Header}}} 
+\end{DoxyReturn}
+\mbox{\Hypertarget{structpelf_1_1_pe_headers_acf2d19c7a2e1f91fee04dd7c76865772}\label{structpelf_1_1_pe_headers_acf2d19c7a2e1f91fee04dd7c76865772}} 
+\index{pelf::PeHeaders@{pelf::PeHeaders}!getStandardCoffFields@{getStandardCoffFields}}
+\index{getStandardCoffFields@{getStandardCoffFields}!pelf::PeHeaders@{pelf::PeHeaders}}
+\doxysubsubsection{\texorpdfstring{getStandardCoffFields()}{getStandardCoffFields()}}
+{\footnotesize\ttfamily constexpr auto pelf\+::\+Pe\+Headers\+::get\+Standard\+Coff\+Fields (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const -\/$>$ \mbox{\hyperlink{structpelf_1_1_standard_coff_fields}{Standard\+Coff\+Fields}}   \hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}, {\ttfamily [noexcept]}}
+
+
+
+Get the Standard Coff Fields object. 
+
+\begin{DoxyReturn}{Returns}
+Returns the struct {\ttfamily \mbox{\hyperlink{structpelf_1_1_standard_coff_fields}{Standard\+Coff\+Fields}}} 
+\end{DoxyReturn}
+\mbox{\Hypertarget{structpelf_1_1_pe_headers_acdb82e633dad6c3dac26b41407867a72}\label{structpelf_1_1_pe_headers_acdb82e633dad6c3dac26b41407867a72}} 
+\index{pelf::PeHeaders@{pelf::PeHeaders}!getWindowsSpecificFields@{getWindowsSpecificFields}}
+\index{getWindowsSpecificFields@{getWindowsSpecificFields}!pelf::PeHeaders@{pelf::PeHeaders}}
+\doxysubsubsection{\texorpdfstring{getWindowsSpecificFields()}{getWindowsSpecificFields()}}
+{\footnotesize\ttfamily constexpr auto pelf\+::\+Pe\+Headers\+::get\+Windows\+Specific\+Fields (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const -\/$>$ \mbox{\hyperlink{structpelf_1_1_windows_specific_fields}{Windows\+Specific\+Fields}}   \hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}, {\ttfamily [noexcept]}}
+
+
+
+Get the Windows Specific Fields object. 
+
+\begin{DoxyReturn}{Returns}
+Returns the struct {\ttfamily \mbox{\hyperlink{structpelf_1_1_windows_specific_fields}{Windows\+Specific\+Fields}}} 
+\end{DoxyReturn}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{structpelf_1_1_pe_headers_a74303421cc117ea467dce67a787de85c}\label{structpelf_1_1_pe_headers_a74303421cc117ea467dce67a787de85c}} 
+\index{pelf::PeHeaders@{pelf::PeHeaders}!mCoffHeader@{mCoffHeader}}
+\index{mCoffHeader@{mCoffHeader}!pelf::PeHeaders@{pelf::PeHeaders}}
+\doxysubsubsection{\texorpdfstring{mCoffHeader}{mCoffHeader}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structpelf_1_1_i_m_a_g_e___f_i_l_e___h_e_a_d_e_r}{IMAGE\+\_\+\+FILE\+\_\+\+HEADER}} pelf\+::\+Pe\+Headers\+::m\+Coff\+Header \{\}}
+
+Struct that represents the coff header \mbox{\Hypertarget{structpelf_1_1_pe_headers_a2e1cc83a3d005b178371fa7ec1180e72}\label{structpelf_1_1_pe_headers_a2e1cc83a3d005b178371fa7ec1180e72}} 
+\index{pelf::PeHeaders@{pelf::PeHeaders}!mOptionalHeader@{mOptionalHeader}}
+\index{mOptionalHeader@{mOptionalHeader}!pelf::PeHeaders@{pelf::PeHeaders}}
+\doxysubsubsection{\texorpdfstring{mOptionalHeader}{mOptionalHeader}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structpelf_1_1_optional_header}{Optional\+Header}} pelf\+::\+Pe\+Headers\+::m\+Optional\+Header}
+
+Struct that represents the optional header 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/nahue/source/\+Pelf/include/\mbox{\hyperlink{pe_structs_8h}{pe\+Structs.\+h}}\end{DoxyCompactItemize}

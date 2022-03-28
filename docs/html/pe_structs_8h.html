@@ -70,7 +70,8 @@ $(function() {
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#namespaces">Namespaces</a> &#124;
-<a href="#typedef-members">Typedefs</a>  </div>
+<a href="#typedef-members">Typedefs</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle"><div class="title">peStructs.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
@@ -79,6 +80,7 @@ $(function() {
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;boost/hana.hpp&gt;</code><br />
 <code>#include &lt;cstdint&gt;</code><br />
+<code>#include &lt;array&gt;</code><br />
 </div>
 <p><a href="pe_structs_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -86,6 +88,23 @@ $(function() {
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structpelf_1_1_i_m_a_g_e___f_i_l_e___h_e_a_d_e_r.html">pelf::IMAGE_FILE_HEADER</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Struct that represents the COFF header format. It's 32/64 bit independent header.  <a href="structpelf_1_1_i_m_a_g_e___f_i_l_e___h_e_a_d_e_r.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structpelf_1_1_i_m_a_g_e___d_a_t_a___d_i_r_e_c_t_o_r_y.html">pelf::IMAGE_DATA_DIRECTORY</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Struct that represents the data directory.  <a href="structpelf_1_1_i_m_a_g_e___d_a_t_a___d_i_r_e_c_t_o_r_y.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structpelf_1_1_standard_coff_fields.html">pelf::StandardCoffFields</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Struct that represents the first eight fields of the optional header.  <a href="structpelf_1_1_standard_coff_fields.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structpelf_1_1_windows_specific_fields.html">pelf::WindowsSpecificFields</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Struct that represents the next 21 fields after the <code><a class="el" href="structpelf_1_1_standard_coff_fields.html" title="Struct that represents the first eight fields of the optional header.">StandardCoffFields</a></code>  <a href="structpelf_1_1_windows_specific_fields.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structpelf_1_1_optional_header.html">pelf::OptionalHeader</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Struct that wraps the Optional header.  <a href="structpelf_1_1_optional_header.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structpelf_1_1_pe_headers.html">pelf::PeHeaders</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Struct that wraps all Headers of a <a class="el" href="classpelf_1_1_pe.html" title="Pe class.">Pe</a> file (both Coff Header and Optional Header)  <a href="structpelf_1_1_pe_headers.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structpelf_1_1_i_m_a_g_e___s_e_c_t_i_o_n___h_e_a_d_e_r.html">pelf::IMAGE_SECTION_HEADER</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
@@ -99,6 +118,15 @@ Typedefs</h2></td></tr>
 <tr class="separator:a68b4632c0053ab2bb24b62ba1ccbf7c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7931c494810aaeb8ce5f61bb01151a2c"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepelf.html#a7931c494810aaeb8ce5f61bb01151a2c">pelf::DWORD</a> = std::uint32_t</td></tr>
 <tr class="separator:a7931c494810aaeb8ce5f61bb01151a2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e96db286837d72766c86aca048c6dfd"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepelf.html#a6e96db286837d72766c86aca048c6dfd">pelf::BYTE</a> = std::uint8_t</td></tr>
+<tr class="separator:a6e96db286837d72766c86aca048c6dfd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af027a97fcc726a33b2fe786943890dff"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepelf.html#af027a97fcc726a33b2fe786943890dff">pelf::ULONGLONG</a> = std::uint64_t</td></tr>
+<tr class="separator:af027a97fcc726a33b2fe786943890dff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a716c30fc438e7314073e86fcb72b293b"><td class="memItemLeft" align="right" valign="top">constexpr std::uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepelf.html#a716c30fc438e7314073e86fcb72b293b">pelf::IMAGE_NUMBER_OF_DIRECTORY_ENTRIES</a> { 16 }</td></tr>
+<tr class="separator:a716c30fc438e7314073e86fcb72b293b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >Pe headers and sections structs. </p>

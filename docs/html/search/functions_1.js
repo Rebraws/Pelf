@@ -1,8 +1,7 @@
 var searchData=
 [
-  ['checkfilesize_0',['checkFileSize',['../classpelf_1_1_pe.html#a99706db76c940290b2e875d4ff8a768a',1,'pelf::Pe']]],
-  ['checkmzdsignature_1',['checkMZDSignature',['../classpelf_1_1_pe.html#a34573a5da8e98176d7ff2905662630c2',1,'pelf::Pe']]],
-  ['checkpesignature_2',['checkPESignature',['../classpelf_1_1_pe.html#a8f7823c9fd56839c51f7fa689fb56971',1,'pelf::Pe']]],
-  ['checksignatures_3',['checkSignatures',['../classpelf_1_1_pe.html#af46883d6b316372ea21c40796111c609',1,'pelf::Pe']]],
-  ['copystruct_4',['copyStruct',['../classpelf_1_1_pelf_helper.html#a59b51d5417a9f15ae9dd1cc2b9b1b060',1,'pelf::PelfHelper']]]
+  ['checkfilesize_0',['checkFileSize',['../classpelf_1_1_elf.html#a5e3cbceda47d65dbfb840323b153917f',1,'pelf::Elf::checkFileSize()'],['../classpelf_1_1_pe.html#a3a438104d2bf4c2d5995ab523c4c9b11',1,'pelf::Pe::checkFileSize() const -&gt; bool']]],
+  ['checkmzdsignature_1',['checkMZDSignature',['../classpelf_1_1_pe.html#af76e7838ee5f706281a94457eafd4f11',1,'pelf::Pe']]],
+  ['checkpesignature_2',['checkPESignature',['../classpelf_1_1_pe.html#a4a887ff030639ded9222e37fba10032d',1,'pelf::Pe']]],
+  ['checksignatures_3',['checkSignatures',['../classpelf_1_1_elf.html#aaa1709914e18d44aa2a8f3d13aaf8d19',1,'pelf::Elf::checkSignatures()'],['../classpelf_1_1_pe.html#a9dca41bf0156d7c10835646fe23b6616',1,'pelf::Pe::checkSignatures()']]]
 ];

@@ -7,64 +7,158 @@
 \DoxyCodeLine{13 \textcolor{preprocessor}{\#define PESTRUCTS\_H\_}}
 \DoxyCodeLine{14 }
 \DoxyCodeLine{15 \textcolor{preprocessor}{\#include <boost/hana.hpp>}}
-\DoxyCodeLine{16 \textcolor{preprocessor}{\#include <cstdint>}}
-\DoxyCodeLine{17 }
-\DoxyCodeLine{18 }
+\DoxyCodeLine{16 }
+\DoxyCodeLine{17 \textcolor{preprocessor}{\#include <cstdint>}}
+\DoxyCodeLine{18 \textcolor{preprocessor}{\#include <array>}}
 \DoxyCodeLine{19 }
-\DoxyCodeLine{20 \textcolor{keyword}{namespace }\mbox{\hyperlink{namespacepelf}{pelf}} \{}
-\DoxyCodeLine{21 }
-\DoxyCodeLine{22 \textcolor{keyword}{namespace }hana = boost::hana;}
-\DoxyCodeLine{23 }
-\DoxyCodeLine{24 \textcolor{comment}{/* Windows typedefs */}}
-\DoxyCodeLine{25 \textcolor{keyword}{using} \mbox{\hyperlink{namespacepelf_a68b4632c0053ab2bb24b62ba1ccbf7c2}{WORD}} = std::uint16\_t;}
-\DoxyCodeLine{26 \textcolor{keyword}{using} \mbox{\hyperlink{namespacepelf_a7931c494810aaeb8ce5f61bb01151a2c}{DWORD}} = std::uint32\_t;}
-\DoxyCodeLine{27 }
-\DoxyCodeLine{28 \textcolor{preprocessor}{\#pragma pack(push, 1)     }\textcolor{comment}{// Disable padding }}
-\DoxyCodeLine{29 }
-\DoxyCodeLine{34 \textcolor{keyword}{struct }\mbox{\hyperlink{structpelf_1_1_i_m_a_g_e___f_i_l_e___h_e_a_d_e_r}{IMAGE\_FILE\_HEADER}} \{}
-\DoxyCodeLine{39   \mbox{\hyperlink{structpelf_1_1_i_m_a_g_e___f_i_l_e___h_e_a_d_e_r_ac47a89aef68a50041d3761c60be3f1d9}{BOOST\_HANA\_DEFINE\_STRUCT}}(\mbox{\hyperlink{structpelf_1_1_i_m_a_g_e___f_i_l_e___h_e_a_d_e_r}{IMAGE\_FILE\_HEADER}},}
-\DoxyCodeLine{40     (\mbox{\hyperlink{namespacepelf_a68b4632c0053ab2bb24b62ba1ccbf7c2}{WORD}},  Machine),          }
-\DoxyCodeLine{41     (\mbox{\hyperlink{namespacepelf_a68b4632c0053ab2bb24b62ba1ccbf7c2}{WORD}},  NumberOfSections),}
-\DoxyCodeLine{42     (\mbox{\hyperlink{namespacepelf_a7931c494810aaeb8ce5f61bb01151a2c}{DWORD}}, TimeDateStamp),}
-\DoxyCodeLine{43     (\mbox{\hyperlink{namespacepelf_a7931c494810aaeb8ce5f61bb01151a2c}{DWORD}}, PointerToSymbolTable),}
-\DoxyCodeLine{44     (\mbox{\hyperlink{namespacepelf_a7931c494810aaeb8ce5f61bb01151a2c}{DWORD}}, NumberOfSymbols),}
-\DoxyCodeLine{45     (\mbox{\hyperlink{namespacepelf_a68b4632c0053ab2bb24b62ba1ccbf7c2}{WORD}},  SizeOfOptionalHeader),}
-\DoxyCodeLine{46     (\mbox{\hyperlink{namespacepelf_a68b4632c0053ab2bb24b62ba1ccbf7c2}{WORD}},  Characteristics)}
-\DoxyCodeLine{47   );}
-\DoxyCodeLine{48 }
-\DoxyCodeLine{49 }
-\DoxyCodeLine{50   [[nodiscard]] \textcolor{keyword}{constexpr} \textcolor{keyword}{auto} \mbox{\hyperlink{structpelf_1_1_i_m_a_g_e___f_i_l_e___h_e_a_d_e_r_a9079b5f58a92d1b759d54a9c4da57c4c}{getMachine}}() const -\/> \mbox{\hyperlink{namespacepelf_a68b4632c0053ab2bb24b62ba1ccbf7c2}{WORD}} \{ }
-\DoxyCodeLine{51     \textcolor{keywordflow}{return} hana::at\_c<0>(hana::members(*\textcolor{keyword}{this})); }
-\DoxyCodeLine{52   \}}
-\DoxyCodeLine{53 }
-\DoxyCodeLine{54   [[nodiscard]] \textcolor{keyword}{constexpr} \textcolor{keyword}{auto} \mbox{\hyperlink{structpelf_1_1_i_m_a_g_e___f_i_l_e___h_e_a_d_e_r_a7517c9e0bbf36a49fd701e24605876f0}{getNumberOfSections}}() const -\/> \mbox{\hyperlink{namespacepelf_a68b4632c0053ab2bb24b62ba1ccbf7c2}{WORD}} \{}
-\DoxyCodeLine{55     \textcolor{keywordflow}{return} hana::at\_c<1>(hana::members(*\textcolor{keyword}{this})); }
-\DoxyCodeLine{56   \}}
-\DoxyCodeLine{57 }
-\DoxyCodeLine{58   [[nodiscard]] \textcolor{keyword}{constexpr} \textcolor{keyword}{auto} \mbox{\hyperlink{structpelf_1_1_i_m_a_g_e___f_i_l_e___h_e_a_d_e_r_a2a465c74dafb04b679ff43abc4b56f52}{getTimeDateStamp}}() const -\/> \mbox{\hyperlink{namespacepelf_a7931c494810aaeb8ce5f61bb01151a2c}{DWORD}} \{}
-\DoxyCodeLine{59     \textcolor{keywordflow}{return} hana::at\_c<2>(hana::members(*\textcolor{keyword}{this})); }
-\DoxyCodeLine{60   \}}
-\DoxyCodeLine{61 }
-\DoxyCodeLine{62   [[nodiscard]] \textcolor{keyword}{constexpr} \textcolor{keyword}{auto} \mbox{\hyperlink{structpelf_1_1_i_m_a_g_e___f_i_l_e___h_e_a_d_e_r_a916391f8a632b27d85b64f74585546ba}{getPointerToSymbolTable}}() const -\/> \mbox{\hyperlink{namespacepelf_a7931c494810aaeb8ce5f61bb01151a2c}{DWORD}} \{}
-\DoxyCodeLine{63     \textcolor{keywordflow}{return} hana::at\_c<3>(hana::members(*\textcolor{keyword}{this}));}
-\DoxyCodeLine{64   \}}
-\DoxyCodeLine{65 }
-\DoxyCodeLine{66   [[nodiscard]] \textcolor{keyword}{constexpr} \textcolor{keyword}{auto} \mbox{\hyperlink{structpelf_1_1_i_m_a_g_e___f_i_l_e___h_e_a_d_e_r_a3545dcd9c6a7bbaa2b3734fb365c3164}{getNumberOfSymbols}}() const -\/> \mbox{\hyperlink{namespacepelf_a7931c494810aaeb8ce5f61bb01151a2c}{DWORD}} \{}
-\DoxyCodeLine{67     \textcolor{keywordflow}{return} hana::at\_c<4>(hana::members(*\textcolor{keyword}{this}));}
-\DoxyCodeLine{68   \}}
-\DoxyCodeLine{69 }
-\DoxyCodeLine{70   [[nodiscard]] \textcolor{keyword}{constexpr} \textcolor{keyword}{auto} \mbox{\hyperlink{structpelf_1_1_i_m_a_g_e___f_i_l_e___h_e_a_d_e_r_aa752f2d5473af483a02309e61008ef94}{getSizeOfOptionalHeader}}() const -\/> \mbox{\hyperlink{namespacepelf_a68b4632c0053ab2bb24b62ba1ccbf7c2}{WORD}} \{}
-\DoxyCodeLine{71     \textcolor{keywordflow}{return} hana::at\_c<5>(hana::members(*\textcolor{keyword}{this}));}
-\DoxyCodeLine{72   \}}
-\DoxyCodeLine{73 }
-\DoxyCodeLine{74   [[nodiscard]] \textcolor{keyword}{constexpr} \textcolor{keyword}{auto} \mbox{\hyperlink{structpelf_1_1_i_m_a_g_e___f_i_l_e___h_e_a_d_e_r_a390b4bc0c763b79681d843ab0f77ac50}{getCharacteristics}}() const -\/> \mbox{\hyperlink{namespacepelf_a68b4632c0053ab2bb24b62ba1ccbf7c2}{WORD}} \{}
-\DoxyCodeLine{75     \textcolor{keywordflow}{return} hana::at\_c<6>(hana::members(*\textcolor{keyword}{this}));}
-\DoxyCodeLine{76   \}}
-\DoxyCodeLine{77 \};}
-\DoxyCodeLine{78 \textcolor{preprocessor}{\#pragma pack(pop)}}
-\DoxyCodeLine{79 }
-\DoxyCodeLine{80 \} \textcolor{comment}{// namespace end }}
-\DoxyCodeLine{81 }
-\DoxyCodeLine{82 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{20 }
+\DoxyCodeLine{21 \textcolor{keyword}{namespace }\mbox{\hyperlink{namespacepelf}{pelf}} \{}
+\DoxyCodeLine{22 }
+\DoxyCodeLine{23 \textcolor{keyword}{namespace }hana = boost::hana;}
+\DoxyCodeLine{24 }
+\DoxyCodeLine{25 \textcolor{comment}{/* Windows typedefs */}}
+\DoxyCodeLine{26 \textcolor{keyword}{using} \mbox{\hyperlink{namespacepelf_a68b4632c0053ab2bb24b62ba1ccbf7c2}{WORD}} = std::uint16\_t;}
+\DoxyCodeLine{27 \textcolor{keyword}{using} \mbox{\hyperlink{namespacepelf_a7931c494810aaeb8ce5f61bb01151a2c}{DWORD}} = std::uint32\_t;}
+\DoxyCodeLine{28 \textcolor{keyword}{using} \mbox{\hyperlink{namespacepelf_a6e96db286837d72766c86aca048c6dfd}{BYTE}} = std::uint8\_t;}
+\DoxyCodeLine{29 \textcolor{keyword}{using} \mbox{\hyperlink{namespacepelf_af027a97fcc726a33b2fe786943890dff}{ULONGLONG}} = std::uint64\_t;}
+\DoxyCodeLine{30 }
+\DoxyCodeLine{31 \textcolor{keyword}{inline} \textcolor{keyword}{constexpr} std::uint8\_t \mbox{\hyperlink{namespacepelf_a716c30fc438e7314073e86fcb72b293b}{IMAGE\_NUMBER\_OF\_DIRECTORY\_ENTRIES}}\{ 16 \};}
+\DoxyCodeLine{32 }
+\DoxyCodeLine{33 }
+\DoxyCodeLine{39 \textcolor{preprocessor}{\#pragma pack(push, 1)}\textcolor{comment}{// Disable padding}}
+\DoxyCodeLine{40 \textcolor{keyword}{struct }\mbox{\hyperlink{structpelf_1_1_i_m_a_g_e___f_i_l_e___h_e_a_d_e_r}{IMAGE\_FILE\_HEADER}}}
+\DoxyCodeLine{41 \{}
+\DoxyCodeLine{46   \mbox{\hyperlink{structpelf_1_1_i_m_a_g_e___f_i_l_e___h_e_a_d_e_r_ac47a89aef68a50041d3761c60be3f1d9}{BOOST\_HANA\_DEFINE\_STRUCT}}(\mbox{\hyperlink{structpelf_1_1_i_m_a_g_e___f_i_l_e___h_e_a_d_e_r}{IMAGE\_FILE\_HEADER}},}
+\DoxyCodeLine{47     (\mbox{\hyperlink{namespacepelf_a68b4632c0053ab2bb24b62ba1ccbf7c2}{WORD}}, Machine),}
+\DoxyCodeLine{48     (\mbox{\hyperlink{namespacepelf_a68b4632c0053ab2bb24b62ba1ccbf7c2}{WORD}}, NumberOfSections),}
+\DoxyCodeLine{49     (\mbox{\hyperlink{namespacepelf_a7931c494810aaeb8ce5f61bb01151a2c}{DWORD}}, TimeDateStamp),}
+\DoxyCodeLine{50     (\mbox{\hyperlink{namespacepelf_a7931c494810aaeb8ce5f61bb01151a2c}{DWORD}}, PointerToSymbolTable),}
+\DoxyCodeLine{51     (\mbox{\hyperlink{namespacepelf_a7931c494810aaeb8ce5f61bb01151a2c}{DWORD}}, NumberOfSymbols),}
+\DoxyCodeLine{52     (\mbox{\hyperlink{namespacepelf_a68b4632c0053ab2bb24b62ba1ccbf7c2}{WORD}}, SizeOfOptionalHeader),}
+\DoxyCodeLine{53     (\mbox{\hyperlink{namespacepelf_a68b4632c0053ab2bb24b62ba1ccbf7c2}{WORD}}, Characteristics));}
+\DoxyCodeLine{54 \};}
+\DoxyCodeLine{55 \textcolor{preprocessor}{\#pragma pack(pop)}}
+\DoxyCodeLine{56 }
+\DoxyCodeLine{64 \textcolor{preprocessor}{\#pragma pack(push, 1)}\textcolor{comment}{// disable padding}}
+\DoxyCodeLine{65 \textcolor{keyword}{struct }\mbox{\hyperlink{structpelf_1_1_i_m_a_g_e___d_a_t_a___d_i_r_e_c_t_o_r_y}{IMAGE\_DATA\_DIRECTORY}}}
+\DoxyCodeLine{66 \{}
+\DoxyCodeLine{67   \mbox{\hyperlink{structpelf_1_1_i_m_a_g_e___d_a_t_a___d_i_r_e_c_t_o_r_y_af53ae415d1254c16d50eeb1182364b1c}{BOOST\_HANA\_DEFINE\_STRUCT}}(\mbox{\hyperlink{structpelf_1_1_i_m_a_g_e___d_a_t_a___d_i_r_e_c_t_o_r_y}{IMAGE\_DATA\_DIRECTORY}},}
+\DoxyCodeLine{68     (\mbox{\hyperlink{namespacepelf_a7931c494810aaeb8ce5f61bb01151a2c}{DWORD}}, VirtualAddress),}
+\DoxyCodeLine{69     (\mbox{\hyperlink{namespacepelf_a7931c494810aaeb8ce5f61bb01151a2c}{DWORD}}, Size));}
+\DoxyCodeLine{70 \};}
+\DoxyCodeLine{71 \textcolor{preprocessor}{\#pragma pack(pop)}}
+\DoxyCodeLine{72 }
+\DoxyCodeLine{81 \textcolor{preprocessor}{\#pragma pack(push, 1)}}
+\DoxyCodeLine{82 \textcolor{keyword}{struct }\mbox{\hyperlink{structpelf_1_1_standard_coff_fields}{StandardCoffFields}}}
+\DoxyCodeLine{83 \{}
+\DoxyCodeLine{84   \mbox{\hyperlink{structpelf_1_1_standard_coff_fields_a0c664b08c8804d43df91a079afb824f1}{BOOST\_HANA\_DEFINE\_STRUCT}}(\mbox{\hyperlink{structpelf_1_1_standard_coff_fields}{StandardCoffFields}},}
+\DoxyCodeLine{85     (\mbox{\hyperlink{namespacepelf_a68b4632c0053ab2bb24b62ba1ccbf7c2}{WORD}}, Magic),}
+\DoxyCodeLine{86     (\mbox{\hyperlink{namespacepelf_a6e96db286837d72766c86aca048c6dfd}{BYTE}}, MajorLinkerVersion),}
+\DoxyCodeLine{87     (\mbox{\hyperlink{namespacepelf_a6e96db286837d72766c86aca048c6dfd}{BYTE}}, MinorLinkerVersion),}
+\DoxyCodeLine{88     (\mbox{\hyperlink{namespacepelf_a7931c494810aaeb8ce5f61bb01151a2c}{DWORD}}, SizeOfCode),}
+\DoxyCodeLine{89     (\mbox{\hyperlink{namespacepelf_a7931c494810aaeb8ce5f61bb01151a2c}{DWORD}}, SizeOfInitializedData),}
+\DoxyCodeLine{90     (\mbox{\hyperlink{namespacepelf_a7931c494810aaeb8ce5f61bb01151a2c}{DWORD}}, SizeOfUninitializedData),}
+\DoxyCodeLine{91     (\mbox{\hyperlink{namespacepelf_a7931c494810aaeb8ce5f61bb01151a2c}{DWORD}}, AddressOfEntryPoint),}
+\DoxyCodeLine{92     (\mbox{\hyperlink{namespacepelf_a7931c494810aaeb8ce5f61bb01151a2c}{DWORD}}, BaseOfCode));}
+\DoxyCodeLine{93 \};}
+\DoxyCodeLine{94 \textcolor{preprocessor}{\#pragma pack(pop)}}
+\DoxyCodeLine{95 }
+\DoxyCodeLine{96 }
+\DoxyCodeLine{105 \textcolor{preprocessor}{\#pragma pack(push, 1)}}
+\DoxyCodeLine{106 \textcolor{keyword}{struct }\mbox{\hyperlink{structpelf_1_1_windows_specific_fields}{WindowsSpecificFields}}}
+\DoxyCodeLine{107 \{}
+\DoxyCodeLine{108   \mbox{\hyperlink{structpelf_1_1_windows_specific_fields_a445ba1593e1157eec536132cde818018}{BOOST\_HANA\_DEFINE\_STRUCT}}(\mbox{\hyperlink{structpelf_1_1_windows_specific_fields}{WindowsSpecificFields}},}
+\DoxyCodeLine{109 }
+\DoxyCodeLine{110     (\mbox{\hyperlink{namespacepelf_af027a97fcc726a33b2fe786943890dff}{ULONGLONG}}, ImageBase),}
+\DoxyCodeLine{111     (\mbox{\hyperlink{namespacepelf_a7931c494810aaeb8ce5f61bb01151a2c}{DWORD}}, SectionAlignment),}
+\DoxyCodeLine{112     (\mbox{\hyperlink{namespacepelf_a7931c494810aaeb8ce5f61bb01151a2c}{DWORD}}, FileAlignment),}
+\DoxyCodeLine{113     (\mbox{\hyperlink{namespacepelf_a68b4632c0053ab2bb24b62ba1ccbf7c2}{WORD}}, MajorOperatingSystemVersion),}
+\DoxyCodeLine{114     (\mbox{\hyperlink{namespacepelf_a68b4632c0053ab2bb24b62ba1ccbf7c2}{WORD}}, MinorOperatingSystemVersion),}
+\DoxyCodeLine{115     (\mbox{\hyperlink{namespacepelf_a68b4632c0053ab2bb24b62ba1ccbf7c2}{WORD}}, MajorImageVersion),}
+\DoxyCodeLine{116     (\mbox{\hyperlink{namespacepelf_a68b4632c0053ab2bb24b62ba1ccbf7c2}{WORD}}, MinorImageVersion),}
+\DoxyCodeLine{117     (\mbox{\hyperlink{namespacepelf_a68b4632c0053ab2bb24b62ba1ccbf7c2}{WORD}}, MajorSubsystemVersion),}
+\DoxyCodeLine{118     (\mbox{\hyperlink{namespacepelf_a68b4632c0053ab2bb24b62ba1ccbf7c2}{WORD}}, MinorSubsystemVersion),}
+\DoxyCodeLine{119     (\mbox{\hyperlink{namespacepelf_a7931c494810aaeb8ce5f61bb01151a2c}{DWORD}}, Win32VersionValue),}
+\DoxyCodeLine{120     (\mbox{\hyperlink{namespacepelf_a7931c494810aaeb8ce5f61bb01151a2c}{DWORD}}, SizeOfImage),}
+\DoxyCodeLine{121     (\mbox{\hyperlink{namespacepelf_a7931c494810aaeb8ce5f61bb01151a2c}{DWORD}}, SizeOfHeaders),}
+\DoxyCodeLine{122     (\mbox{\hyperlink{namespacepelf_a7931c494810aaeb8ce5f61bb01151a2c}{DWORD}}, CheckSum),}
+\DoxyCodeLine{123     (\mbox{\hyperlink{namespacepelf_a68b4632c0053ab2bb24b62ba1ccbf7c2}{WORD}}, Subsystem),}
+\DoxyCodeLine{124     (\mbox{\hyperlink{namespacepelf_a68b4632c0053ab2bb24b62ba1ccbf7c2}{WORD}}, DllCharacteristics),}
+\DoxyCodeLine{125     (\mbox{\hyperlink{namespacepelf_af027a97fcc726a33b2fe786943890dff}{ULONGLONG}}, SizeOfStackReserve),}
+\DoxyCodeLine{126     (\mbox{\hyperlink{namespacepelf_af027a97fcc726a33b2fe786943890dff}{ULONGLONG}}, SizeOfStackCommit),}
+\DoxyCodeLine{127     (\mbox{\hyperlink{namespacepelf_af027a97fcc726a33b2fe786943890dff}{ULONGLONG}}, SizeOfHeapReserve),}
+\DoxyCodeLine{128     (\mbox{\hyperlink{namespacepelf_af027a97fcc726a33b2fe786943890dff}{ULONGLONG}}, SizeOfHeapCommit),}
+\DoxyCodeLine{129     (\mbox{\hyperlink{namespacepelf_a7931c494810aaeb8ce5f61bb01151a2c}{DWORD}}, LoaderFlags),}
+\DoxyCodeLine{130     (\mbox{\hyperlink{namespacepelf_a7931c494810aaeb8ce5f61bb01151a2c}{DWORD}}, NumberOfRvaAndSizes));}
+\DoxyCodeLine{131 \};}
+\DoxyCodeLine{132 \textcolor{preprocessor}{\#pragma pack(pop)}}
+\DoxyCodeLine{133 }
+\DoxyCodeLine{134 }
+\DoxyCodeLine{139 \textcolor{keyword}{struct }\mbox{\hyperlink{structpelf_1_1_optional_header}{OptionalHeader}}}
+\DoxyCodeLine{140 \{}
+\DoxyCodeLine{141   \mbox{\hyperlink{structpelf_1_1_standard_coff_fields}{StandardCoffFields}} \mbox{\hyperlink{structpelf_1_1_optional_header_adde9a675c4612a9ab231d428e25a489b}{mScf}}\{\};}
+\DoxyCodeLine{142   \mbox{\hyperlink{structpelf_1_1_windows_specific_fields}{WindowsSpecificFields}} \mbox{\hyperlink{structpelf_1_1_optional_header_abc5cb58f1cd05db22a5b3ed897af6542}{mWsf}}\{\};}
+\DoxyCodeLine{143   std::array<IMAGE\_DATA\_DIRECTORY, IMAGE\_NUMBER\_OF\_DIRECTORY\_ENTRIES>}
+\DoxyCodeLine{144     \mbox{\hyperlink{structpelf_1_1_optional_header_a4cfcdbdc6a87bb9e54b88215d0c592a1}{mDataDirectories}}\{\};}
+\DoxyCodeLine{145 \};}
+\DoxyCodeLine{146 }
+\DoxyCodeLine{147 }
+\DoxyCodeLine{153 \textcolor{keyword}{struct }\mbox{\hyperlink{structpelf_1_1_pe_headers}{PeHeaders}}}
+\DoxyCodeLine{154 \{}
+\DoxyCodeLine{155   \mbox{\hyperlink{structpelf_1_1_i_m_a_g_e___f_i_l_e___h_e_a_d_e_r}{IMAGE\_FILE\_HEADER}}}
+\DoxyCodeLine{156   \mbox{\hyperlink{structpelf_1_1_pe_headers_a74303421cc117ea467dce67a787de85c}{mCoffHeader}}\{\}; }
+\DoxyCodeLine{157   \mbox{\hyperlink{structpelf_1_1_optional_header}{OptionalHeader}} \mbox{\hyperlink{structpelf_1_1_pe_headers_a2e1cc83a3d005b178371fa7ec1180e72}{mOptionalHeader}}; }
+\DoxyCodeLine{160   \textcolor{comment}{/* Methods to make access to headers more readable for the user */}}
+\DoxyCodeLine{161 }
+\DoxyCodeLine{167   [[nodiscard]] \textcolor{keyword}{constexpr} \textcolor{keyword}{auto} \mbox{\hyperlink{structpelf_1_1_pe_headers_afaa14298fc20ae442d3b44f60a9b0012}{getCoffHeader}}() const noexcept}
+\DoxyCodeLine{168     -\/> \mbox{\hyperlink{structpelf_1_1_i_m_a_g_e___f_i_l_e___h_e_a_d_e_r}{IMAGE\_FILE\_HEADER}}}
+\DoxyCodeLine{169   \{}
+\DoxyCodeLine{170     \textcolor{keywordflow}{return} \mbox{\hyperlink{structpelf_1_1_pe_headers_a74303421cc117ea467dce67a787de85c}{mCoffHeader}};}
+\DoxyCodeLine{171   \}}
+\DoxyCodeLine{172 }
+\DoxyCodeLine{178   [[nodiscard]] \textcolor{keyword}{constexpr} \textcolor{keyword}{auto} \mbox{\hyperlink{structpelf_1_1_pe_headers_abd7e4d5e7b1a38e93b33ed9539d28818}{getOptionalHeader}}() const noexcept}
+\DoxyCodeLine{179     -\/> \mbox{\hyperlink{structpelf_1_1_optional_header}{OptionalHeader}}}
+\DoxyCodeLine{180   \{}
+\DoxyCodeLine{181     \textcolor{keywordflow}{return} \mbox{\hyperlink{structpelf_1_1_pe_headers_a2e1cc83a3d005b178371fa7ec1180e72}{mOptionalHeader}};}
+\DoxyCodeLine{182   \}}
+\DoxyCodeLine{183 }
+\DoxyCodeLine{189   [[nodiscard]] \textcolor{keyword}{constexpr} \textcolor{keyword}{auto} \mbox{\hyperlink{structpelf_1_1_pe_headers_acf2d19c7a2e1f91fee04dd7c76865772}{getStandardCoffFields}}() const noexcept}
+\DoxyCodeLine{190     -\/> \mbox{\hyperlink{structpelf_1_1_standard_coff_fields}{StandardCoffFields}}}
+\DoxyCodeLine{191   \{}
+\DoxyCodeLine{192     \textcolor{keywordflow}{return} \mbox{\hyperlink{structpelf_1_1_pe_headers_a2e1cc83a3d005b178371fa7ec1180e72}{mOptionalHeader}}.\mbox{\hyperlink{structpelf_1_1_optional_header_adde9a675c4612a9ab231d428e25a489b}{mScf}};}
+\DoxyCodeLine{193   \}}
+\DoxyCodeLine{194 }
+\DoxyCodeLine{200   [[nodiscard]] \textcolor{keyword}{constexpr} \textcolor{keyword}{auto} \mbox{\hyperlink{structpelf_1_1_pe_headers_acdb82e633dad6c3dac26b41407867a72}{getWindowsSpecificFields}}() const noexcept}
+\DoxyCodeLine{201     -\/> \mbox{\hyperlink{structpelf_1_1_windows_specific_fields}{WindowsSpecificFields}}}
+\DoxyCodeLine{202   \{}
+\DoxyCodeLine{203     \textcolor{keywordflow}{return} \mbox{\hyperlink{structpelf_1_1_pe_headers_a2e1cc83a3d005b178371fa7ec1180e72}{mOptionalHeader}}.\mbox{\hyperlink{structpelf_1_1_optional_header_abc5cb58f1cd05db22a5b3ed897af6542}{mWsf}};}
+\DoxyCodeLine{204   \}}
+\DoxyCodeLine{210   [[nodiscard]] \textcolor{keyword}{constexpr} \textcolor{keyword}{auto} \mbox{\hyperlink{structpelf_1_1_pe_headers_a84be803693a20335592e46504906b6f0}{getDataDirectories}}() const noexcept}
+\DoxyCodeLine{211   \{}
+\DoxyCodeLine{212     \textcolor{keywordflow}{return} \mbox{\hyperlink{structpelf_1_1_pe_headers_a2e1cc83a3d005b178371fa7ec1180e72}{mOptionalHeader}}.\mbox{\hyperlink{structpelf_1_1_optional_header_a4cfcdbdc6a87bb9e54b88215d0c592a1}{mDataDirectories}};}
+\DoxyCodeLine{213   \}}
+\DoxyCodeLine{214 \};}
+\DoxyCodeLine{215 }
+\DoxyCodeLine{216 \textcolor{preprocessor}{\#pragma pack(push, 1)}}
+\DoxyCodeLine{217 \textcolor{keyword}{struct }\mbox{\hyperlink{structpelf_1_1_i_m_a_g_e___s_e_c_t_i_o_n___h_e_a_d_e_r}{IMAGE\_SECTION\_HEADER}}}
+\DoxyCodeLine{218 \{}
+\DoxyCodeLine{219   \mbox{\hyperlink{structpelf_1_1_i_m_a_g_e___s_e_c_t_i_o_n___h_e_a_d_e_r_a081cb1d1b6cd73a9692efaf675b5c32d}{BOOST\_HANA\_DEFINE\_STRUCT}}(\mbox{\hyperlink{structpelf_1_1_i_m_a_g_e___s_e_c_t_i_o_n___h_e_a_d_e_r}{IMAGE\_SECTION\_HEADER}},}
+\DoxyCodeLine{220     (\mbox{\hyperlink{namespacepelf_af027a97fcc726a33b2fe786943890dff}{ULONGLONG}}, Name),}
+\DoxyCodeLine{221     (\mbox{\hyperlink{namespacepelf_af027a97fcc726a33b2fe786943890dff}{ULONGLONG}}, PhysAddressAndVirtSize),}
+\DoxyCodeLine{222     (\mbox{\hyperlink{namespacepelf_a7931c494810aaeb8ce5f61bb01151a2c}{DWORD}}, VirtualAddress),}
+\DoxyCodeLine{223     (\mbox{\hyperlink{namespacepelf_a7931c494810aaeb8ce5f61bb01151a2c}{DWORD}}, SizeOfRawData),}
+\DoxyCodeLine{224     (\mbox{\hyperlink{namespacepelf_a7931c494810aaeb8ce5f61bb01151a2c}{DWORD}}, PointerToRawData),}
+\DoxyCodeLine{225     (\mbox{\hyperlink{namespacepelf_a7931c494810aaeb8ce5f61bb01151a2c}{DWORD}}, PointerToRelocations),}
+\DoxyCodeLine{226     (\mbox{\hyperlink{namespacepelf_a7931c494810aaeb8ce5f61bb01151a2c}{DWORD}}, PointerToLinenumbers),}
+\DoxyCodeLine{227     (\mbox{\hyperlink{namespacepelf_a68b4632c0053ab2bb24b62ba1ccbf7c2}{WORD}}, NumberOfRelocations),}
+\DoxyCodeLine{228     (\mbox{\hyperlink{namespacepelf_a68b4632c0053ab2bb24b62ba1ccbf7c2}{WORD}}, NumberOfLinenumbers),}
+\DoxyCodeLine{229     (\mbox{\hyperlink{namespacepelf_a7931c494810aaeb8ce5f61bb01151a2c}{DWORD}}, Characteristics));}
+\DoxyCodeLine{230 \};}
+\DoxyCodeLine{231 \textcolor{preprocessor}{\#pragma pack(pop)}}
+\DoxyCodeLine{232 }
+\DoxyCodeLine{233 }
+\DoxyCodeLine{234 \}\textcolor{comment}{// namespace pelf}}
+\DoxyCodeLine{235 }
+\DoxyCodeLine{236 \textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCode}

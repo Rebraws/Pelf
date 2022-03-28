@@ -5,22 +5,30 @@
 Pe class declaration.  
 
 
+{\ttfamily \#include \char`\"{}pe\+Structs.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}Pelf.\+h\char`\"{}}\newline
 {\ttfamily \#include $<$algorithm$>$}\newline
-{\ttfamily \#include $<$cstring$>$}\newline
 {\ttfamily \#include $<$cassert$>$}\newline
-{\ttfamily \#include \char`\"{}pe\+Structs.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$array$>$}\newline
+{\ttfamily \#include $<$type\+\_\+traits$>$}\newline
 {\ttfamily \#include $<$boost/hana.\+hpp$>$}\newline
 \doxysubsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
-class \mbox{\hyperlink{classpelf_1_1_pe}{pelf\+::\+Pe$<$ Container $>$}}
+class \mbox{\hyperlink{classpelf_1_1_pe}{pelf\+::\+Pe$<$ Container, Num\+Of\+Sections $>$}}
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classpelf_1_1_pe}{Pe}} class. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Namespaces}
 \begin{DoxyCompactItemize}
 \item 
 namespace \mbox{\hyperlink{namespacepelf}{pelf}}
 \end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$class Container $>$ \newline
+requires container\+\_\+and\+\_\+convertible\+\_\+v$<$Container, unsigned char$>$}\\consteval auto \mbox{\hyperlink{namespacepelf_a45ded953c0ff554de8b2c8fd0f07b6d6}{pelf\+::get\+Pe\+Number\+Of\+Sections}} (const Container \&data)
+\begin{DoxyCompactList}\small\item\em Function template that returns the number of sections (size of the section table) \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}

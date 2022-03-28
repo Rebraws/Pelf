@@ -1,10 +1,11 @@
 var searchData=
 [
-  ['mcoffheader_0',['mCoffHeader',['../classpelf_1_1_pe.html#a7eafaff28816fab0213b7193d420d178',1,'pelf::Pe']]],
-  ['mdata_1',['mData',['../classpelf_1_1_pelf.html#ac98647f291b3aa3809e49e2f3b57e261',1,'pelf::Pelf']]],
-  ['mminpesize_2',['mMinPeSize',['../classpelf_1_1_pe.html#a90dfed482f8683a9adc33f3fde479311',1,'pelf::Pe']]],
-  ['mmsg_3',['mMsg',['../classpelf_1_1_pelf_exception.html#a3c8c79aae5cd295415e17e1837d73778',1,'pelf::PelfException']]],
-  ['mmzdsignature_4',['mMZDSignature',['../classpelf_1_1_pe.html#a76a7612bdd93c78bac1e3a4bd54526dc',1,'pelf::Pe']]],
-  ['mpeheaderaddress_5',['mPeHeaderAddress',['../classpelf_1_1_pe.html#a93c1187c324e4ae7e2254731bf266cbd',1,'pelf::Pe']]],
-  ['mpesignature_6',['mPeSignature',['../classpelf_1_1_pe.html#afd3cf9aa26d42801f4efa7ed377c05d2',1,'pelf::Pe']]]
+  ['ei_5fclass_0',['EI_CLASS',['../namespacepelf.html#a93a643cc6ba430789ac6565ce1cc8e63',1,'pelf']]],
+  ['ei_5fdata_1',['EI_DATA',['../namespacepelf.html#acf5b4f71bdc0ae8d35d39b40222c01b3',1,'pelf']]],
+  ['ei_5fmag0_2',['EI_MAG0',['../namespacepelf.html#ae8b26e065d67c82a3e3c07b10bc94045',1,'pelf']]],
+  ['ei_5fmag1_3',['EI_MAG1',['../namespacepelf.html#a4bdac3cd6e3b890d427e2273a5db2513',1,'pelf']]],
+  ['ei_5fmag2_4',['EI_MAG2',['../namespacepelf.html#abc2c8ca470598236eea266c7b8d30090',1,'pelf']]],
+  ['ei_5fmag3_5',['EI_MAG3',['../namespacepelf.html#a7657a8ef3238ba5e3e6eb9a91f89cf87',1,'pelf']]],
+  ['elfclass64_6',['ELFCLASS64',['../namespacepelf.html#acee3872fd4945b0f5938b9cac3dc239f',1,'pelf']]],
+  ['elfheader_7',['elfHeader',['../structpelf_1_1_elf_headers.html#ac83a681bcd2fe191a8e18cdba3445966',1,'pelf::ElfHeaders']]]
 ];
