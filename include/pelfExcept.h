@@ -38,6 +38,13 @@ private:
   const char* mMsg /**< Explanatory string */;
 }; 
 
+PelfException::PelfException(const char* msg) noexcept : mMsg(msg) {}
+
+auto PelfException::what() const noexcept -> const char * {
+  return mMsg;
+}
+
+
 }
 
 #endif
