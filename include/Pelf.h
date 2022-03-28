@@ -88,6 +88,11 @@ public:
    * */
   constexpr auto getHeaders() const noexcept -> void;
 
+  /**
+   * @brief Returns the section table of the Pe or ELF file
+   * 
+   */
+  constexpr auto getSections() const noexcept -> void;
 
 protected:
   Container mData; /**< Raw data from the file to be parsed */
@@ -157,6 +162,19 @@ constexpr auto Pelf<Container, Derived, N...>::getHeaders() const noexcept
 {
   static_cast<const Derived<Container, N...>&>(*this).getHeaders();
 }
+
+
+
+template<class Container,
+  template<typename, std::size_t...>
+  class Derived,
+  std::size_t... N>
+constexpr auto Pelf<Container, Derived, N...>::getSections() const noexcept
+  -> void
+{
+  static_cast<const Derived<Container, N...>&>(*this).getSections();
+}
+
 
 
 template<class Container,
