@@ -147,9 +147,9 @@ template<std::size_t NumOfProgramHeader = 0> struct ElfHeaders
     std::array<Elf64_Phdr, NumOfProgramHeader>>;
 
 
-  Elf64_Ehdr mElfHeader; /**< Elf header */
+  Elf64_Ehdr elfHeader = {}; /**< Elf header */
   ProgramHeaders<NumOfProgramHeader>
-    mProgramHeaders; /**< Array or vector containing all program headers from
+    programHeaders = {}; /**< Array or vector containing all program headers from
                         the program header table*/
 };
 
