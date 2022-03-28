@@ -17,7 +17,6 @@
 
 #include <boost/hana.hpp>
 
-
 namespace hana = boost::hana;
 
 namespace pelf {
@@ -26,9 +25,37 @@ namespace pelf {
 inline constexpr int ELFCLASS64 = 2;
 inline constexpr int PN_XNUM = 0xffff;
 inline constexpr int SHN_LORESERVE = 0xff00;
+inline constexpr unsigned char EI_MAG0{
+  0x7f
+}; /**< Magic number identifying the File as an ELF object file */
+inline constexpr unsigned char EI_MAG1{
+  'E'
+}; /**< Magic number identifying the File as an ELF object file */
+inline constexpr unsigned char EI_MAG2{
+  'L'
+}; /**< Magic number identifying the File as an ELF object file */
+inline constexpr unsigned char EI_MAG3{
+  'F'
+}; /**< Magic number identifying the File as an ELF object file */
+inline constexpr unsigned char EI_CLASS{
+  0x2
+}; /**< Magic number identifying the architecture (in this case 64-bit)*/
+inline constexpr unsigned char EI_DATA{
+  0x1
+}; /**< Magic number identifying the data encoding of the processor-specific
+      data in the file (in this case is Two's complement, little-endian.)*/
+
+
 // inline constexpr std::uint8_t EI_NIDENT = 16; /**< The size of the e_ident
 // array */
 
+
+struct TableSizes
+{
+  std::size_t sectionTable{}; /**< Number of entries in the elf section table */
+  std::size_t
+    programHeader{}; /**< Number of entries in the elf program header table */
+};
 
 /** @brief Hana struct that represents the 64 bit elf header
  *
@@ -41,7 +68,8 @@ struct Elf64_Ehdr
    *
    * */
   BOOST_HANA_DEFINE_STRUCT(Elf64_Ehdr,
-    (std::uint16_t, e_ident),
+    (std::uint64_t, e_ident_high), // first 8 bytes of e_ident
+    (std::uint64_t, e_ident_low),  // lasy 6 bytes of e_ident
     (std::uint16_t, e_type),
     (std::uint16_t, e_machine),
     (std::uint32_t, e_version),
