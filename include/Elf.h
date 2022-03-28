@@ -262,7 +262,7 @@ constexpr auto
 
   tables_size.sectionTable = getSectionTableSize(elf_header, read_struct);
 
-  tables_size.programHeader = getProgramTableSize(elf_header, read_struct);
+  tables_size.programTable = getProgramTableSize(elf_header, read_struct);
 
 
   return tables_size;
@@ -329,7 +329,7 @@ constexpr auto Elf<Container, NumOfSections, NumOfProgHeaders>::parseHeaders()
     /* Get number of entries in the program header table */
     std::size_t program_header_table_size{};
     if (mHeaders.elfHeader.e_phnum >= PN_XNUM) {
-      program_header_table_size = getElfTablesSize(this->mData).programHeader;
+      program_header_table_size = getElfTablesSize(this->mData).programTable;
     } else {
       program_header_table_size = mHeaders.elfHeader.e_phnum;
     }

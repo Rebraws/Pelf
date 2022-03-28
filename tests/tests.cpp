@@ -36,7 +36,7 @@ inline constexpr auto elf_tables_size =
 
 constexpr pelf::Elf<decltype(hello_program_elf),
   elf_tables_size.sectionTable,
-  elf_tables_size.programHeader>
+  elf_tables_size.programTable>
   compile_elf{ hello_program_elf };
 
 
@@ -138,7 +138,7 @@ TEST_CASE("Test Pe sections")
 TEST_CASE("Test ELF table section size and program header table size")
 {
 
-  REQUIRE(elf_tables_size.programHeader == 11);
+  REQUIRE(elf_tables_size.programTable == 11);
   REQUIRE(elf_tables_size.sectionTable == 29);
 }
 
@@ -184,8 +184,8 @@ TEST_CASE("Test ELF header parsing")
 
 
   /* Check programHeaders size at compile and runtime */
-  REQUIRE(program_header.size() == elf_tables_size.programHeader);
-  REQUIRE(program_header_runtime.size() == elf_tables_size.programHeader);
+  REQUIRE(program_header.size() == elf_tables_size.programTable);
+  REQUIRE(program_header_runtime.size() == elf_tables_size.programTable);
 
   /* Checking entry point */
   REQUIRE(elf_header.e_entry == 0x4010c0);

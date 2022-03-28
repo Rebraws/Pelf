@@ -54,7 +54,7 @@ struct TableSizes
 {
   std::size_t sectionTable{}; /**< Number of entries in the elf section table */
   std::size_t
-    programHeader{}; /**< Number of entries in the elf program header table */
+    programTable{}; /**< Number of entries in the elf program header table */
 };
 
 /** @brief Hana struct that represents the 64 bit elf header
