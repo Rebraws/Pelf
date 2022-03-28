@@ -17,8 +17,8 @@
 #include "pelfExcept.h"
 #include <peStructs.h>
 #include <cassert>
-#include <boost/hana.hpp>
 
+#include <boost/hana.hpp>
 
 namespace pelf {
 
@@ -119,10 +119,10 @@ protected:
    *  This function is only used if parsing is done at compile time, otherwise
    * std::copy() is used
    *
-   *  @tparam Struct hana struct
-   *  @param offset offset
+   *  @tparam Struct hana struct that represents a pe or elf header
+   *  @param offset offset of the header
    *
-   *  @return `Struct`
+   *  @return Returns a struct of the corresponding header
    *  */
   template<class Struct>
   [[nodiscard]] constexpr auto getStruct(std::size_t offset) -> Struct;
