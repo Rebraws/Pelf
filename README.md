@@ -84,7 +84,7 @@ Once you have the binary data from your file available at compile time, parsing 
 int main() {
     
     /* Get the number of entries in the section table and program header table*/
-    static constexpr auto tables_size = pelf::Elf<decltype(data)>::getElfTablesSize(data);
+    static constexpr auto tables_size = pelf::getElfTablesSize(data);
     
     static constexpr pelf::Elf<decltype(data), tables_size.sectionTable, tables_size.programTable> elf{ data };
     
