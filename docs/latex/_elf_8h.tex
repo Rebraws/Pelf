@@ -7,7 +7,6 @@ Elf class declaration.
 
 {\ttfamily \#include \char`\"{}Pelf.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}elf\+Structs.\+h\char`\"{}}\newline
-{\ttfamily \#include $<$functional$>$}\newline
 \doxysubsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
@@ -18,6 +17,16 @@ class \mbox{\hyperlink{classpelf_1_1_elf}{pelf\+::\+Elf$<$ Container, Num\+Of\+S
 \item 
 namespace \mbox{\hyperlink{namespacepelf}{pelf}}
 \end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$class Function $>$ }\\constexpr auto \mbox{\hyperlink{namespacepelf_a7a8a91bf192c103c0e31a59b5917bbf7}{pelf\+::get\+Section\+Table\+Size}} (const Elf64\+\_\+\+Ehdr \&elf\+Header, Function read\+\_\+struct) -\/$>$ std\+::size\+\_\+t
+\begin{DoxyCompactList}\small\item\em Get the Section Table Size. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Function $>$ }\\constexpr auto \mbox{\hyperlink{namespacepelf_a01945922c682578808681db3cb4750f7}{pelf\+::get\+Program\+Table\+Size}} (const Elf64\+\_\+\+Ehdr \&elf\+Header, Function read\+\_\+struct) -\/$>$ std\+::size\+\_\+t
+\begin{DoxyCompactList}\small\item\em Get the Program Table Size. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Container $>$ \newline
+requires container\+\_\+and\+\_\+convertible\+\_\+v$<$Container, unsigned char$>$}\\constexpr auto \mbox{\hyperlink{namespacepelf_a098648bcab1701f80c3c3dd5f2397038}{pelf\+::get\+Elf\+Tables\+Size}} (const Container \&data) -\/$>$ Table\+Sizes
+\begin{DoxyCompactList}\small\item\em Get the number of entries in the section table and program header table. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}

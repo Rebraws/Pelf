@@ -56,6 +56,13 @@ using \mbox{\hyperlink{namespacepelf_af027a97fcc726a33b2fe786943890dff}{ULONGLON
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
+{\footnotesize template$<$class Function $>$ }\\constexpr auto \mbox{\hyperlink{namespacepelf_a7a8a91bf192c103c0e31a59b5917bbf7}{get\+Section\+Table\+Size}} (const \mbox{\hyperlink{structpelf_1_1_elf64___ehdr}{Elf64\+\_\+\+Ehdr}} \&elf\+Header, Function read\+\_\+struct) -\/$>$ std\+::size\+\_\+t
+\begin{DoxyCompactList}\small\item\em Get the Section Table Size. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Function $>$ }\\constexpr auto \mbox{\hyperlink{namespacepelf_a01945922c682578808681db3cb4750f7}{get\+Program\+Table\+Size}} (const \mbox{\hyperlink{structpelf_1_1_elf64___ehdr}{Elf64\+\_\+\+Ehdr}} \&elf\+Header, Function read\+\_\+struct) -\/$>$ std\+::size\+\_\+t
+\begin{DoxyCompactList}\small\item\em Get the Program Table Size. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Container $>$ \newline
+requires container\+\_\+and\+\_\+convertible\+\_\+v$<$Container, unsigned char$>$}\\constexpr auto \mbox{\hyperlink{namespacepelf_a098648bcab1701f80c3c3dd5f2397038}{get\+Elf\+Tables\+Size}} (const Container \&data) -\/$>$ \mbox{\hyperlink{structpelf_1_1_table_sizes}{Table\+Sizes}}
+\begin{DoxyCompactList}\small\item\em Get the number of entries in the section table and program header table. \end{DoxyCompactList}\item 
 {\footnotesize template$<$class Container $>$ \newline
 requires container\+\_\+and\+\_\+convertible\+\_\+v$<$Container, unsigned char$>$}\\consteval auto \mbox{\hyperlink{namespacepelf_a45ded953c0ff554de8b2c8fd0f07b6d6}{get\+Pe\+Number\+Of\+Sections}} (const Container \&data)
 \begin{DoxyCompactList}\small\item\em Function template that returns the number of sections (size of the section table) \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -79,6 +86,10 @@ constexpr unsigned char \mbox{\hyperlink{namespacepelf_a7657a8ef3238ba5e3e6eb9a9
 constexpr unsigned char \mbox{\hyperlink{namespacepelf_a93a643cc6ba430789ac6565ce1cc8e63}{EI\+\_\+\+CLASS}}
 \item 
 constexpr unsigned char \mbox{\hyperlink{namespacepelf_acf5b4f71bdc0ae8d35d39b40222c01b3}{EI\+\_\+\+DATA}}
+\item 
+constexpr std\+::uint8\+\_\+t \mbox{\hyperlink{namespacepelf_a2c8eaf67543f8e7821227aab535f7dbb}{MIN\+\_\+\+ELF\+\_\+\+SIZE}}
+\item 
+constexpr std\+::size\+\_\+t \mbox{\hyperlink{namespacepelf_a722b918f8f7d9a576849b97e0c7ab6f3}{ELF\+\_\+\+HEADER\+\_\+\+OFFSET}}
 \item 
 constexpr std\+::uint8\+\_\+t \mbox{\hyperlink{namespacepelf_a716c30fc438e7314073e86fcb72b293b}{IMAGE\+\_\+\+NUMBER\+\_\+\+OF\+\_\+\+DIRECTORY\+\_\+\+ENTRIES}} \{ 16 \}
 \end{DoxyCompactItemize}
@@ -130,6 +141,26 @@ Metafunction that returns an array if {\ttfamily Num} is zero, and a vector othe
 
 
 \doxysubsection{Function Documentation}
+\mbox{\Hypertarget{namespacepelf_a098648bcab1701f80c3c3dd5f2397038}\label{namespacepelf_a098648bcab1701f80c3c3dd5f2397038}} 
+\index{pelf@{pelf}!getElfTablesSize@{getElfTablesSize}}
+\index{getElfTablesSize@{getElfTablesSize}!pelf@{pelf}}
+\doxysubsubsection{\texorpdfstring{getElfTablesSize()}{getElfTablesSize()}}
+{\footnotesize\ttfamily template$<$class Container $>$ \newline
+requires container\+\_\+and\+\_\+convertible\+\_\+v$<$Container, unsigned char$>$\\
+constexpr auto pelf\+::get\+Elf\+Tables\+Size (\begin{DoxyParamCaption}\item[{const Container \&}]{data }\end{DoxyParamCaption}) -\/$>$ \mbox{\hyperlink{structpelf_1_1_table_sizes}{Table\+Sizes}} \hspace{0.3cm}{\ttfamily [constexpr]}}
+
+
+
+Get the number of entries in the section table and program header table. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns a {\ttfamily \mbox{\hyperlink{structpelf_1_1_table_sizes}{Table\+Sizes}}} struct 
+\end{DoxyReturn}
 \mbox{\Hypertarget{namespacepelf_a45ded953c0ff554de8b2c8fd0f07b6d6}\label{namespacepelf_a45ded953c0ff554de8b2c8fd0f07b6d6}} 
 \index{pelf@{pelf}!getPeNumberOfSections@{getPeNumberOfSections}}
 \index{getPeNumberOfSections@{getPeNumberOfSections}!pelf@{pelf}}
@@ -154,6 +185,58 @@ Function template that returns the number of sections (size of the section table
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
 Returns a {\ttfamily std\+::uint16\+\_\+t} that represents the number of sections 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespacepelf_a01945922c682578808681db3cb4750f7}\label{namespacepelf_a01945922c682578808681db3cb4750f7}} 
+\index{pelf@{pelf}!getProgramTableSize@{getProgramTableSize}}
+\index{getProgramTableSize@{getProgramTableSize}!pelf@{pelf}}
+\doxysubsubsection{\texorpdfstring{getProgramTableSize()}{getProgramTableSize()}}
+{\footnotesize\ttfamily template$<$class Function $>$ \\
+constexpr auto pelf\+::get\+Program\+Table\+Size (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structpelf_1_1_elf64___ehdr}{Elf64\+\_\+\+Ehdr}} \&}]{elf\+Header,  }\item[{Function}]{read\+\_\+struct }\end{DoxyParamCaption}) -\/$>$ std\+::size\+\_\+t\hspace{0.3cm}{\ttfamily [constexpr]}}
+
+
+
+Get the Program Table Size. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Callable} & object \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em elf\+Header} & \mbox{\hyperlink{classpelf_1_1_elf}{Elf}} header of the file (already initialized) \\
+\hline
+{\em read\+\_\+struct} & function that reads a header and initializes it. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns the Number of Entries in the \mbox{\hyperlink{classpelf_1_1_elf}{Elf}} program header table 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespacepelf_a7a8a91bf192c103c0e31a59b5917bbf7}\label{namespacepelf_a7a8a91bf192c103c0e31a59b5917bbf7}} 
+\index{pelf@{pelf}!getSectionTableSize@{getSectionTableSize}}
+\index{getSectionTableSize@{getSectionTableSize}!pelf@{pelf}}
+\doxysubsubsection{\texorpdfstring{getSectionTableSize()}{getSectionTableSize()}}
+{\footnotesize\ttfamily template$<$class Function $>$ \\
+constexpr auto pelf\+::get\+Section\+Table\+Size (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structpelf_1_1_elf64___ehdr}{Elf64\+\_\+\+Ehdr}} \&}]{elf\+Header,  }\item[{Function}]{read\+\_\+struct }\end{DoxyParamCaption}) -\/$>$ std\+::size\+\_\+t\hspace{0.3cm}{\ttfamily [constexpr]}}
+
+
+
+Get the Section Table Size. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Callable} & object \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em elf\+Header} & \mbox{\hyperlink{classpelf_1_1_elf}{Elf}} header of the file (already initialized) \\
+\hline
+{\em read\+\_\+struct} & function that reads a header and initializes it. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns the Number of Entries in the \mbox{\hyperlink{classpelf_1_1_elf}{Elf}} section table 
 \end{DoxyReturn}
 
 
@@ -236,7 +319,20 @@ Magic number identifying the File as an ELF object file \mbox{\Hypertarget{names
 \DoxyCodeLine{\}}
 
 \end{DoxyCode}
-Magic number identifying the File as an ELF object file \mbox{\Hypertarget{namespacepelf_acee3872fd4945b0f5938b9cac3dc239f}\label{namespacepelf_acee3872fd4945b0f5938b9cac3dc239f}} 
+Magic number identifying the File as an ELF object file \mbox{\Hypertarget{namespacepelf_a722b918f8f7d9a576849b97e0c7ab6f3}\label{namespacepelf_a722b918f8f7d9a576849b97e0c7ab6f3}} 
+\index{pelf@{pelf}!ELF\_HEADER\_OFFSET@{ELF\_HEADER\_OFFSET}}
+\index{ELF\_HEADER\_OFFSET@{ELF\_HEADER\_OFFSET}!pelf@{pelf}}
+\doxysubsubsection{\texorpdfstring{ELF\_HEADER\_OFFSET}{ELF\_HEADER\_OFFSET}}
+{\footnotesize\ttfamily constexpr std\+::size\+\_\+t pelf\+::\+ELF\+\_\+\+HEADER\+\_\+\+OFFSET\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{  0}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+Represents the elf header offset (it always starts at zero) \mbox{\Hypertarget{namespacepelf_acee3872fd4945b0f5938b9cac3dc239f}\label{namespacepelf_acee3872fd4945b0f5938b9cac3dc239f}} 
 \index{pelf@{pelf}!ELFCLASS64@{ELFCLASS64}}
 \index{ELFCLASS64@{ELFCLASS64}!pelf@{pelf}}
 \doxysubsubsection{\texorpdfstring{ELFCLASS64}{ELFCLASS64}}
@@ -248,7 +344,20 @@ Magic number identifying the File as an ELF object file \mbox{\Hypertarget{names
 \doxysubsubsection{\texorpdfstring{IMAGE\_NUMBER\_OF\_DIRECTORY\_ENTRIES}{IMAGE\_NUMBER\_OF\_DIRECTORY\_ENTRIES}}
 {\footnotesize\ttfamily constexpr std\+::uint8\+\_\+t pelf\+::\+IMAGE\+\_\+\+NUMBER\+\_\+\+OF\+\_\+\+DIRECTORY\+\_\+\+ENTRIES \{ 16 \}\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
 
-\mbox{\Hypertarget{namespacepelf_a305ed76c541cf02df786241cddaafa4f}\label{namespacepelf_a305ed76c541cf02df786241cddaafa4f}} 
+\mbox{\Hypertarget{namespacepelf_a2c8eaf67543f8e7821227aab535f7dbb}\label{namespacepelf_a2c8eaf67543f8e7821227aab535f7dbb}} 
+\index{pelf@{pelf}!MIN\_ELF\_SIZE@{MIN\_ELF\_SIZE}}
+\index{MIN\_ELF\_SIZE@{MIN\_ELF\_SIZE}!pelf@{pelf}}
+\doxysubsubsection{\texorpdfstring{MIN\_ELF\_SIZE}{MIN\_ELF\_SIZE}}
+{\footnotesize\ttfamily constexpr std\+::uint8\+\_\+t pelf\+::\+MIN\+\_\+\+ELF\+\_\+\+SIZE\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{  64}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+Minimum possible size for an ELF file \mbox{\Hypertarget{namespacepelf_a305ed76c541cf02df786241cddaafa4f}\label{namespacepelf_a305ed76c541cf02df786241cddaafa4f}} 
 \index{pelf@{pelf}!PN\_XNUM@{PN\_XNUM}}
 \index{PN\_XNUM@{PN\_XNUM}!pelf@{pelf}}
 \doxysubsubsection{\texorpdfstring{PN\_XNUM}{PN\_XNUM}}

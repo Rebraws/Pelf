@@ -69,11 +69,8 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="#pri-methods">Private Member Functions</a> &#124;
-<a href="#pri-static-methods">Static Private Member Functions</a> &#124;
 <a href="#pri-attribs">Private Attributes</a> &#124;
-<a href="#pri-static-attribs">Static Private Attributes</a> &#124;
 <a href="#friends">Friends</a> &#124;
 <a href="classpelf_1_1_elf-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">pelf::Elf&lt; Container, NumOfSections, NumOfProgHeaders &gt; Class Template Reference</div></div>
@@ -119,12 +116,6 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a0241f13c5f834e536e53d05e3cfcb974 inherit pub_methods_classpelf_1_1_pelf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the section table of the Pe or ELF file.  <a href="classpelf_1_1_pelf.html#a0241f13c5f834e536e53d05e3cfcb974">More...</a><br /></td></tr>
 <tr class="separator:a0241f13c5f834e536e53d05e3cfcb974 inherit pub_methods_classpelf_1_1_pelf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
-Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a44a6491a9cda28a6b9caf4b5ac06a45e"><td class="memItemLeft" align="right" valign="top">static constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpelf_1_1_elf.html#a44a6491a9cda28a6b9caf4b5ac06a45e">getElfTablesSize</a> (const Container &amp;data) -&gt; <a class="el" href="structpelf_1_1_table_sizes.html">TableSizes</a></td></tr>
-<tr class="memdesc:a44a6491a9cda28a6b9caf4b5ac06a45e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the <a class="el" href="classpelf_1_1_elf.html" title="Elf class.">Elf</a> Section Table Size.  <a href="classpelf_1_1_elf.html#a44a6491a9cda28a6b9caf4b5ac06a45e">More...</a><br /></td></tr>
-<tr class="separator:a44a6491a9cda28a6b9caf4b5ac06a45e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
 <tr class="memitem:a5e3cbceda47d65dbfb840323b153917f"><td class="memItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpelf_1_1_elf.html#a5e3cbceda47d65dbfb840323b153917f">checkFileSize</a> () const -&gt; bool</td></tr>
@@ -140,30 +131,12 @@ Private Member Functions</h2></td></tr>
 <tr class="memdesc:a55062cdb28d75fbae260b039d4009b73"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads the section table from <code>mData</code> and saves into mSections.  <a href="classpelf_1_1_elf.html#a55062cdb28d75fbae260b039d4009b73">More...</a><br /></td></tr>
 <tr class="separator:a55062cdb28d75fbae260b039d4009b73"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-static-methods" name="pri-static-methods"></a>
-Static Private Member Functions</h2></td></tr>
-<tr class="memitem:a49ece042cdb1cf0e3005d1325af528df"><td class="memTemplParams" colspan="2">template&lt;class Function &gt; </td></tr>
-<tr class="memitem:a49ece042cdb1cf0e3005d1325af528df"><td class="memTemplItemLeft" align="right" valign="top">static constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classpelf_1_1_elf.html#a49ece042cdb1cf0e3005d1325af528df">getSectionTableSize</a> (const <a class="el" href="structpelf_1_1_elf64___ehdr.html">Elf64_Ehdr</a> &amp;elfHeader, Function read_struct) -&gt; std::size_t</td></tr>
-<tr class="memdesc:a49ece042cdb1cf0e3005d1325af528df"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Section Table Size.  <a href="classpelf_1_1_elf.html#a49ece042cdb1cf0e3005d1325af528df">More...</a><br /></td></tr>
-<tr class="separator:a49ece042cdb1cf0e3005d1325af528df"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a161a62b023e6394229664f2de9865359"><td class="memTemplParams" colspan="2">template&lt;class Function &gt; </td></tr>
-<tr class="memitem:a161a62b023e6394229664f2de9865359"><td class="memTemplItemLeft" align="right" valign="top">static constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classpelf_1_1_elf.html#a161a62b023e6394229664f2de9865359">getProgramTableSize</a> (const <a class="el" href="structpelf_1_1_elf64___ehdr.html">Elf64_Ehdr</a> &amp;elfHeader, Function read_struct) -&gt; std::size_t</td></tr>
-<tr class="memdesc:a161a62b023e6394229664f2de9865359"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Program Table Size.  <a href="classpelf_1_1_elf.html#a161a62b023e6394229664f2de9865359">More...</a><br /></td></tr>
-<tr class="separator:a161a62b023e6394229664f2de9865359"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
 <tr class="memitem:a25f6fac463055a930408b59523232a72"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structpelf_1_1_elf_headers.html">ElfHeaders</a>&lt; NumOfProgHeaders &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpelf_1_1_elf.html#a25f6fac463055a930408b59523232a72">mHeaders</a></td></tr>
 <tr class="separator:a25f6fac463055a930408b59523232a72"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9721d2be21940fdee2d025e960307d2f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacepelf.html#aaa0c7d556c13e87c42a7ab82d5111709">Table</a>&lt; <a class="el" href="structpelf_1_1_elf64___shdr.html">Elf64_Shdr</a>, NumOfSections &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpelf_1_1_elf.html#a9721d2be21940fdee2d025e960307d2f">mSections</a> = {}</td></tr>
 <tr class="separator:a9721d2be21940fdee2d025e960307d2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-static-attribs" name="pri-static-attribs"></a>
-Static Private Attributes</h2></td></tr>
-<tr class="memitem:a8f110bc692dd2883792758c7b672793b"><td class="memItemLeft" align="right" valign="top">static constexpr std::uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpelf_1_1_elf.html#a8f110bc692dd2883792758c7b672793b">mMinElfSize</a></td></tr>
-<tr class="separator:a8f110bc692dd2883792758c7b672793b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6ecd58e3e3a5bda4ed2697b111d55946"><td class="memItemLeft" align="right" valign="top">static constexpr std::size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpelf_1_1_elf.html#a6ecd58e3e3a5bda4ed2697b111d55946">mElfHeaderOffset</a></td></tr>
-<tr class="separator:a6ecd58e3e3a5bda4ed2697b111d55946"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friends" name="friends"></a>
 Friends</h2></td></tr>
@@ -289,44 +262,6 @@ template&lt;class Container , std::size_t NumOfSections, std::size_t NumOfProgHe
 
 </div>
 </div>
-<a id="a44a6491a9cda28a6b9caf4b5ac06a45e" name="a44a6491a9cda28a6b9caf4b5ac06a45e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a44a6491a9cda28a6b9caf4b5ac06a45e">&#9670;&nbsp;</a></span>getElfTablesSize()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Container , std::size_t NumOfSections, std::size_t NumOfProgHeaders&gt; <br />
-requires container_and_convertible_v&lt;Container, unsigned char&gt;</div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr auto <a class="el" href="classpelf_1_1_elf.html">pelf::Elf</a>&lt; Container, NumOfSections, NumOfProgHeaders &gt;::getElfTablesSize </td>
-          <td>(</td>
-          <td class="paramtype">const Container &amp;&#160;</td>
-          <td class="paramname"><em>data</em></td><td>)</td>
-          <td> -&gt; <a class="el" href="structpelf_1_1_table_sizes.html">TableSizes</a> </td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Get the <a class="el" href="classpelf_1_1_elf.html" title="Elf class.">Elf</a> Section Table Size. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">data</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Returns a <code><a class="el" href="structpelf_1_1_table_sizes.html">TableSizes</a></code> struct </dd></dl>
-
-</div>
-</div>
 <a id="a1e48dc6ccc6a3221e0c0dd742dcbb23e" name="a1e48dc6ccc6a3221e0c0dd742dcbb23e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1e48dc6ccc6a3221e0c0dd742dcbb23e">&#9670;&nbsp;</a></span>getHeaders()</h2>
 
@@ -351,62 +286,6 @@ template&lt;class Container , std::size_t NumOfSections, std::size_t NumOfProgHe
 
 <p>Returns a <code><a class="el" href="structpelf_1_1_elf_headers.html" title="Structure that contains the Elf header and the program header table from an ELF file.">ElfHeaders</a></code> struct that contains the <a class="el" href="classpelf_1_1_elf.html" title="Elf class.">Elf</a> header and the program header table. </p>
 <dl class="section return"><dt>Returns</dt><dd>ElfHeaders&lt;NumOfProgHeaders&gt; </dd></dl>
-
-</div>
-</div>
-<a id="a161a62b023e6394229664f2de9865359" name="a161a62b023e6394229664f2de9865359"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a161a62b023e6394229664f2de9865359">&#9670;&nbsp;</a></span>getProgramTableSize()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Container , std::size_t NumOfSections, std::size_t NumOfProgHeaders&gt; </div>
-<div class="memtemplate">
-template&lt;class Function &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr auto <a class="el" href="classpelf_1_1_elf.html">pelf::Elf</a>&lt; Container, NumOfSections, NumOfProgHeaders &gt;::getProgramTableSize </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="structpelf_1_1_elf64___ehdr.html">Elf64_Ehdr</a> &amp;&#160;</td>
-          <td class="paramname"><em>elfHeader</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Function&#160;</td>
-          <td class="paramname"><em>read_struct</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> -&gt; std::size_t</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Get the Program Table Size. </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">Callable</td><td>object </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">elfHeader</td><td><a class="el" href="classpelf_1_1_elf.html" title="Elf class.">Elf</a> header of the file (already initialized) </td></tr>
-    <tr><td class="paramname">read_struct</td><td>function that reads a header and initializes it. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Returns the Number of Entries in the <a class="el" href="classpelf_1_1_elf.html" title="Elf class.">Elf</a> program header table </dd></dl>
 
 </div>
 </div>
@@ -437,62 +316,6 @@ template&lt;class Container , std::size_t NumOfSections = 0, std::size_t NumOfPr
 
 <p>Returns the Section table. </p>
 <dl class="section return"><dt>Returns</dt><dd>Table&lt;Elf64_Shdr, NumOfSections&gt; </dd></dl>
-
-</div>
-</div>
-<a id="a49ece042cdb1cf0e3005d1325af528df" name="a49ece042cdb1cf0e3005d1325af528df"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a49ece042cdb1cf0e3005d1325af528df">&#9670;&nbsp;</a></span>getSectionTableSize()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Container , std::size_t NumOfSections, std::size_t NumOfProgHeaders&gt; </div>
-<div class="memtemplate">
-template&lt;class Function &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr auto <a class="el" href="classpelf_1_1_elf.html">pelf::Elf</a>&lt; Container, NumOfSections, NumOfProgHeaders &gt;::getSectionTableSize </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="structpelf_1_1_elf64___ehdr.html">Elf64_Ehdr</a> &amp;&#160;</td>
-          <td class="paramname"><em>elfHeader</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Function&#160;</td>
-          <td class="paramname"><em>read_struct</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> -&gt; std::size_t</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Get the Section Table Size. </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">Callable</td><td>object </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">elfHeader</td><td><a class="el" href="classpelf_1_1_elf.html" title="Elf class.">Elf</a> header of the file (already initialized) </td></tr>
-    <tr><td class="paramname">read_struct</td><td>function that reads a header and initializes it. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Returns the Number of Entries in the <a class="el" href="classpelf_1_1_elf.html" title="Elf class.">Elf</a> section table </dd></dl>
 
 </div>
 </div>
@@ -576,34 +399,6 @@ template&lt;class Container , std::size_t NumOfSections = 0, std::size_t NumOfPr
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="a6ecd58e3e3a5bda4ed2697b111d55946" name="a6ecd58e3e3a5bda4ed2697b111d55946"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6ecd58e3e3a5bda4ed2697b111d55946">&#9670;&nbsp;</a></span>mElfHeaderOffset</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Container , std::size_t NumOfSections = 0, std::size_t NumOfProgHeaders = 0&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr std::size_t <a class="el" href="classpelf_1_1_elf.html">pelf::Elf</a>&lt; Container, NumOfSections, NumOfProgHeaders &gt;::mElfHeaderOffset</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<b>Initial value:</b><div class="fragment"><div class="line">{</div>
-<div class="line">    0</div>
-<div class="line">  }</div>
-</div><!-- fragment --><p >Represents the elf header offset (it always starts at zero) </p>
-
-</div>
-</div>
 <a id="a25f6fac463055a930408b59523232a72" name="a25f6fac463055a930408b59523232a72"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a25f6fac463055a930408b59523232a72">&#9670;&nbsp;</a></span>mHeaders</h2>
 
@@ -626,34 +421,6 @@ template&lt;class Container , std::size_t NumOfSections = 0, std::size_t NumOfPr
 </table>
 </div><div class="memdoc">
 <p >Struct that contains the elf header and the program header table </p>
-
-</div>
-</div>
-<a id="a8f110bc692dd2883792758c7b672793b" name="a8f110bc692dd2883792758c7b672793b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8f110bc692dd2883792758c7b672793b">&#9670;&nbsp;</a></span>mMinElfSize</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Container , std::size_t NumOfSections = 0, std::size_t NumOfProgHeaders = 0&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr std::uint8_t <a class="el" href="classpelf_1_1_elf.html">pelf::Elf</a>&lt; Container, NumOfSections, NumOfProgHeaders &gt;::mMinElfSize</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<b>Initial value:</b><div class="fragment"><div class="line">{</div>
-<div class="line">    64</div>
-<div class="line">  }</div>
-</div><!-- fragment --><p >Minimum possible size for an ELF file </p>
 
 </div>
 </div>

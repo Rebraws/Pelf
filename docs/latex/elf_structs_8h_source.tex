@@ -36,89 +36,91 @@
 \DoxyCodeLine{43 \textcolor{keyword}{inline} \textcolor{keyword}{constexpr} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} \mbox{\hyperlink{namespacepelf_acf5b4f71bdc0ae8d35d39b40222c01b3}{EI\_DATA}}\{}
 \DoxyCodeLine{44   0x1}
 \DoxyCodeLine{45 \}; }
-\DoxyCodeLine{49 \textcolor{comment}{// inline constexpr std::uint8\_t EI\_NIDENT = 16; /**< The size of the e\_ident}}
-\DoxyCodeLine{50 \textcolor{comment}{// array */}}
-\DoxyCodeLine{51 }
-\DoxyCodeLine{52 }
-\DoxyCodeLine{53 \textcolor{keyword}{struct }\mbox{\hyperlink{structpelf_1_1_table_sizes}{TableSizes}}}
-\DoxyCodeLine{54 \{}
-\DoxyCodeLine{55   std::size\_t \mbox{\hyperlink{structpelf_1_1_table_sizes_af7b7b76b6e888a079231dadc64388fec}{sectionTable}}\{\}; }
-\DoxyCodeLine{56   std::size\_t}
-\DoxyCodeLine{57     \mbox{\hyperlink{structpelf_1_1_table_sizes_af5e0a0b980047cb1eebcc2b62bc74e7f}{programHeader}}\{\}; }
-\DoxyCodeLine{58 \};}
-\DoxyCodeLine{59 }
-\DoxyCodeLine{63 \textcolor{preprocessor}{\#pragma pack(push, 1)}\textcolor{comment}{// Disable padding}}
-\DoxyCodeLine{64 \textcolor{keyword}{struct }\mbox{\hyperlink{structpelf_1_1_elf64___ehdr}{Elf64\_Ehdr}}}
-\DoxyCodeLine{65 \{}
-\DoxyCodeLine{70   \mbox{\hyperlink{structpelf_1_1_elf64___ehdr_a7d259188cc7f8cfda919461bfa059fe2}{BOOST\_HANA\_DEFINE\_STRUCT}}(\mbox{\hyperlink{structpelf_1_1_elf64___ehdr}{Elf64\_Ehdr}},}
-\DoxyCodeLine{71     (std::uint64\_t, e\_ident\_high), \textcolor{comment}{// first 8 bytes of e\_ident}}
-\DoxyCodeLine{72     (std::uint64\_t, e\_ident\_low),  \textcolor{comment}{// lasy 6 bytes of e\_ident}}
-\DoxyCodeLine{73     (std::uint16\_t, e\_type),}
-\DoxyCodeLine{74     (std::uint16\_t, e\_machine),}
-\DoxyCodeLine{75     (std::uint32\_t, e\_version),}
-\DoxyCodeLine{76     (std::uint64\_t, e\_entry),}
-\DoxyCodeLine{77     (std::uint64\_t, e\_phoff),}
-\DoxyCodeLine{78     (std::uint64\_t, e\_shoff),}
-\DoxyCodeLine{79     (std::uint32\_t, e\_flags),}
-\DoxyCodeLine{80     (std::uint16\_t, e\_ehsize),}
-\DoxyCodeLine{81     (std::uint16\_t, e\_phentsize),}
-\DoxyCodeLine{82     (std::uint16\_t, e\_phnum),\textcolor{comment}{// Number of entries in the program header table}}
-\DoxyCodeLine{83     (std::uint16\_t, e\_shentsize),}
-\DoxyCodeLine{84     (std::uint16\_t, e\_shnum),\textcolor{comment}{//}}
-\DoxyCodeLine{85     (std::uint16\_t, e\_shstrndx));}
-\DoxyCodeLine{86 \};}
-\DoxyCodeLine{87 \textcolor{preprocessor}{\#pragma pack(pop)}}
-\DoxyCodeLine{88 }
-\DoxyCodeLine{92 \textcolor{preprocessor}{\#pragma pack(push, 1)}\textcolor{comment}{// Disable padding}}
-\DoxyCodeLine{93 \textcolor{keyword}{struct }\mbox{\hyperlink{structpelf_1_1_elf64___phdr}{Elf64\_Phdr}}}
-\DoxyCodeLine{94 \{}
-\DoxyCodeLine{99   \mbox{\hyperlink{structpelf_1_1_elf64___phdr_a4c4b0bede1a8a95774a20e1c8e9f9909}{BOOST\_HANA\_DEFINE\_STRUCT}}(\mbox{\hyperlink{structpelf_1_1_elf64___phdr}{Elf64\_Phdr}},}
-\DoxyCodeLine{100     (std::uint32\_t, p\_type),}
-\DoxyCodeLine{101     (std::uint32\_t, p\_flags),}
-\DoxyCodeLine{102     (std::uint64\_t, p\_offset),}
-\DoxyCodeLine{103     (std::uint64\_t, p\_vaddr),}
-\DoxyCodeLine{104     (std::uint64\_t, p\_paddr),}
-\DoxyCodeLine{105     (std::uint64\_t, p\_filesz),}
-\DoxyCodeLine{106     (std::uint64\_t, p\_memsz),}
-\DoxyCodeLine{107     (std::uint64\_t, p\_align));}
-\DoxyCodeLine{108 \};}
-\DoxyCodeLine{109 \textcolor{preprocessor}{\#pragma pack(pop)}}
-\DoxyCodeLine{110 }
-\DoxyCodeLine{111 }
-\DoxyCodeLine{115 \textcolor{preprocessor}{\#pragma pack(push, 1)}\textcolor{comment}{// Disable padding}}
-\DoxyCodeLine{116 \textcolor{keyword}{struct }\mbox{\hyperlink{structpelf_1_1_elf64___shdr}{Elf64\_Shdr}}}
-\DoxyCodeLine{117 \{}
-\DoxyCodeLine{122   \mbox{\hyperlink{structpelf_1_1_elf64___shdr_a972fb87ed32e6c969127d089cefa83b7}{BOOST\_HANA\_DEFINE\_STRUCT}}(\mbox{\hyperlink{structpelf_1_1_elf64___shdr}{Elf64\_Shdr}},}
-\DoxyCodeLine{123     (std::uint32\_t, sh\_name),}
-\DoxyCodeLine{124     (std::uint32\_t, sh\_type),}
-\DoxyCodeLine{125     (std::uint64\_t, sh\_flags),}
-\DoxyCodeLine{126     (std::uint64\_t, sh\_addr),}
-\DoxyCodeLine{127     (std::uint64\_t, sh\_offset),}
-\DoxyCodeLine{128     (std::uint64\_t, sh\_size),\textcolor{comment}{//}}
-\DoxyCodeLine{129     (std::uint32\_t, sh\_link),}
-\DoxyCodeLine{130     (std::uint32\_t, sh\_info),}
-\DoxyCodeLine{131     (std::uint64\_t, sh\_addralign),}
-\DoxyCodeLine{132     (std::uint64\_t, sh\_entsize));}
-\DoxyCodeLine{133 \};}
-\DoxyCodeLine{134 \textcolor{preprocessor}{\#pragma pack(pop)}}
-\DoxyCodeLine{135 }
-\DoxyCodeLine{142 \textcolor{keyword}{template}<std::\textcolor{keywordtype}{size\_t} NumOfProgramHeader = 0> \textcolor{keyword}{struct }\mbox{\hyperlink{structpelf_1_1_elf_headers}{ElfHeaders}}}
-\DoxyCodeLine{143 \{}
-\DoxyCodeLine{144   \textcolor{keyword}{template}<std::\textcolor{keywordtype}{size\_t} N>}
-\DoxyCodeLine{145   \textcolor{keyword}{using} \mbox{\hyperlink{structpelf_1_1_elf_headers_a9e41084a296b1568db8b7639dbaf6f95}{ProgramHeaders}} = std::conditional\_t<NumOfProgramHeader == 0,}
-\DoxyCodeLine{146     std::vector<Elf64\_Phdr>,}
-\DoxyCodeLine{147     std::array<Elf64\_Phdr, NumOfProgramHeader>>;}
-\DoxyCodeLine{148 }
-\DoxyCodeLine{149 }
-\DoxyCodeLine{150   \mbox{\hyperlink{structpelf_1_1_elf64___ehdr}{Elf64\_Ehdr}} \mbox{\hyperlink{structpelf_1_1_elf_headers_ac83a681bcd2fe191a8e18cdba3445966}{elfHeader}} = \{\}; }
-\DoxyCodeLine{151   ProgramHeaders<NumOfProgramHeader>}
-\DoxyCodeLine{152     \mbox{\hyperlink{structpelf_1_1_elf_headers_a93823ccbea8521e0ff643d198ddce04b}{programHeaders}} = \{\}; }
-\DoxyCodeLine{154 \};}
-\DoxyCodeLine{155 }
-\DoxyCodeLine{156 }
-\DoxyCodeLine{157 \}\textcolor{comment}{// namespace pelf}}
-\DoxyCodeLine{158 }
-\DoxyCodeLine{159 }
-\DoxyCodeLine{160 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{48 \textcolor{keyword}{inline} \textcolor{keyword}{constexpr} std::uint8\_t \mbox{\hyperlink{namespacepelf_a2c8eaf67543f8e7821227aab535f7dbb}{MIN\_ELF\_SIZE}}\{}
+\DoxyCodeLine{49   64}
+\DoxyCodeLine{50 \}; }
+\DoxyCodeLine{51 \textcolor{keyword}{inline} \textcolor{keyword}{constexpr} std::size\_t \mbox{\hyperlink{namespacepelf_a722b918f8f7d9a576849b97e0c7ab6f3}{ELF\_HEADER\_OFFSET}}\{}
+\DoxyCodeLine{52   0}
+\DoxyCodeLine{53 \}; }
+\DoxyCodeLine{58 \textcolor{keyword}{struct }\mbox{\hyperlink{structpelf_1_1_table_sizes}{TableSizes}}}
+\DoxyCodeLine{59 \{}
+\DoxyCodeLine{60   std::size\_t \mbox{\hyperlink{structpelf_1_1_table_sizes_af7b7b76b6e888a079231dadc64388fec}{sectionTable}}\{\}; }
+\DoxyCodeLine{61   std::size\_t}
+\DoxyCodeLine{62     \mbox{\hyperlink{structpelf_1_1_table_sizes_a31cb11b8af17c414ae07a53679d45c0c}{programTable}}\{\}; }
+\DoxyCodeLine{63 \};}
+\DoxyCodeLine{64 }
+\DoxyCodeLine{68 \textcolor{preprocessor}{\#pragma pack(push, 1)}\textcolor{comment}{// Disable padding}}
+\DoxyCodeLine{69 \textcolor{keyword}{struct }\mbox{\hyperlink{structpelf_1_1_elf64___ehdr}{Elf64\_Ehdr}}}
+\DoxyCodeLine{70 \{}
+\DoxyCodeLine{75   \mbox{\hyperlink{structpelf_1_1_elf64___ehdr_a7d259188cc7f8cfda919461bfa059fe2}{BOOST\_HANA\_DEFINE\_STRUCT}}(\mbox{\hyperlink{structpelf_1_1_elf64___ehdr}{Elf64\_Ehdr}},}
+\DoxyCodeLine{76     (std::uint64\_t, e\_ident\_high), \textcolor{comment}{// first 8 bytes of e\_ident}}
+\DoxyCodeLine{77     (std::uint64\_t, e\_ident\_low),  \textcolor{comment}{// lasy 6 bytes of e\_ident}}
+\DoxyCodeLine{78     (std::uint16\_t, e\_type),}
+\DoxyCodeLine{79     (std::uint16\_t, e\_machine),}
+\DoxyCodeLine{80     (std::uint32\_t, e\_version),}
+\DoxyCodeLine{81     (std::uint64\_t, e\_entry),}
+\DoxyCodeLine{82     (std::uint64\_t, e\_phoff),}
+\DoxyCodeLine{83     (std::uint64\_t, e\_shoff),}
+\DoxyCodeLine{84     (std::uint32\_t, e\_flags),}
+\DoxyCodeLine{85     (std::uint16\_t, e\_ehsize),}
+\DoxyCodeLine{86     (std::uint16\_t, e\_phentsize),}
+\DoxyCodeLine{87     (std::uint16\_t, e\_phnum),\textcolor{comment}{// Number of entries in the program header table}}
+\DoxyCodeLine{88     (std::uint16\_t, e\_shentsize),}
+\DoxyCodeLine{89     (std::uint16\_t, e\_shnum),\textcolor{comment}{//}}
+\DoxyCodeLine{90     (std::uint16\_t, e\_shstrndx));}
+\DoxyCodeLine{91 \};}
+\DoxyCodeLine{92 \textcolor{preprocessor}{\#pragma pack(pop)}}
+\DoxyCodeLine{93 }
+\DoxyCodeLine{97 \textcolor{preprocessor}{\#pragma pack(push, 1)}\textcolor{comment}{// Disable padding}}
+\DoxyCodeLine{98 \textcolor{keyword}{struct }\mbox{\hyperlink{structpelf_1_1_elf64___phdr}{Elf64\_Phdr}}}
+\DoxyCodeLine{99 \{}
+\DoxyCodeLine{104   \mbox{\hyperlink{structpelf_1_1_elf64___phdr_a4c4b0bede1a8a95774a20e1c8e9f9909}{BOOST\_HANA\_DEFINE\_STRUCT}}(\mbox{\hyperlink{structpelf_1_1_elf64___phdr}{Elf64\_Phdr}},}
+\DoxyCodeLine{105     (std::uint32\_t, p\_type),}
+\DoxyCodeLine{106     (std::uint32\_t, p\_flags),}
+\DoxyCodeLine{107     (std::uint64\_t, p\_offset),}
+\DoxyCodeLine{108     (std::uint64\_t, p\_vaddr),}
+\DoxyCodeLine{109     (std::uint64\_t, p\_paddr),}
+\DoxyCodeLine{110     (std::uint64\_t, p\_filesz),}
+\DoxyCodeLine{111     (std::uint64\_t, p\_memsz),}
+\DoxyCodeLine{112     (std::uint64\_t, p\_align));}
+\DoxyCodeLine{113 \};}
+\DoxyCodeLine{114 \textcolor{preprocessor}{\#pragma pack(pop)}}
+\DoxyCodeLine{115 }
+\DoxyCodeLine{116 }
+\DoxyCodeLine{120 \textcolor{preprocessor}{\#pragma pack(push, 1)}\textcolor{comment}{// Disable padding}}
+\DoxyCodeLine{121 \textcolor{keyword}{struct }\mbox{\hyperlink{structpelf_1_1_elf64___shdr}{Elf64\_Shdr}}}
+\DoxyCodeLine{122 \{}
+\DoxyCodeLine{127   \mbox{\hyperlink{structpelf_1_1_elf64___shdr_a972fb87ed32e6c969127d089cefa83b7}{BOOST\_HANA\_DEFINE\_STRUCT}}(\mbox{\hyperlink{structpelf_1_1_elf64___shdr}{Elf64\_Shdr}},}
+\DoxyCodeLine{128     (std::uint32\_t, sh\_name),}
+\DoxyCodeLine{129     (std::uint32\_t, sh\_type),}
+\DoxyCodeLine{130     (std::uint64\_t, sh\_flags),}
+\DoxyCodeLine{131     (std::uint64\_t, sh\_addr),}
+\DoxyCodeLine{132     (std::uint64\_t, sh\_offset),}
+\DoxyCodeLine{133     (std::uint64\_t, sh\_size),\textcolor{comment}{//}}
+\DoxyCodeLine{134     (std::uint32\_t, sh\_link),}
+\DoxyCodeLine{135     (std::uint32\_t, sh\_info),}
+\DoxyCodeLine{136     (std::uint64\_t, sh\_addralign),}
+\DoxyCodeLine{137     (std::uint64\_t, sh\_entsize));}
+\DoxyCodeLine{138 \};}
+\DoxyCodeLine{139 \textcolor{preprocessor}{\#pragma pack(pop)}}
+\DoxyCodeLine{140 }
+\DoxyCodeLine{147 \textcolor{keyword}{template}<std::\textcolor{keywordtype}{size\_t} NumOfProgramHeader = 0> \textcolor{keyword}{struct }\mbox{\hyperlink{structpelf_1_1_elf_headers}{ElfHeaders}}}
+\DoxyCodeLine{148 \{}
+\DoxyCodeLine{149   \textcolor{keyword}{template}<std::\textcolor{keywordtype}{size\_t} N>}
+\DoxyCodeLine{150   \textcolor{keyword}{using} \mbox{\hyperlink{structpelf_1_1_elf_headers_a9e41084a296b1568db8b7639dbaf6f95}{ProgramHeaders}} = std::conditional\_t<NumOfProgramHeader == 0,}
+\DoxyCodeLine{151     std::vector<Elf64\_Phdr>,}
+\DoxyCodeLine{152     std::array<Elf64\_Phdr, NumOfProgramHeader>>;}
+\DoxyCodeLine{153 }
+\DoxyCodeLine{154 }
+\DoxyCodeLine{155   \mbox{\hyperlink{structpelf_1_1_elf64___ehdr}{Elf64\_Ehdr}} \mbox{\hyperlink{structpelf_1_1_elf_headers_ac83a681bcd2fe191a8e18cdba3445966}{elfHeader}} = \{\}; }
+\DoxyCodeLine{156   ProgramHeaders<NumOfProgramHeader>}
+\DoxyCodeLine{157     \mbox{\hyperlink{structpelf_1_1_elf_headers_a93823ccbea8521e0ff643d198ddce04b}{programHeaders}} = \{\}; }
+\DoxyCodeLine{159 \};}
+\DoxyCodeLine{160 }
+\DoxyCodeLine{161 }
+\DoxyCodeLine{162 \}\textcolor{comment}{// namespace pelf}}
+\DoxyCodeLine{163 }
+\DoxyCodeLine{164 }
+\DoxyCodeLine{165 \textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCode}

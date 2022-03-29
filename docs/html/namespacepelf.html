@@ -144,6 +144,19 @@ Typedefs</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:a7a8a91bf192c103c0e31a59b5917bbf7"><td class="memTemplParams" colspan="2">template&lt;class Function &gt; </td></tr>
+<tr class="memitem:a7a8a91bf192c103c0e31a59b5917bbf7"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacepelf.html#a7a8a91bf192c103c0e31a59b5917bbf7">getSectionTableSize</a> (const <a class="el" href="structpelf_1_1_elf64___ehdr.html">Elf64_Ehdr</a> &amp;elfHeader, Function read_struct) -&gt; std::size_t</td></tr>
+<tr class="memdesc:a7a8a91bf192c103c0e31a59b5917bbf7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Section Table Size.  <a href="namespacepelf.html#a7a8a91bf192c103c0e31a59b5917bbf7">More...</a><br /></td></tr>
+<tr class="separator:a7a8a91bf192c103c0e31a59b5917bbf7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a01945922c682578808681db3cb4750f7"><td class="memTemplParams" colspan="2">template&lt;class Function &gt; </td></tr>
+<tr class="memitem:a01945922c682578808681db3cb4750f7"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacepelf.html#a01945922c682578808681db3cb4750f7">getProgramTableSize</a> (const <a class="el" href="structpelf_1_1_elf64___ehdr.html">Elf64_Ehdr</a> &amp;elfHeader, Function read_struct) -&gt; std::size_t</td></tr>
+<tr class="memdesc:a01945922c682578808681db3cb4750f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Program Table Size.  <a href="namespacepelf.html#a01945922c682578808681db3cb4750f7">More...</a><br /></td></tr>
+<tr class="separator:a01945922c682578808681db3cb4750f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a098648bcab1701f80c3c3dd5f2397038"><td class="memTemplParams" colspan="2">template&lt;class Container &gt; <br />
+requires container_and_convertible_v&lt;Container, unsigned char&gt;</td></tr>
+<tr class="memitem:a098648bcab1701f80c3c3dd5f2397038"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacepelf.html#a098648bcab1701f80c3c3dd5f2397038">getElfTablesSize</a> (const Container &amp;data) -&gt; <a class="el" href="structpelf_1_1_table_sizes.html">TableSizes</a></td></tr>
+<tr class="memdesc:a098648bcab1701f80c3c3dd5f2397038"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the number of entries in the section table and program header table.  <a href="namespacepelf.html#a098648bcab1701f80c3c3dd5f2397038">More...</a><br /></td></tr>
+<tr class="separator:a098648bcab1701f80c3c3dd5f2397038"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a45ded953c0ff554de8b2c8fd0f07b6d6"><td class="memTemplParams" colspan="2">template&lt;class Container &gt; <br />
 requires container_and_convertible_v&lt;Container, unsigned char&gt;</td></tr>
 <tr class="memitem:a45ded953c0ff554de8b2c8fd0f07b6d6"><td class="memTemplItemLeft" align="right" valign="top">consteval auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacepelf.html#a45ded953c0ff554de8b2c8fd0f07b6d6">getPeNumberOfSections</a> (const Container &amp;data)</td></tr>
@@ -170,6 +183,10 @@ Variables</h2></td></tr>
 <tr class="separator:a93a643cc6ba430789ac6565ce1cc8e63"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acf5b4f71bdc0ae8d35d39b40222c01b3"><td class="memItemLeft" align="right" valign="top">constexpr unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepelf.html#acf5b4f71bdc0ae8d35d39b40222c01b3">EI_DATA</a></td></tr>
 <tr class="separator:acf5b4f71bdc0ae8d35d39b40222c01b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2c8eaf67543f8e7821227aab535f7dbb"><td class="memItemLeft" align="right" valign="top">constexpr std::uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepelf.html#a2c8eaf67543f8e7821227aab535f7dbb">MIN_ELF_SIZE</a></td></tr>
+<tr class="separator:a2c8eaf67543f8e7821227aab535f7dbb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a722b918f8f7d9a576849b97e0c7ab6f3"><td class="memItemLeft" align="right" valign="top">constexpr std::size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepelf.html#a722b918f8f7d9a576849b97e0c7ab6f3">ELF_HEADER_OFFSET</a></td></tr>
+<tr class="separator:a722b918f8f7d9a576849b97e0c7ab6f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a716c30fc438e7314073e86fcb72b293b"><td class="memItemLeft" align="right" valign="top">constexpr std::uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepelf.html#a716c30fc438e7314073e86fcb72b293b">IMAGE_NUMBER_OF_DIRECTORY_ENTRIES</a> { 16 }</td></tr>
 <tr class="separator:a716c30fc438e7314073e86fcb72b293b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -256,6 +273,44 @@ template&lt;class Struct , std::size_t Num&gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
+<a id="a098648bcab1701f80c3c3dd5f2397038" name="a098648bcab1701f80c3c3dd5f2397038"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a098648bcab1701f80c3c3dd5f2397038">&#9670;&nbsp;</a></span>getElfTablesSize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Container &gt; <br />
+requires container_and_convertible_v&lt;Container, unsigned char&gt;</div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr auto pelf::getElfTablesSize </td>
+          <td>(</td>
+          <td class="paramtype">const Container &amp;&#160;</td>
+          <td class="paramname"><em>data</em></td><td>)</td>
+          <td> -&gt; <a class="el" href="structpelf_1_1_table_sizes.html">TableSizes</a> </td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the number of entries in the section table and program header table. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns a <code><a class="el" href="structpelf_1_1_table_sizes.html">TableSizes</a></code> struct </dd></dl>
+
+</div>
+</div>
 <a id="a45ded953c0ff554de8b2c8fd0f07b6d6" name="a45ded953c0ff554de8b2c8fd0f07b6d6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a45ded953c0ff554de8b2c8fd0f07b6d6">&#9670;&nbsp;</a></span>getPeNumberOfSections()</h2>
 
@@ -289,6 +344,114 @@ requires container_and_convertible_v&lt;Container, unsigned char&gt;</div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Returns a <code>std::uint16_t</code> that represents the number of sections </dd></dl>
+
+</div>
+</div>
+<a id="a01945922c682578808681db3cb4750f7" name="a01945922c682578808681db3cb4750f7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a01945922c682578808681db3cb4750f7">&#9670;&nbsp;</a></span>getProgramTableSize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Function &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr auto pelf::getProgramTableSize </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structpelf_1_1_elf64___ehdr.html">Elf64_Ehdr</a> &amp;&#160;</td>
+          <td class="paramname"><em>elfHeader</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Function&#160;</td>
+          <td class="paramname"><em>read_struct</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> -&gt; std::size_t</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the Program Table Size. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Callable</td><td>object </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">elfHeader</td><td><a class="el" href="classpelf_1_1_elf.html" title="Elf class.">Elf</a> header of the file (already initialized) </td></tr>
+    <tr><td class="paramname">read_struct</td><td>function that reads a header and initializes it. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns the Number of Entries in the <a class="el" href="classpelf_1_1_elf.html" title="Elf class.">Elf</a> program header table </dd></dl>
+
+</div>
+</div>
+<a id="a7a8a91bf192c103c0e31a59b5917bbf7" name="a7a8a91bf192c103c0e31a59b5917bbf7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7a8a91bf192c103c0e31a59b5917bbf7">&#9670;&nbsp;</a></span>getSectionTableSize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Function &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr auto pelf::getSectionTableSize </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structpelf_1_1_elf64___ehdr.html">Elf64_Ehdr</a> &amp;&#160;</td>
+          <td class="paramname"><em>elfHeader</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Function&#160;</td>
+          <td class="paramname"><em>read_struct</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> -&gt; std::size_t</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the Section Table Size. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Callable</td><td>object </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">elfHeader</td><td><a class="el" href="classpelf_1_1_elf.html" title="Elf class.">Elf</a> header of the file (already initialized) </td></tr>
+    <tr><td class="paramname">read_struct</td><td>function that reads a header and initializes it. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns the Number of Entries in the <a class="el" href="classpelf_1_1_elf.html" title="Elf class.">Elf</a> section table </dd></dl>
 
 </div>
 </div>
@@ -449,6 +612,32 @@ requires container_and_convertible_v&lt;Container, unsigned char&gt;</div>
 
 </div>
 </div>
+<a id="a722b918f8f7d9a576849b97e0c7ab6f3" name="a722b918f8f7d9a576849b97e0c7ab6f3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a722b918f8f7d9a576849b97e0c7ab6f3">&#9670;&nbsp;</a></span>ELF_HEADER_OFFSET</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr std::size_t pelf::ELF_HEADER_OFFSET</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">{</div>
+<div class="line">  0</div>
+<div class="line">}</div>
+</div><!-- fragment --><p >Represents the elf header offset (it always starts at zero) </p>
+
+</div>
+</div>
 <a id="acee3872fd4945b0f5938b9cac3dc239f" name="acee3872fd4945b0f5938b9cac3dc239f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#acee3872fd4945b0f5938b9cac3dc239f">&#9670;&nbsp;</a></span>ELFCLASS64</h2>
 
@@ -490,6 +679,32 @@ requires container_and_convertible_v&lt;Container, unsigned char&gt;</div>
   </tr>
 </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2c8eaf67543f8e7821227aab535f7dbb" name="a2c8eaf67543f8e7821227aab535f7dbb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2c8eaf67543f8e7821227aab535f7dbb">&#9670;&nbsp;</a></span>MIN_ELF_SIZE</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr std::uint8_t pelf::MIN_ELF_SIZE</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">{</div>
+<div class="line">  64</div>
+<div class="line">}</div>
+</div><!-- fragment --><p >Minimum possible size for an ELF file </p>
 
 </div>
 </div>

@@ -10,304 +10,285 @@
 \DoxyCodeLine{15 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{_pelf_8h}{Pelf.h}}"{}}}
 \DoxyCodeLine{16 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{elf_structs_8h}{elfStructs.h}}"{}}}
 \DoxyCodeLine{17 }
-\DoxyCodeLine{18 \textcolor{preprocessor}{\#include <functional>}}
-\DoxyCodeLine{19 }
-\DoxyCodeLine{20 \textcolor{keyword}{namespace }\mbox{\hyperlink{namespacepelf}{pelf}} \{}
+\DoxyCodeLine{18 }
+\DoxyCodeLine{19 \textcolor{keyword}{namespace }\mbox{\hyperlink{namespacepelf}{pelf}} \{}
+\DoxyCodeLine{20 }
 \DoxyCodeLine{21 }
-\DoxyCodeLine{22 }
-\DoxyCodeLine{31 \textcolor{keyword}{template}<\textcolor{keyword}{class }Container,}
-\DoxyCodeLine{32   std::size\_t NumOfSections = 0,}
-\DoxyCodeLine{33   std::size\_t NumOfProgHeaders = 0>}
-\DoxyCodeLine{34 \textcolor{keyword}{class }\mbox{\hyperlink{classpelf_1_1_elf}{Elf}} : \textcolor{keyword}{public} \mbox{\hyperlink{classpelf_1_1_pelf}{Pelf}}<Container, Elf, NumOfSections, NumOfProgHeaders>}
-\DoxyCodeLine{35 \{}
-\DoxyCodeLine{36 \textcolor{keyword}{public}:}
-\DoxyCodeLine{41   \textcolor{keyword}{constexpr} \textcolor{keyword}{explicit} \mbox{\hyperlink{classpelf_1_1_elf_aa85df319ece20802ade89e361eb1312f}{Elf}}(\textcolor{keyword}{const} Container\& data);}
-\DoxyCodeLine{42 }
-\DoxyCodeLine{48   [[nodiscard]] \textcolor{keyword}{constexpr} \textcolor{keyword}{auto} \mbox{\hyperlink{classpelf_1_1_elf_a1e48dc6ccc6a3221e0c0dd742dcbb23e}{getHeaders}}() \textcolor{keyword}{const} \textcolor{keyword}{noexcept}}
-\DoxyCodeLine{49     -\/> \mbox{\hyperlink{structpelf_1_1_elf_headers}{ElfHeaders<NumOfProgHeaders>}};}
-\DoxyCodeLine{50 }
-\DoxyCodeLine{56   [[nodiscard]] \textcolor{keyword}{constexpr} \textcolor{keyword}{auto} \mbox{\hyperlink{classpelf_1_1_elf_a3dbd2fdec42fed668d67854ac9ea852a}{getSections}}() const noexcept}
-\DoxyCodeLine{57     -\/> \mbox{\hyperlink{namespacepelf_aaa0c7d556c13e87c42a7ab82d5111709}{Table}}<\mbox{\hyperlink{structpelf_1_1_elf64___shdr}{Elf64\_Shdr}}, NumOfSections>;}
+\DoxyCodeLine{30 \textcolor{keyword}{template}<\textcolor{keyword}{class} Function>}
+\DoxyCodeLine{31 \textcolor{keyword}{constexpr} \textcolor{keyword}{auto} \mbox{\hyperlink{namespacepelf_a7a8a91bf192c103c0e31a59b5917bbf7}{getSectionTableSize}}(\textcolor{keyword}{const} \mbox{\hyperlink{structpelf_1_1_elf64___ehdr}{Elf64\_Ehdr}}\& elfHeader,}
+\DoxyCodeLine{32   Function read\_struct) -\/> std::size\_t;}
+\DoxyCodeLine{33 }
+\DoxyCodeLine{42 \textcolor{keyword}{template}<\textcolor{keyword}{class} Function>}
+\DoxyCodeLine{43 \textcolor{keyword}{constexpr} \textcolor{keyword}{auto} \mbox{\hyperlink{namespacepelf_a01945922c682578808681db3cb4750f7}{getProgramTableSize}}(\textcolor{keyword}{const} \mbox{\hyperlink{structpelf_1_1_elf64___ehdr}{Elf64\_Ehdr}}\& elfHeader,}
+\DoxyCodeLine{44   Function read\_struct) -\/> std::size\_t;}
+\DoxyCodeLine{45 }
+\DoxyCodeLine{53 \textcolor{comment}{/* Really bad design :( need to find a way to re-\/write this to avoid}}
+\DoxyCodeLine{54 \textcolor{comment}{  double parsing when the elf class is instantiated while also easy to use */}}
+\DoxyCodeLine{55 \textcolor{keyword}{template}<\textcolor{keyword}{class} Container>}
+\DoxyCodeLine{56 \textcolor{keyword}{constexpr} \textcolor{keyword}{auto} \mbox{\hyperlink{namespacepelf_a098648bcab1701f80c3c3dd5f2397038}{getElfTablesSize}}(\textcolor{keyword}{const} Container\& data)}
+\DoxyCodeLine{57   -\/> \mbox{\hyperlink{structpelf_1_1_table_sizes}{TableSizes}} \textcolor{keyword}{requires} \mbox{\hyperlink{conceptpelf_1_1container__and__convertible__v}{container\_and\_convertible\_v<Container, unsigned char>}};}
 \DoxyCodeLine{58 }
-\DoxyCodeLine{66   \textcolor{comment}{/* Really bad design :( need to find a way to re-\/write this to avoid}}
-\DoxyCodeLine{67 \textcolor{comment}{    double parsing when the elf class is instantiated while also easy to use */}}
-\DoxyCodeLine{68   [[nodiscard]] static constexpr auto \mbox{\hyperlink{classpelf_1_1_elf_a44a6491a9cda28a6b9caf4b5ac06a45e}{getElfTablesSize}}(const Container\& data)}
-\DoxyCodeLine{69     -\/> \mbox{\hyperlink{structpelf_1_1_table_sizes}{TableSizes}} requires}
-\DoxyCodeLine{70     \mbox{\hyperlink{conceptpelf_1_1container__and__convertible__v}{container\_and\_convertible\_v}}<Container, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char}>;}
-\DoxyCodeLine{71 }
-\DoxyCodeLine{72 private : friend class \mbox{\hyperlink{classpelf_1_1_pelf}{Pelf}}<Container, \mbox{\hyperlink{classpelf_1_1_elf}{Elf}}, NumOfSections, NumOfProgHeaders>;}
-\DoxyCodeLine{73   \textcolor{comment}{/* Member Variables */}}
-\DoxyCodeLine{74 }
-\DoxyCodeLine{75   static constexpr std::uint8\_t \mbox{\hyperlink{classpelf_1_1_elf_a8f110bc692dd2883792758c7b672793b}{mMinElfSize}}\{}
-\DoxyCodeLine{76     64}
-\DoxyCodeLine{77   \}; }
-\DoxyCodeLine{78   \textcolor{keyword}{static} \textcolor{keyword}{constexpr} std::size\_t \mbox{\hyperlink{classpelf_1_1_elf_a6ecd58e3e3a5bda4ed2697b111d55946}{mElfHeaderOffset}}\{}
-\DoxyCodeLine{79     0}
-\DoxyCodeLine{80   \}; }
-\DoxyCodeLine{82   ElfHeaders<NumOfProgHeaders> \mbox{\hyperlink{classpelf_1_1_elf_a25f6fac463055a930408b59523232a72}{mHeaders}}; }
-\DoxyCodeLine{85   Table<Elf64\_Shdr, NumOfSections> \mbox{\hyperlink{classpelf_1_1_elf_a9721d2be21940fdee2d025e960307d2f}{mSections}} = \{\}; }
-\DoxyCodeLine{87   \textcolor{comment}{/* Private member functions */}}
-\DoxyCodeLine{88 }
-\DoxyCodeLine{97   \textcolor{keyword}{template}<\textcolor{keyword}{class} Function>}
-\DoxyCodeLine{98   \textcolor{keyword}{static} \textcolor{keyword}{constexpr} \textcolor{keyword}{auto} \mbox{\hyperlink{classpelf_1_1_elf_a49ece042cdb1cf0e3005d1325af528df}{getSectionTableSize}}(\textcolor{keyword}{const} Elf64\_Ehdr\& elfHeader,}
-\DoxyCodeLine{99     Function read\_struct) -\/> std::size\_t;}
+\DoxyCodeLine{59 }
+\DoxyCodeLine{60 \textcolor{keyword}{template}<\textcolor{keyword}{class} Function>}
+\DoxyCodeLine{61 \textcolor{keyword}{constexpr} \textcolor{keyword}{auto} \mbox{\hyperlink{namespacepelf_a7a8a91bf192c103c0e31a59b5917bbf7}{getSectionTableSize}}(\textcolor{keyword}{const} \mbox{\hyperlink{structpelf_1_1_elf64___ehdr}{Elf64\_Ehdr}}\& elfHeader,}
+\DoxyCodeLine{62   Function read\_struct) -\/> std::size\_t}
+\DoxyCodeLine{63 \{}
+\DoxyCodeLine{64   \textcolor{comment}{/* If the offset of the section table is zero, then the size has to be zero */}}
+\DoxyCodeLine{65   \textcolor{keywordflow}{if} (elfHeader.e\_shoff == 0) \{ \textcolor{keywordflow}{return} 0; \}}
+\DoxyCodeLine{66 }
+\DoxyCodeLine{67   \textcolor{comment}{/* If e\_shnum holds a value greater or equal than SHN\_LORESERVE , then the}}
+\DoxyCodeLine{68 \textcolor{comment}{     number of entries of the section table is in the variable sh\_size which}}
+\DoxyCodeLine{69 \textcolor{comment}{     is member of the inital entry in section header table}}
+\DoxyCodeLine{70 \textcolor{comment}{      */}}
+\DoxyCodeLine{71   \textcolor{keywordflow}{if} (elfHeader.e\_shnum >= \mbox{\hyperlink{namespacepelf_adb52eb849e9a4a54621da0156800eedf}{SHN\_LORESERVE}}) \{}
+\DoxyCodeLine{72     \textcolor{comment}{/* Read the initial entry in section header table*/}}
+\DoxyCodeLine{73     \mbox{\hyperlink{structpelf_1_1_elf64___shdr}{Elf64\_Shdr}} section\_header = \{\};}
+\DoxyCodeLine{74     read\_struct(section\_header, elfHeader.e\_shoff);}
+\DoxyCodeLine{75     \textcolor{keywordflow}{return} section\_header.sh\_size;}
+\DoxyCodeLine{76   \}}
+\DoxyCodeLine{77 }
+\DoxyCodeLine{78   \textcolor{keywordflow}{return} elfHeader.e\_shnum;}
+\DoxyCodeLine{79 \}}
+\DoxyCodeLine{80 }
+\DoxyCodeLine{81 }
+\DoxyCodeLine{82 \textcolor{keyword}{template}<\textcolor{keyword}{class} Function>}
+\DoxyCodeLine{83 \textcolor{keyword}{constexpr} \textcolor{keyword}{auto} \mbox{\hyperlink{namespacepelf_a01945922c682578808681db3cb4750f7}{getProgramTableSize}}(\textcolor{keyword}{const} \mbox{\hyperlink{structpelf_1_1_elf64___ehdr}{Elf64\_Ehdr}}\& elfHeader,}
+\DoxyCodeLine{84   Function read\_struct) -\/> std::size\_t}
+\DoxyCodeLine{85 \{}
+\DoxyCodeLine{86   \textcolor{comment}{/* If the offset of the program header table is zero, then the size has to be}}
+\DoxyCodeLine{87 \textcolor{comment}{   * zero */}}
+\DoxyCodeLine{88   \textcolor{keywordflow}{if} (elfHeader.e\_phoff == 0) \{ \textcolor{keywordflow}{return} 0; \}}
+\DoxyCodeLine{89 }
+\DoxyCodeLine{90   \textcolor{comment}{/* If e\_phnum holds a value greater or equal than PN\_XNUM , then the}}
+\DoxyCodeLine{91 \textcolor{comment}{     number of entries of the program header table is in the variable sh\_info}}
+\DoxyCodeLine{92 \textcolor{comment}{     which is member of the inital entry in section header table}}
+\DoxyCodeLine{93 \textcolor{comment}{      */}}
+\DoxyCodeLine{94   \textcolor{keywordflow}{if} (elfHeader.e\_phnum >= \mbox{\hyperlink{namespacepelf_a305ed76c541cf02df786241cddaafa4f}{PN\_XNUM}}) \{}
+\DoxyCodeLine{95     \textcolor{comment}{/* Read the initial entry in section header table*/}}
+\DoxyCodeLine{96     \mbox{\hyperlink{structpelf_1_1_elf64___shdr}{Elf64\_Shdr}} section\_header = \{\};}
+\DoxyCodeLine{97     read\_struct(section\_header, elfHeader.e\_shoff);}
+\DoxyCodeLine{98     \textcolor{keywordflow}{return} section\_header.sh\_info;}
+\DoxyCodeLine{99   \}}
 \DoxyCodeLine{100 }
-\DoxyCodeLine{109   \textcolor{keyword}{template}<\textcolor{keyword}{class} Function>}
-\DoxyCodeLine{110   \textcolor{keyword}{static} \textcolor{keyword}{constexpr} \textcolor{keyword}{auto} \mbox{\hyperlink{classpelf_1_1_elf_a161a62b023e6394229664f2de9865359}{getProgramTableSize}}(\textcolor{keyword}{const} Elf64\_Ehdr\& elfHeader,}
-\DoxyCodeLine{111     Function read\_struct) -\/> std::size\_t;}
-\DoxyCodeLine{112 }
-\DoxyCodeLine{113 }
-\DoxyCodeLine{120   \textcolor{keyword}{constexpr} \textcolor{keyword}{auto} \mbox{\hyperlink{classpelf_1_1_elf_a5e3cbceda47d65dbfb840323b153917f}{checkFileSize}}() const -\/> \textcolor{keywordtype}{bool};}
-\DoxyCodeLine{121 }
-\DoxyCodeLine{128   constexpr auto \mbox{\hyperlink{classpelf_1_1_elf_aaa1709914e18d44aa2a8f3d13aaf8d19}{checkSignatures}}() const -\/> \textcolor{keywordtype}{bool};}
-\DoxyCodeLine{129 }
-\DoxyCodeLine{137   constexpr auto \mbox{\hyperlink{classpelf_1_1_elf_ac79192c97a6abaa18d69f22bf488656f}{parseHeaders}}() -\/> \textcolor{keywordtype}{void};}
-\DoxyCodeLine{138 }
-\DoxyCodeLine{144   constexpr auto \mbox{\hyperlink{classpelf_1_1_elf_a55062cdb28d75fbae260b039d4009b73}{parseSections}}() -\/> \textcolor{keywordtype}{void};}
-\DoxyCodeLine{145 \};}
-\DoxyCodeLine{146 }
-\DoxyCodeLine{147 }
-\DoxyCodeLine{148 template<class Container,}
-\DoxyCodeLine{149   std::\textcolor{keywordtype}{size\_t} NumOfSections,}
-\DoxyCodeLine{150   std::\textcolor{keywordtype}{size\_t} NumOfProgHeaders>}
-\DoxyCodeLine{151 constexpr \mbox{\hyperlink{classpelf_1_1_elf}{Elf}}<Container, NumOfSections, NumOfProgHeaders>::\mbox{\hyperlink{classpelf_1_1_elf}{Elf}}(}
-\DoxyCodeLine{152   const Container\& data)}
-\DoxyCodeLine{153   : \mbox{\hyperlink{classpelf_1_1_pelf}{Pelf}}<Container, \mbox{\hyperlink{classpelf_1_1_elf}{Elf}}, NumOfSections, NumOfProgHeaders>(data)}
-\DoxyCodeLine{154 \{}
-\DoxyCodeLine{155   \textcolor{keywordflow}{if} (!\mbox{\hyperlink{classpelf_1_1_elf_a5e3cbceda47d65dbfb840323b153917f}{checkFileSize}}()) \{ \textcolor{keywordflow}{throw} \mbox{\hyperlink{classpelf_1_1_pelf_exception}{PelfException}}\{ \textcolor{stringliteral}{"{}Invalid PE file size!"{}} \}; \}}
-\DoxyCodeLine{156 }
-\DoxyCodeLine{157 }
-\DoxyCodeLine{158   this-\/>\mbox{\hyperlink{classpelf_1_1_pelf_a89266cb498c8c99b2912ed3cc0edccc9}{parse}}();}
-\DoxyCodeLine{159 }
-\DoxyCodeLine{160 \}}
-\DoxyCodeLine{161 }
-\DoxyCodeLine{162 \textcolor{keyword}{template}<\textcolor{keyword}{class }Container,}
-\DoxyCodeLine{163   std::size\_t NumOfSections,}
-\DoxyCodeLine{164   std::size\_t NumOfProgHeaders>}
-\DoxyCodeLine{165 \textcolor{keyword}{constexpr} \textcolor{keyword}{auto}}
-\DoxyCodeLine{166   \mbox{\hyperlink{classpelf_1_1_elf_a1e48dc6ccc6a3221e0c0dd742dcbb23e}{Elf<Container, NumOfSections, NumOfProgHeaders>::getHeaders}}() const noexcept}
-\DoxyCodeLine{167   -\/> \mbox{\hyperlink{structpelf_1_1_elf_headers}{ElfHeaders}}<NumOfProgHeaders>}
-\DoxyCodeLine{168 \{}
-\DoxyCodeLine{169   \textcolor{keywordflow}{return} \mbox{\hyperlink{classpelf_1_1_elf_a25f6fac463055a930408b59523232a72}{mHeaders}};}
-\DoxyCodeLine{170 \}}
-\DoxyCodeLine{171 }
-\DoxyCodeLine{172 }
-\DoxyCodeLine{173 \textcolor{keyword}{template}<\textcolor{keyword}{class }Container,}
-\DoxyCodeLine{174   std::size\_t NumOfSections,}
-\DoxyCodeLine{175   std::size\_t NumOfProgHeaders>}
-\DoxyCodeLine{176 \textcolor{keyword}{template}<\textcolor{keyword}{class} Function>}
-\DoxyCodeLine{177 \textcolor{keyword}{constexpr} \textcolor{keyword}{auto}}
-\DoxyCodeLine{178   \mbox{\hyperlink{classpelf_1_1_elf_a49ece042cdb1cf0e3005d1325af528df}{Elf<Container, NumOfSections, NumOfProgHeaders>::getSectionTableSize}}(}
-\DoxyCodeLine{179     \textcolor{keyword}{const} \mbox{\hyperlink{structpelf_1_1_elf64___ehdr}{Elf64\_Ehdr}}\& elfHeader,}
-\DoxyCodeLine{180     Function read\_struct) -\/> std::size\_t}
-\DoxyCodeLine{181 \{}
-\DoxyCodeLine{182   \textcolor{comment}{/* If the offset of the section table is zero, then the size has to be zero */}}
-\DoxyCodeLine{183   \textcolor{keywordflow}{if} (elfHeader.e\_shoff == 0) \{ \textcolor{keywordflow}{return} 0; \}}
-\DoxyCodeLine{184 }
-\DoxyCodeLine{185   \textcolor{comment}{/* If e\_shnum holds a value greater or equal than SHN\_LORESERVE , then the}}
-\DoxyCodeLine{186 \textcolor{comment}{     number of entries of the section table is in the variable sh\_size which}}
-\DoxyCodeLine{187 \textcolor{comment}{     is member of the inital entry in section header table}}
-\DoxyCodeLine{188 \textcolor{comment}{      */}}
-\DoxyCodeLine{189   \textcolor{keywordflow}{if} (elfHeader.e\_shnum >= \mbox{\hyperlink{namespacepelf_adb52eb849e9a4a54621da0156800eedf}{SHN\_LORESERVE}}) \{}
-\DoxyCodeLine{190     \textcolor{comment}{/* Read the initial entry in section header table*/}}
-\DoxyCodeLine{191     \mbox{\hyperlink{structpelf_1_1_elf64___shdr}{Elf64\_Shdr}} section\_header = \{\};}
-\DoxyCodeLine{192     read\_struct(section\_header, elfHeader.e\_shoff);}
-\DoxyCodeLine{193     \textcolor{keywordflow}{return} section\_header.sh\_size;}
-\DoxyCodeLine{194   \}}
-\DoxyCodeLine{195 }
-\DoxyCodeLine{196   \textcolor{keywordflow}{return} elfHeader.e\_shnum;}
-\DoxyCodeLine{197 \}}
-\DoxyCodeLine{198 }
-\DoxyCodeLine{199 \textcolor{keyword}{template}<\textcolor{keyword}{class }Container,}
-\DoxyCodeLine{200   std::size\_t NumOfSections,}
-\DoxyCodeLine{201   std::size\_t NumOfProgHeaders>}
-\DoxyCodeLine{202 \textcolor{keyword}{template}<\textcolor{keyword}{class} Function>}
-\DoxyCodeLine{203 \textcolor{keyword}{constexpr} \textcolor{keyword}{auto}}
-\DoxyCodeLine{204   \mbox{\hyperlink{classpelf_1_1_elf_a161a62b023e6394229664f2de9865359}{Elf<Container, NumOfSections, NumOfProgHeaders>::getProgramTableSize}}(}
-\DoxyCodeLine{205     \textcolor{keyword}{const} \mbox{\hyperlink{structpelf_1_1_elf64___ehdr}{Elf64\_Ehdr}}\& elfHeader,}
-\DoxyCodeLine{206     Function read\_struct) -\/> std::size\_t}
-\DoxyCodeLine{207 \{}
-\DoxyCodeLine{208   \textcolor{comment}{/* If the offset of the program header table is zero, then the size has to be}}
-\DoxyCodeLine{209 \textcolor{comment}{   * zero */}}
-\DoxyCodeLine{210   \textcolor{keywordflow}{if} (elfHeader.e\_phoff == 0) \{ \textcolor{keywordflow}{return} 0; \}}
-\DoxyCodeLine{211 }
-\DoxyCodeLine{212   \textcolor{comment}{/* If e\_phnum holds a value greater or equal than PN\_XNUM , then the}}
-\DoxyCodeLine{213 \textcolor{comment}{     number of entries of the program header table is in the variable sh\_info}}
-\DoxyCodeLine{214 \textcolor{comment}{     which is member of the inital entry in section header table}}
-\DoxyCodeLine{215 \textcolor{comment}{      */}}
-\DoxyCodeLine{216   \textcolor{keywordflow}{if} (elfHeader.e\_phnum >= \mbox{\hyperlink{namespacepelf_a305ed76c541cf02df786241cddaafa4f}{PN\_XNUM}}) \{}
-\DoxyCodeLine{217     \textcolor{comment}{/* Read the initial entry in section header table*/}}
-\DoxyCodeLine{218     \mbox{\hyperlink{structpelf_1_1_elf64___shdr}{Elf64\_Shdr}} section\_header = \{\};}
-\DoxyCodeLine{219     read\_struct(section\_header, elfHeader.e\_shoff);}
-\DoxyCodeLine{220     \textcolor{keywordflow}{return} section\_header.sh\_info;}
-\DoxyCodeLine{221   \}}
-\DoxyCodeLine{222 }
-\DoxyCodeLine{223   \textcolor{keywordflow}{return} elfHeader.e\_phnum;}
-\DoxyCodeLine{224 \}}
-\DoxyCodeLine{225 }
-\DoxyCodeLine{226 }
-\DoxyCodeLine{227 \textcolor{keyword}{template}<\textcolor{keyword}{class }Container,}
-\DoxyCodeLine{228   std::size\_t NumOfSections,}
-\DoxyCodeLine{229   std::size\_t NumOfProgHeaders>}
-\DoxyCodeLine{230 \textcolor{keyword}{constexpr} \textcolor{keyword}{auto}}
-\DoxyCodeLine{231   \mbox{\hyperlink{classpelf_1_1_elf_a44a6491a9cda28a6b9caf4b5ac06a45e}{Elf<Container, NumOfSections, NumOfProgHeaders>::getElfTablesSize}}(}
-\DoxyCodeLine{232     \textcolor{keyword}{const} Container\& data)}
-\DoxyCodeLine{233     -\/> \mbox{\hyperlink{structpelf_1_1_table_sizes}{TableSizes}} \textcolor{keyword}{requires} \mbox{\hyperlink{conceptpelf_1_1container__and__convertible__v}{container\_and\_convertible\_v<Container, unsigned char>}}}
-\DoxyCodeLine{234 \{}
-\DoxyCodeLine{235 }
-\DoxyCodeLine{236   \textcolor{comment}{/* Lambda function that takes a reference to a header as a parameter}}
-\DoxyCodeLine{237 \textcolor{comment}{    and initializes its values by reading `data` */}}
-\DoxyCodeLine{238   \textcolor{keyword}{auto} read\_struct = [\&](\textcolor{keyword}{auto}\& header, std::size\_t offset) \{}
-\DoxyCodeLine{239     hana::for\_each(hana::keys(header), [\&](\textcolor{keyword}{auto} key) \{}
-\DoxyCodeLine{240       \textcolor{keyword}{auto}\& member = hana::at\_key(header, key);}
+\DoxyCodeLine{101   \textcolor{keywordflow}{return} elfHeader.e\_phnum;}
+\DoxyCodeLine{102 \}}
+\DoxyCodeLine{103 }
+\DoxyCodeLine{104 \textcolor{keyword}{template}<\textcolor{keyword}{class} Container>}
+\DoxyCodeLine{105 \textcolor{keyword}{constexpr} \textcolor{keyword}{auto} \mbox{\hyperlink{namespacepelf_a098648bcab1701f80c3c3dd5f2397038}{getElfTablesSize}}(\textcolor{keyword}{const} Container\& data)}
+\DoxyCodeLine{106   -\/> \mbox{\hyperlink{structpelf_1_1_table_sizes}{TableSizes}} \textcolor{keyword}{requires} \mbox{\hyperlink{conceptpelf_1_1container__and__convertible__v}{container\_and\_convertible\_v<Container, unsigned char>}}}
+\DoxyCodeLine{107 \{}
+\DoxyCodeLine{108 }
+\DoxyCodeLine{109   \textcolor{comment}{/* Lambda function that takes a reference to a header as a parameter}}
+\DoxyCodeLine{110 \textcolor{comment}{    and initializes its values by reading `data` */}}
+\DoxyCodeLine{111   \textcolor{keyword}{auto} read\_struct = [\&](\textcolor{keyword}{auto}\& header, std::size\_t offset) \{}
+\DoxyCodeLine{112     hana::for\_each(hana::keys(header), [\&](\textcolor{keyword}{auto} key) \{}
+\DoxyCodeLine{113       \textcolor{keyword}{auto}\& member = hana::at\_key(header, key);}
+\DoxyCodeLine{114 }
+\DoxyCodeLine{115 \textcolor{preprocessor}{\#pragma unroll}}
+\DoxyCodeLine{116       \textcolor{keywordflow}{for} (std::size\_t i\{\}; i < \textcolor{keyword}{sizeof}(member); ++i) \{}
+\DoxyCodeLine{117         \textcolor{keywordflow}{if} (\textcolor{keyword}{sizeof}(member) > 1) \{ member <<= 8; \}}
+\DoxyCodeLine{118         member |= data.at(\textcolor{keyword}{sizeof}(member) -\/ 1 + offset -\/ i);}
+\DoxyCodeLine{119       \}}
+\DoxyCodeLine{120 }
+\DoxyCodeLine{121       offset += \textcolor{keyword}{sizeof}(member);}
+\DoxyCodeLine{122     \});}
+\DoxyCodeLine{123   \};}
+\DoxyCodeLine{124 }
+\DoxyCodeLine{125 }
+\DoxyCodeLine{126   \mbox{\hyperlink{structpelf_1_1_table_sizes}{TableSizes}} tables\_size;}
+\DoxyCodeLine{127 }
+\DoxyCodeLine{128   \textcolor{comment}{/* Need to read some headers in order to extract the section table size}}
+\DoxyCodeLine{129 \textcolor{comment}{  and the program header table size */}}
+\DoxyCodeLine{130 }
+\DoxyCodeLine{131   \mbox{\hyperlink{structpelf_1_1_elf64___ehdr}{Elf64\_Ehdr}} elf\_header = \{\};}
+\DoxyCodeLine{132 }
+\DoxyCodeLine{133   \textcolor{comment}{/* Read the elf header */}}
+\DoxyCodeLine{134   read\_struct(elf\_header, \mbox{\hyperlink{namespacepelf_a722b918f8f7d9a576849b97e0c7ab6f3}{ELF\_HEADER\_OFFSET}});}
+\DoxyCodeLine{135 }
+\DoxyCodeLine{136   tables\_size.\mbox{\hyperlink{structpelf_1_1_table_sizes_af7b7b76b6e888a079231dadc64388fec}{sectionTable}} = \mbox{\hyperlink{namespacepelf_a7a8a91bf192c103c0e31a59b5917bbf7}{getSectionTableSize}}(elf\_header, read\_struct);}
+\DoxyCodeLine{137 }
+\DoxyCodeLine{138   tables\_size.\mbox{\hyperlink{structpelf_1_1_table_sizes_a31cb11b8af17c414ae07a53679d45c0c}{programTable}} = \mbox{\hyperlink{namespacepelf_a01945922c682578808681db3cb4750f7}{getProgramTableSize}}(elf\_header, read\_struct);}
+\DoxyCodeLine{139 }
+\DoxyCodeLine{140 }
+\DoxyCodeLine{141   \textcolor{keywordflow}{return} tables\_size;}
+\DoxyCodeLine{142 \}}
+\DoxyCodeLine{143 }
+\DoxyCodeLine{144 }
+\DoxyCodeLine{153 \textcolor{keyword}{template}<\textcolor{keyword}{class }Container,}
+\DoxyCodeLine{154   std::size\_t NumOfSections = 0,}
+\DoxyCodeLine{155   std::size\_t NumOfProgHeaders = 0>}
+\DoxyCodeLine{156 \textcolor{keyword}{class }\mbox{\hyperlink{classpelf_1_1_elf}{Elf}} : \textcolor{keyword}{public} \mbox{\hyperlink{classpelf_1_1_pelf}{Pelf}}<Container, Elf, NumOfSections, NumOfProgHeaders>}
+\DoxyCodeLine{157 \{}
+\DoxyCodeLine{158 \textcolor{keyword}{public}:}
+\DoxyCodeLine{163   \textcolor{keyword}{constexpr} \textcolor{keyword}{explicit} \mbox{\hyperlink{classpelf_1_1_elf_aa85df319ece20802ade89e361eb1312f}{Elf}}(\textcolor{keyword}{const} Container\& data);}
+\DoxyCodeLine{164 }
+\DoxyCodeLine{171   [[nodiscard]] \textcolor{keyword}{constexpr} \textcolor{keyword}{auto} \mbox{\hyperlink{classpelf_1_1_elf_a1e48dc6ccc6a3221e0c0dd742dcbb23e}{getHeaders}}() \textcolor{keyword}{const} \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{172     -\/> \mbox{\hyperlink{structpelf_1_1_elf_headers}{ElfHeaders<NumOfProgHeaders>}};}
+\DoxyCodeLine{173 }
+\DoxyCodeLine{179   [[nodiscard]] \textcolor{keyword}{constexpr} \textcolor{keyword}{auto} \mbox{\hyperlink{classpelf_1_1_elf_a3dbd2fdec42fed668d67854ac9ea852a}{getSections}}() const noexcept}
+\DoxyCodeLine{180     -\/> \mbox{\hyperlink{namespacepelf_aaa0c7d556c13e87c42a7ab82d5111709}{Table}}<\mbox{\hyperlink{structpelf_1_1_elf64___shdr}{Elf64\_Shdr}}, NumOfSections>;}
+\DoxyCodeLine{181 }
+\DoxyCodeLine{182 }
+\DoxyCodeLine{183 private:}
+\DoxyCodeLine{184   friend class \mbox{\hyperlink{classpelf_1_1_pelf}{Pelf}}<Container, \mbox{\hyperlink{classpelf_1_1_elf}{Elf}}, NumOfSections, NumOfProgHeaders>;}
+\DoxyCodeLine{185   \textcolor{comment}{/* Member Variables */}}
+\DoxyCodeLine{186 }
+\DoxyCodeLine{187   \mbox{\hyperlink{structpelf_1_1_elf_headers}{ElfHeaders}}<NumOfProgHeaders> \mbox{\hyperlink{classpelf_1_1_elf_a25f6fac463055a930408b59523232a72}{mHeaders}}; }
+\DoxyCodeLine{190   \mbox{\hyperlink{namespacepelf_aaa0c7d556c13e87c42a7ab82d5111709}{Table}}<\mbox{\hyperlink{structpelf_1_1_elf64___shdr}{Elf64\_Shdr}}, NumOfSections> \mbox{\hyperlink{classpelf_1_1_elf_a9721d2be21940fdee2d025e960307d2f}{mSections}} = \{\}; }
+\DoxyCodeLine{192   \textcolor{comment}{/* Private member functions */}}
+\DoxyCodeLine{193 }
+\DoxyCodeLine{194 }
+\DoxyCodeLine{201   \textcolor{keyword}{constexpr} \textcolor{keyword}{auto} \mbox{\hyperlink{classpelf_1_1_elf_a5e3cbceda47d65dbfb840323b153917f}{checkFileSize}}() const -\/> \textcolor{keywordtype}{bool};}
+\DoxyCodeLine{202 }
+\DoxyCodeLine{209   constexpr auto \mbox{\hyperlink{classpelf_1_1_elf_aaa1709914e18d44aa2a8f3d13aaf8d19}{checkSignatures}}() const -\/> \textcolor{keywordtype}{bool};}
+\DoxyCodeLine{210 }
+\DoxyCodeLine{218   constexpr auto \mbox{\hyperlink{classpelf_1_1_elf_ac79192c97a6abaa18d69f22bf488656f}{parseHeaders}}() -\/> \textcolor{keywordtype}{void};}
+\DoxyCodeLine{219 }
+\DoxyCodeLine{225   constexpr auto \mbox{\hyperlink{classpelf_1_1_elf_a55062cdb28d75fbae260b039d4009b73}{parseSections}}() -\/> \textcolor{keywordtype}{void};}
+\DoxyCodeLine{226 \};}
+\DoxyCodeLine{227 }
+\DoxyCodeLine{228 }
+\DoxyCodeLine{229 template<class Container,}
+\DoxyCodeLine{230   std::\textcolor{keywordtype}{size\_t} NumOfSections,}
+\DoxyCodeLine{231   std::\textcolor{keywordtype}{size\_t} NumOfProgHeaders>}
+\DoxyCodeLine{232 constexpr \mbox{\hyperlink{classpelf_1_1_elf}{Elf}}<Container, NumOfSections, NumOfProgHeaders>::\mbox{\hyperlink{classpelf_1_1_elf}{Elf}}(}
+\DoxyCodeLine{233   const Container\& data)}
+\DoxyCodeLine{234   : \mbox{\hyperlink{classpelf_1_1_pelf}{Pelf}}<Container, \mbox{\hyperlink{classpelf_1_1_elf}{Elf}}, NumOfSections, NumOfProgHeaders>(data)}
+\DoxyCodeLine{235 \{}
+\DoxyCodeLine{236   \textcolor{keywordflow}{if} (!\mbox{\hyperlink{classpelf_1_1_elf_a5e3cbceda47d65dbfb840323b153917f}{checkFileSize}}()) \{ \textcolor{keywordflow}{throw} \mbox{\hyperlink{classpelf_1_1_pelf_exception}{PelfException}}\{ \textcolor{stringliteral}{"{}Invalid PE file size!"{}} \}; \}}
+\DoxyCodeLine{237 }
+\DoxyCodeLine{238 }
+\DoxyCodeLine{239   this-\/>\mbox{\hyperlink{classpelf_1_1_pelf_a89266cb498c8c99b2912ed3cc0edccc9}{parse}}();}
+\DoxyCodeLine{240 \}}
 \DoxyCodeLine{241 }
-\DoxyCodeLine{242 \textcolor{preprocessor}{\#pragma unroll}}
-\DoxyCodeLine{243       \textcolor{keywordflow}{for} (std::size\_t i\{\}; i < \textcolor{keyword}{sizeof}(member); ++i) \{}
-\DoxyCodeLine{244         \textcolor{keywordflow}{if} (\textcolor{keyword}{sizeof}(member) > 1) \{ member <<= 8; \}}
-\DoxyCodeLine{245         member |= data.at(\textcolor{keyword}{sizeof}(member) -\/ 1 + offset -\/ i);}
-\DoxyCodeLine{246       \}}
-\DoxyCodeLine{247 }
-\DoxyCodeLine{248       offset += \textcolor{keyword}{sizeof}(member);}
-\DoxyCodeLine{249     \});}
-\DoxyCodeLine{250   \};}
+\DoxyCodeLine{242 \textcolor{keyword}{template}<\textcolor{keyword}{class }Container,}
+\DoxyCodeLine{243   std::size\_t NumOfSections,}
+\DoxyCodeLine{244   std::size\_t NumOfProgHeaders>}
+\DoxyCodeLine{245 \textcolor{keyword}{constexpr} \textcolor{keyword}{auto}}
+\DoxyCodeLine{246   \mbox{\hyperlink{classpelf_1_1_elf_a1e48dc6ccc6a3221e0c0dd742dcbb23e}{Elf<Container, NumOfSections, NumOfProgHeaders>::getHeaders}}() const noexcept}
+\DoxyCodeLine{247   -\/> \mbox{\hyperlink{structpelf_1_1_elf_headers}{ElfHeaders}}<NumOfProgHeaders>}
+\DoxyCodeLine{248 \{}
+\DoxyCodeLine{249   \textcolor{keywordflow}{return} \mbox{\hyperlink{classpelf_1_1_elf_a25f6fac463055a930408b59523232a72}{mHeaders}};}
+\DoxyCodeLine{250 \}}
 \DoxyCodeLine{251 }
 \DoxyCodeLine{252 }
-\DoxyCodeLine{253   \mbox{\hyperlink{structpelf_1_1_table_sizes}{TableSizes}} tables\_size;}
-\DoxyCodeLine{254 }
-\DoxyCodeLine{255   \textcolor{comment}{/* Need to read some headers in order to extract the section table size}}
-\DoxyCodeLine{256 \textcolor{comment}{  and the program header table size */}}
-\DoxyCodeLine{257 }
-\DoxyCodeLine{258   \mbox{\hyperlink{structpelf_1_1_elf64___ehdr}{Elf64\_Ehdr}} elf\_header = \{\};}
-\DoxyCodeLine{259 }
-\DoxyCodeLine{260   \textcolor{comment}{/* Read the elf header */}}
-\DoxyCodeLine{261   read\_struct(elf\_header, \mbox{\hyperlink{classpelf_1_1_elf_a6ecd58e3e3a5bda4ed2697b111d55946}{mElfHeaderOffset}});}
+\DoxyCodeLine{253 \textcolor{keyword}{template}<\textcolor{keyword}{class }Container,}
+\DoxyCodeLine{254   std::size\_t NumOfSections,}
+\DoxyCodeLine{255   std::size\_t NumOfProgHeaders>}
+\DoxyCodeLine{256 \textcolor{keyword}{constexpr} \textcolor{keyword}{auto}}
+\DoxyCodeLine{257   \mbox{\hyperlink{classpelf_1_1_elf_a5e3cbceda47d65dbfb840323b153917f}{Elf<Container, NumOfSections, NumOfProgHeaders>::checkFileSize}}() const -\/> \textcolor{keywordtype}{bool}}
+\DoxyCodeLine{258 \{}
+\DoxyCodeLine{259   \textcolor{keywordflow}{return} this-\/>\mbox{\hyperlink{classpelf_1_1_pelf_a5306bc94bda869eafe757fd422b0d8cd}{mData}}.size() >= \mbox{\hyperlink{namespacepelf_a2c8eaf67543f8e7821227aab535f7dbb}{MIN\_ELF\_SIZE}};}
+\DoxyCodeLine{260 \}}
+\DoxyCodeLine{261 }
 \DoxyCodeLine{262 }
-\DoxyCodeLine{263   tables\_size.\mbox{\hyperlink{structpelf_1_1_table_sizes_af7b7b76b6e888a079231dadc64388fec}{sectionTable}} = \mbox{\hyperlink{classpelf_1_1_elf_a49ece042cdb1cf0e3005d1325af528df}{getSectionTableSize}}(elf\_header, read\_struct);}
-\DoxyCodeLine{264 }
-\DoxyCodeLine{265   tables\_size.\mbox{\hyperlink{structpelf_1_1_table_sizes_af5e0a0b980047cb1eebcc2b62bc74e7f}{programHeader}} = \mbox{\hyperlink{classpelf_1_1_elf_a161a62b023e6394229664f2de9865359}{getProgramTableSize}}(elf\_header, read\_struct);}
-\DoxyCodeLine{266 }
-\DoxyCodeLine{267 }
-\DoxyCodeLine{268   \textcolor{keywordflow}{return} tables\_size;}
-\DoxyCodeLine{269 \}}
+\DoxyCodeLine{263 \textcolor{keyword}{template}<\textcolor{keyword}{class }Container,}
+\DoxyCodeLine{264   std::size\_t NumOfSections,}
+\DoxyCodeLine{265   std::size\_t NumOfProgHeaders>}
+\DoxyCodeLine{266 \textcolor{keyword}{constexpr} \textcolor{keyword}{auto}}
+\DoxyCodeLine{267   \mbox{\hyperlink{classpelf_1_1_elf_aaa1709914e18d44aa2a8f3d13aaf8d19}{Elf<Container, NumOfSections, NumOfProgHeaders>::checkSignatures}}() const}
+\DoxyCodeLine{268   -\/> \textcolor{keywordtype}{bool}}
+\DoxyCodeLine{269 \{}
 \DoxyCodeLine{270 }
-\DoxyCodeLine{271 }
-\DoxyCodeLine{272 \textcolor{keyword}{template}<\textcolor{keyword}{class }Container,}
-\DoxyCodeLine{273   std::size\_t NumOfSections,}
-\DoxyCodeLine{274   std::size\_t NumOfProgHeaders>}
-\DoxyCodeLine{275 \textcolor{keyword}{constexpr} \textcolor{keyword}{auto}}
-\DoxyCodeLine{276   \mbox{\hyperlink{classpelf_1_1_elf_a5e3cbceda47d65dbfb840323b153917f}{Elf<Container, NumOfSections, NumOfProgHeaders>::checkFileSize}}() const -\/> \textcolor{keywordtype}{bool}}
-\DoxyCodeLine{277 \{}
-\DoxyCodeLine{278   \textcolor{keywordflow}{return} this-\/>\mbox{\hyperlink{classpelf_1_1_pelf_a5306bc94bda869eafe757fd422b0d8cd}{mData}}.size() >= \mbox{\hyperlink{classpelf_1_1_elf_a8f110bc692dd2883792758c7b672793b}{mMinElfSize}};}
-\DoxyCodeLine{279 \}}
-\DoxyCodeLine{280 }
+\DoxyCodeLine{271   \textcolor{comment}{/* Read first 16 bytes to check magic numbers */}}
+\DoxyCodeLine{272   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} magic\_numbers[16];}
+\DoxyCodeLine{273 }
+\DoxyCodeLine{274   std::copy(this-\/>\mbox{\hyperlink{classpelf_1_1_pelf_a5306bc94bda869eafe757fd422b0d8cd}{mData}}.begin(), this-\/>mData.begin() + 16, magic\_numbers);}
+\DoxyCodeLine{275 }
+\DoxyCodeLine{276 }
+\DoxyCodeLine{277   \textcolor{keywordflow}{return} magic\_numbers[0] == \mbox{\hyperlink{namespacepelf_ae8b26e065d67c82a3e3c07b10bc94045}{EI\_MAG0}} \&\& magic\_numbers[1] == \mbox{\hyperlink{namespacepelf_a4bdac3cd6e3b890d427e2273a5db2513}{EI\_MAG1}}}
+\DoxyCodeLine{278          \&\& magic\_numbers[2] == \mbox{\hyperlink{namespacepelf_abc2c8ca470598236eea266c7b8d30090}{EI\_MAG2}} \&\& magic\_numbers[3] == \mbox{\hyperlink{namespacepelf_a7657a8ef3238ba5e3e6eb9a91f89cf87}{EI\_MAG3}}}
+\DoxyCodeLine{279          \&\& magic\_numbers[4] == \mbox{\hyperlink{namespacepelf_a93a643cc6ba430789ac6565ce1cc8e63}{EI\_CLASS}} \&\& magic\_numbers[5] == \mbox{\hyperlink{namespacepelf_acf5b4f71bdc0ae8d35d39b40222c01b3}{EI\_DATA}};}
+\DoxyCodeLine{280 \}}
 \DoxyCodeLine{281 }
-\DoxyCodeLine{282 \textcolor{keyword}{template}<\textcolor{keyword}{class }Container,}
-\DoxyCodeLine{283   std::size\_t NumOfSections,}
-\DoxyCodeLine{284   std::size\_t NumOfProgHeaders>}
-\DoxyCodeLine{285 \textcolor{keyword}{constexpr} \textcolor{keyword}{auto}}
-\DoxyCodeLine{286   \mbox{\hyperlink{classpelf_1_1_elf_aaa1709914e18d44aa2a8f3d13aaf8d19}{Elf<Container, NumOfSections, NumOfProgHeaders>::checkSignatures}}() const}
-\DoxyCodeLine{287   -\/> \textcolor{keywordtype}{bool}}
+\DoxyCodeLine{282 }
+\DoxyCodeLine{283 \textcolor{keyword}{template}<\textcolor{keyword}{class }Container,}
+\DoxyCodeLine{284   std::size\_t NumOfSections,}
+\DoxyCodeLine{285   std::size\_t NumOfProgHeaders>}
+\DoxyCodeLine{286 \textcolor{keyword}{constexpr} \textcolor{keyword}{auto} \mbox{\hyperlink{classpelf_1_1_elf_ac79192c97a6abaa18d69f22bf488656f}{Elf<Container, NumOfSections, NumOfProgHeaders>::parseHeaders}}()}
+\DoxyCodeLine{287   -\/> \textcolor{keywordtype}{void}}
 \DoxyCodeLine{288 \{}
 \DoxyCodeLine{289 }
-\DoxyCodeLine{290   \textcolor{comment}{/* Read first 16 bytes to check magic numbers */}}
-\DoxyCodeLine{291   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} magic\_numbers[16];}
-\DoxyCodeLine{292 }
-\DoxyCodeLine{293   std::copy(this-\/>\mbox{\hyperlink{classpelf_1_1_pelf_a5306bc94bda869eafe757fd422b0d8cd}{mData}}.begin(), this-\/>mData.begin() + 16, magic\_numbers);}
+\DoxyCodeLine{290   \textcolor{comment}{/* Read the elf header into mElfHeaders.elfHeader, the elf header is always at}}
+\DoxyCodeLine{291 \textcolor{comment}{   * offset 0 */}}
+\DoxyCodeLine{292   this-\/>\mbox{\hyperlink{classpelf_1_1_pelf_a5bd0037e6d0e3eec7a3107592dd9a6b0}{readHeader}}(\mbox{\hyperlink{classpelf_1_1_elf_a25f6fac463055a930408b59523232a72}{mHeaders}}.elfHeader, 0);}
+\DoxyCodeLine{293 }
 \DoxyCodeLine{294 }
-\DoxyCodeLine{295 }
-\DoxyCodeLine{296   \textcolor{keywordflow}{return} magic\_numbers[0] == \mbox{\hyperlink{namespacepelf_ae8b26e065d67c82a3e3c07b10bc94045}{EI\_MAG0}} \&\& magic\_numbers[1] == \mbox{\hyperlink{namespacepelf_a4bdac3cd6e3b890d427e2273a5db2513}{EI\_MAG1}}}
-\DoxyCodeLine{297          \&\& magic\_numbers[2] == \mbox{\hyperlink{namespacepelf_abc2c8ca470598236eea266c7b8d30090}{EI\_MAG2}} \&\& magic\_numbers[3] == \mbox{\hyperlink{namespacepelf_a7657a8ef3238ba5e3e6eb9a91f89cf87}{EI\_MAG3}}}
-\DoxyCodeLine{298          \&\& magic\_numbers[4] == \mbox{\hyperlink{namespacepelf_a93a643cc6ba430789ac6565ce1cc8e63}{EI\_CLASS}} \&\& magic\_numbers[5] == \mbox{\hyperlink{namespacepelf_acf5b4f71bdc0ae8d35d39b40222c01b3}{EI\_DATA}};}
-\DoxyCodeLine{299 \}}
-\DoxyCodeLine{300 }
+\DoxyCodeLine{295   \textcolor{comment}{// e\_phoff can't be negative, unless it's an invalid file and an exception}}
+\DoxyCodeLine{296   \textcolor{comment}{// will be thrown later}}
+\DoxyCodeLine{297   std::ptrdiff\_t offset = \textcolor{keyword}{static\_cast<}std::ptrdiff\_t\textcolor{keyword}{>}(}
+\DoxyCodeLine{298     \mbox{\hyperlink{classpelf_1_1_elf_a25f6fac463055a930408b59523232a72}{mHeaders}}.elfHeader.e\_phoff);\textcolor{comment}{// program header table offset}}
+\DoxyCodeLine{299 }
+\DoxyCodeLine{300   \textcolor{comment}{/* Read the program header table */}}
 \DoxyCodeLine{301 }
-\DoxyCodeLine{302 \textcolor{keyword}{template}<\textcolor{keyword}{class }Container,}
-\DoxyCodeLine{303   std::size\_t NumOfSections,}
-\DoxyCodeLine{304   std::size\_t NumOfProgHeaders>}
-\DoxyCodeLine{305 \textcolor{keyword}{constexpr} \textcolor{keyword}{auto} \mbox{\hyperlink{classpelf_1_1_elf_ac79192c97a6abaa18d69f22bf488656f}{Elf<Container, NumOfSections, NumOfProgHeaders>::parseHeaders}}()}
-\DoxyCodeLine{306   -\/> \textcolor{keywordtype}{void}}
-\DoxyCodeLine{307 \{}
-\DoxyCodeLine{308 }
-\DoxyCodeLine{309   \textcolor{comment}{/* Read the elf header into mElfHeaders.elfHeader, the elf header is always at}}
-\DoxyCodeLine{310 \textcolor{comment}{   * offset 0 */}}
-\DoxyCodeLine{311   this-\/>\mbox{\hyperlink{classpelf_1_1_pelf_a5bd0037e6d0e3eec7a3107592dd9a6b0}{readHeader}}(mHeaders.elfHeader, 0);}
-\DoxyCodeLine{312 }
-\DoxyCodeLine{313 }
-\DoxyCodeLine{314   \textcolor{comment}{// e\_phoff can't be negative, unless it's an invalid file and an exception}}
-\DoxyCodeLine{315   \textcolor{comment}{// will be thrown later}}
-\DoxyCodeLine{316   std::ptrdiff\_t offset =}
-\DoxyCodeLine{317    \textcolor{keyword}{static\_cast<}std::ptrdiff\_t\textcolor{keyword}{>}(\mbox{\hyperlink{classpelf_1_1_elf_a25f6fac463055a930408b59523232a72}{mHeaders}}.elfHeader.e\_phoff); \textcolor{comment}{// program header table offset}}
-\DoxyCodeLine{318 }
-\DoxyCodeLine{319   \textcolor{comment}{/* Read the program header table */}}
-\DoxyCodeLine{320 }
-\DoxyCodeLine{321   \textcolor{keywordflow}{if} \textcolor{keyword}{constexpr} (!std::is\_same\_v<\textcolor{keyword}{decltype}(\mbox{\hyperlink{classpelf_1_1_elf_a25f6fac463055a930408b59523232a72}{mHeaders}}.programHeaders),}
-\DoxyCodeLine{322                   std::vector<Elf64\_Phdr>>) \{}
-\DoxyCodeLine{323     \textcolor{comment}{/* If offset is zero the programHeader container will be empty */}}
-\DoxyCodeLine{324     \textcolor{keywordflow}{for} (\textcolor{keyword}{auto}\& header : \mbox{\hyperlink{classpelf_1_1_elf_a25f6fac463055a930408b59523232a72}{mHeaders}}.programHeaders) \{}
-\DoxyCodeLine{325       this-\/>\mbox{\hyperlink{classpelf_1_1_pelf_a5bd0037e6d0e3eec7a3107592dd9a6b0}{readHeader}}(header, offset);}
-\DoxyCodeLine{326       offset += \textcolor{keyword}{sizeof}(header);}
-\DoxyCodeLine{327     \}}
-\DoxyCodeLine{328   \} \textcolor{keywordflow}{else} \{ \textcolor{comment}{/* Runtime case! */}}
-\DoxyCodeLine{329     \textcolor{comment}{/* Get number of entries in the program header table */}}
-\DoxyCodeLine{330     std::size\_t program\_header\_table\_size\{\};}
-\DoxyCodeLine{331     \textcolor{keywordflow}{if} (\mbox{\hyperlink{classpelf_1_1_elf_a25f6fac463055a930408b59523232a72}{mHeaders}}.elfHeader.e\_phnum >= \mbox{\hyperlink{namespacepelf_a305ed76c541cf02df786241cddaafa4f}{PN\_XNUM}}) \{}
-\DoxyCodeLine{332       program\_header\_table\_size = \mbox{\hyperlink{classpelf_1_1_elf_a44a6491a9cda28a6b9caf4b5ac06a45e}{getElfTablesSize}}(this-\/>\mbox{\hyperlink{classpelf_1_1_pelf_a5306bc94bda869eafe757fd422b0d8cd}{mData}}).programHeader;}
-\DoxyCodeLine{333     \} \textcolor{keywordflow}{else} \{}
-\DoxyCodeLine{334       program\_header\_table\_size = \mbox{\hyperlink{classpelf_1_1_elf_a25f6fac463055a930408b59523232a72}{mHeaders}}.elfHeader.e\_phnum;}
-\DoxyCodeLine{335     \}}
-\DoxyCodeLine{336     }
-\DoxyCodeLine{337     \textcolor{keywordflow}{for} (std::size\_t i\{\}; i < program\_header\_table\_size; ++i) \{}
-\DoxyCodeLine{338       \mbox{\hyperlink{structpelf_1_1_elf64___phdr}{Elf64\_Phdr}} tmp = \{\};}
-\DoxyCodeLine{339       this-\/>\mbox{\hyperlink{classpelf_1_1_pelf_a5bd0037e6d0e3eec7a3107592dd9a6b0}{readHeader}}(tmp, offset);}
-\DoxyCodeLine{340       \mbox{\hyperlink{classpelf_1_1_elf_a25f6fac463055a930408b59523232a72}{mHeaders}}.programHeaders.push\_back(tmp);}
-\DoxyCodeLine{341       offset += \textcolor{keyword}{sizeof}(tmp);}
-\DoxyCodeLine{342     \}}
-\DoxyCodeLine{343   \}}
-\DoxyCodeLine{344 \}}
-\DoxyCodeLine{345 }
-\DoxyCodeLine{346 }
-\DoxyCodeLine{347 \textcolor{keyword}{template}<\textcolor{keyword}{class }Container,}
-\DoxyCodeLine{348   std::size\_t NumOfSections,}
-\DoxyCodeLine{349   std::size\_t NumOfProgHeaders>}
-\DoxyCodeLine{350 \textcolor{keyword}{constexpr} \textcolor{keyword}{auto} \mbox{\hyperlink{classpelf_1_1_elf_a55062cdb28d75fbae260b039d4009b73}{Elf<Container, NumOfSections, NumOfProgHeaders>::parseSections}}()}
-\DoxyCodeLine{351   -\/> \textcolor{keywordtype}{void}}
-\DoxyCodeLine{352 \{}
-\DoxyCodeLine{353 }
-\DoxyCodeLine{354 }
-\DoxyCodeLine{355   \textcolor{comment}{// e\_shoff can't be negative, unless it's an invalid file and an exception}}
-\DoxyCodeLine{356   \textcolor{comment}{// will be thrown later}}
-\DoxyCodeLine{357   std::ptrdiff\_t offset = \textcolor{keyword}{static\_cast<}std::ptrdiff\_t\textcolor{keyword}{>}(}
-\DoxyCodeLine{358     \mbox{\hyperlink{classpelf_1_1_elf_a25f6fac463055a930408b59523232a72}{mHeaders}}.elfHeader.e\_shoff); \textcolor{comment}{// section table offset}}
-\DoxyCodeLine{359 }
+\DoxyCodeLine{302   \textcolor{keywordflow}{if} \textcolor{keyword}{constexpr} (!std::is\_same\_v<\textcolor{keyword}{decltype}(\mbox{\hyperlink{classpelf_1_1_elf_a25f6fac463055a930408b59523232a72}{mHeaders}}.programHeaders),}
+\DoxyCodeLine{303                   std::vector<Elf64\_Phdr>>) \{}
+\DoxyCodeLine{304     \textcolor{comment}{/* If offset is zero the programHeader container will be empty */}}
+\DoxyCodeLine{305     \textcolor{keywordflow}{for} (\textcolor{keyword}{auto}\& header : \mbox{\hyperlink{classpelf_1_1_elf_a25f6fac463055a930408b59523232a72}{mHeaders}}.programHeaders) \{}
+\DoxyCodeLine{306       this-\/>\mbox{\hyperlink{classpelf_1_1_pelf_a5bd0037e6d0e3eec7a3107592dd9a6b0}{readHeader}}(header, offset);}
+\DoxyCodeLine{307       offset += \textcolor{keyword}{sizeof}(header);}
+\DoxyCodeLine{308     \}}
+\DoxyCodeLine{309   \} \textcolor{keywordflow}{else} \{ \textcolor{comment}{/* Runtime case! */}}
+\DoxyCodeLine{310     \textcolor{comment}{/* Get number of entries in the program header table */}}
+\DoxyCodeLine{311     std::size\_t program\_header\_table\_size\{\};}
+\DoxyCodeLine{312     \textcolor{keywordflow}{if} (\mbox{\hyperlink{classpelf_1_1_elf_a25f6fac463055a930408b59523232a72}{mHeaders}}.elfHeader.e\_phnum >= \mbox{\hyperlink{namespacepelf_a305ed76c541cf02df786241cddaafa4f}{PN\_XNUM}}) \{}
+\DoxyCodeLine{313       program\_header\_table\_size = \mbox{\hyperlink{namespacepelf_a098648bcab1701f80c3c3dd5f2397038}{getElfTablesSize}}(this-\/>\mbox{\hyperlink{classpelf_1_1_pelf_a5306bc94bda869eafe757fd422b0d8cd}{mData}}).programTable;}
+\DoxyCodeLine{314     \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{315       program\_header\_table\_size = \mbox{\hyperlink{classpelf_1_1_elf_a25f6fac463055a930408b59523232a72}{mHeaders}}.elfHeader.e\_phnum;}
+\DoxyCodeLine{316     \}}
+\DoxyCodeLine{317 }
+\DoxyCodeLine{318     \textcolor{keywordflow}{for} (std::size\_t i\{\}; i < program\_header\_table\_size; ++i) \{}
+\DoxyCodeLine{319       \mbox{\hyperlink{structpelf_1_1_elf64___phdr}{Elf64\_Phdr}} tmp = \{\};}
+\DoxyCodeLine{320       this-\/>\mbox{\hyperlink{classpelf_1_1_pelf_a5bd0037e6d0e3eec7a3107592dd9a6b0}{readHeader}}(tmp, offset);}
+\DoxyCodeLine{321       \mbox{\hyperlink{classpelf_1_1_elf_a25f6fac463055a930408b59523232a72}{mHeaders}}.programHeaders.push\_back(tmp);}
+\DoxyCodeLine{322       offset += \textcolor{keyword}{sizeof}(tmp);}
+\DoxyCodeLine{323     \}}
+\DoxyCodeLine{324   \}}
+\DoxyCodeLine{325 \}}
+\DoxyCodeLine{326 }
+\DoxyCodeLine{327 }
+\DoxyCodeLine{328 \textcolor{keyword}{template}<\textcolor{keyword}{class }Container,}
+\DoxyCodeLine{329   std::size\_t NumOfSections,}
+\DoxyCodeLine{330   std::size\_t NumOfProgHeaders>}
+\DoxyCodeLine{331 \textcolor{keyword}{constexpr} \textcolor{keyword}{auto} \mbox{\hyperlink{classpelf_1_1_elf_a55062cdb28d75fbae260b039d4009b73}{Elf<Container, NumOfSections, NumOfProgHeaders>::parseSections}}()}
+\DoxyCodeLine{332   -\/> \textcolor{keywordtype}{void}}
+\DoxyCodeLine{333 \{}
+\DoxyCodeLine{334 }
+\DoxyCodeLine{335 }
+\DoxyCodeLine{336   \textcolor{comment}{// e\_shoff can't be negative, unless it's an invalid file and an exception}}
+\DoxyCodeLine{337   \textcolor{comment}{// will be thrown later}}
+\DoxyCodeLine{338   std::ptrdiff\_t offset = \textcolor{keyword}{static\_cast<}std::ptrdiff\_t\textcolor{keyword}{>}(}
+\DoxyCodeLine{339     \mbox{\hyperlink{classpelf_1_1_elf_a25f6fac463055a930408b59523232a72}{mHeaders}}.elfHeader.e\_shoff);\textcolor{comment}{// section table offset}}
+\DoxyCodeLine{340 }
+\DoxyCodeLine{341 }
+\DoxyCodeLine{342   \textcolor{keywordflow}{if} \textcolor{keyword}{constexpr} (!std::is\_same\_v<\textcolor{keyword}{decltype}(\mbox{\hyperlink{classpelf_1_1_elf_a9721d2be21940fdee2d025e960307d2f}{mSections}}), std::vector<Elf64\_Shdr>>) \{}
+\DoxyCodeLine{343     \textcolor{keywordflow}{for} (\textcolor{keyword}{auto}\& header : \mbox{\hyperlink{classpelf_1_1_elf_a9721d2be21940fdee2d025e960307d2f}{mSections}}) \{}
+\DoxyCodeLine{344       this-\/>\mbox{\hyperlink{classpelf_1_1_pelf_a5bd0037e6d0e3eec7a3107592dd9a6b0}{readHeader}}(header, offset);}
+\DoxyCodeLine{345       offset += \textcolor{keyword}{sizeof}(header);}
+\DoxyCodeLine{346     \}}
+\DoxyCodeLine{347   \} \textcolor{keywordflow}{else} \{ \textcolor{comment}{/* Runtime case! */}}
+\DoxyCodeLine{348     \textcolor{comment}{/* Get number of entries in the section table */}}
+\DoxyCodeLine{349     std::size\_t section\_table\_size\{\};}
+\DoxyCodeLine{350     \textcolor{keywordflow}{if} (\mbox{\hyperlink{classpelf_1_1_elf_a25f6fac463055a930408b59523232a72}{mHeaders}}.elfHeader.e\_shnum >= \mbox{\hyperlink{namespacepelf_adb52eb849e9a4a54621da0156800eedf}{SHN\_LORESERVE}}) \{}
+\DoxyCodeLine{351       section\_table\_size = \mbox{\hyperlink{namespacepelf_a098648bcab1701f80c3c3dd5f2397038}{getElfTablesSize}}(this-\/>\mbox{\hyperlink{classpelf_1_1_pelf_a5306bc94bda869eafe757fd422b0d8cd}{mData}}).sectionTable;}
+\DoxyCodeLine{352     \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{353       section\_table\_size = \mbox{\hyperlink{classpelf_1_1_elf_a25f6fac463055a930408b59523232a72}{mHeaders}}.elfHeader.e\_shnum;}
+\DoxyCodeLine{354     \}}
+\DoxyCodeLine{355 }
+\DoxyCodeLine{356     \textcolor{keywordflow}{for} (std::size\_t i\{\}; i < section\_table\_size; ++i) \{}
+\DoxyCodeLine{357       \mbox{\hyperlink{structpelf_1_1_elf64___shdr}{Elf64\_Shdr}} tmp = \{\};}
+\DoxyCodeLine{358       this-\/>\mbox{\hyperlink{classpelf_1_1_pelf_a5bd0037e6d0e3eec7a3107592dd9a6b0}{readHeader}}(tmp, offset);}
+\DoxyCodeLine{359       offset += \textcolor{keyword}{sizeof}(\mbox{\hyperlink{structpelf_1_1_elf64___shdr}{Elf64\_Shdr}});}
 \DoxyCodeLine{360 }
-\DoxyCodeLine{361   \textcolor{keywordflow}{if} \textcolor{keyword}{constexpr} (!std::is\_same\_v<\textcolor{keyword}{decltype}(\mbox{\hyperlink{classpelf_1_1_elf_a9721d2be21940fdee2d025e960307d2f}{mSections}}), std::vector<Elf64\_Shdr>>) \{}
-\DoxyCodeLine{362     \textcolor{keywordflow}{for} (\textcolor{keyword}{auto}\& header : \mbox{\hyperlink{classpelf_1_1_elf_a9721d2be21940fdee2d025e960307d2f}{mSections}}) \{}
-\DoxyCodeLine{363       this-\/>\mbox{\hyperlink{classpelf_1_1_pelf_a5bd0037e6d0e3eec7a3107592dd9a6b0}{readHeader}}(header, offset);}
-\DoxyCodeLine{364       offset += \textcolor{keyword}{sizeof}(header);}
-\DoxyCodeLine{365     \}}
-\DoxyCodeLine{366   \} \textcolor{keywordflow}{else} \{ \textcolor{comment}{/* Runtime case! */}}
-\DoxyCodeLine{367     \textcolor{comment}{/* Get number of entries in the section table */}}
-\DoxyCodeLine{368     std::size\_t section\_table\_size\{\};}
-\DoxyCodeLine{369     \textcolor{keywordflow}{if} (\mbox{\hyperlink{classpelf_1_1_elf_a25f6fac463055a930408b59523232a72}{mHeaders}}.elfHeader.e\_shnum >= \mbox{\hyperlink{namespacepelf_adb52eb849e9a4a54621da0156800eedf}{SHN\_LORESERVE}}) \{}
-\DoxyCodeLine{370       section\_table\_size = \mbox{\hyperlink{classpelf_1_1_elf_a44a6491a9cda28a6b9caf4b5ac06a45e}{getElfTablesSize}}(this-\/>\mbox{\hyperlink{classpelf_1_1_pelf_a5306bc94bda869eafe757fd422b0d8cd}{mData}}).sectionTable;}
-\DoxyCodeLine{371     \} \textcolor{keywordflow}{else} \{}
-\DoxyCodeLine{372       section\_table\_size = \mbox{\hyperlink{classpelf_1_1_elf_a25f6fac463055a930408b59523232a72}{mHeaders}}.elfHeader.e\_shnum;}
-\DoxyCodeLine{373     \}}
-\DoxyCodeLine{374 }
-\DoxyCodeLine{375     \textcolor{keywordflow}{for} (std::size\_t i\{\}; i < section\_table\_size; ++i) \{}
-\DoxyCodeLine{376       \mbox{\hyperlink{structpelf_1_1_elf64___shdr}{Elf64\_Shdr}} tmp = \{\};}
-\DoxyCodeLine{377       this-\/>\mbox{\hyperlink{classpelf_1_1_pelf_a5bd0037e6d0e3eec7a3107592dd9a6b0}{readHeader}}(tmp, offset);}
-\DoxyCodeLine{378       offset += \textcolor{keyword}{sizeof}(\mbox{\hyperlink{structpelf_1_1_elf64___shdr}{Elf64\_Shdr}});}
-\DoxyCodeLine{379 }
-\DoxyCodeLine{380       \mbox{\hyperlink{classpelf_1_1_elf_a9721d2be21940fdee2d025e960307d2f}{mSections}}.push\_back(tmp);}
-\DoxyCodeLine{381     \}}
-\DoxyCodeLine{382   \}}
-\DoxyCodeLine{383 \}}
-\DoxyCodeLine{384 }
-\DoxyCodeLine{385 }
-\DoxyCodeLine{386 \}\textcolor{comment}{// namespace pelf}}
-\DoxyCodeLine{387 }
-\DoxyCodeLine{388 }
-\DoxyCodeLine{389 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{361       \mbox{\hyperlink{classpelf_1_1_elf_a9721d2be21940fdee2d025e960307d2f}{mSections}}.push\_back(tmp);}
+\DoxyCodeLine{362     \}}
+\DoxyCodeLine{363   \}}
+\DoxyCodeLine{364 \}}
+\DoxyCodeLine{365 }
+\DoxyCodeLine{366 }
+\DoxyCodeLine{367 \}\textcolor{comment}{// namespace pelf}}
+\DoxyCodeLine{368 }
+\DoxyCodeLine{369 }
+\DoxyCodeLine{370 \textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCode}

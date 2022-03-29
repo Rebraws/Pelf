@@ -69,7 +69,8 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#namespaces">Namespaces</a>  </div>
+<a href="#namespaces">Namespaces</a> &#124;
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle"><div class="title">Elf.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
@@ -78,7 +79,6 @@ $(function() {
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;<a class="el" href="_pelf_8h_source.html">Pelf.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="elf_structs_8h_source.html">elfStructs.h</a>&quot;</code><br />
-<code>#include &lt;functional&gt;</code><br />
 </div>
 <p><a href="_elf_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -92,6 +92,22 @@ Classes</h2></td></tr>
 Namespaces</h2></td></tr>
 <tr class="memitem:namespacepelf"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepelf.html">pelf</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a7a8a91bf192c103c0e31a59b5917bbf7"><td class="memTemplParams" colspan="2">template&lt;class Function &gt; </td></tr>
+<tr class="memitem:a7a8a91bf192c103c0e31a59b5917bbf7"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacepelf.html#a7a8a91bf192c103c0e31a59b5917bbf7">pelf::getSectionTableSize</a> (const Elf64_Ehdr &amp;elfHeader, Function read_struct) -&gt; std::size_t</td></tr>
+<tr class="memdesc:a7a8a91bf192c103c0e31a59b5917bbf7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Section Table Size.  <a href="namespacepelf.html#a7a8a91bf192c103c0e31a59b5917bbf7">More...</a><br /></td></tr>
+<tr class="separator:a7a8a91bf192c103c0e31a59b5917bbf7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a01945922c682578808681db3cb4750f7"><td class="memTemplParams" colspan="2">template&lt;class Function &gt; </td></tr>
+<tr class="memitem:a01945922c682578808681db3cb4750f7"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacepelf.html#a01945922c682578808681db3cb4750f7">pelf::getProgramTableSize</a> (const Elf64_Ehdr &amp;elfHeader, Function read_struct) -&gt; std::size_t</td></tr>
+<tr class="memdesc:a01945922c682578808681db3cb4750f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Program Table Size.  <a href="namespacepelf.html#a01945922c682578808681db3cb4750f7">More...</a><br /></td></tr>
+<tr class="separator:a01945922c682578808681db3cb4750f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a098648bcab1701f80c3c3dd5f2397038"><td class="memTemplParams" colspan="2">template&lt;class Container &gt; <br />
+requires container_and_convertible_v&lt;Container, unsigned char&gt;</td></tr>
+<tr class="memitem:a098648bcab1701f80c3c3dd5f2397038"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacepelf.html#a098648bcab1701f80c3c3dd5f2397038">pelf::getElfTablesSize</a> (const Container &amp;data) -&gt; TableSizes</td></tr>
+<tr class="memdesc:a098648bcab1701f80c3c3dd5f2397038"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the number of entries in the section table and program header table.  <a href="namespacepelf.html#a098648bcab1701f80c3c3dd5f2397038">More...</a><br /></td></tr>
+<tr class="separator:a098648bcab1701f80c3c3dd5f2397038"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >Elf class declaration. </p>

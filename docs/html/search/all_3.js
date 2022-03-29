@@ -11,9 +11,10 @@ var searchData=
   ['elf64_5fehdr_8',['Elf64_Ehdr',['../structpelf_1_1_elf64___ehdr.html',1,'pelf']]],
   ['elf64_5fphdr_9',['Elf64_Phdr',['../structpelf_1_1_elf64___phdr.html',1,'pelf']]],
   ['elf64_5fshdr_10',['Elf64_Shdr',['../structpelf_1_1_elf64___shdr.html',1,'pelf']]],
-  ['elfclass64_11',['ELFCLASS64',['../namespacepelf.html#acee3872fd4945b0f5938b9cac3dc239f',1,'pelf']]],
-  ['elfheader_12',['elfHeader',['../structpelf_1_1_elf_headers.html#ac83a681bcd2fe191a8e18cdba3445966',1,'pelf::ElfHeaders']]],
-  ['elfheaders_13',['ElfHeaders',['../structpelf_1_1_elf_headers.html',1,'pelf']]],
-  ['elfheaders_3c_200_20_3e_14',['ElfHeaders&lt; 0 &gt;',['../structpelf_1_1_elf_headers.html',1,'pelf']]],
-  ['elfstructs_2eh_15',['elfStructs.h',['../elf_structs_8h.html',1,'']]]
+  ['elf_5fheader_5foffset_11',['ELF_HEADER_OFFSET',['../namespacepelf.html#a722b918f8f7d9a576849b97e0c7ab6f3',1,'pelf']]],
+  ['elfclass64_12',['ELFCLASS64',['../namespacepelf.html#acee3872fd4945b0f5938b9cac3dc239f',1,'pelf']]],
+  ['elfheader_13',['elfHeader',['../structpelf_1_1_elf_headers.html#ac83a681bcd2fe191a8e18cdba3445966',1,'pelf::ElfHeaders']]],
+  ['elfheaders_14',['ElfHeaders',['../structpelf_1_1_elf_headers.html',1,'pelf']]],
+  ['elfheaders_3c_200_20_3e_15',['ElfHeaders&lt; 0 &gt;',['../structpelf_1_1_elf_headers.html',1,'pelf']]],
+  ['elfstructs_2eh_16',['elfStructs.h',['../elf_structs_8h.html',1,'']]]
 ];

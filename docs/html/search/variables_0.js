@@ -6,6 +6,7 @@ var searchData=
   ['ei_5fmag1_3',['EI_MAG1',['../namespacepelf.html#a4bdac3cd6e3b890d427e2273a5db2513',1,'pelf']]],
   ['ei_5fmag2_4',['EI_MAG2',['../namespacepelf.html#abc2c8ca470598236eea266c7b8d30090',1,'pelf']]],
   ['ei_5fmag3_5',['EI_MAG3',['../namespacepelf.html#a7657a8ef3238ba5e3e6eb9a91f89cf87',1,'pelf']]],
-  ['elfclass64_6',['ELFCLASS64',['../namespacepelf.html#acee3872fd4945b0f5938b9cac3dc239f',1,'pelf']]],
-  ['elfheader_7',['elfHeader',['../structpelf_1_1_elf_headers.html#ac83a681bcd2fe191a8e18cdba3445966',1,'pelf::ElfHeaders']]]
+  ['elf_5fheader_5foffset_6',['ELF_HEADER_OFFSET',['../namespacepelf.html#a722b918f8f7d9a576849b97e0c7ab6f3',1,'pelf']]],
+  ['elfclass64_7',['ELFCLASS64',['../namespacepelf.html#acee3872fd4945b0f5938b9cac3dc239f',1,'pelf']]],
+  ['elfheader_8',['elfHeader',['../structpelf_1_1_elf_headers.html#ac83a681bcd2fe191a8e18cdba3445966',1,'pelf::ElfHeaders']]]
 ];
