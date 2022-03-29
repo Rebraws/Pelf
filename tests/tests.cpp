@@ -31,7 +31,7 @@ pelf::Pe runtime_pe{ hello_program };
 
 
 inline constexpr auto elf_tables_size =
-  pelf::Elf<decltype(hello_program_elf)>::getElfTablesSize(hello_program_elf);
+  pelf::getElfTablesSize(hello_program_elf);
 
 
 constexpr pelf::Elf<decltype(hello_program_elf),
