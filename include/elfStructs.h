@@ -45,9 +45,14 @@ inline constexpr unsigned char EI_DATA{
 }; /**< Magic number identifying the data encoding of the processor-specific
       data in the file (in this case is Two's complement, little-endian.)*/
 
+inline constexpr std::uint8_t MIN_ELF_SIZE{
+  64
+}; /**< Minimum possible size for an ELF file*/
+inline constexpr std::size_t ELF_HEADER_OFFSET{
+  0
+}; /**< Represents the elf header offset (it always starts at zero)*/
 
-// inline constexpr std::uint8_t EI_NIDENT = 16; /**< The size of the e_ident
-// array */
+
 
 
 struct TableSizes
