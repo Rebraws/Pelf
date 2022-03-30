@@ -182,6 +182,13 @@ private:
    *  @return Void.
    * */
   constexpr auto parseSections() -> void;
+
+  /**
+   * @brief Returns the offset of the section table
+   *
+   * @return std::ptrdiff_t That represents the offset of the section table
+   */
+  constexpr auto getSectionTableOffset() const -> std::ptrdiff_t;
 };
 
 
@@ -242,6 +249,17 @@ constexpr auto Pe<Container, NumOfSections>::checkFileSize() const -> bool
 
 
 template<class Container, std::size_t NumOfSections>
+constexpr auto Pe<Container, NumOfSections>::getSectionTableOffset() const
+  -> std::ptrdiff_t
+{
+  return mPeHeaderAddress + sizeof(mHeaders.mCoffHeader)
+         + sizeof(mHeaders.mOptionalHeader.mDataDirectories)
+             * IMAGE_NUMBER_OF_DIRECTORY_ENTRIES
+         + sizeof(mHeaders.mOptionalHeader.mWsf)
+         + sizeof(mHeaders.mOptionalHeader.mScf);
+}
+
+template<class Container, std::size_t NumOfSections>
 constexpr auto Pe<Container, NumOfSections>::parseHeaders() -> void
 {
 
@@ -278,11 +296,8 @@ template<class Container, std::size_t NumOfSections>
 constexpr auto Pe<Container, NumOfSections>::parseSections() -> void
 {
 
-  std::ptrdiff_t offset =
-    mPeHeaderAddress + sizeof(mHeaders.mCoffHeader)
-    + sizeof(mHeaders.mOptionalHeader.mDataDirectories) * 16
-    + sizeof(mHeaders.mOptionalHeader.mWsf)
-    + sizeof(mHeaders.mOptionalHeader.mScf);
+  /* Compute section table offset */
+  std::ptrdiff_t offset = getSectionTableOffset();
 
   if constexpr (!std::is_same_v<decltype(mSections),
                   std::vector<IMAGE_SECTION_HEADER>>) {
