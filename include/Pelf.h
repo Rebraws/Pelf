@@ -199,7 +199,7 @@ constexpr auto Pelf<Container, Derived>::readHeader(Header& header,
     }
   }
 
-  return offset + sizeof(Header);
+  return offset + static_cast<std::ptrdiff_t>(sizeof(Header));
 }
 
 template<class Container, class Derived>
