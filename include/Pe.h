@@ -76,7 +76,7 @@ consteval auto getPeNumberOfSections(const Container& data) requires
  *
  * */
 template<class Container, std::size_t NumOfSections = 0>
-class Pe : public Pelf<Container, Pe, NumOfSections>
+class Pe : public Pelf<Container, Pe<Container, NumOfSections>>
 {
 public:
   /** @brief Pe constructor
@@ -109,7 +109,7 @@ public:
     -> Table<IMAGE_SECTION_HEADER, NumOfSections>;
 
 private:
-  friend class Pelf<Container, Pe, NumOfSections>;
+  friend class Pelf<Container, Pe<Container, NumOfSections>>;
 
 
   /* Variables */
@@ -187,7 +187,7 @@ private:
 
 template<class Container, std::size_t NumOfSections>
 constexpr Pe<Container, NumOfSections>::Pe(const Container& data)
-  : Pelf<Container, Pe, NumOfSections>(data)
+  : Pelf<Container, Pe<Container, NumOfSections>>(data)
 {
 
   if (!checkFileSize()) { throw PelfException{ "Invalid PE file size!" }; }

@@ -52,12 +52,9 @@ concept container_and_convertible_v =
  *  that needs to be parsed
  *
  *  @tparam Derived The type of the inherited class
- *  @tparam NumOfSections Number of Sections that the Pe or Elf file has
+ *  
  *  */
-template<class Container,
-  template<typename, std::size_t...>
-  class Derived,
-  std::size_t... N>
+template<class Container, class Derived>
 class Pelf
 {
 public:
@@ -133,58 +130,39 @@ protected:
   [[nodiscard]] constexpr auto getStruct(std::size_t offset) -> Struct;
 };
 
-
-template<class Container,
-  template<typename, std::size_t...>
-  class Derived,
-  std::size_t... N>
-constexpr Pelf<Container, Derived, N...>::Pelf(const Container& data) requires
+template<class Container, class Derived>
+constexpr Pelf<Container, Derived>::Pelf(const Container& data) requires
   container_and_convertible_v<Container, unsigned char> : mData(data)
 {}
 
-
-template<class Container,
-  template<typename, std::size_t...>
-  class Derived,
-  std::size_t... N>
-constexpr auto Pelf<Container, Derived, N...>::getRawData() const noexcept
+template<class Container, class Derived>
+constexpr auto Pelf<Container, Derived>::getRawData() const noexcept
   -> Container
 {
   return mData;
 }
 
-template<class Container,
-  template<typename, std::size_t...>
-  class Derived,
-  std::size_t... N>
-constexpr auto Pelf<Container, Derived, N...>::getHeaders() const noexcept
+template<class Container, class Derived>
+constexpr auto Pelf<Container, Derived>::getHeaders() const noexcept
   -> void
 {
-  static_cast<const Derived<Container, N...>&>(*this).getHeaders();
+  static_cast<const Derived&>(*this).getHeaders();
 }
 
 
-
-template<class Container,
-  template<typename, std::size_t...>
-  class Derived,
-  std::size_t... N>
-constexpr auto Pelf<Container, Derived, N...>::getSections() const noexcept
+template<class Container, class Derived>
+constexpr auto Pelf<Container, Derived>::getSections() const noexcept
   -> void
 {
-  static_cast<const Derived<Container, N...>&>(*this).getSections();
+  static_cast<const Derived&>(*this).getSections();
 }
 
 
-
-template<class Container,
-  template<typename, std::size_t...>
-  class Derived,
-  std::size_t... N>
-constexpr auto Pelf<Container, Derived, N...>::parse() -> void
+template<class Container, class Derived>
+constexpr auto Pelf<Container, Derived>::parse() -> void
 {
 
-  auto& pelf = static_cast<Derived<Container, N...>&>(*this);
+  auto& pelf = static_cast<Derived&>(*this);
 
   if (!pelf.checkFileSize()) { throw PelfException{ "Invalid File Size" }; }
 
@@ -195,13 +173,9 @@ constexpr auto Pelf<Container, Derived, N...>::parse() -> void
   pelf.parseSections();
 }
 
-
-template<class Container,
-  template<typename, std::size_t...>
-  class Derived,
-  std::size_t... N>
+template<class Container, class Derived>
 template<class Header>
-constexpr auto Pelf<Container, Derived, N...>::readHeader(Header& header,
+constexpr auto Pelf<Container, Derived>::readHeader(Header& header,
   const std::ptrdiff_t offset) -> void
 {
 
@@ -226,13 +200,9 @@ constexpr auto Pelf<Container, Derived, N...>::readHeader(Header& header,
   }
 }
 
-
-template<class Container,
-  template<typename, std::size_t...>
-  class Derived,
-  std::size_t... N>
+template<class Container, class Derived>
 template<class Struct>
-constexpr auto Pelf<Container, Derived, N...>::getStruct(std::size_t offset)
+constexpr auto Pelf<Container, Derived>::getStruct(std::size_t offset)
   -> Struct
 {
 

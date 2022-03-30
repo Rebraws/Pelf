@@ -153,7 +153,7 @@ constexpr auto getElfTablesSize(const Container& data)
 template<class Container,
   std::size_t NumOfSections = 0,
   std::size_t NumOfProgHeaders = 0>
-class Elf : public Pelf<Container, Elf, NumOfSections, NumOfProgHeaders>
+class Elf : public Pelf<Container, Elf<Container, NumOfSections, NumOfProgHeaders>>
 {
 public:
   /** @brief Elf constructor
@@ -181,7 +181,7 @@ public:
 
 
 private:
-  friend class Pelf<Container, Elf, NumOfSections, NumOfProgHeaders>;
+  friend class Pelf<Container, Elf<Container, NumOfSections, NumOfProgHeaders>>;
   /* Member Variables */
 
   ElfHeaders<NumOfProgHeaders> mHeaders; /**< Struct that contains the elf
@@ -231,7 +231,7 @@ template<class Container,
   std::size_t NumOfProgHeaders>
 constexpr Elf<Container, NumOfSections, NumOfProgHeaders>::Elf(
   const Container& data)
-  : Pelf<Container, Elf, NumOfSections, NumOfProgHeaders>(data)
+  : Pelf<Container, Elf<Container, NumOfSections, NumOfProgHeaders>>(data)
 {
   if (!checkFileSize()) { throw PelfException{ "Invalid PE file size!" }; }
 
