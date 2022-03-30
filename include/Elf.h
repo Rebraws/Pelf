@@ -316,8 +316,7 @@ constexpr auto Elf<Container, NumOfSections, NumOfProgHeaders>::parseHeaders()
   }
 
   for (auto& header : mHeaders.programHeaders) {
-    this->readHeader(header, offset);
-    offset += sizeof(header);
+    offset = this->readHeader(header, offset);
   }
 }
 
@@ -348,8 +347,7 @@ constexpr auto Elf<Container, NumOfSections, NumOfProgHeaders>::parseSections()
   }
 
   for (auto& header : mSections) {
-    this->readHeader(header, offset);
-    offset += sizeof(header);
+    offset = this->readHeader(header, offset);
   }
 }
 
