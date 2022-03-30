@@ -153,7 +153,8 @@ constexpr auto getElfTablesSize(const Container& data)
 template<class Container,
   std::size_t NumOfSections = 0,
   std::size_t NumOfProgHeaders = 0>
-class Elf : public Pelf<Container, Elf<Container, NumOfSections, NumOfProgHeaders>>
+class Elf
+  : public Pelf<Container, Elf<Container, NumOfSections, NumOfProgHeaders>>
 {
 public:
   /** @brief Elf constructor
@@ -299,15 +300,11 @@ constexpr auto Elf<Container, NumOfSections, NumOfProgHeaders>::parseHeaders()
 
   /* Read the program header table */
 
-  if constexpr (!std::is_same_v<decltype(mHeaders.programHeaders),
+  if constexpr (std::is_same_v<decltype(mHeaders.programHeaders),
                   std::vector<Elf64_Phdr>>) {
-    /* If offset is zero the programHeader container will be empty */
-    for (auto& header : mHeaders.programHeaders) {
-      this->readHeader(header, offset);
-      offset += sizeof(header);
-    }
-  } else { /* Runtime case! */
     /* Get number of entries in the program header table */
+
+    /* This should be re-written it's pretty ugly */
     std::size_t program_header_table_size{};
     if (mHeaders.elfHeader.e_phnum >= PN_XNUM) {
       program_header_table_size = getElfTablesSize(this->mData).programTable;
@@ -315,12 +312,12 @@ constexpr auto Elf<Container, NumOfSections, NumOfProgHeaders>::parseHeaders()
       program_header_table_size = mHeaders.elfHeader.e_phnum;
     }
 
-    for (std::size_t i{}; i < program_header_table_size; ++i) {
-      Elf64_Phdr tmp = {};
-      this->readHeader(tmp, offset);
-      mHeaders.programHeaders.push_back(tmp);
-      offset += sizeof(tmp);
-    }
+    mHeaders.programHeaders.resize(program_header_table_size);
+  }
+
+  for (auto& header : mHeaders.programHeaders) {
+    this->readHeader(header, offset);
+    offset += sizeof(header);
   }
 }
 
@@ -339,12 +336,7 @@ constexpr auto Elf<Container, NumOfSections, NumOfProgHeaders>::parseSections()
     mHeaders.elfHeader.e_shoff);// section table offset
 
 
-  if constexpr (!std::is_same_v<decltype(mSections), std::vector<Elf64_Shdr>>) {
-    for (auto& header : mSections) {
-      this->readHeader(header, offset);
-      offset += sizeof(header);
-    }
-  } else { /* Runtime case! */
+  if constexpr (std::is_same_v<decltype(mSections), std::vector<Elf64_Shdr>>) {
     /* Get number of entries in the section table */
     std::size_t section_table_size{};
     if (mHeaders.elfHeader.e_shnum >= SHN_LORESERVE) {
@@ -352,14 +344,12 @@ constexpr auto Elf<Container, NumOfSections, NumOfProgHeaders>::parseSections()
     } else {
       section_table_size = mHeaders.elfHeader.e_shnum;
     }
+    mSections.resize(section_table_size);
+  }
 
-    for (std::size_t i{}; i < section_table_size; ++i) {
-      Elf64_Shdr tmp = {};
-      this->readHeader(tmp, offset);
-      offset += sizeof(Elf64_Shdr);
-
-      mSections.push_back(tmp);
-    }
+  for (auto& header : mSections) {
+    this->readHeader(header, offset);
+    offset += sizeof(header);
   }
 }
 
