@@ -299,20 +299,14 @@ constexpr auto Pe<Container, NumOfSections>::parseSections() -> void
   /* Compute section table offset */
   std::ptrdiff_t offset = getSectionTableOffset();
 
-  if constexpr (!std::is_same_v<decltype(mSections),
+  if constexpr (std::is_same_v<decltype(mSections),
                   std::vector<IMAGE_SECTION_HEADER>>) {
+    mSections.resize(mHeaders.mCoffHeader.NumberOfSections);
+  }
 
-    for (auto& section : mSections) {
-      this->readHeader(section, offset);
-      offset += sizeof(section);
-    }
-  } else {
-    for (int i{}; i < mHeaders.mCoffHeader.NumberOfSections; ++i) {
-      IMAGE_SECTION_HEADER tmp_section{};
-      this->readHeader(tmp_section, offset);
-      offset += sizeof(tmp_section);
-      mSections.push_back(tmp_section);
-    }
+  for (auto& section : mSections) {
+    this->readHeader(section, offset);
+    offset += sizeof(section);
   }
 }
 
