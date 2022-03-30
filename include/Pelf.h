@@ -109,11 +109,11 @@ protected:
    *  @tparam Header struct that represents either a Pe header or an Elf header
    *
    *
-   *  @return Void
+   *  @return Returns the offset from `mData` to continue reading the next struct
    * */
   template<class Header>
   constexpr auto readHeader(Header& header, const std::ptrdiff_t offset)
-    -> void;
+    -> std::ptrdiff_t;
 
   /** @brief Returns an Struct filled with the data from `mData` from index
    * `offset`
@@ -176,7 +176,7 @@ constexpr auto Pelf<Container, Derived>::parse() -> void
 template<class Container, class Derived>
 template<class Header>
 constexpr auto Pelf<Container, Derived>::readHeader(Header& header,
-  const std::ptrdiff_t offset) -> void
+  const std::ptrdiff_t offset) -> std::ptrdiff_t
 {
 
   if (offset < 0) {
@@ -198,6 +198,8 @@ constexpr auto Pelf<Container, Derived>::readHeader(Header& header,
       throw PelfException{ "Invalid Header" };
     }
   }
+
+  return offset + sizeof(Header);
 }
 
 template<class Container, class Derived>
