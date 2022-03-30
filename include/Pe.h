@@ -265,21 +265,12 @@ constexpr auto Pe<Container, NumOfSections>::parseHeaders() -> void
 
   std::ptrdiff_t offset = mPeHeaderAddress + 4;
 
-  this->readHeader(mHeaders.mCoffHeader, offset);
-
-  offset += sizeof(mHeaders.mCoffHeader);
-
-  this->readHeader(mHeaders.mOptionalHeader.mScf, offset);
-
-  offset += sizeof(mHeaders.mOptionalHeader.mScf);
-
-  this->readHeader(mHeaders.mOptionalHeader.mWsf, offset);
-
-  offset += sizeof(mHeaders.mOptionalHeader.mWsf);
+  offset = this->readHeader(mHeaders.mCoffHeader, offset);
+  offset = this->readHeader(mHeaders.mOptionalHeader.mScf, offset);
+  offset = this->readHeader(mHeaders.mOptionalHeader.mWsf, offset);
 
   for (auto& data_dir : mHeaders.mOptionalHeader.mDataDirectories) {
-    this->readHeader(data_dir, offset);
-    offset += sizeof(data_dir);
+    offset = this->readHeader(data_dir, offset);
   }
 }
 
@@ -305,8 +296,7 @@ constexpr auto Pe<Container, NumOfSections>::parseSections() -> void
   }
 
   for (auto& section : mSections) {
-    this->readHeader(section, offset);
-    offset += sizeof(section);
+    offset = this->readHeader(section, offset);
   }
 }
 
