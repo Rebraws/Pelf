@@ -163,13 +163,10 @@ constexpr auto Pelf<Container, Derived>::parse() -> void
 {
 
   auto& pelf = static_cast<Derived&>(*this);
-
-  if (!pelf.checkFileSize()) { throw PelfException{ "Invalid File Size" }; }
-
-  if (!pelf.checkSignatures()) { throw PelfException{ "Invalid signatures!" }; }
-
+  /* If something goes wrong in this functions they will throw an exception */
+  pelf.checkFileSize();
+  pelf.checkSignatures();
   pelf.parseHeaders();
-
   pelf.parseSections();
 }
 
