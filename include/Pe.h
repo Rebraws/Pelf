@@ -136,11 +136,12 @@ private:
   /* Private member functions */
 
 
-  /** @brief  Checks if MZ DOS signature and PE signature are valid
+  /** @brief  Checks if MZ DOS signature and PE signature are valid,
+   * if any signature is invalid then an exception is thrown
    *
-   *  @return Returns `true` if signatures are valid, and `false` otherwise
+   *  @return Void
    * */
-  [[nodiscard]] constexpr auto checkSignatures() const -> bool;
+  constexpr auto checkSignatures() const -> void;
 
 
   /** @brief Checks if the MZ DOS Signature (0x5a4d) at offset 0 is valid of the
@@ -160,7 +161,7 @@ private:
    *
    *  @return Returns `true` if the size is valid, and `false` otherwise
    * */
-  [[nodiscard]] constexpr auto checkFileSize() const -> bool;
+  constexpr auto checkFileSize() const -> void;
 
 
   /** @brief Parses the Coff Header, and the optional coff header
@@ -189,22 +190,42 @@ private:
    * @return std::ptrdiff_t That represents the offset of the section table
    */
   constexpr auto getSectionTableOffset() const -> std::ptrdiff_t;
+
+  /**
+   * @brief Reads the Pe header address from offset 0x3c and returns it.
+   * 
+   * @return Returns the Pe Header Address
+   */
+  constexpr auto readPeHeaderAddress() const -> std::uint32_t;
 };
 
+
+template<class Container, std::size_t NumOfSections>
+constexpr auto Pe<Container, NumOfSections>::readPeHeaderAddress() const -> std::uint32_t {
+  
+  /* Should differentiate between runtime and compile time algorithm */
+  std::size_t offset{ 0x3c };
+  std::uint32_t address{};
+  for (std::size_t i{}; i < sizeof(address); ++i) {
+    address <<= 8;
+    address |= static_cast<std::uint32_t>(
+      this->mData.at(sizeof(address) - 1 + offset--));
+  }
+
+  return address;
+}
 
 template<class Container, std::size_t NumOfSections>
 constexpr Pe<Container, NumOfSections>::Pe(const Container& data)
   : Pelf<Container, Pe<Container, NumOfSections>>(data)
 {
 
-  if (!checkFileSize()) { throw PelfException{ "Invalid PE file size!" }; }
+  checkFileSize();
 
-  std::size_t offset{ 0x3c };
-  for (std::size_t i{}; i < sizeof(mPeHeaderAddress); ++i) {
-    mPeHeaderAddress <<= 8;
-    mPeHeaderAddress |= static_cast<std::uint32_t>(
-      this->mData.at(sizeof(mPeHeaderAddress) - 1 + offset--));
-  }
+  /* Read mPeHeaderAddress */
+
+  mPeHeaderAddress = readPeHeaderAddress();
+
 
   this->parse();
 }
@@ -236,15 +257,23 @@ constexpr auto Pe<Container, NumOfSections>::checkPESignature() const -> bool
 
 
 template<class Container, std::size_t NumOfSections>
-constexpr auto Pe<Container, NumOfSections>::checkSignatures() const -> bool
+constexpr auto Pe<Container, NumOfSections>::checkSignatures() const -> void
 {
-  return checkMZDSignature() && checkPESignature();
+  if (!checkMZDSignature()) {
+    throw pelfInvalidSignature{ "Invalid MZ DOS Signature" };
+  }
+
+  if (!checkPESignature()) {
+    throw pelfInvalidSignature{ "Invalid PE Signature" };
+  }
 }
 
 template<class Container, std::size_t NumOfSections>
-constexpr auto Pe<Container, NumOfSections>::checkFileSize() const -> bool
+constexpr auto Pe<Container, NumOfSections>::checkFileSize() const -> void
 {
-  return this->mData.size() >= mMinPeSize;
+  if (this->mData.size() < mMinPeSize) {
+    throw pelfInvalidSize{ "Pe file it's too small", this->mData.size() };
+  }
 }
 
 
