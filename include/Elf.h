@@ -199,7 +199,7 @@ private:
    * @return Returns `true` if the file size is valid, otherwise it returns
    * `false`
    */
-  constexpr auto checkFileSize() const -> bool;
+  constexpr auto checkFileSize() const -> void;
 
   /**
    * @brief Check if Elf file signatures are valid
@@ -207,7 +207,7 @@ private:
    * @return Returns `true` if signatures are valir, otherwise it returns
    * `false`
    */
-  constexpr auto checkSignatures() const -> bool;
+  constexpr auto checkSignatures() const -> void;
 
   /**
    * @brief Reads the Elf header and the program header table from `mData` into
@@ -234,7 +234,7 @@ constexpr Elf<Container, NumOfSections, NumOfProgHeaders>::Elf(
   const Container& data)
   : Pelf<Container, Elf<Container, NumOfSections, NumOfProgHeaders>>(data)
 {
-  if (!checkFileSize()) { throw PelfException{ "Invalid PE file size!" }; }
+  checkFileSize();
 
 
   this->parse();
@@ -255,9 +255,12 @@ template<class Container,
   std::size_t NumOfSections,
   std::size_t NumOfProgHeaders>
 constexpr auto
-  Elf<Container, NumOfSections, NumOfProgHeaders>::checkFileSize() const -> bool
+  Elf<Container, NumOfSections, NumOfProgHeaders>::checkFileSize() const -> void
 {
-  return this->mData.size() >= MIN_ELF_SIZE;
+  if (this->mData.size() < MIN_ELF_SIZE) {
+    throw pelfInvalidSize{"Elf file it's too small", this->mData.size()};
+  }
+
 }
 
 
@@ -266,7 +269,7 @@ template<class Container,
   std::size_t NumOfProgHeaders>
 constexpr auto
   Elf<Container, NumOfSections, NumOfProgHeaders>::checkSignatures() const
-  -> bool
+  -> void
 {
 
   /* Read first 16 bytes to check magic numbers */
@@ -274,10 +277,14 @@ constexpr auto
 
   std::copy(this->mData.begin(), this->mData.begin() + 16, magic_numbers);
 
-
-  return magic_numbers[0] == EI_MAG0 && magic_numbers[1] == EI_MAG1
+  const bool check = magic_numbers[0] == EI_MAG0 && magic_numbers[1] == EI_MAG1
          && magic_numbers[2] == EI_MAG2 && magic_numbers[3] == EI_MAG3
          && magic_numbers[4] == EI_CLASS && magic_numbers[5] == EI_DATA;
+
+  if (!check) {
+    throw pelfInvalidSignature{"Invalid ELF magic numbers"};
+  }         
+
 }
 
 
